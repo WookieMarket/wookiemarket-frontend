@@ -1,0 +1,8 @@
+.header {
+    color: var(--text-color, blue);
+    min-height: 10vh;
+}
+
+.title {
+    text-align: center;
+}
