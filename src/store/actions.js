@@ -1,22 +1,27 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-
+import { areAdvertsLoaded } from './selectors';
 export const uiResetError = createAction('ui/resetError');
 
 //Adverts Loading
 
 export const advertsLoaded = createAsyncThunk(
     'adverts/loaded',
-    async ({getState, extra: { service: { advs } }, rejectWithValue }) => {
+    async ({
+        getState,
+        extra: {
+            service: { advs },
+        },
+        rejectWithValue,
+    }) => {
         if (areAdvertsLoaded(getState())) {
             return;
         }
         try {
-            await advs.getLastAdv()
-            
+            await advs.getLastAdv();
         } catch (error) {
-           return rejectWithValue(error)
+            return rejectWithValue(error);
         }
-    },
+    }
 );
 
 /*export const advertsLoaded =
@@ -46,8 +51,6 @@ export const advertsLoadedFailure = createAction(
         error: true,
     })
 ); //PONER error como argumento donde se use para que le meta el payload error
-
-
 
 /*export const advertsLoadedSuccess = (adverts) => ({
     type: ADVERTS_LOADED_SUCCESS,
