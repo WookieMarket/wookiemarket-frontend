@@ -1,10 +1,11 @@
 import { configureStore as rtkconfigureStore } from '@reduxjs/toolkit';
 
 import * as reducers from './reducers';
-import * as service from '../service';
+import * as service from '../components/Adverts/service';
 import * as actionCreators from './actions';
-import { timeStamp } from 'console';
 
+
+const timeStamp =  Date.now()
 const failureRedirects = (router, redirectsMap) => () => (next) => (action) => {
     const result = next(action);
 
