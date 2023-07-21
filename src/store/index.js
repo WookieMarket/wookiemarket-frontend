@@ -1,11 +1,9 @@
 import { configureStore as rtkconfigureStore } from '@reduxjs/toolkit';
 
 import * as reducers from './reducers';
-import * as service from '../components/Adverts/service';
+import * as service from '../components/adverts/service';
 import * as actionCreators from './actions';
 
-
-const timeStamp =  Date.now()
 const failureRedirects = (router, redirectsMap) => () => (next) => (action) => {
     const result = next(action);
 
@@ -20,7 +18,6 @@ const failureRedirects = (router, redirectsMap) => () => (next) => (action) => {
 
 export default function configureStore(preloadedState, { router }) {
     const extraMiddleware = [
-        timeStamp,
         failureRedirects(router, { 401: '/login, 404: ' / 404 }),
     ];
     const store = rtkconfigureStore({

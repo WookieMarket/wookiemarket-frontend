@@ -1,12 +1,9 @@
-import { UseSelector, useDispatch } from 'react-redux';
-import { adsSlice, fetchAds } from '../store/slices/adsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Advert from './Advert';
+import Advert from './AdvertPage';
 import { getAdverts } from '../../store/selectors';
-import { advertsLoaded } from '../../store/actions';
-
-const { actions, reducer } = adsSlice;
+import { adFilterName, advertsLoaded } from '../../store/actions';
 
 const EmptyList = ({ dataFiltered }) => {
     return dataFiltered ? (
@@ -20,11 +17,11 @@ const EmptyList = ({ dataFiltered }) => {
     );
 };
 
-const AdvertsPage = ({ isLoading }) => {
+const AdvertsListPage = ({ isLoading }) => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    const adverts = UseSelector(getAdverts);
+    const adverts = useSelector(getAdverts);
 
     const onAdvertsLoaded = (adverts) => dispatch(advertsLoaded(adverts));
 
@@ -64,10 +61,16 @@ const AdvertsPage = ({ isLoading }) => {
         filteredAdverts,
         navigate,
         onAdvertsLoaded,
-        openModalError,
-        openModalErrorLogin,
         query,
     ]);
+
+    const handleFilter = (event) => {
+        const { name, value } = event.target;
+        if (name === 'filterByName') {
+            setQuery(value);
+            dispatch(adFilterName(value));
+        };
+    }
 
     return (
         <>
@@ -162,4 +165,4 @@ const AdvertsPage = ({ isLoading }) => {
     );
 };
 
-export default AdvertsPage;
+export default AdvertsListPage;

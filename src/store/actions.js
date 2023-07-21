@@ -90,3 +90,9 @@ export const tagListFailure = createAction('ADD_TAGS_FAILURE', (error) => ({
     error: true,
 })); //PONER error como argumento donde se use para que le meta el payload error
 */
+
+//Filters
+
+export const adFilterName = createAction('adv_filter_name', (value) => ({
+    payload: value,
+}));

@@ -1,26 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-//import configureStore from './store';
+import configureStore from './store';
+import { createRoot } from 'react-dom/client';
+import Root from './Root';
+import { createBrowserRouter } from 'react-router-dom';
 
-//import Root from './Root';
-//import { createBrowserRouter } from 'react-router-dom';
-
-/*const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: '*',
         element: <App />,
     },
-]);*/
+]);
 
-//const store = configureStore({ router });
+const store = configureStore({}, { router });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <Root store={store} router={router} />
     </React.StrictMode>
 );
 
