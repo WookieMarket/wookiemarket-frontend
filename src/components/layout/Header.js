@@ -7,7 +7,7 @@ const Header = (...rest) => {
   return (
     <header className='header'>
       <nav className='navbar'>
-        <h1 className='title'> Header </h1>
+        <h1 className='title'> {t('header')} </h1>
         <div className='icons'>
           <img
             className='icon-language'
