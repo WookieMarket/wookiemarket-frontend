@@ -1,27 +1,32 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { areAdvertsLoaded } from './selectors';
+
 export const uiResetError = createAction('ui/resetError');
 
 //Adverts Loading
 
-export const advertsLoaded = createAsyncThunk(
-    'adverts/loaded',
-    async ({
-        getState,
-        extra: {
+export const advertsList = createAsyncThunk(
+    'adverts/list',
+    async ({_,
+            extra: {
             service: { advs },
         },
-        rejectWithValue,
+        rejectWithValue
     }) => {
-        if (areAdvertsLoaded(getState())) {
-            return;
-        }
+        console.log('Antes del try');
         try {
-            await advs.getLastAdv();
+            console.log('Despachando la acción advertsList');
+            const adverts =  await advs.getLastAdv();
+            console.log('Anuncios obtenidos:', adverts);
+            return adverts;
         } catch (error) {
             return rejectWithValue(error);
         }
-    }
+    },
+    {
+        condition:(_, { getState }) => !areAdvertsLoaded(getState(),)
+    
+    },
 );
 
 /*export const advertsLoaded =

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { uiResetError } from './actions';
+import { advertsList, uiResetError } from './actions';
 
 export const defaultState = {
     adverts: {
@@ -13,19 +13,20 @@ export const defaultState = {
     },
 };
 
-const isAdvertsLoadSuccess = (action) => action.type;
-
-export const adverts = createReducer(defaultState.adverts, (builder) => {
+export const adverts = createReducer(defaultState.adverts, builder => {
     builder
-    .addCase(isAdvertsLoadSuccess, (state, action) => {
+    .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload;
-    });
+    })
+    /*.addCase(ADVERT_LOADED_SUCCESS, (state, action) => {
+        state.data = action.payload;
+    });*/
 });
 
 const isActionError = (action) => action.error;
 const isRequestAction = (action) => /\/pending$/.test(action.type);
-const isSuccesAction = (action) => /\/fullfiled$/.test(action.type);
+const isSuccesAction = (action) => /\/fulfilled$/.test(action.type);
 
 export const ui = createReducer(defaultState.ui, (builder) => {
     builder

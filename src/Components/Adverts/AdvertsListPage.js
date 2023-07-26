@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Advert from './AdvertPage';
 import { getAdverts } from '../../store/selectors';
-import { adFilterName, advertsLoaded } from '../../store/actions';
+import { adFilterName, advertsList } from '../../store/actions';
 
 const EmptyList = ({ dataFiltered }) => {
     return dataFiltered ? (
@@ -19,19 +19,13 @@ const EmptyList = ({ dataFiltered }) => {
 
 const AdvertsListPage = ({ isLoading }) => {
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
     const adverts = useSelector(getAdverts);
-
-    const onAdvertsLoaded = (adverts) => dispatch(advertsLoaded(adverts));
-
+    console.log(adverts)
+    const onAdvertsLoaded = (adverts) => dispatch(advertsList(adverts));
+    console.log(onAdvertsLoaded)
     const [query, setQuery] = useState('');
-    const [selectedTags, setSelectedTags] = useState({
-        lifestyle: false,
-        motor: false,
-        mobile: false,
-        work: false,
-    });
+
     const [dataFiltered, setDataFiltered] = useState([]);
     const [maxPrice, setQueryMaxPrice] = useState(Infinity);
     const [minPrice, setQueryMinPrice] = useState(-Infinity);
@@ -41,7 +35,7 @@ const AdvertsListPage = ({ isLoading }) => {
     );
 
     useEffect(() => {
-        dispatch(advertsLoaded())
+        dispatch(advertsList())
             .then((adverts) => {
                 filteredAdverts === 0
                     ? onAdvertsLoaded(adverts) //setDataFiltered(true)
@@ -50,7 +44,7 @@ const AdvertsListPage = ({ isLoading }) => {
                 //dispatch(adFilterName(query));
             })
             .catch((error) => {
-                console.log('El error: ', error);
+                //console.log('El error: ', error);
                 if (error.status === 401) {
                     navigate('/login');
                 } else {
