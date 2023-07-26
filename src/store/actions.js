@@ -1,43 +1,23 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT } from "./types";
+//NOTE I use rejectWithValue to take care of the error
 
-export const authLoginRequest = () => ({
-  type: AUTH_LOGIN_REQUEST,
-});
-
-export const authLoginSuccess = () => ({
-  type: AUTH_LOGIN_SUCCESS,
-});
-
-export const authLoginFailure = createAction("auth/loginFailure", error => ({
-  error: true,
-  payload: error,
-}));
-
-export const authLogin =
-  credentials =>
-  async (dispatch, _getState, { service, router }) => {
-    dispatch(authLoginRequest());
+export const authLogin = createAsyncThunk(
+  "auth/login",
+  async (credentials, { extra: { service, router }, rejectWithValue }) => {
     try {
       await service.auth.login(credentials);
-      // Logged in
-      dispatch(authLoginSuccess());
-      // Redirect to pathname
       const to = router.state.location.state?.from?.pathname || "/";
       router.navigate(to);
     } catch (error) {
-      dispatch(authLoginFailure(error));
+      return rejectWithValue(error);
     }
-  };
+  },
+);
 
-export const authLogoutSuccess = () => ({
-  type: AUTH_LOGOUT,
-});
+export const authLogout = createAsyncThunk(
+  "auth/logout",
+  (_, { extra: { service } }) => service.auth.logout(),
+);
 
-export const authLogout =
-  () =>
-  async (dispatch, _getState, { service }) => {
-    await service.auth.logout();
-    dispatch(authLogoutSuccess());
-  };
+export const uiResetError = createAction("ui/resetError");
