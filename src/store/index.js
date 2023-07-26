@@ -16,9 +16,21 @@ const failureRedirects = (router, redirectsMap) => () => next => action => {
   return result;
 };
 
+const successRedirects = router => () => next => action => {
+  const result = next(action);
+
+  if (action.type === actionCreators.authLogin.fulfilled.type) {
+    const to = router.state.location.state?.from?.pathname || "/";
+    router.navigate(to);
+  }
+
+  return result;
+};
+
 export default function configureStore(preloadedState, { router }) {
   const extraMiddleware = [
     failureRedirects(router, { 401: "/login", 404: "/404" }),
+    successRedirects(router),
   ];
 
   const store = rtkConfigureStore({
