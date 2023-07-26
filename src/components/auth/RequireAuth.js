@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { getIsLogged } from "../../store/selectors";
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router-dom";
 
 //NOTE The children property refers to the element that is inside the tag
 
@@ -10,9 +10,10 @@ const RequireAuth = ({ children }) => {
   const isLogged = useSelector(getIsLogged);
   const location = useLocation();
 
-  if (isLogged) {
+  if (!isLogged) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
+  return children;
 };
 
 export default RequireAuth;
