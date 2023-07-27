@@ -4,13 +4,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const authLogin = createAsyncThunk(
   "auth/login",
-  async (credentials, { extra: { service }, rejectWithValue }) => {
-    try {
-      await service.auth.login(credentials);
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
+  async (credentials, { extra: { service }, rejectWithValue }) =>
+    service.auth.login(credentials).catch(rejectWithValue),
 );
 
 export const authLogout = createAsyncThunk(

@@ -31,11 +31,9 @@ const Header = (...rest) => {
       <nav className="navbar">
         <h1 className="title"> Header </h1>
         {isLogged ? (
-          <button onClick={handleLogoutClick} variant="primary2">
-            Logout
-          </button>
+          <button onClick={handleLogoutClick}>Logout</button>
         ) : (
-          <button as={Link} variant="primary" to="/login">
+          <button as={Link} to="/login">
             Login
           </button>
         )}
@@ -43,8 +41,8 @@ const Header = (...rest) => {
       <hr />
       {showModal && (
         <Modal
-          title="Abandonar sesión"
-          message="¿Estas seguro ? "
+          title="Leave session"
+          message="¿You're sure? "
           onConfirm={handleShowModalconfirm}
           onCancel={handleShowModalCancel}
         />

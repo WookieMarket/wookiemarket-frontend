@@ -10,10 +10,10 @@ function Modal(props) {
         <div className="modal-body">{message}</div>
         <div className="modal-buttons">
           <button onClick={onCancel} variant="primary2">
-            Cancelar
+            Cancel
           </button>
           <button onClick={onConfirm} variant="primary3">
-            Confirmar
+            Confirm
           </button>
         </div>
       </div>

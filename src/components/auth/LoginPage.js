@@ -45,7 +45,7 @@ function LoginPage() {
     <Layout title="Login Page">
       <div>
         {isLoading ? (
-          <Spinner message="cargando..." />
+          <Spinner message="Charging..." />
         ) : (
           <form onSubmit={handleSubmit} className="container-form">
             <label className="form-label" htmlFor="username">
@@ -85,7 +85,6 @@ function LoginPage() {
             <button
               data-testid="button"
               type="submit"
-              variant="primary"
               width="button-form"
               disabled={buttonDisabled}>
               Log in
