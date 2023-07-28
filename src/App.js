@@ -10,6 +10,7 @@ import HomePage from "./components/ads/HomePage";
 function App() {
   return (
     <div className="App">
+      Hola Mandalorians!
       <Routes>
         <Route
           path="/home"

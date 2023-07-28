@@ -1,15 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import LoginPage from "../LoginPage";
-//import { defaultState } from "../../../store/reducers";
+
 import { configureStore } from "@reduxjs/toolkit";
-//import { authLogin, userInterfaceResetError } from "../../../store/actions";
+
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import authReducer, { authLogin } from "../../../store/slices/auth";
 import uiReducer, { resetError } from "../../../store/slices/ui";
 
-jest.mock("../../../store/actions");
+jest.mock("../../../store/slices/auth");
+
+console.log("authred", authReducer);
+console.log("login", authLogin);
 
 describe("LoginPage", () => {
   const renderComponent = (error = null) => {
@@ -50,7 +53,7 @@ describe("LoginPage", () => {
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
     const checkboxInput = screen.getByLabelText(/rememberMe/);
-    const submitButton = screen.getByRole("button");
+    const submitButton = screen.getByRole("button", { name: /Log in/ });
 
     expect(submitButton).toBeDisabled();
 
