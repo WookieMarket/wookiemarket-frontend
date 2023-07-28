@@ -5,7 +5,8 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "<rootDir>/styleMock.js"
-    }
+    },
+    "testEnvironment": "jsdom"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
