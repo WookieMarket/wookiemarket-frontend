@@ -40,7 +40,8 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                         <h1>ADVERTISEMENTS AVIABLE</h1>
                       </div>
                       <ul>
-                        {adverts
+                        {[...adverts]
+                        .slice()
                           .sort((a, b) => a.createdAt > b.createdAt)
                           .map((advert) => (
                             <li key={advert.id}>

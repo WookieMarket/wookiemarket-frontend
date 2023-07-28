@@ -1,58 +1,59 @@
 import React from 'react';
-import defaultPhoto from '../../assets/no_image.jpg';
+import defaultImage from '../../assets/no_image.jpg';
 
-const Advert = (advs) => {
-    const advDate = new Date(advs.createdAt);
+const Advert = ({ name, createdAt, sale, price, image, category }) => {
+    console.log('Rendering Advert component')
+  const advDate = new Date(createdAt);
+  const images = (image) => {
+    if (image) {
+      return image;
+    } else {
+      return defaultImage;
+    }
+  };
 
-    const photos = (photo) => {
-        if (photo) {
-            return advs.photo;
-        } else {
-            return defaultPhoto;
-        }
-    };
+  return (
+    <>
+      <div className="productInfo" id="advertOnly" tyle={{ border: '1px solid red' }}>
+        <p>Debería haber un anuncio aquí</p>
+        <div className="productName">
+          <h1>{name}</h1>
+          <small>Created at: {`${advDate.toUTCString()}`}</small>
+        </div>
 
-    return (
-        <>
-            <div className='productInfo' id='advertOnly'>
-                <div className='productName'>
-                    <h1>{advs.name}</h1>
-                    <small>Created at: {`${advDate.toUTCString()}`}</small>
-                </div>
+        <div className="productData">
+          <p>
+            {' '}
+            Is
+            {sale ? (
+              <span id="isSale"> for sale </span>
+            ) : (
+              <span id="isSale"> purchased </span>
+            )}
+            this product by:
+          </p>
+          <h2>{price} €</h2>
+        </div>
 
-                <div className='productData'>
-                    <p>
-                        {' '}
-                        Is
-                        {advs.sale ? (
-                            <span id='isSale'> for sale </span>
-                        ) : (
-                            <span id='isSale'> purchased </span>
-                        )}
-                        this product by:
-                    </p>
-                    <h2>{advs.price} €</h2>
-                </div>
+        <div className="product-img">
+          <img
+            className="productPhoto"
+            src={images(image)}
+            alt="imagen del producto en venta"
+          ></img>
+        </div>
 
-                <div className='product-img'>
-                    <img
-                        className='productPhoto'
-                        src={photos(advs.photo)}
-                        alt='imagen del producto en venta'
-                    ></img>
-                </div>
-
-                <div className='typeTag'>
-                    <p>
-                        Tags:{' '}
-                        {advs.tags === undefined
-                            ? ''
-                            : advs.tags.join(', ').toLocaleUpperCase()}
-                    </p>
-                </div>
-            </div>
-        </>
-    );
+        <div className="typeTag">
+          <p>
+            Category:{' '}
+            {category === undefined
+              ? ''
+              : category.join(', ').toLocaleUpperCase()}
+          </p>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Advert;
