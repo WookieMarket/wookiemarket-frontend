@@ -12,8 +12,26 @@ exports[`LoginPage snapshot 1`] = `
         <h1
           class="title"
         >
-           Header 
+           
+          header
+           
         </h1>
+        <div
+          class="icons"
+        >
+          <img
+            alt="ES"
+            class="icon-language"
+            src="/images/languageIcons/es.png"
+            title="icon-hover"
+          />
+          <img
+            alt="EN"
+            class="icon-language"
+            src="/images/languageIcons/en.png"
+            title="icon-hover"
+          />
+        </div>
         <button
           as="[object Object]"
           to="/login"
@@ -26,6 +44,11 @@ exports[`LoginPage snapshot 1`] = `
     <main
       class="content"
     >
+      <h2
+        class="layout-title"
+      >
+        Login Page
+      </h2>
       <div>
         <form
           class="container-form"
@@ -61,7 +84,7 @@ exports[`LoginPage snapshot 1`] = `
           <label
             for="rememberMe"
           >
-            rememberMe
+            RememberMe
             <input
               id="rememberMe"
               name="rememberMe"
@@ -85,7 +108,7 @@ exports[`LoginPage snapshot 1`] = `
         class="footer"
       >
         <p>
-          @Keepcoding 2023 by Mandalorians
+          footer
         </p>
       </div>
     </footer>

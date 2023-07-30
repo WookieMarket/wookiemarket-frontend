@@ -48,7 +48,7 @@ describe("LoginPage", () => {
     renderComponent();
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
-    const checkboxInput = screen.getByLabelText(/rememberMe/);
+    const checkboxInput = screen.getByLabelText(/RememberMe/);
     const submitButton = screen.getByRole("button", { name: /Log in/ });
     expect(submitButton).toBeDisabled();
 
