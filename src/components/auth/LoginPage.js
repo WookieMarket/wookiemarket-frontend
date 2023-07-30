@@ -6,10 +6,12 @@ import { authLogin } from "../../store/slices/auth";
 import ErrorModal from "../shared/modal/ErrorModal";
 import Spinner from "../shared/spinner/Spinner";
 import Layout from "../layout/Layout";
+import { useTranslation } from "react-i18next";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
 function LoginPage() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
 
@@ -42,14 +44,14 @@ function LoginPage() {
     isLoading || !credentials.username || !credentials.password;
 
   return (
-    <Layout title="Login Page">
+    <Layout title={t("Login Page")}>
       <div>
         {isLoading ? (
-          <Spinner message="cargando..." />
+          <Spinner message={t("charging...")} />
         ) : (
           <form onSubmit={handleSubmit} className="container-form">
             <label className="form-label" htmlFor="username">
-              Username
+              {t("Username")}
             </label>
             <input
               id="username"
@@ -61,7 +63,7 @@ function LoginPage() {
               required
             />
             <label className="form-label" htmlFor="password">
-              Password
+              {t("Password")}
             </label>
             <input
               id="password"
@@ -73,7 +75,7 @@ function LoginPage() {
               required
             />
             <label htmlFor="rememberMe">
-              rememberMe
+              {t("RememberMe")}
               <input
                 id="rememberMe"
                 type="checkbox"
@@ -88,7 +90,7 @@ function LoginPage() {
               //variant="primary"
               width="button-form"
               disabled={buttonDisabled}>
-              Log in
+              {t("Log in")}
             </button>
           </form>
         )}

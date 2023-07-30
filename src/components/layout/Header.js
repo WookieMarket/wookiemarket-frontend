@@ -36,31 +36,31 @@ const Header = (...rest) => {
           <img
             className="icon-language"
             src="/images/languageIcons/es.png"
-            alt="Castellano"
+            alt="ES"
             title={t("icon-hover")}
             onClick={() => i18n.changeLanguage("es")}
           />
           <img
             className="icon-language"
             src="/images/languageIcons/en.png"
-            alt="Inglés"
+            alt="EN"
             title={t("icon-hover")}
             onClick={() => i18n.changeLanguage("en")}
           />
         </div>
         {isLogged ? (
-          <button onClick={handleLogoutClick}>Logout</button>
+          <button onClick={handleLogoutClick}>{t("Logout")}</button>
         ) : (
           <button as={Link} to="/login">
-            Login
+            {t("Login")}
           </button>
         )}
       </nav>
       <hr />
       {showModal && (
         <Modal
-          title="Leave session"
-          message="¿You're sure? "
+          title={t("Leave session")}
+          message={t("¿are you sure?")}
           onConfirm={handleShowModalconfirm}
           onCancel={handleShowModalCancel}
         />
