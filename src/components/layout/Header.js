@@ -5,8 +5,10 @@ import Modal from "../shared/modal/Modal";
 import { getIsLogged, getUi } from "../../store/selectors";
 import { toggleModal } from "../../store/slices/ui";
 import { authLogout } from "../../store/slices/auth";
+import { useTranslation } from "react-i18next";
 
 const Header = (...rest) => {
+  const { t, i18n } = useTranslation();
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
   const { showModal } = useSelector(getUi);
@@ -29,7 +31,23 @@ const Header = (...rest) => {
   return (
     <header className="header">
       <nav className="navbar">
-        <h1 className="title"> Header </h1>
+        <h1 className="title"> {t("header")} </h1>
+        <div className="icons">
+          <img
+            className="icon-language"
+            src="/images/languageIcons/es.png"
+            alt="Castellano"
+            title={t("icon-hover")}
+            onClick={() => i18n.changeLanguage("es")}
+          />
+          <img
+            className="icon-language"
+            src="/images/languageIcons/en.png"
+            alt="Inglés"
+            title={t("icon-hover")}
+            onClick={() => i18n.changeLanguage("en")}
+          />
+        </div>
         {isLogged ? (
           <button onClick={handleLogoutClick}>Logout</button>
         ) : (
