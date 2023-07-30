@@ -1,18 +1,16 @@
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Advert from './AdvertPage';
+import Advert from './Advert';
 import { connect } from 'react-redux';
 import { getAdverts, getUi } from '../../store/selectors';
-import { advertsList } from '../../store/slices/adverts';
-import '../../stylesheets/advertListPage.css'
-
+import { advertsList } from '../../store/slices/ads';
+import '../../css/advertListPage.css';
+import '../../css/advert.css';
 
 const EmptyList = ({ dataFiltered }) => {
-    
-        <div style={{ textAlign: 'center' }}>
-            <p>Sorry, no adverts yet.</p>
-        </div>
+  <div style={{ textAlign: 'center' }}>
+    <p>Sorry, no adverts yet.</p>
+  </div>;
 };
 
 const advertsPerPage = 2;
@@ -33,13 +31,14 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
   const advertsToDisplay = adverts.slice(startIndex, endIndex);
+  const isLastPage = currentPage === totalPages;
 
   return (
     <>
-      <div className="container">
+      <div className='container'>
         {isLoading ? (
-          <div className="loadingPage">
-            <div className="loadingInfo">
+          <div className='loadingPage'>
+            <div className='loadingInfo'>
               <h1>LOADING....</h1>
             </div>
           </div>
@@ -47,31 +46,68 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
           <div>
             {!!(adverts && adverts.length) ? (
               <>
-                <div className="listContainer">
-                  <div className="contaienrTittle">
+                <div className='listContainer'>
+                  <div className='contaienrTittle'>
                     <h1>ADVERTISEMENTS AVIABLE</h1>
                   </div>
                   <ul>
-                    {advertsToDisplay
-                      .sort((a, b) => a.createdAt > b.createdAt)
-                      .map((advert) => (
-                        <li key={advert.id}>
-                          <Link to={`/adverts/${advert.id}`}>
-                            <Advert {...advert} />
-                          </Link>
-                        </li>
-                      ))}
+                    <ul>
+                      {advertsToDisplay
+                        .sort((a, b) => a.createdAt > b.createdAt)
+                        .map((advert) => (
+                          <li key={advert.id}>
+                            <div className='advert-container'>
+                              <Link to={`/adverts/${advert.id}`}>
+                                <Advert {...advert} />
+                              </Link>
+                            </div>
+                          </li>
+                        ))}
+                    </ul>
                   </ul>
                 </div>
-                <div className="pagination">
-                  {[...Array(totalPages)].map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handlePageChange(index + 1)}
+                <div className='pagination'>
+                  <p>
+                    <span
+                      className={currentPage === 1 ? 'disabled' : 'page'}
+                      onClick={() => handlePageChange(currentPage - 1)}
                     >
-                      {index + 1}
-                    </button>
-                  ))}
+                      &lt;{' '}
+                    </span>
+                    {[...Array(totalPages)].map((_, index) => {
+                      if (
+                        totalPages > 5 &&
+                        index > 1 &&
+                        index < totalPages - 2
+                      ) {
+                        return (
+                          <span className='page' key={index}>
+                            ...
+                          </span>
+                        );
+                      } else {
+                        return (
+                          <>
+                            <span
+                              className='page'
+                              key={index}
+                              onClick={() => handlePageChange(index + 1)}
+                            >
+                              {index + 1}
+                            </span>
+                            {index < totalPages - 1 && <span> - </span>}
+                          </>
+                        );
+                      }
+                    })}
+                    <span
+                      className={isLastPage ? 'disabled' : 'page'}
+                      onClick={() => handlePageChange(currentPage + 1)}
+                    >
+                      {' '}
+                      &gt;
+                    </span>
+                  </p>
                 </div>
               </>
             ) : (
@@ -84,14 +120,13 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   );
 };
 
-
-const mapStateToProps = state => ({
-    adverts: getAdverts(state),
-    //isLoading: isLoading(state),
-    ...getUi(state)
-    });
+const mapStateToProps = (state) => ({
+  adverts: getAdverts(state),
+  //isLoading: isLoading(state),
+  ...getUi(state),
+});
 const mapDispatchToProps = {
-    onAdvertsLoaded: advertsList,
-    };
-    
+  onAdvertsLoaded: advertsList,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(AdvertsListPage);
