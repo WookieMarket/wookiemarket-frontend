@@ -16,7 +16,7 @@ function App() {
         element={
           <Layout>
             <div className='App'>{t('welcome')}</div>
-              </Layout>
+          </Layout>
         }
       />
       {/* <Route path="/login" element={<LoginPage />} /> */}
