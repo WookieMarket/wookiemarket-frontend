@@ -1,3 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginPage snapshot 1`] = `<div />`;
+exports[`LoginPage snapshot 1`] = `
+<div>
+  <div>
+    <header
+      class="header"
+    >
+      <nav
+        class="navbar"
+      >
+        <h1
+          class="title"
+        >
+           Header 
+        </h1>
+        <button
+          as="[object Object]"
+          to="/login"
+        >
+          Login
+        </button>
+      </nav>
+      <hr />
+    </header>
+    <main
+      class="content"
+    >
+      <div>
+        <form
+          class="container-form"
+        >
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            required=""
+            type="text"
+            value=""
+          />
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            required=""
+            type="password"
+            value=""
+          />
+          <label
+            for="rememberMe"
+          >
+            rememberMe
+            <input
+              id="rememberMe"
+              name="rememberMe"
+              type="checkbox"
+            />
+          </label>
+          <button
+            data-testid="button"
+            disabled=""
+            type="submit"
+            width="button-form"
+          >
+            Log in
+          </button>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <hr />
+      <div
+        class="footer"
+      >
+        <p>
+          @Keepcoding 2023 by Mandalorians
+        </p>
+      </div>
+    </footer>
+  </div>
+</div>
+`;
