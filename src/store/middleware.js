@@ -1,8 +1,8 @@
 export const failureRedirects =
-  (router, redirectsMap) => () => next => action => {
+  (router, redirectsMap) => () => (next) => (action) => {
     const result = next(action);
 
-    if (action.error) {
+    if (action.error && action.payload) {
       const redirect = redirectsMap[action.payload.status];
       if (redirect) {
         router.navigate(redirect);
@@ -12,7 +12,7 @@ export const failureRedirects =
   };
 
 export const successRedirects =
-  (router, redirectsMap) => () => next => action => {
+  (router, redirectsMap) => () => (next) => (action) => {
     const result = next(action);
 
     const redirect = redirectsMap[action.type];

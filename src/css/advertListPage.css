@@ -1,0 +1,56 @@
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  width: 50%;
+}
+
+h1 {
+  text-align: center;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+.pagination {
+  text-align: center;
+  color: rgb(242, 204, 108);
+}
+
+.pagination .page {
+  cursor: pointer;
+}
+
+.advert-container {
+    border: 2px solid rgb(242, 204, 108);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+  }
+  
+  .advert-container img {
+    display: block;
+  }
+  
+  .advert-container h2 {
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1.5rem;
+  }
+  .disabled {
+    cursor: default;
+    pointer-events: none; 
+    color: rgb(242, 204, 108, 50%);
+  }
+  
+  @media (max-width: 600px) {
+    .advert-container {
+      font-size: 14px;
+    }
+  }
+  
