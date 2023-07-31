@@ -6,6 +6,7 @@ const HomePage = (props) => {
   const { t } = useTranslation();
   return (
     <Layout title={t('welcome')} {...props}>
+      <br />
       <AdvertsListPage />
     </Layout>
   );

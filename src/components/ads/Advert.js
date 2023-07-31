@@ -3,6 +3,7 @@ import defaultImage from '../../assets/no_image.jpg';
 import '../../css/advert.css';
 
 function Advert({
+  _id,
   name,
   description,
   createdAt,
@@ -21,7 +22,7 @@ function Advert({
       return defaultImage;
     }
   };
-
+  console.log('_id: ' + _id)
   return (
     <>
       <div className='productInfo' id='advertOnly'>

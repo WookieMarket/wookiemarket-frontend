@@ -1,6 +1,6 @@
 import { configureStore as rtkConfigureStore } from '@reduxjs/toolkit';
-
 import * as service from '../service';
+import * as adsService from '../service/ads'
 import * as reducers from './reducers';
 import { failureRedirects, successRedirects } from './middleware';
 import { authLogin } from './slices/auth';
@@ -19,7 +19,7 @@ export default function configureStore(preloadedState, { router }) {
     reducer: reducers,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
-        thunk: { extraArgument: { service, router } },
+        thunk: { extraArgument: { service, adsService, router } },
         serializableCheck: false,
       }).concat(extraMiddleware),
     preloadedState,
