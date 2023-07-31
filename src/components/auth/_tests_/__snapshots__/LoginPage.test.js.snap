@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage snapshot 1`] = `
+<div>
+  <div>
+    <header
+      class="header"
+    >
+      <nav
+        class="navbar"
+      >
+        <h1
+          class="title"
+        >
+           
+          header
+           
+        </h1>
+        <div
+          class="icons"
+        >
+          <img
+            alt="ES"
+            class="icon-language"
+            src="/images/languageIcons/es.png"
+            title="icon-hover"
+          />
+          <img
+            alt="EN"
+            class="icon-language"
+            src="/images/languageIcons/en.png"
+            title="icon-hover"
+          />
+        </div>
+        <button
+          as="[object Object]"
+          to="/login"
+        >
+          Login
+        </button>
+      </nav>
+      <hr />
+    </header>
+    <main
+      class="content"
+    >
+      <h2
+        class="layout-title"
+      >
+        Login Page
+      </h2>
+      <div>
+        <form
+          class="container-form"
+        >
+          <label
+            class="form-label"
+            for="username"
+          >
+            Username
+          </label>
+          <input
+            class="form-input"
+            id="username"
+            name="username"
+            required=""
+            type="text"
+            value=""
+          />
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="form-input"
+            id="password"
+            name="password"
+            required=""
+            type="password"
+            value=""
+          />
+          <label
+            for="rememberMe"
+          >
+            RememberMe
+            <input
+              id="rememberMe"
+              name="rememberMe"
+              type="checkbox"
+            />
+          </label>
+          <button
+            data-testid="button"
+            disabled=""
+            type="submit"
+            width="button-form"
+          >
+            Log in
+          </button>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <hr />
+      <div
+        class="footer"
+      >
+        <p>
+          footer
+        </p>
+      </div>
+    </footer>
+  </div>
+</div>
+`;
