@@ -6,6 +6,7 @@ import { getAdverts, getUi } from '../../store/selectors';
 import { advertsList } from '../../store/slices/ads';
 import '../../css/advertListPage.css';
 import '../../css/advert.css';
+import defaultImage from '../../assets/no_image.jpg';
 
 const EmptyList = ({ dataFiltered }) => {
   return (
@@ -14,6 +15,10 @@ const EmptyList = ({ dataFiltered }) => {
     </div>
   );
 };
+
+const handleImageError = (event) => {
+  event.target.src = defaultImage;
+}
 
 const advertsPerPage = 2;
 
@@ -60,7 +65,7 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                           <li key={advert.id}>
                             <div className='advert-container'>
                               <Link to={`/adverts/${advert.id}`}>
-                                <Advert {...advert} />
+                                <Advert key={advert.id} advert={advert} onImageError={handleImageError} />
                               </Link>
                             </div>
                           </li>

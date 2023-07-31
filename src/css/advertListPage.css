@@ -18,7 +18,7 @@ a:link, a:visited, a:active {
 }
 .pagination {
   text-align: center;
-  color: rgb(242, 204, 108);
+  color: var(--text-color);
 }
 
 .pagination .page {
@@ -26,7 +26,7 @@ a:link, a:visited, a:active {
 }
 
 .advert-container {
-    border: 2px solid rgb(242, 204, 108);
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     padding: 16px;
     margin: 16px;
@@ -48,7 +48,7 @@ a:link, a:visited, a:active {
   .disabled {
     cursor: default;
     pointer-events: none; 
-    color: rgb(242, 204, 108, 50%);
+    color: rgba(var(--text-color), 0.25);
   }
   
   @media (max-width: 600px) {

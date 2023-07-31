@@ -4,7 +4,7 @@
 }
 
 h2 {
-  font-family: 'Star Jedi', sans-serif;
+  font-family: var(--font-family);
 }
 .advert_text {
     font-size: 1 em;
@@ -30,9 +30,9 @@ h2 {
   text-align: center;
   display: inline-block;
   font-weight: bold;
-  color: rgb(255, 0, 0);
+  color: var(--price-color);
   border-radius: 8px;
-  border-color: rgb(255, 0, 0);
+  border-color: var(--price-color);
   border: 2px dashed;
 }
 
