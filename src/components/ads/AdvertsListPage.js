@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from './Advert';
 import { connect } from 'react-redux';
-import { getAdverts, getUi } from '../../store/selectors';
+import { getAdverts, getUi, dataFiltered } from '../../store/selectors';
 import { advertsList } from '../../store/slices/ads';
 import '../../css/advertListPage.css';
 import '../../css/advert.css';
 import defaultImage from '../../assets/no_image.jpg';
+import { filterByName } from '../../store/slices/adsFiltered';
+
 
 const EmptyList = ({ dataFiltered }) => {
   return (
@@ -18,13 +20,14 @@ const EmptyList = ({ dataFiltered }) => {
 
 const handleImageError = (event) => {
   event.target.src = defaultImage;
-}
+};
 
 const advertsPerPage = 2;
 
 const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   //const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredAdverts, setFilteredAdverts] = useState(adverts);
 
   useEffect(() => {
     onAdvertsLoaded();
@@ -40,8 +43,19 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   const advertsToDisplay = adverts.slice(startIndex, endIndex);
   const isLastPage = currentPage === totalPages;
 
+  const handleFilterChange = (event) => {
+    //filterByName(event.target.value);
+        const filteredData = filterByName({ name: event.target.value, adverts });
+    setFilteredAdverts(filteredData);
+  };
+
   return (
     <>
+      <section className='searchSection'>
+        <h1>Searching area</h1>
+        <label className='advert_label'>Name: </label>
+        <input type='text' onChange={handleFilterChange} />
+      </section>
       <div className='container'>
         {isLoading ? (
           <div className='loadingPage'>
@@ -65,7 +79,11 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                           <li key={advert.id}>
                             <div className='advert-container'>
                               <Link to={`/adverts/${advert.id}`}>
-                                <Advert key={advert.id} advert={advert} onImageError={handleImageError} />
+                                <Advert
+                                  key={advert.id}
+                                  advert={advert}
+                                  onImageError={handleImageError}
+                                />
                               </Link>
                             </div>
                           </li>

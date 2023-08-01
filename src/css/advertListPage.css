@@ -45,12 +45,21 @@ a:link, a:visited, a:active {
     text-decoration: underline;
     font-size: 1.5rem;
   }
+
   .disabled {
     cursor: default;
     pointer-events: none; 
     color: rgba(var(--text-color), 0.25);
   }
   
+  .searchSection h1 {
+    color: var(--text-color)
+  }
+  .searchSection {
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    margin: 1.3rem;
+  }
   @media (max-width: 600px) {
     .advert-container {
       font-size: 14px;
