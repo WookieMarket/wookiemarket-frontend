@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Advert from "./Advert";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { getAdverts, getUi, dataFiltered } from "../../store/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdverts, getUi } from "../../store/selectors";
 import { advertsList } from "../../store/slices/ads";
 import "../../css/advertListPage.css";
 import "../../css/advert.css";
 import defaultImage from "../../assets/no_image.jpg";
 import { filterByName } from "../../store/slices/adsFiltered";
+import Layout from "../layout/Layout";
 
 const EmptyList = ({ dataFiltered }) => {
   return (
@@ -88,28 +89,28 @@ const AdvertsListPage = () => {
   };
 
   return (
-    <>
-      <section className="searchSection">
-        <h1>Searching area</h1>
-        <label className="advert_label">Name: </label>
-        <input type="text" onChange={handleFilterChange} />
-      </section>
-      <div className="container">
-        {isLoading ? (
-          <div className="loadingPage">
-            <div className="loadingInfo">
-              <h1>LOADING....</h1>
+    <Layout title="anuncios">
+      <>
+        <section className="searchSection">
+          <h1>Searching area</h1>
+          <label className="advert_label">Name: </label>
+          <input type="text" onChange={handleFilterChange} />
+        </section>
+        <div className="container">
+          {isLoading ? (
+            <div className="loadingPage">
+              <div className="loadingInfo">
+                <h1>LOADING....</h1>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            {!!(ads && ads.length) ? (
-              <>
-                <div className="listContainer">
-                  <div className="contaienrTittle">
-                    <h1>ADVERTISEMENTS AVIABLE</h1>
-                  </div>
-                  <ul>
+          ) : (
+            <div>
+              {!!(ads && ads.length) ? (
+                <>
+                  <div className="listContainer">
+                    <div className="contaienrTittle">
+                      <h1>ADVERTISEMENTS AVIABLE</h1>
+                    </div>
                     <ul>
                       {advertsToDisplay
                         .sort((a, b) => a.createdAt > b.createdAt)
@@ -118,7 +119,6 @@ const AdvertsListPage = () => {
                             <div className="advert-container">
                               <Link to={`/adverts/${advert.id}`}>
                                 <Advert
-                                  key={advert.id}
                                   advert={advert}
                                   onImageError={handleImageError}
                                 />
@@ -127,56 +127,56 @@ const AdvertsListPage = () => {
                           </li>
                         ))}
                     </ul>
-                  </ul>
-                </div>
-                <div className="pagination">
-                  <p>
-                    <span
-                      className={currentPage === 1 ? "disabled" : "page"}
-                      onClick={() => handlePageChange(currentPage - 1)}>
-                      &lt;{" "}
-                    </span>
-                    {[...Array(totalPages)].map((_, index) => {
-                      if (
-                        totalPages > 5 &&
-                        index > 1 &&
-                        index < totalPages - 2
-                      ) {
-                        return (
-                          <span className="page" key={index}>
-                            ...
-                          </span>
-                        );
-                      } else {
-                        return (
-                          <>
-                            <span
-                              className="page"
-                              key={index}
-                              onClick={() => handlePageChange(index + 1)}>
-                              {index + 1}
+                  </div>
+                  <div className="pagination">
+                    <p>
+                      <span
+                        className={currentPage === 1 ? "disabled" : "page"}
+                        onClick={() => handlePageChange(currentPage - 1)}>
+                        &lt;{" "}
+                      </span>
+                      {[...Array(totalPages)].map((_, index) => {
+                        if (
+                          totalPages > 5 &&
+                          index > 1 &&
+                          index < totalPages - 2
+                        ) {
+                          return (
+                            <span className="page" key={index}>
+                              ...
                             </span>
-                            {index < totalPages - 1 && <span> - </span>}
-                          </>
-                        );
-                      }
-                    })}
-                    <span
-                      className={isLastPage ? "disabled" : "page"}
-                      onClick={() => handlePageChange(currentPage + 1)}>
-                      {" "}
-                      &gt;
-                    </span>
-                  </p>
-                </div>
-              </>
-            ) : (
-              <EmptyList />
-            )}
-          </div>
-        )}
-      </div>
-    </>
+                          );
+                        } else {
+                          return (
+                            <>
+                              <span
+                                className="page"
+                                key={index}
+                                onClick={() => handlePageChange(index + 1)}>
+                                {index + 1}
+                              </span>
+                              {index < totalPages - 1 && <span> - </span>}
+                            </>
+                          );
+                        }
+                      })}
+                      <span
+                        className={isLastPage ? "disabled" : "page"}
+                        onClick={() => handlePageChange(currentPage + 1)}>
+                        {" "}
+                        &gt;
+                      </span>
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <EmptyList />
+              )}
+            </div>
+          )}
+        </div>
+      </>
+    </Layout>
   );
 };
 
