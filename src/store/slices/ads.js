@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { areAdvertsLoaded } from '../selectors';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { areAdvertsLoaded } from "../selectors";
 
 export const advertsList = createAsyncThunk(
-  'adverts/list',
+  "adverts/list",
   async (_, { extra: { adsService }, rejectWithValue }) => {
-    console.log('Antes del try');
+    console.log("Antes del try");
     try {
-      console.log('Despachando la acción advertsList');
+      console.log("Despachando la acción advertsList");
       const adverts = await adsService.getLastAdv();
-      console.log('Anuncios obtenidos:', adverts);
+      console.log("Anuncios obtenidos:", adverts);
       return adverts;
     } catch (error) {
       console.log(error);
@@ -17,16 +17,16 @@ export const advertsList = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  }
+  },
 );
 
 const ads = createSlice({
-  name: 'adverts',
+  name: "adverts",
   initialState: {
     areLoaded: false,
     data: [],
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(advertsList.fulfilled, (state, action) => {
       state.areLoaded = true;
       state.data = action.payload.results;

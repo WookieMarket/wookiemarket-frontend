@@ -1,83 +1,121 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Advert from './Advert';
-import { connect } from 'react-redux';
-import { getAdverts, getUi, dataFiltered } from '../../store/selectors';
-import { advertsList } from '../../store/slices/ads';
-import '../../css/advertListPage.css';
-import '../../css/advert.css';
-import defaultImage from '../../assets/no_image.jpg';
-import { filterByName } from '../../store/slices/adsFiltered';
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Advert from "./Advert";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getAdverts, getUi, dataFiltered } from "../../store/selectors";
+import { advertsList } from "../../store/slices/ads";
+import "../../css/advertListPage.css";
+import "../../css/advert.css";
+import defaultImage from "../../assets/no_image.jpg";
+import { filterByName } from "../../store/slices/adsFiltered";
 
 const EmptyList = ({ dataFiltered }) => {
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: "center" }}>
       <p>Sorry, no adverts yet.</p>
     </div>
   );
 };
 
-const handleImageError = (event) => {
+const handleImageError = event => {
   event.target.src = defaultImage;
 };
 
 const advertsPerPage = 2;
 
-const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
+const AdvertsListPage = () => {
   //const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredAdverts, setFilteredAdverts] = useState(adverts);
+  const [filteredAdverts, setFilteredAdverts] = useState("");
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  const ads = useSelector(getAdverts);
+  const { isLoading } = useSelector(getUi);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   onAdvertsLoaded();
+  // }, [onAdvertsLoaded]);
 
   useEffect(() => {
-    onAdvertsLoaded();
-  }, [onAdvertsLoaded]);
+    dispatch(advertsList()).catch(error => console.log(error));
+  }, [dispatch]);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = page => {
     setCurrentPage(page);
   };
 
-  const totalPages = Math.ceil(adverts.length / advertsPerPage);
+  const filterAdName = ad =>
+    (ad.name ?? "").toUpperCase().startsWith(filteredAdverts.toUpperCase());
+
+  const filteredAds = ads
+    //.filter(filterAdSaleValueOrDefault)
+    .filter(filterAdName);
+  //.filter(filterAdPrice)
+  //.filter(filterAdTags);
+
+  //const totalPages = Math.ceil(adverts.length / advertsPerPage);
+  const totalPages = Math.ceil(
+    (isFilterActive ? filteredAds.length : ads.length) / advertsPerPage,
+  );
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
-  const advertsToDisplay = adverts.slice(startIndex, endIndex);
-  const isLastPage = currentPage === totalPages;
+  //const advertsToDisplay = adverts.slice(startIndex, endIndex);
+  const advertsToDisplay = isFilterActive
+    ? filteredAds.slice(startIndex, endIndex)
+    : ads.slice(startIndex, endIndex);
+  //const isLastPage = currentPage === totalPages;
+  const isLastPage = isFilterActive
+    ? currentPage === Math.ceil(filteredAds.length / advertsPerPage)
+    : currentPage === Math.ceil(ads.length / advertsPerPage);
 
-  const handleFilterChange = (event) => {
-    //filterByName(event.target.value);
-        const filteredData = filterByName({ name: event.target.value, adverts });
-    setFilteredAdverts(filteredData);
+  // const handleFilterChange = event => {
+  //   // //filterByName(event.target.value);
+  //   // const filteredData = filterByName({ name: event.target.value, adverts });
+  //   // setFilteredAdverts(filteredData);
+  //   setFilteredAdverts(event.target.value);
+  // };
+
+  // const handleFilterChange = event => {
+  //   const value = event.target.value;
+  //   setFilteredAdverts(value);
+  //   setIsFilterActive(value.trim() !== "");
+  // };
+  const handleFilterChange = event => {
+    const value = event.target.value;
+    setFilteredAdverts(value);
+    setIsFilterActive(value.trim() !== "");
+    dispatch(filterByName({ name: value.trim(), adverts: ads })); // Llama a la acción filterByName
   };
 
   return (
     <>
-      <section className='searchSection'>
+      <section className="searchSection">
         <h1>Searching area</h1>
-        <label className='advert_label'>Name: </label>
-        <input type='text' onChange={handleFilterChange} />
+        <label className="advert_label">Name: </label>
+        <input type="text" onChange={handleFilterChange} />
       </section>
-      <div className='container'>
+      <div className="container">
         {isLoading ? (
-          <div className='loadingPage'>
-            <div className='loadingInfo'>
+          <div className="loadingPage">
+            <div className="loadingInfo">
               <h1>LOADING....</h1>
             </div>
           </div>
         ) : (
           <div>
-            {!!(adverts && adverts.length) ? (
+            {!!(ads && ads.length) ? (
               <>
-                <div className='listContainer'>
-                  <div className='contaienrTittle'>
+                <div className="listContainer">
+                  <div className="contaienrTittle">
                     <h1>ADVERTISEMENTS AVIABLE</h1>
                   </div>
                   <ul>
                     <ul>
                       {advertsToDisplay
                         .sort((a, b) => a.createdAt > b.createdAt)
-                        .map((advert) => (
+                        .map(advert => (
                           <li key={advert.id}>
-                            <div className='advert-container'>
+                            <div className="advert-container">
                               <Link to={`/adverts/${advert.id}`}>
                                 <Advert
                                   key={advert.id}
@@ -91,13 +129,12 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                     </ul>
                   </ul>
                 </div>
-                <div className='pagination'>
+                <div className="pagination">
                   <p>
                     <span
-                      className={currentPage === 1 ? 'disabled' : 'page'}
-                      onClick={() => handlePageChange(currentPage - 1)}
-                    >
-                      &lt;{' '}
+                      className={currentPage === 1 ? "disabled" : "page"}
+                      onClick={() => handlePageChange(currentPage - 1)}>
+                      &lt;{" "}
                     </span>
                     {[...Array(totalPages)].map((_, index) => {
                       if (
@@ -106,7 +143,7 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                         index < totalPages - 2
                       ) {
                         return (
-                          <span className='page' key={index}>
+                          <span className="page" key={index}>
                             ...
                           </span>
                         );
@@ -114,10 +151,9 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                         return (
                           <>
                             <span
-                              className='page'
+                              className="page"
                               key={index}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
+                              onClick={() => handlePageChange(index + 1)}>
                               {index + 1}
                             </span>
                             {index < totalPages - 1 && <span> - </span>}
@@ -126,10 +162,9 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                       }
                     })}
                     <span
-                      className={isLastPage ? 'disabled' : 'page'}
-                      onClick={() => handlePageChange(currentPage + 1)}
-                    >
-                      {' '}
+                      className={isLastPage ? "disabled" : "page"}
+                      onClick={() => handlePageChange(currentPage + 1)}>
+                      {" "}
                       &gt;
                     </span>
                   </p>
@@ -145,13 +180,15 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  adverts: getAdverts(state),
-  //isLoading: isLoading(state),
-  ...getUi(state),
-});
-const mapDispatchToProps = {
-  onAdvertsLoaded: advertsList,
-};
+// const mapStateToProps = state => ({
+//   adverts: getAdverts(state),
+//   //isLoading: isLoading(state),
+//   ...getUi(state),
+// });
+// const mapDispatchToProps = {
+//   onAdvertsLoaded: advertsList,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdvertsListPage);
+// export default connect(mapStateToProps, mapDispatchToProps)(AdvertsListPage);
+
+export default AdvertsListPage;
