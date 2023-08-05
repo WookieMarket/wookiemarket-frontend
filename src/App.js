@@ -6,6 +6,7 @@ import RequireAuth from "./components/auth/RequireAuth";
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/ads/HomePage";
+import ResetPasswordPage from "./components/auth/ResetPasswordPage";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/" element={<Navigate to="/home" />} />

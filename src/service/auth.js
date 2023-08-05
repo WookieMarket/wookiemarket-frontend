@@ -17,3 +17,15 @@ export const logout = () => {
     storage.remove("auth");
   });
 };
+
+export const emailPassword = email => {
+  return client.post("api/users/email-password", { to: email });
+};
+
+export const resetPassword = (email, newPassword, token) => {
+  return client.post("api/users/recover-password", {
+    email,
+    newPassword,
+    token,
+  });
+};
