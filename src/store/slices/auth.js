@@ -18,11 +18,6 @@ export const authLogout = createAsyncThunk(
   (_, { extra: { service } }) => service.auth.logout(),
 );
 
-// export const emailResetPassword = createAsyncThunk(
-//   "auth/emailResetPassword",
-//   (_, { extra: { service } }) => service.auth.emailPassword(),
-// );
-
 export const emailResetPassword = createAsyncThunk(
   "auth/emailResetPassword",
   async (email, { extra: { service }, rejectWithValue }) => {
@@ -34,11 +29,6 @@ export const emailResetPassword = createAsyncThunk(
     }
   },
 );
-
-// export const resetPassword = createAsyncThunk(
-//   "auth/emailResetPassword",
-//   (_, { extra: { service } }) => service.auth.resetPassword(),
-// );
 
 export const resetPassword = createAsyncThunk(
   "auth/resetPassword",

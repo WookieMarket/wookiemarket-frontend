@@ -9,10 +9,10 @@ import Layout from "../layout/Layout";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
+//DONE change Password
 function ResetPasswordPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  //const history = useHistory();
   const location = useLocation();
   const { isLoading, error } = useSelector(getUi);
 
@@ -38,7 +38,6 @@ function ResetPasswordPage() {
     const token = searchParams.get("token");
     const email = searchParams.get("email");
 
-    // Realizar la solicitud para restablecer la contraseña
     dispatch(resetPassword({ email, token, newPassword: password }));
   };
 
@@ -78,7 +77,6 @@ function ResetPasswordPage() {
             <button
               data-testid="button"
               type="submit"
-              // ... tus estilos de botón existentes ...
               disabled={buttonDisabled}>
               {t("Submit")}
             </button>

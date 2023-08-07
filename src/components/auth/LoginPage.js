@@ -45,13 +45,8 @@ function LoginPage() {
   };
 
   const handleResetPasswordLinkClick = () => {
-    // Aquí disparamos la acción para enviar el correo de restablecimiento de contraseña
     dispatch(toggleModal());
   };
-
-  // const handleLogoutClick = () => {
-  //   dispatch(toggleModal());
-  // };
 
   const handleShowModalconfirm = async event => {
     event.preventDefault();
@@ -110,7 +105,6 @@ function LoginPage() {
             <button
               data-testid="button"
               type="submit"
-              //variant="primary"
               width="button-form"
               disabled={buttonDisabled}>
               {t("Log in")}
