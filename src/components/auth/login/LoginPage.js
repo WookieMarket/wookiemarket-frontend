@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUi } from "../../store/selectors";
-import { resetError, toggleModal } from "../../store/slices/ui";
-import { authLogin, emailResetPassword } from "../../store/slices/auth";
-import ErrorModal from "../shared/modal/ErrorModal";
-import Spinner from "../shared/spinner/Spinner";
-import Layout from "../layout/Layout";
+import { getUi } from "../../../store/selectors";
+import { resetError, toggleModal } from "../../../store/slices/ui";
+import { authLogin, emailResetPassword } from "../../../store/slices/auth";
+import ErrorModal from "../../shared/modal/ErrorModal";
+import Spinner from "../../shared/spinner/Spinner";
+import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
-import Modal from "../shared/modal/Modal";
+import Modal from "../../shared/modal/Modal";
 import { Link } from "react-router-dom";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
@@ -136,7 +136,7 @@ function LoginPage() {
         {error && (
           <ErrorModal
             title="Error"
-            message={error.data.error}
+            message={error.message}
             onCancel={handleErrorClick}
           />
         )}

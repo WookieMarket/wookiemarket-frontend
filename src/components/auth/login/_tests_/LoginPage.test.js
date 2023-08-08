@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import LoginPage from "../LoginPage";
 import userEvent from "@testing-library/user-event";
-import { authLogin } from "../../../store/slices/auth";
+import { authLogin } from "../../../../store/slices/auth";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import * as defaultState from "../../../store/reducers";
+import * as defaultState from "../../../../store/reducers";
 
-jest.mock("../../../store/slices/auth", () => ({
+jest.mock("../../../../store/slices/auth", () => ({
   __esModule: true,
   authLogin: jest.fn(), // Mock only the authLogin action
 }));
@@ -65,7 +65,7 @@ describe("LoginPage", () => {
   test("should display an error", () => {
     //NOTE // Spy on resetError function
     const resetErrorSpy = jest.spyOn(
-      require("../../../store/slices/ui"),
+      require("../../../../store/slices/ui"),
       "resetError",
     );
 
