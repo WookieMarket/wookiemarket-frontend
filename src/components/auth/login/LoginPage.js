@@ -1,25 +1,29 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUi } from "../../store/selectors";
-import { resetError } from "../../store/slices/ui";
-import { authLogin } from "../../store/slices/auth";
-import ErrorModal from "../shared/modal/ErrorModal";
-import Spinner from "../shared/spinner/Spinner";
-import Layout from "../layout/Layout";
+import { getUi } from "../../../store/selectors";
+import { resetError, toggleModal } from "../../../store/slices/ui";
+import { authLogin, emailResetPassword } from "../../../store/slices/auth";
+import ErrorModal from "../../shared/modal/ErrorModal";
+import Spinner from "../../shared/spinner/Spinner";
+import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
+import Modal from "../../shared/modal/Modal";
+import { Link } from "react-router-dom";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
 function LoginPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(getUi);
+  const { isLoading, error, showModal } = useSelector(getUi);
 
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
     rememberMe: false,
   });
+
+  const [email, setEmail] = useState("");
 
   const handleErrorClick = () => {
     dispatch(resetError());
@@ -38,6 +42,20 @@ function LoginPage() {
     event.preventDefault();
 
     dispatch(authLogin(credentials));
+  };
+
+  const handleResetPasswordLinkClick = () => {
+    dispatch(toggleModal());
+  };
+
+  const handleShowModalconfirm = async event => {
+    event.preventDefault();
+    dispatch(emailResetPassword(email));
+    dispatch(toggleModal());
+  };
+
+  const handleShowModalCancel = () => {
+    dispatch(toggleModal());
   };
 
   const buttonDisabled =
@@ -87,11 +105,31 @@ function LoginPage() {
             <button
               data-testid="button"
               type="submit"
-              //variant="primary"
               width="button-form"
               disabled={buttonDisabled}>
               {t("Log in")}
             </button>
+            <Link onClick={handleResetPasswordLinkClick}>
+              <h4 className="navbar-h4">{t("Forgot password?")}</h4>
+            </Link>
+            {showModal && (
+              <Modal
+                title={t("Recover password")}
+                message={
+                  <input
+                    id="reset-email"
+                    className="form-input"
+                    type="email"
+                    name="reset-email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                  />
+                }
+                onConfirm={handleShowModalconfirm}
+                onCancel={handleShowModalCancel}
+              />
+            )}
           </form>
         )}
 

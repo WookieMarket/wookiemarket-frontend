@@ -99,6 +99,15 @@ exports[`LoginPage snapshot 1`] = `
           >
             Log in
           </button>
+          <a
+            href="/"
+          >
+            <h4
+              class="navbar-h4"
+            >
+              Forgot password?
+            </h4>
+          </a>
         </form>
       </div>
     </main>
