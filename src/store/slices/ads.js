@@ -5,8 +5,8 @@ export const adsCreate = createAsyncThunk(
   async (ad, { extra: { service }, rejectWithValue }) => {
     try {
       const { id } = await service.ads.createAd(ad);
-      const createdAd = await service.ads.getAd(id);
-      return createdAd;
+      //const createdAd = await service.ads.getAd(id);
+      return id;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -14,7 +14,7 @@ export const adsCreate = createAsyncThunk(
 );
 
 const ads = createSlice({
-  name: "ads",
+  name: "adverts",
   initialState: {
     areLoaded: false,
     data: [],

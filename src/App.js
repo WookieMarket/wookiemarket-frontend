@@ -7,6 +7,7 @@ import RequireAuth from "./components/auth/RequireAuth";
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/ads/HomePage";
 import ResetPasswordPage from "./components/auth/resetPassword/ResetPasswordPage";
+import AdNew from "./components/ads/adsNew/AdNew";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
           element={
             <RequireAuth>
               <HomePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/create-ad"
+          element={
+            <RequireAuth>
+              <AdNew />
             </RequireAuth>
           }
         />

@@ -5,10 +5,11 @@ function Form(props) {
     text,
     classNameInput,
     inputId,
-    type,
+    inputType,
     inputName,
     value,
     handleChange,
+    accept,
     placeholder,
   } = props;
 
@@ -18,12 +19,12 @@ function Form(props) {
       <input
         className={classNameInput}
         id={inputId}
-        type={type}
+        type={inputType}
         name={inputName}
         value={value}
         onChange={handleChange}
+        accept={accept}
         placeholder={placeholder}
-        required
       />
     </div>
   );
