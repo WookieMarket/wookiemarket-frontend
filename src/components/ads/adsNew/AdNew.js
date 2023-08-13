@@ -129,7 +129,7 @@ function AdNew() {
             text={t("Price")}
             classNameInput="form-input"
             inputId="price"
-            inputType="text"
+            inputType="number"
             inputName="price"
             value={formData.price}
             handleChange={handleChange}
@@ -205,7 +205,7 @@ function AdNew() {
             variant="primary"
             width="button-form"
             disabled={buttonDisabled}>
-            Crear
+            {t("Create")}
           </button>
         </form>
       )}

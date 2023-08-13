@@ -29,5 +29,7 @@
     "Category": "Categoría",
     "Description": "Descripción",
     "Status": "Estado",
-    "Coin": "Moneda"
+    "Coin": "Moneda",
+    "Image": "Imagen",
+    "Create": "Crear"
 }

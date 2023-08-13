@@ -29,6 +29,8 @@
     "Category": "Category",
     "Description": "Description",
     "Status": "Status",
-    "Coin": "Coin"
+    "Coin": "Coin",
+    "Image": "Image",
+    "Create": "Create"
    
 }
