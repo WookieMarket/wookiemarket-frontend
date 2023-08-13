@@ -8,6 +8,11 @@ export const getAd = adId => {
 };
 
 export const createAd = ad => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
   const url = `${adUrl}/create`;
-  return client.post(url, ad, {});
+  return client.post(url, ad, config);
 };

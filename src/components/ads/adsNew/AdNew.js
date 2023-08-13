@@ -8,6 +8,7 @@ import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 import { adsCreate } from "../../../store/slices/ads";
 import Form from "../../shared/form/Form";
+//import "./AdNew.css";
 
 function AdNew() {
   const { t } = useTranslation();
@@ -38,6 +39,8 @@ function AdNew() {
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
+    console.log("Selected image file:", e.target.files[0]);
+    console.log(" image file:", image);
   };
 
   const handleChange = event => {
@@ -72,9 +75,9 @@ function AdNew() {
     !formData.coin;
 
   return (
-    <Layout title="sube un anuncio">
+    <Layout title={t("Create an ad")}>
       {isLoading ? (
-        <Spinner message="Cargando..." />
+        <Spinner message={t("charging...")} />
       ) : (
         <form
           onSubmit={handleSubmit}
@@ -90,7 +93,7 @@ function AdNew() {
             inputName="name"
             value={formData.name}
             handleChange={handleChange}
-            placeholder="name"
+            placeholder={t("Name")}
           />
 
           <div>
@@ -104,7 +107,6 @@ function AdNew() {
               inputName="onSale"
               value={true}
               handleChange={handleChange}
-              placeholder="name"
               required
             />
             <Form
@@ -117,7 +119,6 @@ function AdNew() {
               inputName="onSale"
               value={false}
               handleChange={handleChange}
-              placeholder="name"
               required
             />
           </div>
@@ -132,7 +133,7 @@ function AdNew() {
             inputName="price"
             value={formData.price}
             handleChange={handleChange}
-            placeholder="price"
+            placeholder={t("Price")}
             required
           />
           <Form
@@ -145,7 +146,7 @@ function AdNew() {
             inputName="category"
             value={formData.category}
             handleChange={handleChange}
-            placeholder="category"
+            placeholder={t("Category")}
             required
           />
           <Form
@@ -158,7 +159,7 @@ function AdNew() {
             inputName="description"
             value={formData.description}
             handleChange={handleChange}
-            placeholder="description"
+            placeholder={t("Description")}
             required
           />
           <Form
@@ -171,7 +172,7 @@ function AdNew() {
             inputName="status"
             value={formData.status}
             handleChange={handleChange}
-            placeholder="status"
+            placeholder={t("Status")}
             required
           />
           <Form
@@ -184,7 +185,7 @@ function AdNew() {
             inputName="coin"
             value={formData.coin}
             handleChange={handleChange}
-            placeholder="coin"
+            placeholder={t("Coin")}
             required
           />
           <Form
