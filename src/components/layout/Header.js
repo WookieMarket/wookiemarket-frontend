@@ -57,9 +57,9 @@ const Header = (...rest) => {
         {isLogged ? (
           <button onClick={handleLogoutClick}>{t("Logout")}</button>
         ) : (
-          <button as={Link} to="/login">
+          <NavLink className="navbar-list-item" to="/login">
             {t("Login")}
-          </button>
+          </NavLink>
         )}
       </nav>
       <hr />
