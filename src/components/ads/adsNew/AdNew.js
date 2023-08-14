@@ -53,13 +53,7 @@ function AdNew() {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(adsCreate(adNew));
-    console.log("anuncio", adNew);
   };
-
-  // const handleChangeInputFile = e => {
-  //   setImage(e.target.files[0]);
-  //   console.log("Selected image file:", e.target.files[0]);
-  // };
 
   const handleErrorClick = () => {
     dispatch(resetError());
@@ -209,14 +203,6 @@ function AdNew() {
           </button>
         </form>
       )}
-
-      {/* {showModal && (
-          <ErrorModal
-            title="Anuncio"
-            message={"Acabas de crear un nuevo anuncio"}
-            onCancel={handleShowModal}
-          />
-        )} */}
 
       {error && (
         <ErrorModal
