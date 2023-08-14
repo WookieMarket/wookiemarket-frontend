@@ -9,16 +9,20 @@ exports[`LoginPage snapshot 1`] = `
       <nav
         class="navbar"
       >
-        <h1
-          class="title"
-        >
-           
-          header
-           
-        </h1>
         <div
           class="icons"
         >
+          <a
+            href="/"
+          >
+            <h1
+              class="title"
+            >
+               
+              header
+               
+            </h1>
+          </a>
           <img
             alt="ES"
             class="icon-language"
@@ -32,12 +36,22 @@ exports[`LoginPage snapshot 1`] = `
             title="icon-hover"
           />
         </div>
-        <button
-          as="[object Object]"
-          to="/login"
-        >
-          Login
-        </button>
+        <ul>
+          <li>
+            <a
+              class="navbar-list-item"
+              href="/create-ad"
+            >
+              Upload ad
+            </a>
+            <a
+              class="navbar-list-item"
+              href="/login"
+            >
+              Login
+            </a>
+          </li>
+        </ul>
       </nav>
       <hr />
     </header>
