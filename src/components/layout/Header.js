@@ -31,11 +31,10 @@ const Header = (...rest) => {
   return (
     <header className="header">
       <nav className="navbar">
-        <Link to="/">
-          <h1 className="title"> {t("header")} </h1>
-        </Link>
-
         <div className="icons">
+          <Link to="/">
+            <h1 className="title"> {t("header")} </h1>
+          </Link>
           <img
             className="icon-language"
             src="/images/languageIcons/es.png"
@@ -51,16 +50,22 @@ const Header = (...rest) => {
             onClick={() => i18n.changeLanguage("en")}
           />
         </div>
-        <NavLink className="navbar-list-item" to="/create-ad">
-          {t("Upload ad")}
-        </NavLink>
-        {isLogged ? (
-          <button onClick={handleLogoutClick}>{t("Logout")}</button>
-        ) : (
-          <NavLink className="navbar-list-item" to="/login">
-            {t("Login")}
-          </NavLink>
-        )}
+        <ul>
+          <li>
+            <NavLink className="navbar-list-item" to="/create-ad">
+              {t("Upload ad")}
+            </NavLink>
+            {isLogged ? (
+              <button onClick={handleLogoutClick} className="navbar-list-item">
+                {t("Logout")}
+              </button>
+            ) : (
+              <NavLink className="navbar-list-item" to="/login">
+                {t("Login")}
+              </NavLink>
+            )}
+          </li>
+        </ul>
       </nav>
       <hr />
       {showModal && (
