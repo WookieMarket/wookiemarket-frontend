@@ -1,5 +1,5 @@
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../shared/modal/Modal";
 import { getIsLogged, getUi } from "../../store/selectors";
@@ -31,7 +31,10 @@ const Header = (...rest) => {
   return (
     <header className="header">
       <nav className="navbar">
-        <h1 className="title"> {t("header")} </h1>
+        <Link to="/">
+          <h1 className="title"> {t("header")} </h1>
+        </Link>
+
         <div className="icons">
           <img
             className="icon-language"
@@ -48,6 +51,9 @@ const Header = (...rest) => {
             onClick={() => i18n.changeLanguage("en")}
           />
         </div>
+        <NavLink className="navbar-list-item" to="/create-ad">
+          {t("Upload ad")}
+        </NavLink>
         {isLogged ? (
           <button onClick={handleLogoutClick}>{t("Logout")}</button>
         ) : (

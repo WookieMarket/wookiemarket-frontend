@@ -14,14 +14,7 @@ function App() {
     <div className="App">
       Hola Mandalorians!
       <Routes>
-        <Route
-          path="/home"
-          element={
-            <RequireAuth>
-              <HomePage />
-            </RequireAuth>
-          }
-        />
+        <Route path="/home" element={<HomePage />} />
         <Route
           path="/create-ad"
           element={
