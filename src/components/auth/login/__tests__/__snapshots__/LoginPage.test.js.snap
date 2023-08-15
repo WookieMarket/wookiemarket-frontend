@@ -67,44 +67,56 @@ exports[`LoginPage snapshot 1`] = `
         <form
           class="container-form"
         >
-          <label
-            class="form-label"
-            for="username"
+          <div
+            class="user-label"
           >
-            Username
-          </label>
-          <input
-            class="form-input"
-            id="username"
-            name="username"
-            required=""
-            type="text"
-            value=""
-          />
-          <label
-            class="form-label"
-            for="password"
-          >
-            Password
-          </label>
-          <input
-            class="form-input"
-            id="password"
-            name="password"
-            required=""
-            type="password"
-            value=""
-          />
-          <label
-            for="rememberMe"
-          >
-            RememberMe
+            <label
+              for="username"
+            >
+              Username
+            </label>
             <input
+              class="user-input"
+              id="username"
+              name="username"
+              placeholder="Username"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="password-label"
+          >
+            <label
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              class="password-input"
+              id="password"
+              name="password"
+              placeholder="Password"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="rememberMe-label"
+          >
+            <label
+              for="rememberMe"
+            >
+              RememberMe
+            </label>
+            <input
+              class="password-input"
               id="rememberMe"
               name="rememberMe"
               type="checkbox"
+              value=""
             />
-          </label>
+          </div>
           <button
             data-testid="button"
             disabled=""
