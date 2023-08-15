@@ -8,6 +8,7 @@ import Spinner from "../../shared/spinner/Spinner";
 import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
+import Form from "../../shared/form/Form";
 
 //DONE change Password
 function ResetPasswordPage() {
@@ -50,30 +51,34 @@ function ResetPasswordPage() {
           <Spinner message={t("Resetting password...")} />
         ) : (
           <form onSubmit={handleSubmit} className="container-form">
-            <label className="form-label" htmlFor="password">
-              {t("New Password")}
-            </label>
-            <input
-              id="password"
-              className="form-input"
-              type="password"
-              name="password"
-              onChange={handleChangePassword}
+            <Form
+              classNameLabel="new-password-label"
+              htmlFor="new-password"
+              text={t("New password")}
+              classNameInput="password-input"
+              inputId="new-password"
+              inputType="password"
+              inputName="password"
               value={password}
+              handleChange={handleChangePassword}
+              placeholder={t("New password")}
               required
             />
-            <label className="form-label" htmlFor="confirmPassword">
-              {t("Confirm Password")}
-            </label>
-            <input
-              id="confirmPassword"
-              className="form-input"
-              type="password"
-              name="confirmPassword"
-              onChange={handleChangeConfirmPassword}
+
+            <Form
+              classNameLabel="new-password-label"
+              htmlFor="confirm-password"
+              text={t("Confirm password")}
+              classNameInput="password-input"
+              inputId="confirm-password"
+              inputType="password"
+              inputName="confirmPassword"
               value={confirmPassword}
+              handleChange={handleChangeConfirmPassword}
+              placeholder={t("Confirm password")}
               required
             />
+
             <button
               data-testid="button"
               type="submit"

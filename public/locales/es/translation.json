@@ -1,20 +1,44 @@
 {
     "welcome": "Bienvenido",
+    "welcomeMessage": "Hola Mandalorians!",
     "icon-hover": "Pulse para cambiar el idioma",
     "header": "Cabecera",
     "footer": "@Keepcoding 2023 por Mandalorians",
+    
     "Username": "Usuario",
     "Password": "Contraseña",
     "RememberMe": "Recuerdame",
     "Log in": "Acceso",
     "Login": "Acceso",
     "Logout": "Cerrar sesión",
+    "Upload ad": "Subir anuncio",
     "charging...": "cargando...",
     "Login Page": "Inicio de sesión",
     "Cancel": "Cancelar",
     "Confirm": "Confirmar",
     "Leave session": "Salir de la sesión",
     "¿are you sure?": "¿Estás seguro?",
+
     "Recover password": "Recuperar contraseña",
-    "Forgot password?": "Olvidó su contraseña?"
+    "Forgot password?": "Olvidó su contraseña?",
+    "Enter your email": "Introduce tu correo",
+    "Example@Example.com": "Ejemplo@Ejemplo.com",
+    
+    "Reset Password": "Restablecer la contraseña",
+    "New password": "Nueva contraseña",
+    "Confirm password": "Confirmar contraseña",
+    "Submit": "Restablecer",
+
+    "Create an ad": "Crea un anuncio",
+    "Article": "Artículo",
+    "Name": "Nombre",
+    "Sell": "Vender",
+    "Buy": "Comprar",
+    "Price": "Precio",
+    "Category": "Categoría",
+    "Description": "Descripción",
+    "Status": "Estado",
+    "Coin": "Moneda",
+    "Image": "Imagen",
+    "Create": "Crear"
 }

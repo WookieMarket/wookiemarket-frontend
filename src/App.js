@@ -7,17 +7,21 @@ import RequireAuth from "./components/auth/RequireAuth";
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/ads/HomePage";
 import ResetPasswordPage from "./components/auth/resetPassword/ResetPasswordPage";
+import AdNew from "./components/ads/adsNew/AdNew";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   return (
     <div className="App">
-      Hola Mandalorians!
+      {t("welcomeMessage")}
       <Routes>
+        <Route path="/home" element={<HomePage />} />
         <Route
-          path="/home"
+          path="/create-ad"
           element={
             <RequireAuth>
-              <HomePage />
+              <AdNew />
             </RequireAuth>
           }
         />
