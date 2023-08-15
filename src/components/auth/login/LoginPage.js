@@ -59,6 +59,10 @@ function LoginPage() {
     dispatch(toggleModal());
   };
 
+  const handleChangeEmail = e => {
+    setEmail(e.target.value);
+  };
+
   const buttonDisabled =
     isLoading || !credentials.username || !credentials.password;
 
@@ -133,7 +137,7 @@ function LoginPage() {
                     inputType="email"
                     inputName="reset-email"
                     value={email}
-                    handleChange={e => setEmail(e.target.value)}
+                    handleChange={handleChangeEmail}
                     placeholder={t("Example@Example.com")}
                     required
                   />

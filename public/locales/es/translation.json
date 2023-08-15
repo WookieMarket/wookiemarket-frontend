@@ -23,6 +23,11 @@
     "Forgot password?": "Olvidó su contraseña?",
     "Enter your email": "Introduce tu correo",
     "Example@Example.com": "Ejemplo@Ejemplo.com",
+    
+    "Reset Password": "Restablecer la contraseña",
+    "New password": "Nueva contraseña",
+    "Confirm password": "Confirmar contraseña",
+    "Submit": "Restablecer",
 
     "Create an ad": "Crea un anuncio",
     "Article": "Artículo",

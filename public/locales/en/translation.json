@@ -23,7 +23,12 @@
     "Forgot password?": "Forgot password?",
     "Enter your email": "Enter your email",
     "Example@Example.com": "Example@Example.com",
+
     
+    "Reset Password": "Reset Password",
+    "New password": "New password",
+    "Confirm password": "Confirm password",
+    "Submit": "Submit",
     
     "Create an ad": "Create an ad",
     "Article": "Article",
