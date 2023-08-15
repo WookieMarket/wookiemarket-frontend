@@ -5,6 +5,8 @@ export const adsCreate = createAsyncThunk(
   async (ad, { extra: { service }, rejectWithValue }) => {
     try {
       const { id } = await service.ads.createAd(ad);
+
+      //TODO modificar cuando este implementado el detalle del anuncio
       //const createdAd = await service.ads.getAd(id);
       return id;
     } catch (error) {
