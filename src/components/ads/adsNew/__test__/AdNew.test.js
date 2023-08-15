@@ -8,14 +8,15 @@ import { adsCreate } from "../../../../store/slices/ads";
 
 jest.mock("../../../../store/slices/ads", () => ({
   __esModule: true,
-  adsCreate: jest.fn(), // Mock only the authLogin action
+  adsCreate: jest.fn(), // Mock only the adsCreate action
 }));
 
 describe("AdNew", () => {
-  const renderComponent = () => {
+  const renderComponent = (error = null) => {
     const store = {
       getState: () => {
         const state = { ...defaultState }; // Create a copy of the state
+        state.ui.error = error; // Modify the copy instead of the original state
 
         return state;
       },
@@ -37,6 +38,8 @@ describe("AdNew", () => {
   });
 
   test("shoul dispatch adsCreate action", () => {
+    const file = new File(["hello"], "hello.png", { type: "image/png" });
+
     const ad = {
       name: "mando",
       onSale: "true",
@@ -45,9 +48,9 @@ describe("AdNew", () => {
       description: "lado oscuro",
       status: "true",
       coin: "euro",
-      image: null,
+      image: file,
     };
-    //NOTE renderizo el componente
+    //NOTE I render the component
     renderComponent();
 
     const nameInput = screen.getByLabelText(/Article/);
@@ -62,19 +65,41 @@ describe("AdNew", () => {
     const submitButton = screen.getByRole("button", { name: /Create/ });
     expect(submitButton).toBeDisabled();
 
-    //NOTE para lanzar eventos
+    //NOTE to launch events
     userEvent.type(nameInput, ad.name);
-    userEvent.type(onsaleInput, ad.onsale);
+    userEvent.type(onsaleInput, ad.onSale);
     userEvent.type(priceInput, ad.price);
     userEvent.type(categoryInput, ad.category);
     userEvent.type(descriptionInput, ad.description);
     userEvent.type(statusInput, ad.status);
     userEvent.type(coinInput, ad.coin);
-    userEvent.type(imageInput, ad.image);
+    userEvent.upload(imageInput, ad.image);
 
     expect(submitButton).toBeEnabled();
     userEvent.click(submitButton);
 
+    expect(imageInput.files[0]).toStrictEqual(file);
+    expect(imageInput.files.item(0)).toStrictEqual(file);
+    expect(imageInput.files).toHaveLength(1);
     expect(adsCreate).toHaveBeenCalledWith(ad);
+  });
+
+  test("should display an error", () => {
+    //NOTE // Spy on resetError function
+    const resetErrorSpy = jest.spyOn(
+      require("../../../../store/slices/ui"),
+      "resetError",
+    );
+
+    const error = { message: "Network Error" };
+
+    renderComponent(error);
+    const errorElement = screen.getByText(error.message);
+
+    expect(errorElement).toBeInTheDocument();
+    const modalButton = screen.getByTestId("modalButton");
+    userEvent.click(modalButton);
+
+    expect(resetErrorSpy).toHaveBeenCalled();
   });
 });

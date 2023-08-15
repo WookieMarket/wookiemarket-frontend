@@ -20,6 +20,10 @@ export const successRedirects =
       router.navigate(redirect(action));
     }
 
+    if (action.type === "auth/logout/fulfilled") {
+      router.navigate("/");
+    }
+
     //NOTE Add redirect to "Home" page after successful password change
     if (action.type === "auth/resetPassword/fulfilled") {
       router.navigate("/login");

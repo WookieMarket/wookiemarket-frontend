@@ -44,7 +44,7 @@ describe("LoginPage", () => {
       rememberMe: true,
     };
 
-    //NOTE renderizo el componente
+    //NOTE I render the component
     renderComponent();
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
@@ -52,7 +52,7 @@ describe("LoginPage", () => {
     const submitButton = screen.getByRole("button", { name: /Log in/ });
     expect(submitButton).toBeDisabled();
 
-    //NOTE para lanzar eventos
+    //NOTE to launch events
     userEvent.type(usernameInput, credentials.username);
     userEvent.type(passwordInput, credentials.password);
     userEvent.click(checkboxInput, credentials.rememberMe);
