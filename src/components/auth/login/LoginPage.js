@@ -9,6 +9,7 @@ import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 import Modal from "../../shared/modal/Modal";
 import { Link } from "react-router-dom";
+import Form from "../../shared/form/Form";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
@@ -68,40 +69,47 @@ function LoginPage() {
           <Spinner message={t("charging...")} />
         ) : (
           <form onSubmit={handleSubmit} className="container-form">
-            <label className="form-label" htmlFor="username">
-              {t("Username")}
-            </label>
-            <input
-              id="username"
-              className="form-input"
-              type="text"
-              name="username"
-              onChange={handleChange}
+            <Form
+              classNameLabel="user-label"
+              htmlFor="username"
+              text={t("Username")}
+              classNameInput="user-input"
+              inputId="username"
+              inputType="text"
+              inputName="username"
               value={credentials.username}
+              handleChange={handleChange}
+              placeholder={t("Username")}
               required
             />
-            <label className="form-label" htmlFor="password">
-              {t("Password")}
-            </label>
-            <input
-              id="password"
-              className="form-input"
-              type="password"
-              name="password"
-              onChange={handleChange}
+
+            <Form
+              classNameLabel="password-label"
+              htmlFor="password"
+              text={t("Password")}
+              classNameInput="password-input"
+              inputId="password"
+              inputType="password"
+              inputName="password"
               value={credentials.password}
+              handleChange={handleChange}
+              placeholder={t("Password")}
               required
             />
-            <label htmlFor="rememberMe">
-              {t("RememberMe")}
-              <input
-                id="rememberMe"
-                type="checkbox"
-                name="rememberMe"
-                checked={credentials.rememberMe}
-                onChange={handleChange}
-              />
-            </label>
+
+            <Form
+              classNameLabel="rememberMe-label"
+              htmlFor="rememberMe"
+              text={t("RememberMe")}
+              classNameInput="password-input"
+              inputId="rememberMe"
+              inputType="checkbox"
+              inputName="rememberMe"
+              checked={credentials.rememberMe}
+              handleChange={handleChange}
+              required
+            />
+
             <button
               data-testid="button"
               type="submit"
@@ -116,13 +124,17 @@ function LoginPage() {
               <Modal
                 title={t("Recover password")}
                 message={
-                  <input
-                    id="reset-email"
-                    className="form-input"
-                    type="email"
-                    name="reset-email"
+                  <Form
+                    classNameLabel="email-label"
+                    htmlFor="email-service"
+                    text={t("Enter your email")}
+                    classNameInput="email-input"
+                    inputId="email-service"
+                    inputType="email"
+                    inputName="reset-email"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    handleChange={e => setEmail(e.target.value)}
+                    placeholder={t("Example@Example.com")}
                     required
                   />
                 }
