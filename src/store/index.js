@@ -1,8 +1,6 @@
 import { configureStore as rtkConfigureStore } from "@reduxjs/toolkit";
-
 import * as service from "../service";
 import * as reducers from "./reducers";
-
 import { failureRedirects, successRedirects } from "./middleware";
 import { authLogin } from "./slices/auth";
 

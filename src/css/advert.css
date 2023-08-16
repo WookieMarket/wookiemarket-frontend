@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Star Jedi';
+  src: url('../assets/fonts/Starjedi.ttf');
+}
+
+h2 {
+  font-family: var(--font-family);
+}
+.advert_text {
+    font-size: 1 em;
+    font-weight: normal;
+}
+.advert_label {
+  font-weight: bold;
+}
+
+.description {
+  text-align: justify;
+}
+
+#isSale {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.8 rem;
+}
+.price {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  color: var(--price-color);
+  border-radius: 8px;
+  border-color: var(--price-color);
+  border: 2px dashed;
+}
+
+#price_coin {
+  font-style: oblique;
+}
