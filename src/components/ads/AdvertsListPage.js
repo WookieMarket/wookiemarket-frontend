@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from './Advert';
@@ -10,6 +11,21 @@ import defaultImage from '../../assets/no_image.jpg';
 import { filterByName } from '../../store/slices/adsFiltered';
 
 const EmptyList = () => {
+=======
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Advert from "./Advert";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdverts, getUi } from "../../store/selectors";
+import { advertsList } from "../../store/slices/ads";
+import "../../css/advertListPage.css";
+import "../../css/advert.css";
+import defaultImage from "../../assets/no_image.jpg";
+import { filterByName } from "../../store/slices/adsFiltered";
+import Layout from "../layout/Layout";
+
+const EmptyList = ({ dataFiltered }) => {
+>>>>>>> 72ab9d179bfe6fd7c574a8ddbc29823132848b2e
   return (
     <div style={{ textAlign: "center" }}>
       <p>Sorry, no adverts yet.</p>
@@ -26,7 +42,19 @@ const advertsPerPage = 2;
 const AdvertsListPage = () => {
   //const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+<<<<<<< HEAD
   //const [filteredAdverts, setFilteredAdverts] = useState(adverts);
+=======
+  const [filteredAdverts, setFilteredAdverts] = useState("");
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  const ads = useSelector(getAdverts);
+  const { isLoading } = useSelector(getUi);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   onAdvertsLoaded();
+  // }, [onAdvertsLoaded]);
+>>>>>>> 72ab9d179bfe6fd7c574a8ddbc29823132848b2e
 
   useEffect(() => {
     dispatch(advertsList()).catch(error => console.log(error));
@@ -60,13 +88,7 @@ const AdvertsListPage = () => {
     ? currentPage === Math.ceil(filteredAds.length / advertsPerPage)
     : currentPage === Math.ceil(ads.length / advertsPerPage);
 
-  // const handleFilterChange = event => {
-  //   // //filterByName(event.target.value);
-  //   // const filteredData = filterByName({ name: event.target.value, adverts });
-  //   // setFilteredAdverts(filteredData);
-  //   setFilteredAdverts(event.target.value);
-  // };
-
+<<<<<<< HEAD
   /*const handleFilterChange = (event) => {
     //filterByName(event.target.value);
     const filteredData = filterByName({ name: event.target.value, adverts });
@@ -85,24 +107,64 @@ const AdvertsListPage = () => {
           <div className='loadingPage'>
             <div className='loadingInfo'>
               <h1>LOADING....</h1>
+=======
+  // const handleFilterChange = event => {
+  //   // //filterByName(event.target.value);
+  //   // const filteredData = filterByName({ name: event.target.value, adverts });
+  //   // setFilteredAdverts(filteredData);
+  //   setFilteredAdverts(event.target.value);
+  // };
+
+  // const handleFilterChange = event => {
+  //   const value = event.target.value;
+  //   setFilteredAdverts(value);
+  //   setIsFilterActive(value.trim() !== "");
+  // };
+  const handleFilterChange = event => {
+    const value = event.target.value;
+    setFilteredAdverts(value);
+    setIsFilterActive(value.trim() !== "");
+    dispatch(filterByName({ name: value.trim(), adverts: ads })); // Llama a la acción filterByName
+  };
+
+  return (
+    <Layout title="anuncios">
+      <>
+        <section className="searchSection">
+          <h1>Searching area</h1>
+          <label className="advert_label">Name: </label>
+          <input type="text" onChange={handleFilterChange} />
+        </section>
+        <div className="container">
+          {isLoading ? (
+            <div className="loadingPage">
+              <div className="loadingInfo">
+                <h1>LOADING....</h1>
+              </div>
+>>>>>>> 72ab9d179bfe6fd7c574a8ddbc29823132848b2e
             </div>
-          </div>
-        ) : (
-          <div>
-            {!!(adverts && adverts.length) ? (
-              <>
-                <div className='listContainer'>
-                  <div className='contaienrTittle'>
-                    <h1>ADVERTISEMENTS AVIABLE</h1>
-                  </div>
-                  <ul>
+          ) : (
+            <div>
+              {!!(ads && ads.length) ? (
+                <>
+                  <div className="listContainer">
+                    <div className="contaienrTittle">
+                      <h1>ADVERTISEMENTS AVIABLE</h1>
+                    </div>
                     <ul>
                       {advertsToDisplay
                         .sort((a, b) => a.createdAt > b.createdAt)
+<<<<<<< HEAD
                         .map((advert) => (
                           <li key={advert._id}>
                             <div className='advert-container'>
                               <Link to={`/adverts/${advert._id}`}>
+=======
+                        .map(advert => (
+                          <li key={advert.id}>
+                            <div className="advert-container">
+                              <Link to={`/adverts/${advert.id}`}>
+>>>>>>> 72ab9d179bfe6fd7c574a8ddbc29823132848b2e
                                 <Advert
                                   advert={advert}
                                   onImageError={handleImageError}
