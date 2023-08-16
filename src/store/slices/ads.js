@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { areAdvertsLoaded } from '../selectors';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { areAdvertsLoaded } from "../selectors";
 
 export const advertsList = createAsyncThunk(
   'adverts/list',
@@ -14,16 +14,16 @@ export const advertsList = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  }
+  },
 );
 
 const ads = createSlice({
-  name: 'adverts',
+  name: "adverts",
   initialState: {
     areLoaded: false,
     data: [],
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(advertsList.fulfilled, (state, action) => {
       state.areLoaded = true;
       state.data = action.payload.results;

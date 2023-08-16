@@ -11,36 +11,61 @@ import { filterByName } from '../../store/slices/adsFiltered';
 
 const EmptyList = () => {
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: "center" }}>
       <p>Sorry, no adverts yet.</p>
     </div>
   );
 };
 
-const handleImageError = (event) => {
+const handleImageError = event => {
   event.target.src = defaultImage;
 };
 
 const advertsPerPage = 2;
 
-const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
+const AdvertsListPage = () => {
   //const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   //const [filteredAdverts, setFilteredAdverts] = useState(adverts);
 
   useEffect(() => {
-    onAdvertsLoaded();
-  }, [onAdvertsLoaded]);
+    dispatch(advertsList()).catch(error => console.log(error));
+  }, [dispatch]);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = page => {
     setCurrentPage(page);
   };
 
-  const totalPages = Math.ceil(adverts.length / advertsPerPage);
+  const filterAdName = ad =>
+    (ad.name ?? "").toUpperCase().startsWith(filteredAdverts.toUpperCase());
+
+  const filteredAds = ads
+    //.filter(filterAdSaleValueOrDefault)
+    .filter(filterAdName);
+  //.filter(filterAdPrice)
+  //.filter(filterAdTags);
+
+  //const totalPages = Math.ceil(adverts.length / advertsPerPage);
+  const totalPages = Math.ceil(
+    (isFilterActive ? filteredAds.length : ads.length) / advertsPerPage,
+  );
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
-  const advertsToDisplay = adverts.slice(startIndex, endIndex);
-  const isLastPage = currentPage === totalPages;
+  //const advertsToDisplay = adverts.slice(startIndex, endIndex);
+  const advertsToDisplay = isFilterActive
+    ? filteredAds.slice(startIndex, endIndex)
+    : ads.slice(startIndex, endIndex);
+  //const isLastPage = currentPage === totalPages;
+  const isLastPage = isFilterActive
+    ? currentPage === Math.ceil(filteredAds.length / advertsPerPage)
+    : currentPage === Math.ceil(ads.length / advertsPerPage);
+
+  // const handleFilterChange = event => {
+  //   // //filterByName(event.target.value);
+  //   // const filteredData = filterByName({ name: event.target.value, adverts });
+  //   // setFilteredAdverts(filteredData);
+  //   setFilteredAdverts(event.target.value);
+  // };
 
   /*const handleFilterChange = (event) => {
     //filterByName(event.target.value);
@@ -87,69 +112,68 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                           </li>
                         ))}
                     </ul>
-                  </ul>
-                </div>
-                <div className='pagination'>
-                  <p>
-                    <span
-                      className={currentPage === 1 ? 'disabled' : 'page'}
-                      onClick={() => handlePageChange(currentPage - 1)}
-                    >
-                      &lt;{' '}
-                    </span>
-                    {[...Array(totalPages)].map((_, index) => {
-                      if (
-                        totalPages > 5 &&
-                        index > 1 &&
-                        index < totalPages - 2
-                      ) {
-                        return (
-                          <span className='page' key={index}>
-                            ...
-                          </span>
-                        );
-                      } else {
-                        return (
-                          <>
-                            <span
-                              className='page'
-                              key={index}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
-                              {index + 1}
+                  </div>
+                  <div className="pagination">
+                    <p>
+                      <span
+                        className={currentPage === 1 ? "disabled" : "page"}
+                        onClick={() => handlePageChange(currentPage - 1)}>
+                        &lt;{" "}
+                      </span>
+                      {[...Array(totalPages)].map((_, index) => {
+                        if (
+                          totalPages > 5 &&
+                          index > 1 &&
+                          index < totalPages - 2
+                        ) {
+                          return (
+                            <span className="page" key={index}>
+                              ...
                             </span>
-                            {index < totalPages - 1 && <span> - </span>}
-                          </>
-                        );
-                      }
-                    })}
-                    <span
-                      className={isLastPage ? 'disabled' : 'page'}
-                      onClick={() => handlePageChange(currentPage + 1)}
-                    >
-                      {' '}
-                      &gt;
-                    </span>
-                  </p>
-                </div>
-              </>
-            ) : (
-              <EmptyList />
-            )}
-          </div>
-        )}
-      </div>
-    </>
+                          );
+                        } else {
+                          return (
+                            <>
+                              <span
+                                className="page"
+                                key={index}
+                                onClick={() => handlePageChange(index + 1)}>
+                                {index + 1}
+                              </span>
+                              {index < totalPages - 1 && <span> - </span>}
+                            </>
+                          );
+                        }
+                      })}
+                      <span
+                        className={isLastPage ? "disabled" : "page"}
+                        onClick={() => handlePageChange(currentPage + 1)}>
+                        {" "}
+                        &gt;
+                      </span>
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <EmptyList />
+              )}
+            </div>
+          )}
+        </div>
+      </>
+    </Layout>
   );
 };
 
-const mapStateToProps = (state) => ({
-  adverts: getAdverts(state),
-  //isLoading: isLoading(state),
-  ...getUi(state),
-});
-const mapDispatchToProps = {
-  onAdvertsLoaded: advertsList,
-};
+// const mapStateToProps = state => ({
+//   adverts: getAdverts(state),
+//   //isLoading: isLoading(state),
+//   ...getUi(state),
+// });
+// const mapDispatchToProps = {
+//   onAdvertsLoaded: advertsList,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdvertsListPage);
+// export default connect(mapStateToProps, mapDispatchToProps)(AdvertsListPage);
+
+export default AdvertsListPage;

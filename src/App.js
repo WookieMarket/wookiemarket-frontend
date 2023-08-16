@@ -7,17 +7,19 @@ import AdvertPage from './components/ads/AdvertPage';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/ads/HomePage";
+import AdvertsListPage from "./components/ads/AdvertsListPage";
 
 function App() {
   return (
     <div className="App">
       Hola Mandalorians!
       <Routes>
+        <Route path="/home" element={<HomePage />} />
         <Route
-          path="/home"
+          path="/ads"
           element={
             <RequireAuth>
-              <HomePage />
+              <AdvertsListPage />
             </RequireAuth>
           }
         />

@@ -21,14 +21,13 @@ function Advert({ advert, onImageError }) {
         </div>
       </div>
       <br />
-      <div className='productData'>
-        <div className='product-img'>
+      <div className="productData">
+        <div className="product-img">
           <img
             className='productPhoto'
             src={advert.image || defaultImage}
             onError={onImageError}
-            alt='imagen del producto en venta'
-          ></img>
+            alt="imagen del producto en venta"></img>
         </div>
         <br />
         <div className='product_Info'>
@@ -40,13 +39,13 @@ function Advert({ advert, onImageError }) {
           <p>
             Is
             {advert.onSale ? (
-              <span id='isSale'> for sale </span>
+              <span id="isSale"> for sale </span>
             ) : (
-              <span id='isSale'> purchased </span>
+              <span id="isSale"> purchased </span>
             )}
             this product by:
           </p>
-          <div className='price'>
+          <div className="price">
             <p>
               <Fields value={advert.price} />
               {/*{advert.price}*/}{' '}
@@ -67,8 +66,8 @@ function Advert({ advert, onImageError }) {
             </span>
             {/*</span><span className='advert_text'>
                 {advert.category === undefined
-                  ? ''
-                  : advert.category.join(', ').toLocaleUpperCase()}
+                  ? ""
+                  : advert.category.join(", ").toLocaleUpperCase()}
               </span>
             */}
           </div>

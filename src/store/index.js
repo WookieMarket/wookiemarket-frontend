@@ -11,10 +11,10 @@ import { authLogin } from './slices/auth';
 
 export default function configureStore(preloadedState, { router }) {
   const extraMiddleware = [
-    failureRedirects(router, { 401: '/login', 404: '/404' }),
+    failureRedirects(router, { 401: "/login", 404: "/404" }),
     successRedirects(router, {
       [authLogin.fulfilled.type]: () => {
-        return router.state.location.state?.from?.pathname || '/';
+        return router.state.location.state?.from?.pathname || "/";
       },
     }),
     localStorageAdverts,
@@ -34,9 +34,9 @@ export default function configureStore(preloadedState, { router }) {
 
   const store = rtkConfigureStore({
     reducer: reducers,
-    middleware: (getDefaultMiddleware) =>
+    middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
-        thunk: { extraArgument: { service, adsService, router } },
+        thunk: { extraArgument: { service, router } },
         serializableCheck: false,
       }).concat(extraMiddleware),
     preloadedState: persistedState(),
