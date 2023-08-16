@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import LoginPage from "../LoginPage";
 import userEvent from "@testing-library/user-event";
-import { authLogin } from "../../../store/slices/auth";
+import { authLogin } from "../../../../store/slices/auth";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import * as defaultState from "../../../store/reducers";
+import * as defaultState from "../../../../store/reducers";
 
-jest.mock("../../../store/slices/auth", () => ({
+jest.mock("../../../../store/slices/auth", () => ({
   __esModule: true,
   authLogin: jest.fn(), // Mock only the authLogin action
 }));
@@ -44,7 +44,7 @@ describe("LoginPage", () => {
       rememberMe: true,
     };
 
-    //NOTE renderizo el componente
+    //NOTE I render the component
     renderComponent();
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
@@ -52,7 +52,7 @@ describe("LoginPage", () => {
     const submitButton = screen.getByRole("button", { name: /Log in/ });
     expect(submitButton).toBeDisabled();
 
-    //NOTE para lanzar eventos
+    //NOTE to launch events
     userEvent.type(usernameInput, credentials.username);
     userEvent.type(passwordInput, credentials.password);
     userEvent.click(checkboxInput, credentials.rememberMe);
@@ -65,7 +65,7 @@ describe("LoginPage", () => {
   test("should display an error", () => {
     //NOTE // Spy on resetError function
     const resetErrorSpy = jest.spyOn(
-      require("../../../store/slices/ui"),
+      require("../../../../store/slices/ui"),
       "resetError",
     );
 

@@ -1,5 +1,5 @@
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../shared/modal/Modal";
 import { getIsLogged, getUi } from "../../store/selectors";
@@ -31,8 +31,10 @@ const Header = (...rest) => {
   return (
     <header className="header">
       <nav className="navbar">
-        <h1 className="title"> {t("header")} </h1>
         <div className="icons">
+          <Link to="/">
+            <h1 className="title"> {t("header")} </h1>
+          </Link>
           <img
             className="icon-language"
             src="/images/languageIcons/es.png"
@@ -48,13 +50,22 @@ const Header = (...rest) => {
             onClick={() => i18n.changeLanguage("en")}
           />
         </div>
-        {isLogged ? (
-          <button onClick={handleLogoutClick}>{t("Logout")}</button>
-        ) : (
-          <button as={Link} to="/login">
-            {t("Login")}
-          </button>
-        )}
+        <ul>
+          <li>
+            <NavLink className="navbar-list-item" to="/create-ad">
+              {t("Upload ad")}
+            </NavLink>
+            {isLogged ? (
+              <button onClick={handleLogoutClick} className="navbar-list-item">
+                {t("Logout")}
+              </button>
+            ) : (
+              <NavLink className="navbar-list-item" to="/login">
+                {t("Login")}
+              </NavLink>
+            )}
+          </li>
+        </ul>
       </nav>
       <hr />
       {showModal && (

@@ -25,6 +25,6 @@ test("renders learn react link", () => {
       </MemoryRouter>
     </Provider>,
   );
-  const linkElement = screen.getByText(/Hola Mandalorians!/i);
+  const linkElement = screen.getByText(/welcomeMessage/i);
   expect(linkElement).toBeInTheDocument();
 });

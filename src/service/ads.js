@@ -1,10 +1,18 @@
-import client from '../api/client';
+import client from "../api/client";
 
-const advUrl = '/adverts';
+const adUrl = "/api/ads/adverts";
 
-export const getLastAdv = () => {
-    const url = `${advUrl}`;
-    return client.get(url);
+export const getAd = adId => {
+  const url = `${adUrl}/${adId}`;
+  return client.get(url);
 };
 
-/*Incremenetar los likes: https://www.youtube.com/watch?v=I7jaHPqef10&ab_channel=JAB 26:49*/
+export const createAd = ad => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const url = `${adUrl}/create`;
+  return client.post(url, ad, config);
+};

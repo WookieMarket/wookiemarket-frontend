@@ -1,28 +1,33 @@
 import "./App.css";
 import "./css/Variables.css";
 import "./css/Reset.css";
-import LoginPage from "./components/auth/LoginPage";
+import LoginPage from "./components/auth/login/LoginPage";
 import RequireAuth from "./components/auth/RequireAuth";
 import AdvertPage from './components/ads/AdvertPage';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/ads/HomePage";
-import AdvertsListPage from "./components/ads/AdvertsListPage";
+import ResetPasswordPage from "./components/auth/resetPassword/ResetPasswordPage";
+import AdNew from "./components/ads/adsNew/AdNew";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   return (
     <div className="App">
-      Hola Mandalorians!
+      {t("welcomeMessage")}
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route
-          path="/ads"
+          path="/create-ad"
           element={
             <RequireAuth>
-              <AdvertsListPage />
+              <AdNew />
             </RequireAuth>
           }
         />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/" element={<Navigate to="/home" />} />
