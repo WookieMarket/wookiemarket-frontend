@@ -3,6 +3,7 @@ import "./css/Variables.css";
 import "./css/Reset.css";
 import LoginPage from "./components/auth/LoginPage";
 import RequireAuth from "./components/auth/RequireAuth";
+import AdvertPage from './components/ads/AdvertPage';
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/ads/HomePage";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/adverts/:advertId" element={<AdvertPage />} />
         <Route path="/404" element={<div>404 | Not found</div>} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

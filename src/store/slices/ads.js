@@ -4,11 +4,8 @@ import { areAdvertsLoaded } from '../selectors';
 export const advertsList = createAsyncThunk(
   'adverts/list',
   async (_, { extra: { adsService }, rejectWithValue }) => {
-    console.log('Antes del try');
     try {
-      console.log('Despachando la acción advertsList');
       const adverts = await adsService.getLastAdv();
-      console.log('Anuncios obtenidos:', adverts);
       return adverts;
     } catch (error) {
       console.log(error);

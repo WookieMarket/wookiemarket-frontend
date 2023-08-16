@@ -2,15 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from './Advert';
 import { connect } from 'react-redux';
-import { getAdverts, getUi, dataFiltered } from '../../store/selectors';
+import { getAdverts, getUi } from '../../store/selectors';
 import { advertsList } from '../../store/slices/ads';
 import '../../css/advertListPage.css';
 import '../../css/advert.css';
 import defaultImage from '../../assets/no_image.jpg';
 import { filterByName } from '../../store/slices/adsFiltered';
 
-
-const EmptyList = ({ dataFiltered }) => {
+const EmptyList = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <p>Sorry, no adverts yet.</p>
@@ -27,7 +26,7 @@ const advertsPerPage = 2;
 const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   //const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredAdverts, setFilteredAdverts] = useState(adverts);
+  //const [filteredAdverts, setFilteredAdverts] = useState(adverts);
 
   useEffect(() => {
     onAdvertsLoaded();
@@ -43,19 +42,19 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
   const advertsToDisplay = adverts.slice(startIndex, endIndex);
   const isLastPage = currentPage === totalPages;
 
-  const handleFilterChange = (event) => {
+  /*const handleFilterChange = (event) => {
     //filterByName(event.target.value);
-        const filteredData = filterByName({ name: event.target.value, adverts });
+    const filteredData = filterByName({ name: event.target.value, adverts });
     setFilteredAdverts(filteredData);
-  };
-
+  };*/
+ 
   return (
     <>
-      <section className='searchSection'>
+      {/*<section className='searchSection'>
         <h1>Searching area</h1>
         <label className='advert_label'>Name: </label>
         <input type='text' onChange={handleFilterChange} />
-      </section>
+  </section>*/}
       <div className='container'>
         {isLoading ? (
           <div className='loadingPage'>
@@ -76,11 +75,10 @@ const AdvertsListPage = ({ adverts, onAdvertsLoaded, isLoading }) => {
                       {advertsToDisplay
                         .sort((a, b) => a.createdAt > b.createdAt)
                         .map((advert) => (
-                          <li key={advert.id}>
+                          <li key={advert._id}>
                             <div className='advert-container'>
-                              <Link to={`/adverts/${advert.id}`}>
+                              <Link to={`/adverts/${advert._id}`}>
                                 <Advert
-                                  key={advert.id}
                                   advert={advert}
                                   onImageError={handleImageError}
                                 />

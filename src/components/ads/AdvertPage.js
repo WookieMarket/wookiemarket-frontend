@@ -1,41 +1,37 @@
 import React from 'react';
 import '../../css/advert.css';
+import Advert from './Advert';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getAdvertById } from '../../store/selectors';
 
-const AdvertPage = ({ name, image, description, onSale, price, username }) => {
-  const advDate = new Date();
+const AdvertPage = ({ onImageError }) => {
+  const { advertId } = useParams();
+  /*const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const advertId = searchParams.get('_id');*/
+
+  console.log('Advert ID:', advertId);
+
+  const advert = useSelector((state) => getAdvertById(state, advertId));
+
+  console.log('Esto debería ser el anuncio:', advert);
+ 
+
+  const navigate = useNavigate();
+  //navigate.replace(`/adverts/${advert.name}`);
+
+  if (advert) {
+    navigate(`/adverts/${advert._id}`);
+  } else {
+    console.error('No se encontró un anuncio con el ID especificado');
+  }
+
   return (
     <>
+      <Advert advert={advert} onImageError={onImageError} />
       <div>
-        <h2>{name}</h2>
-        <br />
-
-        <img src={image} alt={name} />
-        <br />
-
-        <p className='advert-label'>Description:</p>
-        <span className='description'> {description}</span>
-        <br />
-        <br />
-        <p>
-          Is
-          {onSale ? (
-            <span id='isSale'> for sale </span>
-          ) : (
-            <span id='isSale'> purchased </span>
-          )}
-          this product by:
-        </p>
-        <br/>
-        <div className='price_number'>
-          <p>{price}</p>
-        </div>
-        <div className='price_coin'>
-          <p>€</p>
-        </div>
-      </div>
-      <div>
-        <span className='tweet-username'>{username}</span>
-        <small>Created at: {`${advDate.toUTCString()}`}</small>
+        <small>Created at: ¡AÑADIR CAMPO FECHA CREACIÓN ANUNCIO!</small>
       </div>
     </>
   );
