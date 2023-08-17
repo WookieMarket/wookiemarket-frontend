@@ -17,7 +17,12 @@ export const createAd = ad => {
   return client.post(url, ad, config);
 };
 
-export const getLastAdv = () => {
+// export const getLastAdv = () => {
+//   const url = `${adUrl}`;
+//   return client.get(url);
+// };
+
+export const getRecentAds = () => {
   const url = `${adUrl}`;
   return client.get(url);
 };

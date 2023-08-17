@@ -1,17 +1,18 @@
 import React from "react";
-import defaultImage from "../../assets/no_image.jpg";
-import "../../css/advert.css";
+//import defaultImage from "../../assets/no_image.jpg";
+import "./advert.css";
+import defaultImage from "../../../assets/no_image.jpg";
 
-function Advert({ advert, onImageError }) {
+function Advert(advert) {
   console.log("Rendering Advert component");
   const advDate = new Date(advert.createdAt);
-  const images = image => {
-    if (image) {
-      return image;
-    } else {
-      return defaultImage;
-    }
-  };
+  // const images = image => {
+  //   if (image) {
+  //     return image;
+  //   } else {
+  //     return defaultImage;
+  //   }
+  // };
   return (
     <>
       <div className="productInfo" id="advertOnly">
@@ -22,11 +23,22 @@ function Advert({ advert, onImageError }) {
       <br />
       <div className="productData">
         <div className="product-img">
-          <img
+          {advert.image === "" ? (
+            <img
+              className="img"
+              src={defaultImage}
+              alt="imagenes anuncios"></img>
+          ) : (
+            <img
+              className="img"
+              src={advert.image}
+              alt="imagenes anuncios"></img>
+          )}
+          {/* <img
             className="productPhoto"
             src={advert.image}
             onError={onImageError}
-            alt="imagen del producto en venta"></img>
+            alt="imagen del producto en venta"></img> */}
         </div>
         <br />
         <div className="product_Info">

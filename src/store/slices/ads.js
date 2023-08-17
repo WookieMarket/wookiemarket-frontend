@@ -17,12 +17,12 @@ export const adsCreate = createAsyncThunk(
 );
 
 export const advertsList = createAsyncThunk(
-  "adverts/list",
+  "ads/list",
   async (_, { extra: { service }, rejectWithValue }) => {
     console.log("Antes del try");
     try {
       console.log("Despachando la acción advertsList");
-      const adverts = await service.ads.getLastAdv();
+      const adverts = await service.ads.getRecentAds();
       console.log("Anuncios obtenidos:", adverts);
       return adverts;
     } catch (error) {
@@ -36,7 +36,7 @@ export const advertsList = createAsyncThunk(
 );
 
 const ads = createSlice({
-  name: "adverts",
+  name: "ads",
   initialState: {
     areLoaded: false,
     data: [],
