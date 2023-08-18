@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import Modal from "../../shared/modal/Modal";
 import { Link } from "react-router-dom";
 import Form from "../../shared/form/Form";
+import "./LoginPage.css";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
@@ -74,10 +75,11 @@ function LoginPage() {
         ) : (
           <form onSubmit={handleSubmit} className="container-form">
             <Form
-              classNameLabel="user-label"
+              classNameForm="form-group"
+              classNameLabel="password-label"
               htmlFor="username"
               text={t("Username")}
-              classNameInput="user-input"
+              classNameInput="password-input"
               inputId="username"
               inputType="text"
               inputName="username"
@@ -88,6 +90,7 @@ function LoginPage() {
             />
 
             <Form
+              classNameForm="form-group"
               classNameLabel="password-label"
               htmlFor="password"
               text={t("Password")}
@@ -102,10 +105,9 @@ function LoginPage() {
             />
 
             <Form
-              classNameLabel="rememberMe-label"
+              classNameForm="password-input-rememberme"
               htmlFor="rememberMe"
               text={t("RememberMe")}
-              classNameInput="password-input"
               inputId="rememberMe"
               inputType="checkbox"
               inputName="rememberMe"
@@ -115,6 +117,7 @@ function LoginPage() {
             />
 
             <button
+              className="login-button"
               data-testid="button"
               type="submit"
               width="button-form"
@@ -122,7 +125,7 @@ function LoginPage() {
               {t("Log in")}
             </button>
             <Link onClick={handleResetPasswordLinkClick}>
-              <h4 className="navbar-h4">{t("Forgot password?")}</h4>
+              <h4 className="link">{t("Forgot password?")}</h4>
             </Link>
             {showModal && (
               <Modal

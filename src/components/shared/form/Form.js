@@ -1,5 +1,6 @@
 function Form(props) {
   const {
+    classNameForm,
     classNameLabel,
     htmlFor,
     text,
@@ -14,8 +15,10 @@ function Form(props) {
   } = props;
 
   return (
-    <div className={classNameLabel}>
-      <label htmlFor={htmlFor}>{text}</label>
+    <div className={classNameForm}>
+      <label className={classNameLabel} htmlFor={htmlFor}>
+        {text}
+      </label>
       <input
         className={classNameInput}
         id={inputId}
