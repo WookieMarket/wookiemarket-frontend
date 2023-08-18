@@ -1,5 +1,5 @@
 export const failureRedirects =
-  (router, redirectsMap) => () => (next) => (action) => {
+  (router, redirectsMap) => () => next => action => {
     const result = next(action);
 
     if (action.error && action.payload) {
@@ -12,7 +12,7 @@ export const failureRedirects =
   };
 
 export const successRedirects =
-  (router, redirectsMap) => () => (next) => (action) => {
+  (router, redirectsMap) => () => next => action => {
     const result = next(action);
 
     const redirect = redirectsMap[action.type];
@@ -22,6 +22,11 @@ export const successRedirects =
 
     if (action.type === "auth/logout/fulfilled") {
       router.navigate("/");
+    }
+
+    //TODO modificar cuando este implementado el detalle del anuncio
+    if (action.type === "ads/create/fulfilled") {
+      router.navigate("/ads");
     }
 
     //NOTE Add redirect to "Home" page after successful password change
