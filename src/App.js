@@ -5,7 +5,6 @@ import LoginPage from "./components/auth/login/LoginPage";
 import RequireAuth from "./components/auth/RequireAuth";
 
 import { Route, Routes, Navigate } from "react-router-dom";
-import HomePage from "./components/ads/HomePage/HomePage";
 import ResetPasswordPage from "./components/auth/resetPassword/ResetPasswordPage";
 import AdNew from "./components/ads/adsNew/AdNew";
 import { useTranslation } from "react-i18next";
@@ -17,7 +16,7 @@ function App() {
     <div className="App">
       {t("welcomeMessage")}
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<AdvertsListPage />} />
         <Route
           path="/create-ad"
           element={
