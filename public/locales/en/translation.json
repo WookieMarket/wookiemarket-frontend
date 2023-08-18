@@ -4,7 +4,6 @@
     "icon-hover": "Click here to change the language",
     "header": "Header",
     "footer": "@Keepcoding 2023 by Mandalorians",
-
     "Username": "Username",
     "Password": "Password",
     "RememberMe": "RememberMe",
@@ -12,25 +11,20 @@
     "Login": "Login",
     "Logout": "Logout",
     "Upload ad": "Upload ad",
-    "Ads": "Ads",
     "charging...": "charging...",
     "Login Page": "Login Page",
     "Cancel": "Cancel",
     "Confirm": "Confirm",
     "Leave session": "Leave session",
     "¿are you sure?": "¿are you sure?",
-
     "Recover password": "Recover password",
     "Forgot password?": "Forgot password?",
     "Enter your email": "Enter your email",
     "Example@Example.com": "Example@Example.com",
-
-    
     "Reset Password": "Reset Password",
     "New password": "New password",
     "Confirm password": "Confirm password",
     "Submit": "Submit",
-    
     "Create an ad": "Create an ad",
     "Article": "Article",
     "Name": "Name",
@@ -42,6 +36,11 @@
     "Status": "Status",
     "Coin": "Coin",
     "Image": "Image",
-    "Create": "Create"
-   
+    "Create": "Create",
+    "Sorry, no adverts yet": "Sorry, no adverts yet",
+    "Advertisements": "Advertisements",
+    "advertisements": "advertisements",
+    "Searching area": "Searching area",
+    "LOADING...": "LOADING...",
+    "ADVERTISEMENTS AVIABLE": "ADVERTISEMENTS AVIABLE"
 }
