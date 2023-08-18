@@ -1,11 +1,11 @@
-import "./Header.css";
-import { Link, NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Modal from "../shared/modal/Modal";
-import { getIsLogged, getUi } from "../../store/selectors";
-import { toggleModal } from "../../store/slices/ui";
-import { authLogout } from "../../store/slices/auth";
-import { useTranslation } from "react-i18next";
+import './Header.css';
+import { Link, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Modal from '../shared/modal/Modal';
+import { getIsLogged, getUi } from '../../store/selectors';
+import { toggleModal } from '../../store/slices/ui';
+import { authLogout } from '../../store/slices/auth';
+import { useTranslation } from 'react-i18next';
 
 const Header = (...rest) => {
   const { t, i18n } = useTranslation();
@@ -33,39 +33,44 @@ const Header = (...rest) => {
       <nav className="navbar">
         <div className="icons">
           <Link to="/">
-            <h1 className="title"> {t("header")} </h1>
+            <h1 className="title"> {t('header')} </h1>
           </Link>
           <img
             className="icon-language"
             src="/images/languageIcons/es.png"
             alt="ES"
-            title={t("icon-hover")}
-            onClick={() => i18n.changeLanguage("es")}
+            title={t('icon-hover')}
+            onClick={() => i18n.changeLanguage('es')}
           />
           <img
             className="icon-language"
             src="/images/languageIcons/en.png"
             alt="EN"
-            title={t("icon-hover")}
-            onClick={() => i18n.changeLanguage("en")}
+            title={t('icon-hover')}
+            onClick={() => i18n.changeLanguage('en')}
           />
         </div>
         <ul>
           <li>
             <NavLink className="navbar-list-item" to="/create-ad">
-              {t("Upload ad")}
+              {t('Upload ad')}
             </NavLink>
             <NavLink className="navbar-list-item" to="/ads">
-              {t("Ads")}
+              {t('Ads')}
             </NavLink>
             {isLogged ? (
               <button onClick={handleLogoutClick} className="navbar-list-item">
-                {t("Logout")}
+                {t('Logout')}
               </button>
             ) : (
-              <NavLink className="navbar-list-item" to="/login">
-                {t("Login")}
-              </NavLink>
+              <>
+                <NavLink className="navbar-list-item" to="/login">
+                  {t('Login')}
+                </NavLink>
+                <NavLink className="navbar-list-item" to="/signup">
+                  {t('Sign up')}
+                </NavLink>
+              </>
             )}
           </li>
         </ul>
@@ -73,8 +78,8 @@ const Header = (...rest) => {
       <hr />
       {showModal && (
         <Modal
-          title={t("Leave session")}
-          message={t("¿are you sure?")}
+          title={t('Leave session')}
+          message={t('¿are you sure?')}
           onConfirm={handleShowModalconfirm}
           onCancel={handleShowModalCancel}
         />
