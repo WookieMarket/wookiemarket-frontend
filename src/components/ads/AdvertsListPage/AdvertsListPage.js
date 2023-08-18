@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Advert from '../AdvertPage/Advert';
+import Advert from '../Advert/Advert';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdverts, getUi } from '../../../store/selectors';
 import { advertsList } from '../../../store/slices/ads';
@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
+import AdvertPage from '../AdvertPage/AdvertPage';
 
 const advertsPerPage = 2;
 
@@ -76,7 +77,7 @@ const AdvertsListPage = () => {
                           <li key={advert._id}>
                             <div className='advert-container'>
                               <Link to={`/adverts/${advert._id}`}>
-                                <Advert {...advert} />
+                                <AdvertPage {...advert} />
                               </Link>
                             </div>
                           </li>
