@@ -55,6 +55,9 @@ const Header = (...rest) => {
             <NavLink className="navbar-list-item" to="/create-ad">
               {t("Upload ad")}
             </NavLink>
+            <NavLink className="navbar-list-item" to="/ads">
+              {t("Ads")}
+            </NavLink>
             {isLogged ? (
               <button onClick={handleLogoutClick} className="navbar-list-item">
                 {t("Logout")}

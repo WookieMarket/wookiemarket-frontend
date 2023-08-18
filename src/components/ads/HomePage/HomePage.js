@@ -1,4 +1,4 @@
-import Layout from "../layout/Layout";
+import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 
 const HomePage = props => {

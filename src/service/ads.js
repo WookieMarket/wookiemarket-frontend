@@ -16,3 +16,13 @@ export const createAd = ad => {
   const url = `${adUrl}/create`;
   return client.post(url, ad, config);
 };
+
+// export const getLastAdv = () => {
+//   const url = `${adUrl}`;
+//   return client.get(url);
+// };
+
+export const getRecentAds = () => {
+  const url = `${adUrl}`;
+  return client.get(url);
+};
