@@ -53,7 +53,7 @@ const ads = createSlice({
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
-      });
+      })
   },
 });
 

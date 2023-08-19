@@ -77,7 +77,7 @@ const AdvertsListPage = () => {
                           <li key={advert._id}>
                             <div className='advert-container'>
                               <Link to={`/adverts/${advert._id}`}>
-                                <AdvertPage {...advert} />
+                                <Advert {...advert} />
                               </Link>
                             </div>
                           </li>
