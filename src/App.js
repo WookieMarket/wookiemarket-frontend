@@ -9,6 +9,7 @@ import ResetPasswordPage from './components/auth/resetPassword/ResetPasswordPage
 import AdNew from './components/ads/adsNew/AdNew';
 import { useTranslation } from 'react-i18next';
 import AdvertsListPage from './components/ads/AdvertsListPage/AdvertsListPage';
+import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 
 function App() {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ function App() {
               </RequireAuth>
             }
           />
+           <Route path='/adverts/:id' element={<AdvertPage />} />
           <Route path='/reset-password' element={<ResetPasswordPage />} />
 
           <Route path='/login' element={<LoginPage />} />
