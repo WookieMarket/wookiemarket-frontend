@@ -5,7 +5,7 @@
     "header": "Cabecera",
     "footer": "@Keepcoding 2023 por Mandalorians",
     
-    "Username": "Usuario",
+    "Username": "usuario",
     "Password": "Contraseña",
     "RememberMe": "Recuerdame",
     "Log in": "Acceso",
@@ -21,7 +21,7 @@
     "¿are you sure?": "¿Estás seguro?",
 
     "Recover password": "Recuperar contraseña",
-    "Forgot password?": "Olvidó su contraseña?",
+    "Forgot password?": "olvidó su contraseña?",
     "Enter your email": "Introduce tu correo",
     "Example@Example.com": "Ejemplo@Ejemplo.com",
     

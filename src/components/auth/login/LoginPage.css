@@ -26,6 +26,7 @@
 }
 
 .container-form .password-label {
+  font-family: var(--font-family);
   font-size: 17px;
   margin-bottom: 10px;
 }
@@ -33,6 +34,7 @@
 .container-form .password-input {
   height: 20px;
   width: 100%;
+  font-family: var(--font-family);
   margin: auto;
   font-size: 13px;
   margin-bottom: 10px;
@@ -40,20 +42,21 @@
   border: 3px solid gainsboro;
 }
 
-.container-form .login-button {
+/* .container-form .login-button {
   display: block;
-  background-color: var(--background-color-button);
+  background-color: var(--background-accept-button-color);
   border-radius: 5px;
   font-size: 13px;
   color: white;
   border: 0;
   padding: 6px 6px;
   margin-bottom: 10px;
-}
+} */
 
-.container-form .link {
+.container-form .link-reset {
   display: flex;
   justify-content: center;
+  font-family: var(--font-family);
   font-size: 16px;
   color: rgba(0, 0, 255, 0.897);
   text-decoration: none;
@@ -62,6 +65,7 @@
 
 .container-form .password-input-rememberme {
   display: flex;
+  font-family: var(--font-family);
   align-items: center;
   align-content: space-between;
 }
@@ -74,11 +78,11 @@
     height: 25px;
     font-size: 16px;
   }
-  .container-form .login-button {
+  /* .container-form .login-button {
     border-radius: 5px;
     padding: 7px 7px;
     font-size: 15px;
-  }
+  } */
   .container-form .link {
     font-size: 18px;
   }
@@ -99,11 +103,11 @@
   .container-form .link {
     font-size: 19px;
   }
-  .container-form .login-button {
+  /* .container-form .login-button {
     border-radius: 5px;
     padding: 8px 8px;
     font-size: 15px;
-  }
+  } */
   .container-form .password-label {
     font-size: 20px;
     margin-bottom: 10px;

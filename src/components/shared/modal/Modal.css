@@ -35,3 +35,25 @@
   justify-content: center;
   margin-top: 30px;
 }
+
+.oncancel {
+  display: block;
+  background-color: var(--background-accept-button-color);
+  border-radius: 5px;
+  font-size: 13px;
+  color: white;
+  border: 0;
+  padding: 6px 6px;
+  margin-bottom: 10px;
+}
+
+.onconfirm {
+  display: block;
+  background-color: var(--background-reject-button-color);
+  border-radius: 5px;
+  font-size: 13px;
+  color: white;
+  border: 0;
+  padding: 6px 6px;
+  margin-bottom: 10px;
+}

@@ -8,6 +8,8 @@ import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 import { adsCreate } from "../../../store/slices/ads";
 import Form from "../../shared/form/Form";
+import Button from "../../shared/Button";
+
 //import "./AdNew.css";
 
 function AdNew() {
@@ -194,13 +196,13 @@ function AdNew() {
             handleChange={handleChangeInputFile}
           />
 
-          <button
+          <Button
             type="submit"
-            variant="primary"
+            //variant="primary"
             width="button-form"
             disabled={buttonDisabled}>
             {t("Create")}
-          </button>
+          </Button>
         </form>
       )}
 

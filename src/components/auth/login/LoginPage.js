@@ -11,6 +11,7 @@ import Modal from "../../shared/modal/Modal";
 import { Link } from "react-router-dom";
 import Form from "../../shared/form/Form";
 import "./LoginPage.css";
+import Button from "../../shared/Button";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
@@ -116,26 +117,28 @@ function LoginPage() {
               required
             />
 
-            <button
-              className="login-button"
+            <Button
+              //className="login-button"
               data-testid="button"
               type="submit"
+              variant="accept"
               width="button-form"
               disabled={buttonDisabled}>
               {t("Log in")}
-            </button>
+            </Button>
             <Link onClick={handleResetPasswordLinkClick}>
-              <h4 className="link">{t("Forgot password?")}</h4>
+              <h4 className="link-reset">{t("Forgot password?")}</h4>
             </Link>
             {showModal && (
               <Modal
                 title={t("Recover password")}
                 message={
                   <Form
-                    classNameLabel="email-label"
+                    classNameForm="form-group"
+                    classNameLabel="password-label"
                     htmlFor="email-service"
                     text={t("Enter your email")}
-                    classNameInput="email-input"
+                    classNameInput="password-input"
                     inputId="email-service"
                     inputType="email"
                     inputName="reset-email"

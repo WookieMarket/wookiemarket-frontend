@@ -10,5 +10,6 @@
   --font-family: "Star Jedi", sans-serif;
   --border-color: #13c1ac;
   --background-color-form: whitesmoke;
-  --background-color-button: #578d57;
+  --background-accept-button-color: #578d57;
+  --background-reject-button-color: #da2413;
 }

@@ -44,6 +44,12 @@ exports[`AdNew snapshot 1`] = `
             >
               Upload ad
             </a>
+            <a
+              class="navbar-list-item"
+              href="/ads"
+            >
+              Ads
+            </a>
             <button
               class="navbar-list-item"
             >
@@ -66,10 +72,9 @@ exports[`AdNew snapshot 1`] = `
         class="container-form"
         enctype="multipart/form-data"
       >
-        <div
-          class="form-label"
-        >
+        <div>
           <label
+            class="form-label"
             for="adname"
           >
             Article
@@ -84,10 +89,9 @@ exports[`AdNew snapshot 1`] = `
           />
         </div>
         <div>
-          <div
-            class="form-label"
-          >
+          <div>
             <label
+              class="form-label"
               for="onsale"
             >
               Sell
@@ -100,10 +104,9 @@ exports[`AdNew snapshot 1`] = `
               value="true"
             />
           </div>
-          <div
-            class="form-label"
-          >
+          <div>
             <label
+              class="form-label"
               for="onsale"
             >
               Buy
@@ -117,10 +120,9 @@ exports[`AdNew snapshot 1`] = `
             />
           </div>
         </div>
-        <div
-          class="form-label"
-        >
+        <div>
           <label
+            class="form-label"
             for="price"
           >
             Price
@@ -134,10 +136,9 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div
-          class="form-label"
-        >
+        <div>
           <label
+            class="form-label"
             for="category"
           >
             Category
@@ -151,10 +152,9 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div
-          class="form-label"
-        >
+        <div>
           <label
+            class="form-label"
             for="description"
           >
             Description
@@ -168,10 +168,9 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div
-          class="form-label"
-        >
+        <div>
           <label
+            class="form-label"
             for="status"
           >
             Status
@@ -185,10 +184,9 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div
-          class="form-label"
-        >
+        <div>
           <label
+            class="form-label"
             for="coin"
           >
             Coin
@@ -202,10 +200,9 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div
-          class="form-label-img"
-        >
+        <div>
           <label
+            class="form-label-img"
             for="img"
           >
             Image

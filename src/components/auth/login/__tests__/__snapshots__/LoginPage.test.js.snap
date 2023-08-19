@@ -46,6 +46,12 @@ exports[`LoginPage snapshot 1`] = `
             </a>
             <a
               class="navbar-list-item"
+              href="/ads"
+            >
+              Ads
+            </a>
+            <a
+              class="navbar-list-item"
               href="/login"
             >
               Login
@@ -68,15 +74,16 @@ exports[`LoginPage snapshot 1`] = `
           class="container-form"
         >
           <div
-            class="user-label"
+            class="form-group"
           >
             <label
+              class="password-label"
               for="username"
             >
               Username
             </label>
             <input
-              class="user-input"
+              class="password-input"
               id="username"
               name="username"
               placeholder="Username"
@@ -85,9 +92,10 @@ exports[`LoginPage snapshot 1`] = `
             />
           </div>
           <div
-            class="password-label"
+            class="form-group"
           >
             <label
+              class="password-label"
               for="password"
             >
               Password
@@ -102,7 +110,7 @@ exports[`LoginPage snapshot 1`] = `
             />
           </div>
           <div
-            class="rememberMe-label"
+            class="password-input-rememberme"
           >
             <label
               for="rememberMe"
@@ -110,7 +118,6 @@ exports[`LoginPage snapshot 1`] = `
               RememberMe
             </label>
             <input
-              class="password-input"
               id="rememberMe"
               name="rememberMe"
               type="checkbox"
@@ -118,9 +125,11 @@ exports[`LoginPage snapshot 1`] = `
             />
           </div>
           <button
+            class="sc-bcPKhP ibftXS"
             data-testid="button"
             disabled=""
             type="submit"
+            variant="primary"
             width="button-form"
           >
             Log in
@@ -129,7 +138,7 @@ exports[`LoginPage snapshot 1`] = `
             href="/"
           >
             <h4
-              class="navbar-h4"
+              class="link-reset"
             >
               Forgot password?
             </h4>
