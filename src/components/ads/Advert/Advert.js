@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react';
 //import defaultImage from "../../assets/no_image.jpg";
-import "./advert.css";
-import defaultImage from "../../../assets/no_image.jpg";
+import './advert.css';
+import defaultImage from '../../../assets/no_image.jpg';
 
 function Advert(advert) {
-  console.log("Rendering Advert component");
   const advDate = new Date(advert.createdAt);
+  //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
+  const handleImageError = (event) => {
+    event.target.src = defaultImage;
+  };
+
   // const images = image => {
   //   if (image) {
   //     return image;
@@ -15,69 +19,70 @@ function Advert(advert) {
   // };
   return (
     <>
-      <div className="productInfo" id="advertOnly">
-        <div className="advert-name">
+      <div className='productInfo' id='advertOnly'>
+        <div className='advert-name'>
           <h2>{advert.name}</h2>
         </div>
       </div>
       <br />
-      <div className="productData">
-        <div className="product-img">
-          {advert.image === "" ? (
-            <img
-              className="img"
-              src={defaultImage}
-              alt="imagenes anuncios"></img>
+      <div className='productData'>
+        <div className='product-img'>
+          {/*advert.image === '' ? (
+            <img className='img' src={defaultImage} alt='Default Image'></img>
           ) : (
             <img
-              className="img"
+              className='img'
               src={advert.image}
-              alt="imagenes anuncios"></img>
-          )}
-          {/* <img
-            className="productPhoto"
-            src={advert.image}
-            onError={onImageError}
-            alt="imagen del producto en venta"></img> */}
+              alt='imagenes anuncios'
+            ></img>
+          )*/}
+          {
+            <img
+              className='img'
+              src={advert.image}
+              onError={handleImageError}
+              alt='imagenes anuncios'
+            ></img>
+          }
         </div>
         <br />
-        <div className="product_Info">
-          <p className="advert_label">Description: </p>
-          <span className="description"> {advert.description}</span>
+        <div className='product_Info'>
+          <p className='advert_label'>Description: </p>
+          <span className='description'> {advert.description}</span>
           <br />
           <br />
           <p>
             Is
             {advert.onSale ? (
-              <span id="isSale"> for sale </span>
+              <span id='isSale'> for sale </span>
             ) : (
-              <span id="isSale"> purchased </span>
+              <span id='isSale'> purchased </span>
             )}
             this product by:
           </p>
-          <div className="price">
+          <div className='price'>
             <p>
-              {advert.price} <span id="price_coin"> €</span>
+              {advert.price} <span id='price_coin'> €</span>
             </p>
           </div>
-          <div className="advert_label">
+          <div className='advert_label'>
             <p>
-              Category:{" "}
-              <span className="advert_text">
+              Category:{' '}
+              <span className='advert_text'>
                 {advert.category === undefined
-                  ? ""
-                  : advert.category.join(", ").toLocaleUpperCase()}
+                  ? ''
+                  : advert.category.join(', ').toLocaleUpperCase()}
               </span>
             </p>
           </div>
         </div>
         <div>
-          <p className="advert_label">
-            Username: <span className="advert-text">{advert.username}</span>
+          <p className='advert_label'>
+            Username: <span className='advert-text'>{advert.username}</span>
           </p>
-          <small className="advert_label">
-            Created at:{" "}
-            <span className="advert_text">{`${advDate.toUTCString()}`}</span>
+          <small className='advert_label'>
+            Created at:{' '}
+            <span className='advert_text'>{`${advDate.toUTCString()}`}</span>
           </small>
         </div>
       </div>

@@ -1,7 +1,7 @@
 @font-face {
-    font-family: 'Star Jedi';
-    src: url('../assets/fonts/Starjedi.ttf');
-  }
+  font-family: 'Star Jedi';
+  src: url('../assets/fonts/Starjedi.ttf'); /*<--Debereía ser una url con nuestra dirección real*/
+}
 
 :root {
   --text-color: #60cfe0;
