@@ -1,25 +1,36 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 //NOTE I use rejectWithValue to take care of the error
 
+export const authSignup = createAsyncThunk(
+  'auth/signup',
+  async (userData, { extra: { service }, rejectWithValue }) => {
+    try {
+      await service.auth.signup(userData);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const authLogin = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async (credentials, { extra: { service }, rejectWithValue }) => {
     try {
       await service.auth.login(credentials);
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
 );
 
 export const authLogout = createAsyncThunk(
-  "auth/logout",
-  (_, { extra: { service } }) => service.auth.logout(),
+  'auth/logout',
+  (_, { extra: { service } }) => service.auth.logout()
 );
 
 export const emailResetPassword = createAsyncThunk(
-  "auth/emailResetPassword",
+  'auth/emailResetPassword',
   async (email, { extra: { service }, rejectWithValue }) => {
     try {
       const resetEmail = await service.auth.emailPassword(email);
@@ -27,33 +38,34 @@ export const emailResetPassword = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
 );
 
 export const resetPassword = createAsyncThunk(
-  "auth/resetPassword",
+  'auth/resetPassword',
   async (
     { email, newPassword, token },
-    { extra: { service }, rejectWithValue },
+    { extra: { service }, rejectWithValue }
   ) => {
     try {
       const response = await service.auth.resetPassword(
         email,
         newPassword,
-        token,
+        token
       );
       return response;
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
 );
 
 const auth = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: false,
   extraReducers: builder => {
     builder
+      .addCase(authSignup.fulfilled, () => true)
       .addCase(authLogin.fulfilled, () => true)
       .addCase(authLogout.fulfilled, () => false);
   },
