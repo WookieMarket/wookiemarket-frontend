@@ -9,9 +9,9 @@ import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
-import AdvertPage from '../AdvertPage/AdvertPage';
 
-const advertsPerPage = 2;
+
+const advertsPerPage = 4;
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
