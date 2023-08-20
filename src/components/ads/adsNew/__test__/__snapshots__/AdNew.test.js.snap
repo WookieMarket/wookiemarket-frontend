@@ -69,18 +69,20 @@ exports[`AdNew snapshot 1`] = `
         Create an ad
       </h2>
       <form
-        class="container-form"
+        class="container-form-creation"
         enctype="multipart/form-data"
       >
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label"
+            class="password-label-creation"
             for="adname"
           >
             Article
           </label>
           <input
-            class="form-input"
+            class="password-input-creation"
             id="adname"
             name="name"
             placeholder="Name"
@@ -88,16 +90,18 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div>
+        <div
+          class="input-checked"
+        >
           <div>
             <label
-              class="form-label"
+              class="checked-label-creation"
               for="onsale"
             >
               Sell
             </label>
             <input
-              class="form-input"
+              class="checked-input-creation"
               id="onsale"
               name="onSale"
               type="radio"
@@ -106,13 +110,13 @@ exports[`AdNew snapshot 1`] = `
           </div>
           <div>
             <label
-              class="form-label"
+              class="checked-label-creation"
               for="onsale"
             >
               Buy
             </label>
             <input
-              class="form-input"
+              class="checked-input-creation"
               id="onsale"
               name="onSale"
               type="radio"
@@ -120,15 +124,17 @@ exports[`AdNew snapshot 1`] = `
             />
           </div>
         </div>
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label"
+            class="password-label-creation"
             for="price"
           >
             Price
           </label>
           <input
-            class="form-input"
+            class="password-input-creation"
             id="price"
             name="price"
             placeholder="Price"
@@ -136,15 +142,17 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label"
+            class="password-label-creation"
             for="category"
           >
             Category
           </label>
           <input
-            class="form-input"
+            class="password-input-creation"
             id="category"
             name="category"
             placeholder="Category"
@@ -152,15 +160,17 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label"
+            class="password-label-creation"
             for="description"
           >
             Description
           </label>
           <input
-            class="form-input"
+            class="password-input-creation"
             id="description"
             name="description"
             placeholder="Description"
@@ -168,15 +178,17 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label"
+            class="password-label-creation"
             for="status"
           >
             Status
           </label>
           <input
-            class="form-input"
+            class="password-input-creation"
             id="status"
             name="status"
             placeholder="Status"
@@ -184,15 +196,17 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label"
+            class="password-label-creation"
             for="coin"
           >
             Coin
           </label>
           <input
-            class="form-input"
+            class="password-input-creation"
             id="coin"
             name="coin"
             placeholder="Coin"
@@ -200,16 +214,18 @@ exports[`AdNew snapshot 1`] = `
             value=""
           />
         </div>
-        <div>
+        <div
+          class="form-group-creation"
+        >
           <label
-            class="form-label-img"
+            class="password-label-creation"
             for="img"
           >
             Image
           </label>
           <input
             accept="image/*"
-            class="form-input"
+            class="img-input-creation"
             id="img"
             name="image"
             type="file"
@@ -217,9 +233,10 @@ exports[`AdNew snapshot 1`] = `
           />
         </div>
         <button
+          class="sc-beqWaB dAsVMc"
+          data-testid="buttonAdNew"
           disabled=""
           type="submit"
-          variant="primary"
           width="button-form"
         >
           Create

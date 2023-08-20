@@ -125,11 +125,10 @@ exports[`LoginPage snapshot 1`] = `
             />
           </div>
           <button
-            class="sc-bcPKhP ibftXS"
+            class="sc-beqWaB dAsVMc"
             data-testid="button"
             disabled=""
             type="submit"
-            variant="primary"
             width="button-form"
           >
             Log in

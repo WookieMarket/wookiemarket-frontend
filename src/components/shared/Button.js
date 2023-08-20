@@ -15,19 +15,16 @@ const Button = styled.button`
   border-width: 1px;
   border-color: ${closedColor};
   color: ${props => (props.variant === "accept" ? "white" : "black")};
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   font-family: var(--font-family);
   font-weight: bold;
   font-size: 10px;
-  min-height: 15px;
-  justify-content: center;
-  width: ${props => (props.width === "button-form" ? "35%" : "auto")};
-  min-width: 45px;
-  outline-style: none;
+  height: 30px;
+  width: ${props => (props.width === "button-form" ? "29%" : "auto")};
   opacity: ${props => (props.disabled ? 0.5 : 1)};
   padding: 6px 6px;
-
   text-decoration: none;
   transition: background-color 0.5s;
 
@@ -38,13 +35,13 @@ const Button = styled.button`
   }
 
   @media screen and (min-width: 768px) {
-    width: ${props => (props.width === "button-form" ? "38%" : "auto")};
-    font-size: 16px;
+    width: ${props => (props.width === "button-form" ? "45%" : "auto")};
+    font-size: 14px;
     padding: 7px 7px;
   }
 
   @media screen and (min-width: 1024px) {
-    width: ${props => (props.width === "button-form" ? "45%" : "auto")};
+    width: ${props => (props.width === "button-form" ? "35%" : "auto")};
     font-size: 17px;
     padding: 8px 8px;
   }

@@ -62,7 +62,7 @@ describe("AdNew", () => {
     const coinInput = screen.getByLabelText(/Coin/);
     const imageInput = screen.getByLabelText(/Image/);
 
-    const submitButton = screen.getByRole("button", { name: /Create/ });
+    const submitButton = screen.getByTestId("buttonAdNew");
     expect(submitButton).toBeDisabled();
 
     //NOTE to launch events
