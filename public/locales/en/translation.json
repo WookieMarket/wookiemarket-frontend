@@ -42,5 +42,9 @@
     "advertisements": "advertisements",
     "Searching area": "Searching area",
     "LOADING...": "LOADING...",
-    "ADVERTISEMENTS AVIABLE": "ADVERTISEMENTS AVIABLE"
+    
+    "ADVERTISEMENTS AVIABLE": "ADVERTISEMENTS AVIABLE",
+    
+    "ADVERT DETAIL": "ADVERT DETAIL",
+    "Sorry, the requested ad is not available": "Sorry, the requested ad is not available"
 }

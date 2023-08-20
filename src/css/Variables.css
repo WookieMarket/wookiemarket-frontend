@@ -9,8 +9,10 @@
   --price-color: rgb(255, 0, 0);
   --font-family: 'Star Jedi', sans-serif;
   --holo-color: #00fcfc;
-  --background-image-url: url('https://www.viajeromagico.com/wp-content/uploads/2020/11/Starcruiser-2.jpg');
+  --background-image-url: url('https://www.viajeromagico.com/wp-content/uploads/2020/11/Starcruiser-2.jpg'); /*No me funciona*/
   --background-image: url('../../public/images/Starcruiser-2.jpg');
   --holo-width: 150px;
   --holo-height: 5px;
+  --noAdvertFound-image: url('../../public/images/advertNotFound_Image.avif'); /*<--Debereía ser una url con nuestra dirección real*/
+  --notFound_404: url('../../public/images/Starcruiser-2.jpg'); /*<--Debereía ser una url con nuestra dirección real*/
 }

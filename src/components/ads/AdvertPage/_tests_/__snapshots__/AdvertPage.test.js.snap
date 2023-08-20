@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvertPage Should match snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="header"
+  >
+    <nav
+      class="navbar"
+    >
+      <div
+        class="icons"
+      >
+        <a
+          href="/"
+        >
+          <h1
+            class="title"
+          >
+             header 
+          </h1>
+        </a>
+        <img
+          alt="ES"
+          class="icon-language"
+          src="/images/languageIcons/es.png"
+          title="icon-hover"
+        />
+        <img
+          alt="EN"
+          class="icon-language"
+          src="/images/languageIcons/en.png"
+          title="icon-hover"
+        />
+      </div>
+      <ul>
+        <li>
+          <a
+            class="navbar-list-item"
+            href="/create-ad"
+          >
+            Upload ad
+          </a>
+          <a
+            class="navbar-list-item"
+            href="/ads"
+          >
+            Ads
+          </a>
+          <button
+            class="navbar-list-item"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <hr />
+  </header>
+  <div
+    class="content"
+  >
+    <div
+      class="holobackground"
+    />
+    <h1>
+      ADVERT DETAIL
+    </h1>
+    <div
+      class="productInfo"
+      id="advertOnly"
+    >
+      <div
+        class="advert-name"
+      >
+        <h2>
+          Advert 1
+        </h2>
+      </div>
+    </div>
+    <br />
+    <div
+      class="productData"
+    >
+      <div
+        class="product-img"
+      >
+        <img
+          alt="imagenes anuncios"
+          class="img"
+        />
+      </div>
+      <br />
+      <div
+        class="product_Info"
+      >
+        <p
+          class="advert_label"
+        >
+          Description: 
+        </p>
+        <span
+          class="description"
+        >
+           Advert 1 description
+        </span>
+        <br />
+        <br />
+        <p>
+          Is
+          <span
+            id="isSale"
+          >
+             purchased 
+          </span>
+          this product by:
+        </p>
+        <div
+          class="price"
+        >
+          <p>
+            100 
+            <span
+              id="price_coin"
+            >
+               €
+            </span>
+          </p>
+        </div>
+        <div
+          class="advert_label"
+        >
+          <p>
+            Category: 
+            <span
+              class="advert_text"
+            />
+          </p>
+        </div>
+      </div>
+      <div>
+        <p
+          class="advert_label"
+        >
+          Username: 
+          <span
+            class="advert-text"
+          />
+        </p>
+        <small
+          class="advert_label"
+        >
+          Created at: 
+          <span
+            class="advert_text"
+          >
+            Invalid Date
+          </span>
+        </small>
+      </div>
+    </div>
+    <div
+      class="no-advert_content "
+    />
+  </div>
+  <div
+    class="holoBase "
+  >
+    Hola
+  </div>
+  <footer>
+    <hr />
+    <div
+      class="footer"
+    >
+      <p>
+        footer
+      </p>
+    </div>
+  </footer>
+</DocumentFragment>
+`;

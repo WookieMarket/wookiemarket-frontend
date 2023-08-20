@@ -1,0 +1,93 @@
+header,
+footer {
+  width: 100%;
+}
+/* apply this style if you want to put your holo inside*/
+/*.holo {
+  position: absolute;
+  bottom: 0;
+}*/
+* {
+    font-size: 2rem;
+}
+.holoBase {
+  z-index: 2;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: var(--holo-height);
+  margin: -5px auto 0;
+  background-color: var(--holo-color, 0.35);
+  border-radius: 100%;
+  filter: blur(2.5px);
+  transform: perspective(100px) rotateX(-30deg);
+  transform-style: preserve-3d;
+  animation: holographic 1.5s infinite alternate;
+  backface-visibility: hidden;
+
+  &:after {
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    content: '';
+    height: 10px;
+    background-color: var(--holo-color, 0.5);
+    border-radius: 100%;
+    filter: blur(2.5px);
+  }
+
+  + .holo {
+    animation-duration: 0.75s;
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  from {
+    will-change: unset;
+    transform: translateY(-10px);
+  }
+  to {
+    will-change: transform;
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes holographic {
+  from {
+    will-change: box-shadow;
+    box-shadow: 0 -75px 5px var(--holo-color, 0.15),
+      0 -1px 2px var(--holo-color, 0.5), 0 -45px 5px var(--holo-color, 0.15), /*Linea de enmedio*/
+      0 -2px 3px var(--holo-color, 0.5), 0 -3px 4px var(--holo-color, 0.5),
+      0 -4px 6px var(--holo-color, 0.5), 0 -17px 10px var(--holo-color, 0.75),
+      0 -7px 20px var(--holo-color, 0.75), 0 -10px 30px var(--holo-color, 0.75),
+      0 -15px 40px var(--holo-color, 0.75), 0 -25px 50px var(--holo-color, 0.75),
+      0 -35px 60px var(--holo-color, 0.85), 0 -45px 70px var(--holo-color, 0.95),
+      0 -65px 80px var(--holo-color, 1), 0 -75px 90px var(--holo-color, 1); /*Primera linea*/
+      
+  }
+  to {
+    will-change: unset;
+    box-shadow: 0 -1px 5px var(--holo-color, 0.15),
+      0 -1px 2px var(--holo-color, 0.5), 0 -1px 5px var(--holo-color, 0.15),
+      0 -2px 3px var(--holo-color, 0.5), 0 -3px 4px var(--holo-color, 0.5),
+      0 -4px 6px var(--holo-color, 0.5), 0 -5px 7px var(--holo-color, 0.75),
+      0 -7px 10px var(--holo-color, 0.75), 0 -10px 15px var(--holo-color, 0.75),
+      0 -15px 20px var(--holo-color, 0.75), 0 -25px 25px var(--holo-color, 0.75),
+      0 -35px 30px var(--holo-color, 0.85), 0 -300px 35px var(--holo-color, 0.95),
+      0 -300px 0px var(--holo-color, 1), 0 -75px 50px var(--holo-color, 1);
+  }
+}
+
+.no-advert{
+    background-image: var(--noAdvertFound-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 25px;
+    height: 75vh;
+}
+
+.holoBaseNoAdvert{
+    display: none;
+}

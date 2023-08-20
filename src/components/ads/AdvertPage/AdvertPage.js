@@ -6,22 +6,31 @@ import Advert from '../Advert/Advert';
 import { Footer } from '../../layout/Footer';
 import Header from '../../layout/Header';
 import { useParams } from 'react-router-dom';
+import './advertPage.css';
 
 const AdvertPage = () => {
-  const advDate = new Date();
   const { t } = useTranslation();
 
   const { id } = useParams();
-  console.log('Este es el Id que le está pasando a useSelectot' + id)
+
   const advert = useSelector((state) => getAdvertById(state, id));
   return (
     <>
       <Header />
-      <h1>ADVERT DETAIL</h1>
-      <div className='holo'></div>
-      <div className='content'>
-        <Advert {...advert} />
-        <div className='holoBase'></div>
+      <div className={'content'}>
+        <div className='holobackground'></div>
+        <h1>{t('ADVERT DETAIL')}</h1>
+        {advert ? (
+          <Advert {...advert} />
+        ) : (
+          <p>{t('Sorry, the requested ad is not available')}</p>
+        )}
+        <div
+          className={`no-advert_content ${!advert ? 'no-advert' : ''}`}
+        ></div>
+      </div>
+      <div className={`holoBase ${!advert ? 'holoBaseNoAdvert' : ''}`}>
+        Hola
       </div>
       <Footer />
     </>
