@@ -1,25 +1,23 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUi } from '../../../store/selectors';
-import { resetError, toggleModal } from '../../../store/slices/ui';
+import { resetError } from '../../../store/slices/ui';
 import { authSignup } from '../../../store/slices/auth';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
-import Modal from '../../shared/modal/Modal';
 import Form from '../../shared/form/Form';
 
 /**
  * This page allows user to create an account.
  * If account is successfully created a session is created
- * and forwards user to main page as logged
- * @returns
+ * and user is forwarded to home page.
  */
 function SignupPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { isLoading, error, showModal } = useSelector(getUi);
+  const { isLoading, error } = useSelector(getUi);
 
   const [userData, setUserData] = useState({
     email: '',
@@ -42,17 +40,6 @@ function SignupPage() {
     event.preventDefault();
 
     dispatch(authSignup(userData));
-  };
-
-  // Review
-  const handleShowModalconfirm = async event => {
-    event.preventDefault();
-    dispatch(toggleModal());
-  };
-
-  // Review
-  const handleShowModalCancel = () => {
-    dispatch(toggleModal());
   };
 
   const buttonDisabled =
@@ -111,15 +98,8 @@ function SignupPage() {
               width="button-form"
               disabled={buttonDisabled}
             >
-              {t('Register')}
+              {t('Register-button-title')}
             </button>
-            {showModal && (
-              <Modal
-                title={t('Account created')}
-                onConfirm={handleShowModalconfirm}
-                onCancel={handleShowModalCancel}
-              />
-            )}
           </form>
         )}
 
