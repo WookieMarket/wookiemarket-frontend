@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Advert from "../AdvertPage/Advert";
-import { useDispatch, useSelector } from "react-redux";
-import { getAdverts, getUi } from "../../../store/selectors";
-import { advertsList } from "../../../store/slices/ads";
-import "./advertListPage.css";
-import { useTranslation } from "react-i18next";
-import Layout from "../../layout/Layout";
-import Spinner from "../../shared/spinner/Spinner";
-import EmptyList from "../EmptyList/EmptyList";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Advert from '../AdvertPage/Advert';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdverts, getUi } from '../../../store/selectors';
+import { advertsList } from '../../../store/slices/ads';
+import './advertListPage.css';
+import { useTranslation } from 'react-i18next';
+import Layout from '../../layout/Layout';
+import Spinner from '../../shared/spinner/Spinner';
+import EmptyList from '../EmptyList/EmptyList';
 
 const advertsPerPage = 2;
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterName, setFilterName] = useState("");
+  const [filterName, setFilterName] = useState('');
   const ads = useSelector(getAdverts);
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const AdvertsListPage = () => {
   };
 
   const filterAdName = ad =>
-    (ad.name ?? "").toUpperCase().startsWith(filterName.toUpperCase());
+    (ad.name ?? '').toUpperCase().startsWith(filterName.toUpperCase());
   //NOTE añadir resto de campos de filtrado
 
   const filteredAds = ads
@@ -60,7 +60,7 @@ const AdvertsListPage = () => {
         </section>
         <div className="container">
           {isLoading ? (
-            <Spinner message={t("charging...")} />
+            <Spinner message={t('charging...')} />
           ) : (
             <div>
               {!!ads.length ? (
@@ -86,9 +86,10 @@ const AdvertsListPage = () => {
                   <div className="pagination">
                     <p>
                       <span
-                        className={currentPage === 1 ? "disabled" : "page"}
-                        onClick={() => handlePageChange(currentPage - 1)}>
-                        &lt;{" "}
+                        className={currentPage === 1 ? 'disabled' : 'page'}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                      >
+                        &lt;{' '}
                       </span>
                       {[...Array(totalPages)].map((_, index) => {
                         if (
@@ -105,10 +106,11 @@ const AdvertsListPage = () => {
                           return (
                             <span
                               className={
-                                currentPage === index + 1 ? "disabled" : "page"
+                                currentPage === index + 1 ? 'disabled' : 'page'
                               }
                               key={index}
-                              onClick={() => handlePageChange(index + 1)}>
+                              onClick={() => handlePageChange(index + 1)}
+                            >
                               {index + 1}
                               {index < totalPages - 1 && <span> - </span>}
                             </span>
@@ -116,9 +118,10 @@ const AdvertsListPage = () => {
                         }
                       })}
                       <span
-                        className={isLastPage ? "disabled" : "page"}
-                        onClick={() => handlePageChange(currentPage + 1)}>
-                        {" "}
+                        className={isLastPage ? 'disabled' : 'page'}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                      >
+                        {' '}
                         &gt;
                       </span>
                     </p>

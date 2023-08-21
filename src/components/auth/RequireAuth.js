@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import { getIsLogged } from "../../store/selectors";
-import { Navigate, useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { getIsLogged } from '../../store/selectors';
+import { Navigate, useLocation } from 'react-router-dom';
 
 //NOTE The children property refers to the element that is inside the tag
 

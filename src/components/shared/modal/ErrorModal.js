@@ -1,4 +1,4 @@
-import "./Modal.css";
+import './Modal.css';
 
 function ErrorModal(props) {
   const { message, title, onCancel } = props;

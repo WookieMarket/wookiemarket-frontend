@@ -10,7 +10,7 @@ export const authSignup = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const authLogin = createAsyncThunk(
@@ -21,12 +21,12 @@ export const authLogin = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const authLogout = createAsyncThunk(
   'auth/logout',
-  (_, { extra: { service } }) => service.auth.logout()
+  (_, { extra: { service } }) => service.auth.logout(),
 );
 
 export const emailResetPassword = createAsyncThunk(
@@ -38,26 +38,26 @@ export const emailResetPassword = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
   async (
     { email, newPassword, token },
-    { extra: { service }, rejectWithValue }
+    { extra: { service }, rejectWithValue },
   ) => {
     try {
       const response = await service.auth.resetPassword(
         email,
         newPassword,
-        token
+        token,
       );
       return response;
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 const auth = createSlice({
