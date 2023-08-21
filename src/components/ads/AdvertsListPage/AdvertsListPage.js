@@ -10,7 +10,6 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 
-
 const advertsPerPage = 4;
 
 const AdvertsListPage = () => {
@@ -51,6 +50,18 @@ const AdvertsListPage = () => {
     setCurrentPage(1);
   };
 
+  //Cleaning & making friendly URL
+  const cleanUpForURL = (text) => {
+    return text
+      .toLowerCase()
+      .replace(/ /g, '-') // Replace spaces with hyphens
+      .replace(/[^\w-]/g, ''); // Remove special characters
+  };
+  // Generates the URL using the _id of the advert and the name field
+  const generateAdvertURL = (advert) => {
+    const cleanName = cleanUpForURL(advert.name);
+    return `/adverts/${advert._id}/${cleanName}`;
+  };
   return (
     <Layout>
       <>
@@ -76,7 +87,7 @@ const AdvertsListPage = () => {
                         .map((advert) => (
                           <li key={advert._id}>
                             <div className='advert-container'>
-                              <Link to={`/adverts/${advert._id}`}>
+                              <Link to={generateAdvertURL(advert)}>
                                 <Advert {...advert} />
                               </Link>
                             </div>
