@@ -1,17 +1,17 @@
-import { render, screen } from "@testing-library/react";
-import LoginPage from "../LoginPage";
-import userEvent from "@testing-library/user-event";
-import { authLogin } from "../../../../store/slices/auth";
-import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router-dom";
-import * as defaultState from "../../../../store/reducers";
+import { render, screen } from '@testing-library/react';
+import LoginPage from '../LoginPage';
+import userEvent from '@testing-library/user-event';
+import { authLogin } from '../../../../store/slices/auth';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import * as defaultState from '../../../../store/reducers';
 
-jest.mock("../../../../store/slices/auth", () => ({
+jest.mock('../../../../store/slices/auth', () => ({
   __esModule: true,
   authLogin: jest.fn(), // Mock only the authLogin action
 }));
 
-describe("LoginPage", () => {
+describe('LoginPage', () => {
   const renderComponent = (error = null) => {
     const store = {
       getState: () => {
@@ -32,15 +32,15 @@ describe("LoginPage", () => {
     );
   };
 
-  test("snapshot", () => {
+  test('snapshot', () => {
     const { container } = renderComponent();
     expect(container).toMatchSnapshot();
   });
 
-  test("shoul dispatch authLogin action", () => {
+  test('shoul dispatch authLogin action', () => {
     const credentials = {
-      username: "rober",
-      password: "123",
+      username: 'rober',
+      password: '123',
       rememberMe: true,
     };
 
@@ -49,7 +49,7 @@ describe("LoginPage", () => {
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
     const checkboxInput = screen.getByLabelText(/RememberMe/);
-    const submitButton = screen.getByRole("button", { name: /Log in/ });
+    const submitButton = screen.getByRole('button', { name: /Log in/ });
     expect(submitButton).toBeDisabled();
 
     //NOTE to launch events
@@ -62,20 +62,20 @@ describe("LoginPage", () => {
 
     expect(authLogin).toHaveBeenCalledWith(credentials);
   });
-  test("should display an error", () => {
+  test('should display an error', () => {
     //NOTE // Spy on resetError function
     const resetErrorSpy = jest.spyOn(
-      require("../../../../store/slices/ui"),
-      "resetError",
+      require('../../../../store/slices/ui'),
+      'resetError',
     );
 
-    const error = { message: "Unauthorized" };
+    const error = { message: 'Unauthorized' };
 
     renderComponent(error);
     const errorElement = screen.getByText(error.message);
 
     expect(errorElement).toBeInTheDocument();
-    const modalButton = screen.getByTestId("modalButton");
+    const modalButton = screen.getByTestId('modalButton');
     userEvent.click(modalButton);
 
     expect(resetErrorSpy).toHaveBeenCalled();

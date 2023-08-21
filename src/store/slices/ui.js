@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const isActionError = action => action.error;
 const isRequestAction = action => /\/pending$/.test(action.type);
 const isSuccessAction = action => /\/fulfilled$/.test(action.type);
 
 const ui = createSlice({
-  name: "ui",
+  name: 'ui',
   initialState: {
     isLoading: false,
     showModal: false,

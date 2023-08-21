@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 //import defaultImage from "../../assets/no_image.jpg";
-import "./advert.css";
-import defaultImage from "../../../assets/no_image.jpg";
+import './advert.css';
+import defaultImage from '../../../assets/no_image.jpg';
 
 function Advert(advert) {
-  console.log("Rendering Advert component");
+  console.log('Rendering Advert component');
   const advDate = new Date(advert.createdAt);
   // const images = image => {
   //   if (image) {
@@ -23,16 +23,18 @@ function Advert(advert) {
       <br />
       <div className="productData">
         <div className="product-img">
-          {advert.image === "" ? (
+          {advert.image === '' ? (
             <img
               className="img"
               src={defaultImage}
-              alt="imagenes anuncios"></img>
+              alt="imagenes anuncios"
+            ></img>
           ) : (
             <img
               className="img"
               src={advert.image}
-              alt="imagenes anuncios"></img>
+              alt="imagenes anuncios"
+            ></img>
           )}
           {/* <img
             className="productPhoto"
@@ -62,11 +64,11 @@ function Advert(advert) {
           </div>
           <div className="advert_label">
             <p>
-              Category:{" "}
+              Category:{' '}
               <span className="advert_text">
                 {advert.category === undefined
-                  ? ""
-                  : advert.category.join(", ").toLocaleUpperCase()}
+                  ? ''
+                  : advert.category.join(', ').toLocaleUpperCase()}
               </span>
             </p>
           </div>
@@ -76,7 +78,7 @@ function Advert(advert) {
             Username: <span className="advert-text">{advert.username}</span>
           </p>
           <small className="advert_label">
-            Created at:{" "}
+            Created at:{' '}
             <span className="advert_text">{`${advDate.toUTCString()}`}</span>
           </small>
         </div>

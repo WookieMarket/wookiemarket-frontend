@@ -1,6 +1,6 @@
 const EmptyList = ({ dataFiltered }) => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: 'center' }}>
       <p>Sorry, no adverts yet.</p>
     </div>
   );

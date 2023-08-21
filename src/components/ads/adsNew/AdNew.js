@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUi } from "../../../store/selectors";
-import { resetError } from "../../../store/slices/ui";
-import ErrorModal from "../../shared/modal/ErrorModal";
-import Spinner from "../../shared/spinner/Spinner";
-import Layout from "../../layout/Layout";
-import { useTranslation } from "react-i18next";
-import { adsCreate } from "../../../store/slices/ads";
-import Form from "../../shared/form/Form";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUi } from '../../../store/selectors';
+import { resetError } from '../../../store/slices/ui';
+import ErrorModal from '../../shared/modal/ErrorModal';
+import Spinner from '../../shared/spinner/Spinner';
+import Layout from '../../layout/Layout';
+import { useTranslation } from 'react-i18next';
+import { adsCreate } from '../../../store/slices/ads';
+import Form from '../../shared/form/Form';
 //import "./AdNew.css";
 
 function AdNew() {
@@ -17,13 +17,13 @@ function AdNew() {
 
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
-    name: "",
+    name: '',
     onSale: true,
-    price: "",
-    category: "",
-    description: "",
-    status: "",
-    coin: "",
+    price: '',
+    category: '',
+    description: '',
+    status: '',
+    coin: '',
   });
 
   const adNew = {
@@ -39,8 +39,8 @@ function AdNew() {
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    console.log("Selected image file:", e.target.files[0]);
-    console.log(" image file:", image);
+    console.log('Selected image file:', e.target.files[0]);
+    console.log(' image file:', image);
   };
 
   const handleChange = event => {
@@ -69,32 +69,33 @@ function AdNew() {
     !formData.coin;
 
   return (
-    <Layout title={t("Create an ad")}>
+    <Layout title={t('Create an ad')}>
       {isLoading ? (
-        <Spinner message={t("charging...")} />
+        <Spinner message={t('charging...')} />
       ) : (
         <form
           onSubmit={handleSubmit}
           className="container-form"
-          encType="multipart/form-data">
+          encType="multipart/form-data"
+        >
           <Form
             classNameLabel="form-label"
             htmlFor="adname"
-            text={t("Article")}
+            text={t('Article')}
             classNameInput="form-input"
             inputId="adname"
             inputType="text"
             inputName="name"
             value={formData.name}
             handleChange={handleChange}
-            placeholder={t("Name")}
+            placeholder={t('Name')}
           />
 
           <div>
             <Form
               classNameLabel="form-label"
               htmlFor="onsale"
-              text={t("Sell")}
+              text={t('Sell')}
               classNameInput="form-input"
               inputId="onsale"
               inputType="radio"
@@ -106,7 +107,7 @@ function AdNew() {
             <Form
               classNameLabel="form-label"
               htmlFor="onsale"
-              text={t("Buy")}
+              text={t('Buy')}
               classNameInput="form-input"
               inputId="onsale"
               inputType="radio"
@@ -120,72 +121,72 @@ function AdNew() {
           <Form
             classNameLabel="form-label"
             htmlFor="price"
-            text={t("Price")}
+            text={t('Price')}
             classNameInput="form-input"
             inputId="price"
             inputType="number"
             inputName="price"
             value={formData.price}
             handleChange={handleChange}
-            placeholder={t("Price")}
+            placeholder={t('Price')}
             required
           />
           <Form
             classNameLabel="form-label"
             htmlFor="category"
-            text={t("Category")}
+            text={t('Category')}
             classNameInput="form-input"
             inputId="category"
             inputType="text"
             inputName="category"
             value={formData.category}
             handleChange={handleChange}
-            placeholder={t("Category")}
+            placeholder={t('Category')}
             required
           />
           <Form
             classNameLabel="form-label"
             htmlFor="description"
-            text={t("Description")}
+            text={t('Description')}
             classNameInput="form-input"
             inputId="description"
             inputType="text"
             inputName="description"
             value={formData.description}
             handleChange={handleChange}
-            placeholder={t("Description")}
+            placeholder={t('Description')}
             required
           />
           <Form
             classNameLabel="form-label"
             htmlFor="status"
-            text={t("Status")}
+            text={t('Status')}
             classNameInput="form-input"
             inputId="status"
             inputType="text"
             inputName="status"
             value={formData.status}
             handleChange={handleChange}
-            placeholder={t("Status")}
+            placeholder={t('Status')}
             required
           />
           <Form
             classNameLabel="form-label"
             htmlFor="coin"
-            text={t("Coin")}
+            text={t('Coin')}
             classNameInput="form-input"
             inputId="coin"
             inputType="text"
             inputName="coin"
             value={formData.coin}
             handleChange={handleChange}
-            placeholder={t("Coin")}
+            placeholder={t('Coin')}
             required
           />
           <Form
             classNameLabel="form-label-img"
             htmlFor="img"
-            text={t("Image")}
+            text={t('Image')}
             classNameInput="form-input"
             inputId="img"
             inputName="image"
@@ -198,8 +199,9 @@ function AdNew() {
             type="submit"
             variant="primary"
             width="button-form"
-            disabled={buttonDisabled}>
-            {t("Create")}
+            disabled={buttonDisabled}
+          >
+            {t('Create')}
           </button>
         </form>
       )}
