@@ -33,7 +33,7 @@ const Header = (...rest) => {
       <nav className="navbar">
         <div className="icons">
           <Link to="/">
-            <h1 className="title"> {t("header")} </h1>
+            <h1 className="title"> {t("home")} </h1>
           </Link>
           <img
             className="icon-language"
