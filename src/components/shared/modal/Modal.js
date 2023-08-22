@@ -14,7 +14,7 @@ function Modal(props) {
           <button onClick={onCancel} className="oncancel">
             {t("Cancel")}
           </button>
-          <button onClick={onConfirm} className="oncancel">
+          <button onClick={onConfirm} className="onconfirm">
             {t("Confirm")}
           </button>
         </div>

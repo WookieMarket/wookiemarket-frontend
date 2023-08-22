@@ -38,7 +38,7 @@
 
 .oncancel {
   display: block;
-  background-color: var(--background-accept-button-color);
+  background-color: var(--background-reject-button-color);
   border-radius: 5px;
   font-size: 13px;
   color: white;
@@ -49,7 +49,7 @@
 
 .onconfirm {
   display: block;
-  background-color: var(--background-reject-button-color);
+  background-color: var(--background-accept-button-color);
   border-radius: 5px;
   font-size: 13px;
   color: white;

@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 export const Container = styled.div`
   width: 100%;
   height: 60px;
-  background-color: #23394d;
+  background-color: var(--background-navbar-color);
+  --background-navbar-color
 `;
 
 export const Wrapper = styled.div`
@@ -21,6 +22,7 @@ export const LogoContainer = styled.div`
   margin-left: 0.5rem;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   font-size: 1.2rem;
   font-family: sans-serif;
 

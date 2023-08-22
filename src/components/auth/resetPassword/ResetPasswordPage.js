@@ -9,6 +9,8 @@ import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import Form from "../../shared/form/Form";
+import Button from "../../shared/Button";
+import "./ResetPasswordPage.css";
 
 //DONE change Password
 function ResetPasswordPage() {
@@ -50,12 +52,13 @@ function ResetPasswordPage() {
         {isLoading ? (
           <Spinner message={t("Resetting password...")} />
         ) : (
-          <form onSubmit={handleSubmit} className="container-form">
+          <form onSubmit={handleSubmit} className="container-reset-form">
             <Form
-              classNameLabel="new-password-label"
+              classNameForm="reset-form-group"
+              classNameLabel="reset-form-label"
               htmlFor="new-password"
               text={t("New password")}
-              classNameInput="password-input"
+              classNameInput="reset-form-input"
               inputId="new-password"
               inputType="password"
               inputName="password"
@@ -66,10 +69,11 @@ function ResetPasswordPage() {
             />
 
             <Form
-              classNameLabel="new-password-label"
+              classNameForm="reset-form-group"
+              classNameLabel="reset-form-label"
               htmlFor="confirm-password"
               text={t("Confirm password")}
-              classNameInput="password-input"
+              classNameInput="reset-form-input"
               inputId="confirm-password"
               inputType="password"
               inputName="confirmPassword"
@@ -79,12 +83,12 @@ function ResetPasswordPage() {
               required
             />
 
-            <button
+            <Button
               data-testid="button"
               type="submit"
               disabled={buttonDisabled}>
               {t("Submit")}
-            </button>
+            </Button>
           </form>
         )}
 

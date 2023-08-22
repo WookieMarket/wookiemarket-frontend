@@ -138,13 +138,13 @@ function LoginPage() {
                     classNameLabel="password-label"
                     htmlFor="email-service"
                     text={t("Enter your email")}
-                    classNameInput="password-input"
+                    classNameInput="email-input"
                     inputId="email-service"
                     inputType="email"
                     inputName="reset-email"
                     value={email}
                     handleChange={handleChangeEmail}
-                    placeholder={t("Example@Example.com")}
+                    placeholder={t("Email")}
                     required
                   />
                 }
