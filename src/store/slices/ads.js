@@ -52,6 +52,7 @@ const ads = createSlice({
     areLoaded: false,
     data: [],
     adsPerPage: 4,
+    categories: [],
   },
   reducers: {
     setAdsPerPage(state, action) {
