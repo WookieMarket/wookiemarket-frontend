@@ -31,5 +31,8 @@ img.icon-language {
 }
 
 .navbar-list-item {
+  color: white;
+  border-radius: 25px;
+  background-color: var(--background-reject-button-color);
   padding: 2px 5px;
 }

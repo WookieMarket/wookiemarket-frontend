@@ -27,14 +27,7 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route
-          path="/ads"
-          element={
-            <RequireAuth>
-              <AdvertsListPage />
-            </RequireAuth>
-          }
-        />
+        <Route path="/ads" element={<AdvertsListPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />

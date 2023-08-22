@@ -1,11 +1,15 @@
 @font-face {
-    font-family: 'Star Jedi';
-    src: url('../assets/fonts/Starjedi.ttf');
-  }
+  font-family: "Star Jedi";
+  src: url("../assets/fonts/Starjedi.ttf");
+}
 
 :root {
-    --text-color: #60cfe0;
-    --border-color: rgb(242, 204, 108);
-    --price-color: rgb(255, 0, 0);
-    --font-family: 'Star Jedi', sans-serif;
+  --text-color: #60cfe0;
+  --price-color: rgb(255, 0, 0);
+  --font-family: "Star Jedi", sans-serif;
+  --border-color: #e8cf04;
+  --background-color-form: whitesmoke;
+  --background-accept-button-color: #578d57;
+  --background-reject-button-color: #da2413;
+  --background-navbar-color: #2055a1;
 }
