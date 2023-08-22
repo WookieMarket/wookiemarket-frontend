@@ -79,11 +79,11 @@ const Navbar = () => {
           <Menu open={showMobileMenu}>
             <MenuItem>
               <MenuItemLink
-                to="/ads"
+                to="/home"
                 onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 <div>
                   <FaUserAlt />
-                  {t("Ads")}
+                  {t("Home")}
                 </div>
               </MenuItemLink>
               <MenuItemLink
@@ -91,15 +91,15 @@ const Navbar = () => {
                 onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 <div>
                   <FaBriefcase />
-                  {t("Upload ad")}
+                  {t("Upload")}
                 </div>
               </MenuItemLink>
               <MenuItemLink
-                to="/"
+                to="/signup"
                 onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 <div>
                   <FaHome />
-                  {t("header")}
+                  {t("Signup")}
                 </div>
               </MenuItemLink>
               {isLogged ? (
