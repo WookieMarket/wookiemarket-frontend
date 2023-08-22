@@ -38,6 +38,11 @@
     "Coin": "Coin",
     "Image": "Image",
     "Create": "Create",
+    "ADVERTISEMENTS AVIABLE":"ADVERTISEMENTS AVIABLE",
     "Adverts per page": "Adverts per page",
-    "Searching area": "Searching area"
+    "Searching area": "Searching area",
+    "Enter the exact price":"Enter the exact price",
+    "Enter minimum price":"Enter minimum price",
+    "Enter maximum price":"Enter maximum price",
+    "Hold down the ctrl key to select more than one category":"Hold down the ctrl key to select more than one category"
 }

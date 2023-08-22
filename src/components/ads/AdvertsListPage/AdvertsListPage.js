@@ -22,7 +22,9 @@ const getUniqueCategories = (categories) => {
     category.replace(/\s*,\s*/g, ',')
   );
   // Divide each item into subcategories and flatten the array
-  const splitCategories = trimmedCategories.flatMap((category) => category.split(','));
+  const splitCategories = trimmedCategories.flatMap((category) =>
+    category.split(',')
+  );
 
   //Convert the first letter of all values to capital letters
   const capitalizedCategories = splitCategories.map(
@@ -38,12 +40,19 @@ const AdvertsListPage = () => {
   const { t } = useTranslation();
   const adsPerPage = useSelector(getAdsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterName, setFilterName] = useState('');
+
   const ads = useSelector(getAdverts);
   const categories = useSelector(getCategoriesList);
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
   const uniqueCategories = getUniqueCategories(categories);
+
+  const [noResults, setNoResult] = useState(true);
+  const [filterName, setFilterName] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [queryPrice, setqueryPrice] = useState('');
+  const [queryMinPrice, setQueryMinPrice] = useState('');
+  const [queryMaxPrice, setQueryMaxPrice] = useState('');
 
   useEffect(() => {
     dispatch(advertsList()).catch((error) => console.log(error));
@@ -60,21 +69,20 @@ const AdvertsListPage = () => {
     setCurrentPage(page);
   };
 
-  const filterByName = (ad) =>
-    (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
+  const handleChangePrice = (event) => {
+    setqueryPrice(event.target.value);
+    setNoResult(true);
+  };
 
-  //NOTE añadir resto de campos de filtrado
+  const handleChangeMinPrice = (event) => {
+    setQueryMinPrice(event.target.value);
+    setNoResult(true);
+  };
 
-  const filteredAds = ads
-    //.filter(filterAdSaleValueOrDefault)
-    .filter(filterByName);
-  //.filter(filterAdPrice)
-  //.filter(filterAdTags);
-  const totalPages = Math.ceil(filteredAds.length / adsPerPage);
-  const startIndex = (currentPage - 1) * adsPerPage;
-  const endIndex = startIndex + adsPerPage;
-  const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
-  const isLastPage = currentPage === totalPages;
+  const handleChangeMaxPrice = (event) => {
+    setQueryMaxPrice(event.target.value);
+    setNoResult(true);
+  };
 
   const handleFilterChange = (event) => {
     const value = event.target.value;
@@ -82,6 +90,33 @@ const AdvertsListPage = () => {
     //NOTE Resetear la página al cambiar el filtro
     setCurrentPage(1);
   };
+
+  const filterByName = (ad) =>
+    (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
+
+  const filterByPrice = (ad) =>
+    queryPrice === '' || ad.price === Number(queryPrice);
+
+  const filterByMinMaxPrice = (ad) => {
+    if (!queryMinPrice && !queryMaxPrice) return true;
+
+    const minPrice = parseInt(queryMinPrice) || 0;
+    const maxPrice = parseInt(queryMaxPrice) || Infinity;
+
+    return ad.price >= minPrice && ad.price <= maxPrice;
+  };
+
+  const filteredAds = ads
+    .filter(filterByName)
+    //.filter(filterByCategory)
+    .filter(filterByPrice)
+    .filter(filterByMinMaxPrice);
+
+  const totalPages = Math.ceil(filteredAds.length / adsPerPage);
+  const startIndex = (currentPage - 1) * adsPerPage;
+  const endIndex = startIndex + adsPerPage;
+  const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
+  const isLastPage = currentPage === totalPages;
 
   return (
     <Layout title='adverts'>
@@ -104,15 +139,46 @@ const AdvertsListPage = () => {
               <input type='text' onChange={handleFilterChange} />
             </section>
           </section>
-          <section id='filterByCategory'>
-            <label htmlFor='categorySelect'>{t('Category')}:</label>
-            <select id='categorySelect'>
+          {/*<section id='filterByCategory'>
+            <label className='advert_label'>{t('Category')}:</label>
+            <select
+              id='categorySelect'
+              multiple
+              onChange={handleFilterChange}
+            >
               {uniqueCategories.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
               ))}
             </select>
+            <p>
+              {t('Hold down the ctrl key to select more than one category')}.
+            </p>
+              </section>*/}
+          <section id='filterByPrice'>
+            <label className='advert_label'>{t('Price')}:</label>
+            <input type='number'
+             id='priceInput'
+             placeholder={t('Enter the exact price')}
+             value={queryPrice}
+              onChange={handleChangePrice} />
+            <label className='form-label'>Precio Mínimo:</label>
+            <input
+              className='form-input'
+              type='number'
+              placeholder={t('Enter minimum price')}
+              value={queryMinPrice}
+              onChange={handleChangeMinPrice}
+            />
+            <label className='form-label'>{t('Precio Máximo')}:</label>
+            <input
+              className='form-input'
+              type='number'
+              placeholder={t('Enter maximum price')}
+              value={queryMaxPrice}
+              onChange={handleChangeMaxPrice}
+            />
           </section>
         </section>
         <div className='container'>
@@ -124,7 +190,7 @@ const AdvertsListPage = () => {
                 <>
                   <div className='listContainer'>
                     <div className='contaienrTittle'>
-                      <h1>ADVERTISEMENTS AVIABLE</h1>
+                      <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
                     </div>
                     <ul>
                       {advertsToDisplay
