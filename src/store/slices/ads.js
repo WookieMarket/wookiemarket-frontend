@@ -44,6 +44,7 @@ const ads = createSlice({
   initialState: {
     areLoaded: false,
     data: [],
+    adsPerPage: 4,
   },
   extraReducers: builder => {
     builder
