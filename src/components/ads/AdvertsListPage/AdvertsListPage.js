@@ -28,13 +28,14 @@ const AdvertsListPage = () => {
     setCurrentPage(page);
   };
 
-  const filterAdName = ad =>
-    (ad.name ?? "").toUpperCase().startsWith(filterName.toUpperCase());
-  //NOTE añadir resto de campos de filtrado
+  const filterByName = ad =>
+    (ad.name ?? "").toUpperCase().includes(filterName.toUpperCase());
+  
+    //NOTE añadir resto de campos de filtrado
 
   const filteredAds = ads
     //.filter(filterAdSaleValueOrDefault)
-    .filter(filterAdName);
+    .filter(filterByName);
   //.filter(filterAdPrice)
   //.filter(filterAdTags);
   const totalPages = Math.ceil(filteredAds.length / advertsPerPage);
