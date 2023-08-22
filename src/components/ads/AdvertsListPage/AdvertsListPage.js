@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import Advert from '../AdvertPage/Advert';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdsPerPage, getAdverts, getUi } from '../../../store/selectors';
-import { advertsList } from '../../../store/slices/ads';
+import { advertsList, setAdsPerPage } from '../../../store/slices/ads';
 import './advertListPage.css';
 import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
-
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
@@ -24,6 +23,9 @@ const AdvertsListPage = () => {
     dispatch(advertsList()).catch((error) => console.log(error));
   }, [dispatch]);
 
+  const handleAdsPerPageChange = (event) => {
+    dispatch(setAdsPerPage(event.target.value));
+  };
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -52,11 +54,19 @@ const AdvertsListPage = () => {
   };
 
   return (
-    <Layout title='anuncios'>
+    <Layout title='adverts'>
       <>
         <section className='searchSection'>
-          <h1>Searching area</h1>
-          <label className='advert_label'>Name: </label>
+          <h1>{t('Searching area')}</h1>
+          <label className='advert_label'>{t('Adverts per page')}: </label>
+          <select value={adsPerPage} onChange={handleAdsPerPageChange}>
+            <option value={2}>2</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
+          <label className='advert_label'>{t('Name')}: </label>
           <input type='text' onChange={handleFilterChange} />
         </section>
         <div className='container'>
@@ -72,14 +82,17 @@ const AdvertsListPage = () => {
                     </div>
                     <ul>
                       {advertsToDisplay
-                          .sort((a, b) => {
-                            const aDate = new Date(a.createdAt);
-                            const bDate = new Date(b.createdAt);
-                            if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
-                              return isNaN(aDate.getTime()) ? 1 : -1;
-                            }
-                            return bDate - aDate;
-                          })
+                        .sort((a, b) => {
+                          const aDate = new Date(a.createdAt);
+                          const bDate = new Date(b.createdAt);
+                          if (
+                            isNaN(aDate.getTime()) ||
+                            isNaN(bDate.getTime())
+                          ) {
+                            return isNaN(aDate.getTime()) ? 1 : -1;
+                          }
+                          return bDate - aDate;
+                        })
                         /*.sort((a, b) => a.createdAt > b.createdAt)*/
                         .map((advert) => (
                           <li key={advert._id}>
