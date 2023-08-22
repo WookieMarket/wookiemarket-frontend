@@ -37,13 +37,15 @@
     "Coin": "Moneda",
     "Image": "Imagen",
     "Create": "Crear",
+    "Created at": "Creado el",
     "Sorry, no adverts yet": "Lo sentimos, aún no hay anuncios que mostrar",
     "Advertisements": "Anuncios",
     "advertisements": "anuncios",
     "Searching area": "Área de búsqueda",
     "LOADING...": "CARGANDO...",
-    "home":"inicio",
+    "home": "inicio",
     "ADVERTISEMENTS AVIABLE": "ANUNCIOS DISPONIBLES",
-    "ADVERT DETAIL": "DETALLE DEL ANUNIO",
-    "Sorry, the requested ad is not available": "Lo sentimos, el anuncio solicitado no está disponible"
+    "ADVERT DETAIL": "DETALLE DEL ANUNCIO",
+    "Sorry, the requested ad is not available": "Lo sentimos, el anuncio solicitado no está disponible",
+    "Product image": "Imagen del producto"
 }

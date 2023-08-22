@@ -1,9 +1,10 @@
 import React from 'react';
-//import defaultImage from "../../assets/no_image.jpg";
 import './advert.css';
 import defaultImage from '../../../assets/no_image.jpg';
+import { useTranslation } from 'react-i18next';
 
 function Advert(advert) {
+  const { t } = useTranslation();
   const advDate = new Date(advert.createdAt);
   //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
   const handleImageError = (event) => {
@@ -25,7 +26,7 @@ function Advert(advert) {
         </div>
       </div>
       <br />
-      <div className='productData'>
+      <div className='productData '>
         <div className='product-img'>
           {/*advert.image === '' ? (
             <img className='img' src={defaultImage} alt='Default Image'></img>
@@ -41,22 +42,22 @@ function Advert(advert) {
               className='img'
               src={advert.image}
               onError={handleImageError}
-              alt='imagenes anuncios'
+              alt={t('Product image')}
             ></img>
           }
         </div>
         <br />
-        <div className='product_Info'>
-          <p className='advert_label'>Description: </p>
+        <div className='productInfo'>
+          <p className='advert_label'>{t('Description')}</p><br />
           <span className='description'> {advert.description}</span>
           <br />
           <br />
           <p>
             Is
             {advert.onSale ? (
-              <span id='isSale'> for sale </span>
+              <span id='isSale'> {t('for sale')} </span>
             ) : (
-              <span id='isSale'> purchased </span>
+              <span id='isSale'> {t('purchased')} </span>
             )}
             this product by:
           </p>
@@ -67,7 +68,7 @@ function Advert(advert) {
           </div>
           <div className='advert_label'>
             <p>
-              Category:{' '}
+              {t('Category')}:{' '}
               <span className='advert_text'>
                 {advert.category === undefined
                   ? ''
@@ -78,10 +79,10 @@ function Advert(advert) {
         </div>
         <div>
           <p className='advert_label'>
-            Username: <span className='advert-text'>{advert.username}</span>
+            {t('Username')}: <span className='advert-text'>{advert.username}</span>
           </p>
           <small className='advert_label'>
-            Created at:{' '}
+            {t('Created at')}:{' '}
             <span className='advert_text'>{`${advDate.toUTCString()}`}</span>
           </small>
         </div>

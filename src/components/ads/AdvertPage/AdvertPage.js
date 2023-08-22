@@ -27,7 +27,11 @@ console.log('esto es advert: ' + advert)
       <Header />
       <div className={'content'}>
         <div className='holobackground'></div>
-        <h1>{t('ADVERT DETAIL')}</h1>
+        <h1>
+          <span className='StarWarsObject fontInverted'>*</span>
+          {t('ADVERT DETAIL')}
+          <span className='StarWarsObject'>*</span>
+          </h1>
         {advert ? (
           <Advert {...advert} />
         ) : (

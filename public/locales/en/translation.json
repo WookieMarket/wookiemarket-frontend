@@ -37,6 +37,7 @@
     "Coin": "Coin",
     "Image": "Image",
     "Create": "Create",
+    "Created at": "Created at",
     "Sorry, no adverts yet": "Sorry, no adverts yet",
     "Advertisements": "Advertisements",
     "advertisements": "advertisements",
@@ -47,5 +48,7 @@
     "ADVERTISEMENTS AVIABLE": "ADVERTISEMENTS AVIABLE",
     
     "ADVERT DETAIL": "ADVERT DETAIL",
-    "Sorry, the requested ad is not available": "Sorry, the requested ad is not available"
+    "Sorry, the requested ad is not available": "Sorry, the requested ad is not available",
+
+    "Product image": "Product image",
 }
