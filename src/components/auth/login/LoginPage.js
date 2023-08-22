@@ -1,15 +1,17 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUi } from '../../../store/selectors';
-import { resetError, toggleModal } from '../../../store/slices/ui';
-import { authLogin, emailResetPassword } from '../../../store/slices/auth';
-import ErrorModal from '../../shared/modal/ErrorModal';
-import Spinner from '../../shared/spinner/Spinner';
-import Layout from '../../layout/Layout';
-import { useTranslation } from 'react-i18next';
-import Modal from '../../shared/modal/Modal';
-import { Link } from 'react-router-dom';
-import Form from '../../shared/form/Form';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUi } from "../../../store/selectors";
+import { resetError, toggleModal } from "../../../store/slices/ui";
+import { authLogin, emailResetPassword } from "../../../store/slices/auth";
+import ErrorModal from "../../shared/modal/ErrorModal";
+import Spinner from "../../shared/spinner/Spinner";
+import Layout from "../../layout/Layout";
+import { useTranslation } from "react-i18next";
+import Modal from "../../shared/modal/Modal";
+import { Link } from "react-router-dom";
+import Form from "../../shared/form/Form";
+import "./LoginPage.css";
+import Button from "../../shared/Button";
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
@@ -74,10 +76,11 @@ function LoginPage() {
         ) : (
           <form onSubmit={handleSubmit} className="container-form">
             <Form
-              classNameLabel="user-label"
+              classNameForm="form-group"
+              classNameLabel="password-label"
               htmlFor="username"
-              text={t('Username')}
-              classNameInput="user-input"
+              text={t("Username")}
+              classNameInput="password-input"
               inputId="username"
               inputType="text"
               inputName="username"
@@ -88,6 +91,7 @@ function LoginPage() {
             />
 
             <Form
+              classNameForm="form-group"
               classNameLabel="password-label"
               htmlFor="password"
               text={t('Password')}
@@ -102,10 +106,9 @@ function LoginPage() {
             />
 
             <Form
-              classNameLabel="rememberMe-label"
+              classNameForm="password-input-rememberme"
               htmlFor="rememberMe"
-              text={t('RememberMe')}
-              classNameInput="password-input"
+              text={t("RememberMe")}
               inputId="rememberMe"
               inputType="checkbox"
               inputName="rememberMe"
@@ -114,23 +117,25 @@ function LoginPage() {
               required
             />
 
-            <button
+            <Button
+              //className="login-button"
               data-testid="button"
               type="submit"
+              variant="accept"
               width="button-form"
-              disabled={buttonDisabled}
-            >
-              {t('Log in')}
-            </button>
+              disabled={buttonDisabled}>
+              {t("Log in")}
+            </Button>
             <Link onClick={handleResetPasswordLinkClick}>
-              <h4 className="navbar-h4">{t('Forgot password?')}</h4>
+              <h4 className="link-reset">{t("Forgot password?")}</h4>
             </Link>
             {showModal && (
               <Modal
                 title={t('Recover password')}
                 message={
                   <Form
-                    classNameLabel="email-label"
+                    classNameForm="form-group"
+                    classNameLabel="password-label"
                     htmlFor="email-service"
                     text={t('Enter your email')}
                     classNameInput="email-input"
@@ -139,7 +144,7 @@ function LoginPage() {
                     inputName="reset-email"
                     value={email}
                     handleChange={handleChangeEmail}
-                    placeholder={t('Example@Example.com')}
+                    placeholder={t("Email")}
                     required
                   />
                 }

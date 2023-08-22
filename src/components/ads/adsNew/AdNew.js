@@ -1,14 +1,16 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUi } from '../../../store/selectors';
-import { resetError } from '../../../store/slices/ui';
-import ErrorModal from '../../shared/modal/ErrorModal';
-import Spinner from '../../shared/spinner/Spinner';
-import Layout from '../../layout/Layout';
-import { useTranslation } from 'react-i18next';
-import { adsCreate } from '../../../store/slices/ads';
-import Form from '../../shared/form/Form';
-//import "./AdNew.css";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUi } from "../../../store/selectors";
+import { resetError } from "../../../store/slices/ui";
+import ErrorModal from "../../shared/modal/ErrorModal";
+import Spinner from "../../shared/spinner/Spinner";
+import Layout from "../../layout/Layout";
+import { useTranslation } from "react-i18next";
+import { adsCreate } from "../../../store/slices/ads";
+import Form from "../../shared/form/Form";
+import Button from "../../shared/Button";
+
+import "./AdNew.css";
 
 function AdNew() {
   const { t } = useTranslation();
@@ -75,14 +77,14 @@ function AdNew() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="container-form"
-          encType="multipart/form-data"
-        >
+          className="container-form-creation"
+          encType="multipart/form-data">
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="adname"
-            text={t('Article')}
-            classNameInput="form-input"
+            text={t("Article")}
+            classNameInput="password-input-creation"
             inputId="adname"
             inputType="text"
             inputName="name"
@@ -91,12 +93,12 @@ function AdNew() {
             placeholder={t('Name')}
           />
 
-          <div>
+          <div className="input-checked">
             <Form
-              classNameLabel="form-label"
+              classNameLabel="checked-label-creation"
               htmlFor="onsale"
-              text={t('Sell')}
-              classNameInput="form-input"
+              text={t("Sell")}
+              classNameInput="checked-input-creation"
               inputId="onsale"
               inputType="radio"
               inputName="onSale"
@@ -105,10 +107,10 @@ function AdNew() {
               required
             />
             <Form
-              classNameLabel="form-label"
+              classNameLabel="checked-label-creation"
               htmlFor="onsale"
-              text={t('Buy')}
-              classNameInput="form-input"
+              text={t("Buy")}
+              classNameInput="checked-input-creation"
               inputId="onsale"
               inputType="radio"
               inputName="onSale"
@@ -119,10 +121,11 @@ function AdNew() {
           </div>
 
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="price"
-            text={t('Price')}
-            classNameInput="form-input"
+            text={t("Price")}
+            classNameInput="password-input-creation"
             inputId="price"
             inputType="number"
             inputName="price"
@@ -132,10 +135,11 @@ function AdNew() {
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="category"
-            text={t('Category')}
-            classNameInput="form-input"
+            text={t("Category")}
+            classNameInput="password-input-creation"
             inputId="category"
             inputType="text"
             inputName="category"
@@ -145,10 +149,11 @@ function AdNew() {
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="description"
-            text={t('Description')}
-            classNameInput="form-input"
+            text={t("Description")}
+            classNameInput="password-input-creation"
             inputId="description"
             inputType="text"
             inputName="description"
@@ -158,10 +163,11 @@ function AdNew() {
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="status"
-            text={t('Status')}
-            classNameInput="form-input"
+            text={t("Status")}
+            classNameInput="password-input-creation"
             inputId="status"
             inputType="text"
             inputName="status"
@@ -171,10 +177,11 @@ function AdNew() {
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="coin"
-            text={t('Coin')}
-            classNameInput="form-input"
+            text={t("Coin")}
+            classNameInput="password-input-creation"
             inputId="coin"
             inputType="text"
             inputName="coin"
@@ -184,10 +191,11 @@ function AdNew() {
             required
           />
           <Form
-            classNameLabel="form-label-img"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="img"
-            text={t('Image')}
-            classNameInput="form-input"
+            text={t("Image")}
+            classNameInput="img-input-creation"
             inputId="img"
             inputName="image"
             inputType="file"
@@ -195,14 +203,15 @@ function AdNew() {
             handleChange={handleChangeInputFile}
           />
 
-          <button
+          <Button
+            data-testid="buttonAdNew"
             type="submit"
-            variant="primary"
+            variant="accept"
+            //variant="primary"
             width="button-form"
-            disabled={buttonDisabled}
-          >
-            {t('Create')}
-          </button>
+            disabled={buttonDisabled}>
+            {t("Create")}
+          </Button>
         </form>
       )}
 

@@ -11,11 +11,11 @@ function Modal(props) {
         <div className="modal-header">{title}</div>
         <div className="modal-body">{message}</div>
         <div className="modal-buttons">
-          <button onClick={onCancel} variant="primary2">
-            {t('Cancel')}
+          <button onClick={onCancel} className="oncancel">
+            {t("Cancel")}
           </button>
-          <button onClick={onConfirm} variant="primary3">
-            {t('Confirm')}
+          <button onClick={onConfirm} className="onconfirm">
+            {t("Confirm")}
           </button>
         </div>
       </div>

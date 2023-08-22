@@ -30,7 +30,7 @@ export const successRedirects =
 
     //TODO modificar cuando este implementado el detalle del anuncio
     if (action.type === 'ads/create/fulfilled') {
-      router.navigate('/ads');
+      router.navigate('/home');
     }
 
     //NOTE Add redirect to "Home" page after successful password change
