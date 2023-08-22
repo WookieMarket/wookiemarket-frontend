@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from '../AdvertPage/Advert';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdsPerPage, getAdverts, getCategoriesList, getUi } from '../../../store/selectors';
+import {
+  getAdsPerPage,
+  getAdverts,
+  getCategoriesList,
+  getUi,
+} from '../../../store/selectors';
 import { advertsList, setAdsPerPage } from '../../../store/slices/ads';
 import './advertListPage.css';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +15,24 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 import { categoriesList } from '../../../store/slices/adsCategories';
+
+const getUniqueCategories = (categories) => {
+  //Removing blank spaces before and after commas
+  const trimmedCategories = categories.map((category) =>
+    category.replace(/\s*,\s*/g, ',')
+  );
+  // Divide each item into subcategories and flatten the array
+  const splitCategories = trimmedCategories.flatMap((category) => category.split(','));
+
+  //Convert the first letter of all values to capital letters
+  const capitalizedCategories = splitCategories.map(
+    (category) => category.charAt(0).toUpperCase() + category.slice(1)
+  );
+  //Remove duplicate values and convert to array
+  const uniqueCategories = Array.from(new Set(capitalizedCategories));
+
+  return uniqueCategories;
+};
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
@@ -20,6 +43,7 @@ const AdvertsListPage = () => {
   const categories = useSelector(getCategoriesList);
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
+  const uniqueCategories = getUniqueCategories(categories);
 
   useEffect(() => {
     dispatch(advertsList()).catch((error) => console.log(error));
@@ -64,16 +88,32 @@ const AdvertsListPage = () => {
       <>
         <section className='searchSection'>
           <h1>{t('Searching area')}</h1>
-          <label className='advert_label'>{t('Adverts per page')}: </label>
-          <select value={adsPerPage} onChange={handleAdsPerPageChange}>
-            <option value={2}>2</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-          </select>
-          <label className='advert_label'>{t('Name')}: </label>
-          <input type='text' onChange={handleFilterChange} />
+          <section id='advertsPerPage'>
+            <label className='advert_label'>{t('Adverts per page')}: </label>
+            <select value={adsPerPage} onChange={handleAdsPerPageChange}>
+              <option value={2}>2</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+            </select>
+          </section>
+          <section id='filters'>
+            <section id='filterByName'>
+              <label className='advert_label'>{t('Name')}: </label>
+              <input type='text' onChange={handleFilterChange} />
+            </section>
+          </section>
+          <section id='filterByCategory'>
+            <label htmlFor='categorySelect'>{t('Category')}:</label>
+            <select id='categorySelect'>
+              {uniqueCategories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </section>
         </section>
         <div className='container'>
           {isLoading ? (
