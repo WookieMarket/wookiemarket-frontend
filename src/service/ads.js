@@ -2,7 +2,7 @@ import client from '../api/client';
 
 const adUrl = '/api/ads/adverts';
 
-export const getCategories = (adCategories) => {
+export const getCategories = () => {
   const url = `${adUrl}/categories`;
   return client.get(url);
 };

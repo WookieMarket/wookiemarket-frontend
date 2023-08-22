@@ -29,7 +29,7 @@ const adsCategories = createSlice({
   extraReducers: (builder) => {
     builder.addCase(categoriesList.fulfilled, (state, action) => {
       state.areCategoriesLoaded = true;
-      state.categories = action.payload.results;
+      state.categories = action.payload.result;
     });
   },
 });

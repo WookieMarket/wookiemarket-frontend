@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from '../AdvertPage/Advert';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdsPerPage, getAdverts, getUi } from '../../../store/selectors';
+import { getAdsPerPage, getAdverts, getCategoriesList, getUi } from '../../../store/selectors';
 import { advertsList, setAdsPerPage } from '../../../store/slices/ads';
 import './advertListPage.css';
 import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
+import { categoriesList } from '../../../store/slices/adsCategories';
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
@@ -16,11 +17,16 @@ const AdvertsListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterName, setFilterName] = useState('');
   const ads = useSelector(getAdverts);
+  const categories = useSelector(getCategoriesList);
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(advertsList()).catch((error) => console.log(error));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(categoriesList()).catch((error) => console.log(error));
   }, [dispatch]);
 
   const handleAdsPerPageChange = (event) => {
