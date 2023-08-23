@@ -68,11 +68,33 @@ const AdvertsListPage = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  //Filter by category NOT WORKING
+  const handleCategoryChange = (event) => {
+    const options = event.target.options;
+    
+  let selectedOptions = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedOptions.push(options[i].value);
+      }
+    }
+    setSelectedCategories(selectedOptions);
+  };
+  
+  const filterByCategory = (ad) =>
+    selectedCategories.length === 0 ||
+    selectedCategories.some((category) =>
+      ad.category.includes(category)
+    );
 
+  //Filter by price
   const handleChangePrice = (event) => {
     setqueryPrice(event.target.value);
     setNoResult(true);
   };
+
+  const filterByPrice = (ad) =>
+    queryPrice === '' || ad.price === Number(queryPrice);
 
   const handleChangeMinPrice = (event) => {
     setQueryMinPrice(event.target.value);
@@ -84,6 +106,16 @@ const AdvertsListPage = () => {
     setNoResult(true);
   };
 
+  const filterByMinMaxPrice = (ad) => {
+    if (!queryMinPrice && !queryMaxPrice) return true;
+
+    const minPrice = parseInt(queryMinPrice) || 0;
+    const maxPrice = parseInt(queryMaxPrice) || Infinity;
+
+    return ad.price >= minPrice && ad.price <= maxPrice;
+  };
+
+  //Filter by name
   const handleFilterChange = (event) => {
     const value = event.target.value;
     setFilterName(value);
@@ -94,21 +126,9 @@ const AdvertsListPage = () => {
   const filterByName = (ad) =>
     (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
 
-  const filterByPrice = (ad) =>
-    queryPrice === '' || ad.price === Number(queryPrice);
-
-  const filterByMinMaxPrice = (ad) => {
-    if (!queryMinPrice && !queryMaxPrice) return true;
-
-    const minPrice = parseInt(queryMinPrice) || 0;
-    const maxPrice = parseInt(queryMaxPrice) || Infinity;
-
-    return ad.price >= minPrice && ad.price <= maxPrice;
-  };
-
   const filteredAds = ads
     .filter(filterByName)
-    //.filter(filterByCategory)
+    .filter(filterByCategory)
     .filter(filterByPrice)
     .filter(filterByMinMaxPrice);
 
@@ -139,12 +159,12 @@ const AdvertsListPage = () => {
               <input type='text' onChange={handleFilterChange} />
             </section>
           </section>
-          {/*<section id='filterByCategory'>
+          <section id='filterByCategory'>
             <label className='advert_label'>{t('Category')}:</label>
             <select
               id='categorySelect'
               multiple
-              onChange={handleFilterChange}
+              onChange={handleCategoryChange}
             >
               {uniqueCategories.map((category) => (
                 <option key={category} value={category}>
@@ -155,14 +175,16 @@ const AdvertsListPage = () => {
             <p>
               {t('Hold down the ctrl key to select more than one category')}.
             </p>
-              </section>*/}
+          </section>
           <section id='filterByPrice'>
             <label className='advert_label'>{t('Price')}:</label>
-            <input type='number'
-             id='priceInput'
-             placeholder={t('Enter the exact price')}
-             value={queryPrice}
-              onChange={handleChangePrice} />
+            <input
+              type='number'
+              id='priceInput'
+              placeholder={t('Enter the exact price')}
+              value={queryPrice}
+              onChange={handleChangePrice}
+            />
             <label className='form-label'>Precio Mínimo:</label>
             <input
               className='form-input'
