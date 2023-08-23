@@ -82,10 +82,12 @@ const AdvertsListPage = () => {
   };
   
   const filterByCategory = (ad) =>
-    selectedCategories.length === 0 ||
-    selectedCategories.some((category) =>
-      ad.category.includes(category)
-    );
+  selectedCategories.length === 0 ||
+  ad.category.some(adCategory =>
+    selectedCategories.includes(adCategory.trim())
+  );
+
+
 
   //Filter by price
   const handleChangePrice = (event) => {
