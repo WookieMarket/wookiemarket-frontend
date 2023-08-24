@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdById } from '../../../store/slices/ads';
 import { useParams } from 'react-router-dom';
-import { getAdvertById, getUi } from '../../../store/selectors';
+import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
 import { resetError, toggleModal } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Header from '../../layout/Header';
@@ -20,6 +20,11 @@ const AdvertPage = () => {
   const dispatch = useDispatch();
   const advert = useSelector(state => getAdvertById(state, id));
   const { showModal, isLoading, error } = useSelector(getUi);
+  const token = localStorage.getItem('auth');
+  const getIsLogged = useSelector(state => state.auth)
+  const isDisabled =  !useSelector(state => state.auth) && !token;
+
+ console.log('isDisabled: ' + getIsLogged)
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
@@ -47,11 +52,18 @@ const AdvertPage = () => {
   const handleShowModalCancel = () => {
     dispatch(toggleModal());
   };
+  /* */
 
   //TODO Delete Advert
-  const handleDeleteConfirm = () =>{console.log('Deelted Advert')}
+  const handleDeleteConfirm = () => {
+    setActiveModal(null)
+    console.log('Deelted Advert');
+  };
   //TODO Edit Advert
-  const handleEdit = () =>{console.log('Edited Advert')}
+  const handleEdit = () => {
+    setActiveModal(null)
+    console.log('Edited Advert');
+  };
 
   useEffect(() => {
     dispatch(getAdById(id));
@@ -111,17 +123,22 @@ const AdvertPage = () => {
             ) : (
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
-            <section id="buttonSection">
+            {!isDisabled && (<section id="buttonSection">
               <Button
                 id="deleteButton"
-                onClick={() => handleOpenModal(1)} disabled={error}
+                onClick={() => handleOpenModal(1)}
+                
               >
                 {t('Delete Advert')}?
               </Button>
-              <Button id="editButton" onClick={handleEdit} disabled={error}>
+              <Button
+                id="editButton"
+                onClick={handleEdit}
+                
+              >
                 {t('Edit Advert')}
               </Button>
-            </section>
+            </section>)}
             <div
               className={`no-advert_content ${!advert ? 'no-advert' : ''}`}
             ></div>
