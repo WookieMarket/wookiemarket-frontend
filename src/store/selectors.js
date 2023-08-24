@@ -6,4 +6,6 @@ export const areCategoriesLoaded = (state) => state.adsCategories.areLoaded;
 export const getCategoriesList = (state) =>
   state.adsCategories.categories ? state.adsCategories.categories : [];
 
+export const selectTotalCountAds = (state) => state.ads.totalCountAds;
+
 export const getUi = (state) => state.ui;

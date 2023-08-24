@@ -7,6 +7,7 @@ import {
   getAdverts,
   getCategoriesList,
   getUi,
+  selectTotalCountAds,
 } from '../../../store/selectors';
 import { advertsList, setAdsPerPage } from '../../../store/slices/ads';
 import './advertListPage.css';
@@ -38,14 +39,15 @@ const getUniqueCategories = (categories) => {
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
-  const adsPerPage = useSelector(getAdsPerPage);
-  const [currentPage, setCurrentPage] = useState(1);
-
   const ads = useSelector(getAdverts);
   const categories = useSelector(getCategoriesList);
+  const adsPerPage = useSelector(getAdsPerPage);
+  const uniqueCategories = getUniqueCategories(categories);
+  const totalCountAds = useSelector(selectTotalCountAds);
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
-  const uniqueCategories = getUniqueCategories(categories);
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [noResults, setNoResult] = useState(true);
   const [filterName, setFilterName] = useState('');
@@ -54,25 +56,39 @@ const AdvertsListPage = () => {
   const [queryMinPrice, setQueryMinPrice] = useState('');
   const [queryMaxPrice, setQueryMaxPrice] = useState('');
 
+  //Ads list
   useEffect(() => {
     dispatch(advertsList()).catch((error) => console.log(error));
   }, [dispatch]);
 
+  //Categories list
   useEffect(() => {
     dispatch(categoriesList()).catch((error) => console.log(error));
   }, [dispatch]);
 
+  //PAGINATION
   const handleAdsPerPageChange = (event) => {
     dispatch(setAdsPerPage(event.target.value));
   };
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+
+  /*const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      dispatch(advertsList({ page: newPage })); // Call API for neew ads
+    }
+  };*/
+  
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
   };
+
   //Filter by category NOT WORKING
   const handleCategoryChange = (event) => {
     const options = event.target.options;
-    
-  let selectedOptions = [];
+
+    let selectedOptions = [];
     for (let i = 0; i < options.length; i++) {
       if (options[i].selected) {
         selectedOptions.push(options[i].value);
@@ -80,14 +96,12 @@ const AdvertsListPage = () => {
     }
     setSelectedCategories(selectedOptions);
   };
-  
+
   const filterByCategory = (ad) =>
-  selectedCategories.length === 0 ||
-  ad.category.some(adCategory =>
-    selectedCategories.includes(adCategory.trim())
-  );
-
-
+    selectedCategories.length === 0 ||
+    ad.category.some((adCategory) =>
+      selectedCategories.includes(adCategory.trim())
+    );
 
   //Filter by price
   const handleChangePrice = (event) => {
@@ -127,7 +141,7 @@ const AdvertsListPage = () => {
 
   const filterByName = (ad) =>
     (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
-
+  /**/
   const filteredAds = ads
     .filter(filterByName)
     .filter(filterByCategory)
@@ -139,6 +153,16 @@ const AdvertsListPage = () => {
   const endIndex = startIndex + adsPerPage;
   const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
   const isLastPage = currentPage === totalPages;
+
+  useEffect(() => {
+    if (
+      filteredAds.length < adsPerPage && 
+      filteredAds.length < totalCountAds && 
+      currentPage < totalPages 
+    ) { 
+      dispatch(advertsList({ page: currentPage + 1 })); // call API for new ads
+    }
+  }, [filteredAds.length, currentPage, totalPages, adsPerPage, totalCountAds, dispatch]);
 
   return (
     <Layout title='adverts'>
@@ -241,42 +265,34 @@ const AdvertsListPage = () => {
                         ))}
                     </ul>
                   </div>
+                  {/*Pagination buttons*/}
                   <div className='pagination'>
                     <p>
                       <span
-                        className={currentPage === 1 ? 'disabled' : 'page'}
+                        className={currentPage === 1 ? 'numberPage' : 'page'}
                         onClick={() => handlePageChange(currentPage - 1)}
                       >
                         &lt;{' '}
                       </span>
                       {[...Array(totalPages)].map((_, index) => {
-                        if (
-                          totalPages > 5 &&
-                          index > 1 &&
-                          index < totalPages - 2
-                        ) {
-                          return (
-                            <span className='page' key={`ellipsis-${index}`}>
-                              ...
-                            </span>
-                          );
-                        } else {
-                          return (
-                            <span
-                              className={
-                                currentPage === index + 1 ? 'disabled' : 'page'
-                              }
-                              key={index}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
-                              {index + 1}
-                              {index < totalPages - 1 && <span> - </span>}
-                            </span>
-                          );
-                        }
+                        const isCurrentPage = currentPage === index + 1; // Actual page?
+                        return (
+                          <span
+                            className={`${isCurrentPage ? 'currentPage ' : ''}${
+                              currentPage === index + 1 ? 'numberPage ' : 'page'
+                            }`}
+                            key={index}
+                            onClick={() => handlePageChange(index + 1)}
+                          >
+                            {index + 1}
+                            {index < totalPages - 1 && <span> - </span>}
+                          </span>
+                        );
                       })}
                       <span
-                        className={isLastPage ? 'disabled' : 'page'}
+                        className={
+                          currentPage === totalPages ? 'numberPage' : 'page'
+                        }
                         onClick={() => handlePageChange(currentPage + 1)}
                       >
                         {' '}

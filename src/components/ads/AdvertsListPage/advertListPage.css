@@ -67,3 +67,16 @@ a:active {
     font-size: 14px;
   }
 }
+
+.currentPage {
+  background-color: transparent;
+  box-shadow: 0px 0px 30px #01ccff;
+}
+
+.numberPage {
+  background-color: transparent;
+}
+
+.page {
+  background-color: transparent;
+}

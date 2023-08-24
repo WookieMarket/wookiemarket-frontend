@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { areAdvertsLoaded } from "../selectors";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { areAdvertsLoaded } from '../selectors';
 
 export const adsCreate = createAsyncThunk(
-  "ads/create",
+  'ads/create',
   async (ad, { extra: { service }, rejectWithValue }) => {
     try {
       //TODO modificar cuando este implementado el detalle del anuncio
       //const { id } = await service.ads.createAd(ad);
       const id = await service.ads.createAd(ad);
-      console.log("Ante", id);
+      console.log('Ante', id);
 
       //TODO modificar cuando este implementado el detalle del anuncio
       //const createdAd = await service.ads.getAd(id);
@@ -17,17 +17,17 @@ export const adsCreate = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
 );
 
 export const advertsList = createAsyncThunk(
-  "ads/list",
+  'ads/list',
   async (_, { extra: { service }, rejectWithValue }) => {
-    console.log("Antes del try");
+    console.log('Antes del try');
     try {
-      console.log("Despachando la acción advertsList");
+      console.log('Despachando la acción advertsList');
       const adverts = await service.ads.getRecentAds();
-      console.log("Anuncios obtenidos:", adverts);
+      console.log('Anuncios obtenidos:', adverts);
       return adverts;
     } catch (error) {
       console.log(error);
@@ -36,29 +36,30 @@ export const advertsList = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  },
+  }
 );
 
 export const setAdsPerPage = createAsyncThunk(
-  "ads/setAdsPerPage",
+  'ads/setAdsPerPage',
   async (adsPerPage, { dispatch }) => {
-    dispatch({ type: "ads/setAdsPerPage", payload: adsPerPage });
+    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
   }
 );
 
 const ads = createSlice({
-  name: "ads",
+  name: 'ads',
   initialState: {
     areLoaded: false,
     data: [],
     adsPerPage: 4,
+    totalCountAds: 0,
   },
   reducers: {
     setAdsPerPage(state, action) {
       state.adsPerPage = action.payload;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(adsCreate.fulfilled, (state, action) => {
         state.data.unshift(action.payload.result);
@@ -66,6 +67,7 @@ const ads = createSlice({
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
+        state.totalCountAds = action.payload.total;
       });
   },
 });
