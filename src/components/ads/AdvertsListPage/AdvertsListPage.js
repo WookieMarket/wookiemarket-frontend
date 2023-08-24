@@ -28,7 +28,7 @@ const AdvertsListPage = () => {
     setCurrentPage(page);
   };
 
-  const filterAdName = (ad) =>
+  const filterAdName = ad =>
     (ad.name ?? '').toUpperCase().startsWith(filterName.toUpperCase());
   //NOTE añadir resto de campos de filtrado
 

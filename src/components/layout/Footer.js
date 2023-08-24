@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer>
       <hr />
-      <div className='footer'>
+      <div className="footer">
         <p>{t('footer')}</p>
       </div>
     </footer>

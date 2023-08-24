@@ -8,7 +8,9 @@ import Layout from "../../layout/Layout";
 import { useTranslation } from "react-i18next";
 import { adsCreate } from "../../../store/slices/ads";
 import Form from "../../shared/form/Form";
-//import "./AdNew.css";
+import Button from "../../shared/Button";
+
+import "./AdNew.css";
 
 function AdNew() {
   const { t } = useTranslation();
@@ -17,13 +19,13 @@ function AdNew() {
 
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
-    name: "",
+    name: '',
     onSale: true,
-    price: "",
-    category: "",
-    description: "",
-    status: "",
-    coin: "",
+    price: '',
+    category: '',
+    description: '',
+    status: '',
+    coin: '',
   });
 
   const adNew = {
@@ -39,8 +41,8 @@ function AdNew() {
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    console.log("Selected image file:", e.target.files[0]);
-    console.log(" image file:", image);
+    console.log('Selected image file:', e.target.files[0]);
+    console.log(' image file:', image);
   };
 
   const handleChange = event => {
@@ -69,33 +71,34 @@ function AdNew() {
     !formData.coin;
 
   return (
-    <Layout title={t("Create an ad")}>
+    <Layout title={t('Create an ad')}>
       {isLoading ? (
-        <Spinner message={t("charging...")} />
+        <Spinner message={t('charging...')} />
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="container-form"
+          className="container-form-creation"
           encType="multipart/form-data">
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="adname"
             text={t("Article")}
-            classNameInput="form-input"
+            classNameInput="password-input-creation"
             inputId="adname"
             inputType="text"
             inputName="name"
             value={formData.name}
             handleChange={handleChange}
-            placeholder={t("Name")}
+            placeholder={t('Name')}
           />
 
-          <div>
+          <div className="input-checked">
             <Form
-              classNameLabel="form-label"
+              classNameLabel="checked-label-creation"
               htmlFor="onsale"
               text={t("Sell")}
-              classNameInput="form-input"
+              classNameInput="checked-input-creation"
               inputId="onsale"
               inputType="radio"
               inputName="onSale"
@@ -104,10 +107,10 @@ function AdNew() {
               required
             />
             <Form
-              classNameLabel="form-label"
+              classNameLabel="checked-label-creation"
               htmlFor="onsale"
               text={t("Buy")}
-              classNameInput="form-input"
+              classNameInput="checked-input-creation"
               inputId="onsale"
               inputType="radio"
               inputName="onSale"
@@ -118,75 +121,81 @@ function AdNew() {
           </div>
 
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="price"
             text={t("Price")}
-            classNameInput="form-input"
+            classNameInput="password-input-creation"
             inputId="price"
             inputType="number"
             inputName="price"
             value={formData.price}
             handleChange={handleChange}
-            placeholder={t("Price")}
+            placeholder={t('Price')}
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="category"
             text={t("Category")}
-            classNameInput="form-input"
+            classNameInput="password-input-creation"
             inputId="category"
             inputType="text"
             inputName="category"
             value={formData.category}
             handleChange={handleChange}
-            placeholder={t("Category")}
+            placeholder={t('Category')}
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="description"
             text={t("Description")}
-            classNameInput="form-input"
+            classNameInput="password-input-creation"
             inputId="description"
             inputType="text"
             inputName="description"
             value={formData.description}
             handleChange={handleChange}
-            placeholder={t("Description")}
+            placeholder={t('Description')}
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="status"
             text={t("Status")}
-            classNameInput="form-input"
+            classNameInput="password-input-creation"
             inputId="status"
             inputType="text"
             inputName="status"
             value={formData.status}
             handleChange={handleChange}
-            placeholder={t("Status")}
+            placeholder={t('Status')}
             required
           />
           <Form
-            classNameLabel="form-label"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="coin"
             text={t("Coin")}
-            classNameInput="form-input"
+            classNameInput="password-input-creation"
             inputId="coin"
             inputType="text"
             inputName="coin"
             value={formData.coin}
             handleChange={handleChange}
-            placeholder={t("Coin")}
+            placeholder={t('Coin')}
             required
           />
           <Form
-            classNameLabel="form-label-img"
+            classNameForm="form-group-creation"
+            classNameLabel="password-label-creation"
             htmlFor="img"
             text={t("Image")}
-            classNameInput="form-input"
+            classNameInput="img-input-creation"
             inputId="img"
             inputName="image"
             inputType="file"
@@ -194,13 +203,15 @@ function AdNew() {
             handleChange={handleChangeInputFile}
           />
 
-          <button
+          <Button
+            data-testid="buttonAdNew"
             type="submit"
-            variant="primary"
+            variant="accept"
+            //variant="primary"
             width="button-form"
             disabled={buttonDisabled}>
             {t("Create")}
-          </button>
+          </Button>
         </form>
       )}
 

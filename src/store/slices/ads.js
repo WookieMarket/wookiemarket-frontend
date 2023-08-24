@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { areAdvertsLoaded } from '../selectors';
-//import { getAd } from '../../service/ads';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -24,6 +23,7 @@ export const adsCreate = createAsyncThunk(
 export const advertsList = createAsyncThunk(
   'ads/list',
   async (_, { extra: { service }, rejectWithValue }) => {
+    console.log('Antes del try');
     console.log('Antes del try');
     try {
       //console.log('Despachando la acción advertsList');

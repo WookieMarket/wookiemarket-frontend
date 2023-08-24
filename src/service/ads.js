@@ -1,6 +1,6 @@
-import client from "../api/client";
+import client from '../api/client';
 
-const adUrl = "/api/ads/adverts";
+const adUrl = '/api/ads/adverts';
 
 export const getAd = adId => {
   const url = `${adUrl}/${adId}`;
@@ -10,7 +10,7 @@ export const getAd = adId => {
 export const createAd = ad => {
   const config = {
     headers: {
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     },
   };
   const url = `${adUrl}/create`;

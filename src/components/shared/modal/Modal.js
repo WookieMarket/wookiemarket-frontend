@@ -1,5 +1,5 @@
-import "./Modal.css";
-import { useTranslation } from "react-i18next";
+import './Modal.css';
+import { useTranslation } from 'react-i18next';
 
 function Modal(props) {
   const { message, title, onConfirm, onCancel } = props;
@@ -11,10 +11,10 @@ function Modal(props) {
         <div className="modal-header">{title}</div>
         <div className="modal-body">{message}</div>
         <div className="modal-buttons">
-          <button onClick={onCancel} variant="primary2">
+          <button onClick={onCancel} className="oncancel">
             {t("Cancel")}
           </button>
-          <button onClick={onConfirm} variant="primary3">
+          <button onClick={onConfirm} className="onconfirm">
             {t("Confirm")}
           </button>
         </div>

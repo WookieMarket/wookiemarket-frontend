@@ -1,23 +1,22 @@
 import { render, screen } from '@testing-library/react';
-import LoginPage from '../LoginPage';
+import SignupPage from '../SignupPage';
 import userEvent from '@testing-library/user-event';
-import { authLogin } from '../../../../store/slices/auth';
+import { authSignup } from '../../../../store/slices/auth';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import * as defaultState from '../../../../store/reducers';
 
 jest.mock('../../../../store/slices/auth', () => ({
   __esModule: true,
-  authLogin: jest.fn(), // Mock only the authLogin action
+  authSignup: jest.fn(),
 }));
 
-describe('LoginPage', () => {
+describe('Signup', () => {
   const renderComponent = (error = null) => {
     const store = {
       getState: () => {
-        const state = { ...defaultState }; // Create a copy of the state
-        state.ui.error = error; // Modify the copy instead of the original state
-
+        const state = { ...defaultState };
+        state.ui.error = error;
         return state;
       },
       subscribe: () => {},
@@ -26,9 +25,9 @@ describe('LoginPage', () => {
     return render(
       <Provider store={store}>
         <MemoryRouter>
-          <LoginPage />
+          <SignupPage />
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     );
   };
 
@@ -37,39 +36,40 @@ describe('LoginPage', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('shoul dispatch authLogin action', () => {
-    const credentials = {
-      username: 'rober',
-      password: '123',
-      rememberMe: true,
+  test('should dispatch signup action', () => {
+    const userData = {
+      username: 'user123',
+      password: 'supersegurisimo',
+      email: 'user123@test.com',
     };
 
-    //NOTE I render the component
+    // Render component
     renderComponent();
+
+    // Test UI components
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
-    const checkboxInput = screen.getByLabelText(/RememberMe/);
-    const submitButton = screen.getByTestId("button");
+    const emailInput = screen.getByLabelText(/Email/);
+    const submitButton = screen.getByRole('button', { name: /Register/ });
     expect(submitButton).toBeDisabled();
 
-    //NOTE to launch events
-    userEvent.type(usernameInput, credentials.username);
-    userEvent.type(passwordInput, credentials.password);
-    userEvent.click(checkboxInput, credentials.rememberMe);
-
+    // Test button after fulfilling text fields
+    userEvent.type(usernameInput, userData.username);
+    userEvent.type(passwordInput, userData.password);
+    userEvent.type(emailInput, userData.email);
     expect(submitButton).toBeEnabled();
     userEvent.click(submitButton);
 
-    expect(authLogin).toHaveBeenCalledWith(credentials);
+    expect(authSignup).toHaveBeenCalledWith(userData);
   });
+
   test('should display an error', () => {
-    //NOTE // Spy on resetError function
     const resetErrorSpy = jest.spyOn(
       require('../../../../store/slices/ui'),
-      'resetError',
+      'resetError'
     );
 
-    const error = { message: 'Unauthorized' };
+    const error = { message: 'Bad request' };
 
     renderComponent(error);
     const errorElement = screen.getByText(error.message);
@@ -80,4 +80,4 @@ describe('LoginPage', () => {
 
     expect(resetErrorSpy).toHaveBeenCalled();
   });
-});*/
+});
