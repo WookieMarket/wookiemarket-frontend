@@ -108,3 +108,7 @@ footer {
   -o-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+#buttonSection {
+  display: flex;
+  justify-content: space-around;
+}

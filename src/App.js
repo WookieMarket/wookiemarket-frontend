@@ -1,23 +1,21 @@
-import './App.css';
-import './css/Variables.css';
-import './css/Reset.css';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import LoginPage from './components/auth/login/LoginPage';
 import RequireAuth from './components/auth/RequireAuth';
 import SignupPage from './components/auth/signup/SignupPage';
+import ResetPasswordPage from './components/auth/resetPassword/ResetPasswordPage';
+import AdNew from './components/ads/adsNew/AdNew';
+import AdvertsListPage from './components/ads/AdvertsListPage/AdvertsListPage';
+import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 
-import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
-import LoginPage from './components/auth/login/LoginPage';
-import RequireAuth from './components/auth/RequireAuth';
+import './App.css';
+import './css/Variables.css';
+import './css/Reset.css';
 
-import { Route, Routes, Navigate } from 'react-router-dom';
-import ResetPasswordPage from './components/auth/resetPassword/ResetPasswordPage';
-import AdNew from './components/ads/adsNew/AdNew';
-import { useTranslation } from 'react-i18next';
-import AdvertsListPage from './components/ads/AdvertsListPage/AdvertsListPage';
-import AdvertPage from './components/ads/AdvertPage/AdvertPage';
+
 
 function App() {
   const { t } = useTranslation();

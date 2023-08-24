@@ -11,17 +11,22 @@
 }
 
 .modal {
-  background-color: #fff;
+  font-family: var(--font-family);
+  background-color: var(--border-color);
   width: 400px;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   text-align: center;
+  color: black;
+  text-transform: lowercase;
 }
 
 .modal-header {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.2em;
   margin-bottom: 20px;
+  color: black;
+  text-transform: lowercase;
 }
 
 .modal-buttons {
@@ -56,4 +61,8 @@
   border: 0;
   padding: 6px 6px;
   margin-bottom: 10px;
+}
+.messageWords{
+  font-size: large;
+  
 }

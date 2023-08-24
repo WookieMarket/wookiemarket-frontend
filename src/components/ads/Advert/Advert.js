@@ -53,13 +53,13 @@ function Advert(advert) {
           <br />
           <br />
           <p>
-            Is
+            {t('Is&')}
             {advert.onSale ? (
               <span id='isSale'> {t('for sale')} </span>
             ) : (
               <span id='isSale'> {t('purchased')} </span>
             )}
-            this product by:
+            {t('this product by')}:
           </p>
           <div className='price'>
             <p>
@@ -81,10 +81,6 @@ function Advert(advert) {
           <p className='advert_label'>
             {t('Username')}: <span className='advert-text'>{advert.username}</span>
           </p>
-          <small className='advert_label'>
-            {t('Created at')}:{' '}
-            <span className='advert_text'>{`${advDate.toUTCString()}`}</span>
-          </small>
         </div>
       </div>
     </>
