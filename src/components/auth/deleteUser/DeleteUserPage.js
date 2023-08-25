@@ -7,7 +7,7 @@ import Spinner from '../../shared/spinner/Spinner';
 import Button from '../../shared/Button';
 import { deleteAccount } from '../../../store/slices/auth';
 import Modal from '../../shared/modal/Modal';
-import { resetError, toggleModal } from '../../../store/slices/ui';
+import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import './DeleteUserPage.css';
 import Form from '../../shared/form/Form';
@@ -15,7 +15,8 @@ import Form from '../../shared/form/Form';
 function DeleteUserPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { isLoading, error, showModal } = useSelector(getUi);
+  const { isLoading, error } = useSelector(getUi);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const [email, setEmail] = useState('');
 
@@ -29,16 +30,16 @@ function DeleteUserPage() {
 
   const handleShowModalconfirm = async event => {
     dispatch(deleteAccount(email));
-    dispatch(toggleModal());
+    setToggleModal(true);
   };
 
   const handleShowModalCancel = () => {
-    dispatch(toggleModal());
+    setToggleModal(false);
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
-    dispatch(toggleModal());
+    setToggleModal(true);
   };
 
   const buttonDisabled = isLoading || !email;
@@ -76,7 +77,7 @@ function DeleteUserPage() {
             </Button>
           </form>
         )}
-        {showModal && (
+        {toggleModal && (
           <Modal
             title={t('Delete Account')}
             message={t('¿are you sure?')}

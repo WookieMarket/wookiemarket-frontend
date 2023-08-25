@@ -8,16 +8,12 @@ const ui = createSlice({
   name: 'ui',
   initialState: {
     isLoading: false,
-    showModal: false,
     error: null,
   },
   //NOTE I create a case for reseterror
   reducers: {
     resetError: state => {
       state.error = null;
-    },
-    toggleModal: state => {
-      state.showModal = !state.showModal;
     },
   },
   extraReducers: builder => {

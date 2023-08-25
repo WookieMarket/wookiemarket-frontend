@@ -15,32 +15,31 @@ import {
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import '../Header.css';
-import { getIsLogged, getUi } from '../../../store/selectors';
+import { getIsLogged } from '../../../store/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleModal } from '../../../store/slices/ui';
 import Modal from '../../shared/modal/Modal';
 import { authLogout } from '../../../store/slices/auth';
 
 const UserOptions = () => {
   const dispatch = useDispatch();
-  const { showModal } = useSelector(getUi);
   const isLogged = useSelector(getIsLogged);
   const { t } = useTranslation();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const onLogout = () => dispatch(authLogout());
 
   const handleLogoutClick = () => {
-    dispatch(toggleModal());
+    setToggleModal(true);
   };
 
   const handleShowModalconfirm = async event => {
     onLogout();
-    dispatch(toggleModal());
+    //setToggleModal(false);
   };
 
   const handleShowModalCancel = () => {
-    dispatch(toggleModal());
+    setToggleModal(false);
   };
 
   const toggleDropdown = () => {
@@ -77,7 +76,7 @@ const UserOptions = () => {
           )}
         </DropdownMenu>
       </IconContext.Provider>
-      {showModal && (
+      {toggleModal && (
         <Modal
           title={t('Leave session')}
           message={t('¿are you sure?')}

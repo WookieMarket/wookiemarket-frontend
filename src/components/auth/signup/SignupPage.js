@@ -106,7 +106,7 @@ function SignupPage() {
         {error && (
           <ErrorModal
             title="Error"
-            message={error.message}
+            message={error.data.error}
             onCancel={handleErrorClick}
           />
         )}

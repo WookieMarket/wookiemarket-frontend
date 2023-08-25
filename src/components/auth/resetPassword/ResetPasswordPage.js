@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUi } from "../../../store/selectors";
-import { resetError } from "../../../store/slices/ui";
-import { resetPassword } from "../../../store/slices/auth";
-import ErrorModal from "../../shared/modal/ErrorModal";
-import Spinner from "../../shared/spinner/Spinner";
-import Layout from "../../layout/Layout";
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import Form from "../../shared/form/Form";
-import Button from "../../shared/Button";
-import "./ResetPasswordPage.css";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUi } from '../../../store/selectors';
+import { resetError } from '../../../store/slices/ui';
+import { resetPassword } from '../../../store/slices/auth';
+import ErrorModal from '../../shared/modal/ErrorModal';
+import Spinner from '../../shared/spinner/Spinner';
+import Layout from '../../layout/Layout';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import Form from '../../shared/form/Form';
+import Button from '../../shared/Button';
+import './ResetPasswordPage.css';
 
 //DONE change Password
 function ResetPasswordPage() {
@@ -57,7 +57,7 @@ function ResetPasswordPage() {
               classNameForm="reset-form-group"
               classNameLabel="reset-form-label"
               htmlFor="new-password"
-              text={t("New password")}
+              text={t('New password')}
               classNameInput="reset-form-input"
               inputId="new-password"
               inputType="password"
@@ -72,7 +72,7 @@ function ResetPasswordPage() {
               classNameForm="reset-form-group"
               classNameLabel="reset-form-label"
               htmlFor="confirm-password"
-              text={t("Confirm password")}
+              text={t('Confirm password')}
               classNameInput="reset-form-input"
               inputId="confirm-password"
               inputType="password"
@@ -86,8 +86,9 @@ function ResetPasswordPage() {
             <Button
               data-testid="button"
               type="submit"
-              disabled={buttonDisabled}>
-              {t("Submit")}
+              disabled={buttonDisabled}
+            >
+              {t('Submit')}
             </Button>
           </form>
         )}
@@ -95,7 +96,7 @@ function ResetPasswordPage() {
         {error && (
           <ErrorModal
             title={t('Error')}
-            message={error.message}
+            message={error.data.error}
             onCancel={handleErrorClick}
           />
         )}
