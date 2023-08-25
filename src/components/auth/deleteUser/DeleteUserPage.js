@@ -66,7 +66,6 @@ function DeleteUserPage() {
             />
 
             <Button
-              //className="login-button"
               data-testid="button"
               type="submit"
               variant="accept"
