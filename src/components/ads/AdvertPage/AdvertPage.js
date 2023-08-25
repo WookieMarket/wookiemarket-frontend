@@ -70,9 +70,11 @@ const AdvertPage = () => {
   /* */
 
   //TODO Delete Advert
+
   const handleDeleteConfirm = () => {
     setActiveModal(null);
-    console.log('Deelted Advert');
+    //dispatch(deletedAdvert(id));
+    
   };
   //TODO Edit Advert
   const handleEdit = () => {

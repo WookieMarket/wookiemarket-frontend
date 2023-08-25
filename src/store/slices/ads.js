@@ -17,7 +17,7 @@ export const adsCreate = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const advertsList = createAsyncThunk(
@@ -37,7 +37,7 @@ export const advertsList = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  }
+  },
 );
 
 export const getAdById = createAsyncThunk(
@@ -49,7 +49,21 @@ export const getAdById = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
+);
+
+export const deleteAdvert = createAsyncThunk(
+  'ads/deleteAdvert',
+  async (id, { extra: { service }, rejectWithValue }) => {
+    try {
+      await service.ads.deleteAdvert(id);
+      console.log('Deelted Advert');
+      return true;
+    } catch (error) {
+      // Maneja cualquier error que pueda ocurrir
+      return rejectWithValue(error);
+    }
+  },
 );
 
 const ads = createSlice({
@@ -58,7 +72,7 @@ const ads = createSlice({
     areLoaded: false,
     data: [],
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(adsCreate.fulfilled, (state, action) => {
         state.data.unshift(action.payload.result);
@@ -69,7 +83,7 @@ const ads = createSlice({
       })
       .addCase(getAdById.fulfilled, (state, action) => {
         state.areLoaded = false;
-        state.data = [action.payload.result]
+        state.data = [action.payload.result];
       });
   },
 });
