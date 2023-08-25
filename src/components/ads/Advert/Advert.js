@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 function Advert(advert) {
   const { t } = useTranslation();
-  const advDate = new Date(advert.createdAt);
+
   //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
   const handleImageError = (event) => {
     event.target.src = defaultImage;
