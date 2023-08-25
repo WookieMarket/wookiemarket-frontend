@@ -74,10 +74,7 @@ export const deleteAccount = createAsyncThunk(
 
 const auth = createSlice({
   name: 'auth',
-  initialState: {
-    auth: false,
-    logged: false,
-  },
+  initialState: false,
   extraReducers: builder => {
     builder
       .addCase(authSignup.fulfilled, () => true)

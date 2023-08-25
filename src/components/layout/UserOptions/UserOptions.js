@@ -67,11 +67,14 @@ const UserOptions = () => {
               <> {t('Login')}</>
             </MenuItem>
           )}
-          <MenuItem to="/delete-account">
-            <FaTrashAlt />
 
-            {t('Delete Account')}
-          </MenuItem>
+          {isLogged && (
+            <MenuItem to="/delete-account">
+              <FaTrashAlt />
+
+              {t('Delete Account')}
+            </MenuItem>
+          )}
         </DropdownMenu>
       </IconContext.Provider>
       {showModal && (

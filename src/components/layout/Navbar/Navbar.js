@@ -19,12 +19,14 @@ import {
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import '../Header.css';
-
+import { getIsLogged } from '../../../store/selectors';
+import { useSelector } from 'react-redux';
 import UserOptions from '../UserOptions/UserOptions';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const isLogged = useSelector(getIsLogged);
 
   return (
     <Container>
@@ -64,24 +66,29 @@ const Navbar = () => {
                   {t('Home')}
                 </div>
               </MenuItemLink>
-              <MenuItemLink
-                to="/create-ad"
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
-              >
-                <div>
-                  <FaBriefcase />
-                  {t('Upload')}
-                </div>
-              </MenuItemLink>
-              <MenuItemLink
-                to="/signup"
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
-              >
-                <div>
-                  <FaHome />
-                  {t('Signup')}
-                </div>
-              </MenuItemLink>
+              {isLogged && (
+                <MenuItemLink
+                  to="/create-ad"
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
+                  <div>
+                    <FaBriefcase />
+                    {t('Upload')}
+                  </div>
+                </MenuItemLink>
+              )}
+
+              {!isLogged && (
+                <MenuItemLink
+                  to="/signup"
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
+                  <div>
+                    <FaHome />
+                    {t('Signup')}
+                  </div>
+                </MenuItemLink>
+              )}
 
               <UserOptions />
             </MenuItem>
