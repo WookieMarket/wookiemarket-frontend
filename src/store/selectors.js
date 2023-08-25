@@ -4,4 +4,6 @@ export const areAdvertsLoaded = (state) => state.ads.areLoaded;
 export const getAdverts = (state) => (state.ads.data ? state.ads.data : []);
 export const getAdvertById = (state, advertId) =>
   state.ads.data.find((advert) => advert._id === advertId);
+export const getUsernameFromAd = (state, advertUsername) => 
+state.ads.data.find(advert => advert.username === advertUsername);
 

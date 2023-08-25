@@ -17,10 +17,10 @@ export const createAd = ad => {
   return client.post(url, ad, config);
 };
 
-// export const getLastAdv = () => {
-//   const url = `${adUrl}`;
-//   return client.get(url);
-// };
+export const deleteAdvert = (advertId) => {
+  const url = `${adUrl}/${advertId}`;
+  return client.delete(url);
+};
 
 export const getRecentAds = () => {
   const url = `${adUrl}`;
