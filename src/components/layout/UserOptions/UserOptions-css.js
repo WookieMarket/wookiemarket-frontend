@@ -11,16 +11,16 @@ export const MobileIcon = styled.div`
   cursor: pointer;
 
   svg {
-    fill: #e07924;
+    fill: var(--background-iconFa-options-color);
     margin-right: 0.5rem;
-  }
+    
 `;
 
 export const DropdownMenu = styled.div`
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #23394d;
+  background-color: var(--background-navbar-color);
   width: 200px;
   display: ${({ open }) => (open ? 'block' : 'none')};
 `;
@@ -28,17 +28,24 @@ export const DropdownMenu = styled.div`
 export const MenuItem = styled(NavLink)`
   display: flex;
   flex-direction: column
+  justify-content: center;
+  align-items: center;
   padding: 0.5rem 1rem;
-  color: #64b2ff;
   font-family: sans-serif;
   font-size: 1rem;
   font-weight: 300;
   cursor: pointer;
   transition: 0.5s all ease;
 
+  svg {
+    
+    fill: var(--background-iconFa-color);
+    margin-right: 0.5rem;
+  }
+
   &:hover {
     color: #fff;
-    background-color: #e0792a;
+    background-color: var(--background-iconFa-color);
     transition: 0.5s all ease;
   }
 `;

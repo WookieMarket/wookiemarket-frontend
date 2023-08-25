@@ -6,11 +6,11 @@ import {
   MobileIcon,
 } from './UserOptions-css';
 import {
-  FaTimes,
-  FaHome,
+  FaExpeditedssl,
+  FaPowerOff,
+  FaTrashAlt,
+  FaEyeSlash,
   FaUserAlt,
-  FaBriefcase,
-  FaGlasses,
 } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
@@ -49,44 +49,29 @@ const UserOptions = () => {
 
   return (
     <Container>
-      <IconContext.Provider value={{ style: { fontSize: '2em' } }}>
+      <IconContext.Provider value={{ style: { fontSize: '1.7em' } }}>
         <MobileIcon onClick={toggleDropdown}>
-          {showDropdown ? <FaTimes /> : <FaUserAlt />}
+          {showDropdown ? <FaEyeSlash /> : <FaUserAlt />}
         </MobileIcon>
         <DropdownMenu open={showDropdown}>
-          <MenuItem to="/delete-account">
-            <FaUserAlt />
-
-            {t('Delete')}
-          </MenuItem>
-          <MenuItem>
-            <FaBriefcase />
-            {t('Upload')}
-          </MenuItem>
-          <MenuItem>
-            <FaHome />
-            {t('Signup')}
-          </MenuItem>
           {isLogged ? (
             <MenuItem>
-              <div>
-                <FaGlasses />
-                <button
-                  onClick={handleLogoutClick}
-                  className="navbar-list-item"
-                >
-                  {t('Logout')}
-                </button>
-              </div>
+              <FaPowerOff />
+              <button onClick={handleLogoutClick} className="navbar-list-item">
+                {t('Logout')}
+              </button>
             </MenuItem>
           ) : (
             <MenuItem to="/login">
-              <div>
-                <FaGlasses />
-                <> {t('Login')}</>
-              </div>
+              <FaExpeditedssl />
+              <> {t('Login')}</>
             </MenuItem>
           )}
+          <MenuItem to="/delete-account">
+            <FaTrashAlt />
+
+            {t('Delete Account')}
+          </MenuItem>
         </DropdownMenu>
       </IconContext.Provider>
       {showModal && (
