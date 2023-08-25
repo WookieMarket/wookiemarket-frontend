@@ -1,0 +1,104 @@
+import React, { useState } from 'react';
+import {
+  Container,
+  DropdownMenu,
+  MenuItem,
+  MobileIcon,
+} from './UserOptions-css';
+import {
+  FaTimes,
+  FaHome,
+  FaUserAlt,
+  FaBriefcase,
+  FaGlasses,
+} from 'react-icons/fa';
+import { IconContext } from 'react-icons';
+import { useTranslation } from 'react-i18next';
+import '../Header.css';
+import { getIsLogged, getUi } from '../../../store/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleModal } from '../../../store/slices/ui';
+import Modal from '../../shared/modal/Modal';
+import { authLogout } from '../../../store/slices/auth';
+
+const UserOptions = () => {
+  const dispatch = useDispatch();
+  const { showModal } = useSelector(getUi);
+  const isLogged = useSelector(getIsLogged);
+  const { t } = useTranslation();
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const onLogout = () => dispatch(authLogout());
+
+  const handleLogoutClick = () => {
+    dispatch(toggleModal());
+  };
+
+  const handleShowModalconfirm = async event => {
+    onLogout();
+    dispatch(toggleModal());
+  };
+
+  const handleShowModalCancel = () => {
+    dispatch(toggleModal());
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  return (
+    <Container>
+      <IconContext.Provider value={{ style: { fontSize: '2em' } }}>
+        <MobileIcon onClick={toggleDropdown}>
+          {showDropdown ? <FaTimes /> : <FaUserAlt />}
+        </MobileIcon>
+        <DropdownMenu open={showDropdown}>
+          <MenuItem to="/delete-account">
+            <FaUserAlt />
+
+            {t('Delete')}
+          </MenuItem>
+          <MenuItem>
+            <FaBriefcase />
+            {t('Upload')}
+          </MenuItem>
+          <MenuItem>
+            <FaHome />
+            {t('Signup')}
+          </MenuItem>
+          {isLogged ? (
+            <MenuItem>
+              <div>
+                <FaGlasses />
+                <button
+                  onClick={handleLogoutClick}
+                  className="navbar-list-item"
+                >
+                  {t('Logout')}
+                </button>
+              </div>
+            </MenuItem>
+          ) : (
+            <MenuItem to="/login">
+              <div>
+                <FaGlasses />
+                <> {t('Login')}</>
+              </div>
+            </MenuItem>
+          )}
+        </DropdownMenu>
+      </IconContext.Provider>
+      {showModal && (
+        <Modal
+          title={t('Leave session')}
+          message={t('¿are you sure?')}
+          onConfirm={handleShowModalconfirm}
+          onCancel={handleShowModalCancel}
+        />
+      )}
+    </Container>
+  );
+};
+
+export default UserOptions;
