@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUi } from "../../../store/selectors";
-import { resetError } from "../../../store/slices/ui";
-import ErrorModal from "../../shared/modal/ErrorModal";
-import Spinner from "../../shared/spinner/Spinner";
-import Layout from "../../layout/Layout";
-import { useTranslation } from "react-i18next";
-import { adsCreate } from "../../../store/slices/ads";
-import Form from "../../shared/form/Form";
-import Button from "../../shared/Button";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUi } from '../../../store/selectors';
+import { resetError } from '../../../store/slices/ui';
+import ErrorModal from '../../shared/modal/ErrorModal';
+import Spinner from '../../shared/spinner/Spinner';
+import Layout from '../../layout/Layout';
+import { useTranslation } from 'react-i18next';
+import { adsCreate } from '../../../store/slices/ads';
+import Form from '../../shared/form/Form';
+import Button from '../../shared/Button';
 
-import "./AdNew.css";
+import './AdNew.css';
 
 function AdNew() {
   const { t } = useTranslation();
@@ -78,12 +78,13 @@ function AdNew() {
         <form
           onSubmit={handleSubmit}
           className="container-form-creation"
-          encType="multipart/form-data">
+          encType="multipart/form-data"
+        >
           <Form
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="adname"
-            text={t("Article")}
+            text={t('Article')}
             classNameInput="password-input-creation"
             inputId="adname"
             inputType="text"
@@ -97,7 +98,7 @@ function AdNew() {
             <Form
               classNameLabel="checked-label-creation"
               htmlFor="onsale"
-              text={t("Sell")}
+              text={t('Sell')}
               classNameInput="checked-input-creation"
               inputId="onsale"
               inputType="radio"
@@ -109,7 +110,7 @@ function AdNew() {
             <Form
               classNameLabel="checked-label-creation"
               htmlFor="onsale"
-              text={t("Buy")}
+              text={t('Buy')}
               classNameInput="checked-input-creation"
               inputId="onsale"
               inputType="radio"
@@ -124,7 +125,7 @@ function AdNew() {
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="price"
-            text={t("Price")}
+            text={t('Price')}
             classNameInput="password-input-creation"
             inputId="price"
             inputType="number"
@@ -138,7 +139,7 @@ function AdNew() {
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="category"
-            text={t("Category")}
+            text={t('Category')}
             classNameInput="password-input-creation"
             inputId="category"
             inputType="text"
@@ -152,7 +153,7 @@ function AdNew() {
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="description"
-            text={t("Description")}
+            text={t('Description')}
             classNameInput="password-input-creation"
             inputId="description"
             inputType="text"
@@ -166,7 +167,7 @@ function AdNew() {
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="status"
-            text={t("Status")}
+            text={t('Status')}
             classNameInput="password-input-creation"
             inputId="status"
             inputType="text"
@@ -180,7 +181,7 @@ function AdNew() {
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="coin"
-            text={t("Coin")}
+            text={t('Coin')}
             classNameInput="password-input-creation"
             inputId="coin"
             inputType="text"
@@ -194,7 +195,7 @@ function AdNew() {
             classNameForm="form-group-creation"
             classNameLabel="password-label-creation"
             htmlFor="img"
-            text={t("Image")}
+            text={t('Image')}
             classNameInput="img-input-creation"
             inputId="img"
             inputName="image"
@@ -209,8 +210,9 @@ function AdNew() {
             variant="accept"
             //variant="primary"
             width="button-form"
-            disabled={buttonDisabled}>
-            {t("Create")}
+            disabled={buttonDisabled}
+          >
+            {t('Create')}
           </Button>
         </form>
       )}
@@ -220,6 +222,7 @@ function AdNew() {
           title="Error"
           message={error.message}
           onCancel={handleErrorClick}
+          testid="modalButton"
         />
       )}
     </Layout>

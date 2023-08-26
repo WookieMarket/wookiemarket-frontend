@@ -69,13 +69,16 @@ describe('Signup', () => {
       'resetError',
     );
 
-    const error = { message: 'Bad request' };
+    const email = 'example@example.com';
+    const error = {
+      data: { error: `Email: ${email} is already registered!` },
+    };
 
     renderComponent(error);
-    const errorElement = screen.getByText(error.message);
+    const errorElement = screen.getByText(error.data.error);
 
     expect(errorElement).toBeInTheDocument();
-    const modalButton = screen.getByTestId('modalButton');
+    const modalButton = screen.getByTestId('modalSignup');
     userEvent.click(modalButton);
 
     expect(resetErrorSpy).toHaveBeenCalled();

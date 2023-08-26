@@ -80,7 +80,7 @@ describe('DeleteUserPage', () => {
     const errorElement = screen.getByText(error.data.error);
 
     expect(errorElement).toBeInTheDocument();
-    const modalButton = screen.getByTestId('modalButton');
+    const modalButton = screen.getByTestId('modalDelete');
     userEvent.click(modalButton);
 
     expect(resetErrorSpy).toHaveBeenCalled();

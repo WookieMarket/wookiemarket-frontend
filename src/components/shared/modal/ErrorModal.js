@@ -1,7 +1,7 @@
 import './Modal.css';
 
 function ErrorModal(props) {
-  const { message, title, onCancel } = props;
+  const { message, title, onCancel, testid } = props;
 
   return (
     <div className="modal-container">
@@ -9,7 +9,7 @@ function ErrorModal(props) {
         <div className="modal-header">{title}</div>
         <div className="modal-body">{message}</div>
         <div className="modal-errorButton">
-          <button data-testid="modalButton" onClick={onCancel}>
+          <button data-testid={testid} onClick={onCancel}>
             Click
           </button>
         </div>

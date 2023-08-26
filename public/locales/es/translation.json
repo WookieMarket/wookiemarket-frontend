@@ -44,5 +44,7 @@
 
   "Delete Account": "Borrar Cuenta",
   "Delete User": "Borrar usuario",
-  "Delete": "Borrar"
+  "Delete": "Borrar",
+
+  "Email sent, check your email": "Email enviado, revisa tu correo"
 }

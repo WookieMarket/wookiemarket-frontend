@@ -25,11 +25,17 @@ function LoginPage() {
     password: '',
     rememberMe: false,
   });
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(false);
+  };
 
   const [email, setEmail] = useState('');
 
   const handleErrorClick = () => {
     dispatch(resetError());
+    setShowModal(false);
   };
 
   const handleChange = event => {
@@ -54,7 +60,9 @@ function LoginPage() {
   const handleShowModalconfirm = async event => {
     event.preventDefault();
     dispatch(emailResetPassword(email));
-    //dispatch(toggleModal());
+
+    setShowModal(true);
+    setToggleModal(false);
   };
 
   const handleShowModalCancel = () => {
@@ -156,11 +164,23 @@ function LoginPage() {
           </form>
         )}
 
+        {/* Mostrar el mensaje de error si hay un error */}
         {error && (
           <ErrorModal
             title="Error"
-            message={error.message}
+            message={error.data.error}
             onCancel={handleErrorClick}
+            testid="modalButton"
+          />
+        )}
+
+        {/* Mostrar el modal de éxito */}
+        {!error && showModal && (
+          <ErrorModal
+            title={t('Email')}
+            message={t('Email sent, check your email')}
+            onCancel={handleShowModal}
+            testid="showmodal"
           />
         )}
       </div>

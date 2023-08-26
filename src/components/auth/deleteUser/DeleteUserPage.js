@@ -91,6 +91,7 @@ function DeleteUserPage() {
             title="Error"
             message={error.data.error}
             onCancel={handleErrorClick}
+            testid="modalDelete"
           />
         )}
       </>

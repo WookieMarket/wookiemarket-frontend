@@ -70,10 +70,12 @@ describe('LoginPage', () => {
       'resetError',
     );
 
-    const error = { message: 'Unauthorized' };
+    const error = {
+      data: { error: 'invalid credentials' },
+    };
 
     renderComponent(error);
-    const errorElement = screen.getByText(error.message);
+    const errorElement = screen.getByText(error.data.error);
 
     expect(errorElement).toBeInTheDocument();
     const modalButton = screen.getByTestId('modalButton');
