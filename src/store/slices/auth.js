@@ -60,6 +60,18 @@ export const resetPassword = createAsyncThunk(
   },
 );
 
+export const deleteAccount = createAsyncThunk(
+  'auth/deleteAccount',
+  async (email, { extra: { service }, rejectWithValue }) => {
+    try {
+      const response = await service.auth.deleteUser(email);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const auth = createSlice({
   name: 'auth',
   initialState: false,
@@ -67,7 +79,8 @@ const auth = createSlice({
     builder
       .addCase(authSignup.fulfilled, () => true)
       .addCase(authLogin.fulfilled, () => true)
-      .addCase(authLogout.fulfilled, () => false);
+      .addCase(authLogout.fulfilled, () => false)
+      .addCase(deleteAccount.fulfilled, () => false);
   },
 });
 

@@ -36,3 +36,7 @@ export const resetPassword = (email, newPassword, token) => {
     token,
   });
 };
+
+export const deleteUser = email => {
+  return client.post('api/users/deleted-user', { email: email });
+};

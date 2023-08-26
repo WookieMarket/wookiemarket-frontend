@@ -12,10 +12,14 @@ function Modal(props) {
         <div className="modal-body">{message}</div>
         <div className="modal-buttons">
           <button onClick={onCancel} className="oncancel">
-            {t("Cancel")}
+            {t('Cancel')}
           </button>
-          <button onClick={onConfirm} className="onconfirm">
-            {t("Confirm")}
+          <button
+            onClick={onConfirm}
+            data-testid="confirmButton"
+            className="onconfirm"
+          >
+            {t('Confirm')}
           </button>
         </div>
       </div>

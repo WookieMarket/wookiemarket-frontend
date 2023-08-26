@@ -5,11 +5,13 @@ import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../src/store/slices/auth';
 import uiReducer from '../src/store/slices/ui';
+import adsReducer from '../src/store/slices/auth';
 
 test('renders learn react link', () => {
   const store = configureStore({
     reducer: {
       auth: authReducer,
+      ads: adsReducer,
       ui: uiReducer, // Agrega el slice uiReducer al store
     },
     preloadedState: {
@@ -25,6 +27,6 @@ test('renders learn react link', () => {
       </MemoryRouter>
     </Provider>,
   );
-  const linkElement = screen.getByText(/welcomeMessage/i);
+  const linkElement = screen.getByText(/welcomeMessage/);
   expect(linkElement).toBeInTheDocument();
 });

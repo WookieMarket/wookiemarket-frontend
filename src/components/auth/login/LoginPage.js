@@ -1,35 +1,41 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUi } from "../../../store/selectors";
-import { resetError, toggleModal } from "../../../store/slices/ui";
-import { authLogin, emailResetPassword } from "../../../store/slices/auth";
-import ErrorModal from "../../shared/modal/ErrorModal";
-import Spinner from "../../shared/spinner/Spinner";
-import Layout from "../../layout/Layout";
-import { useTranslation } from "react-i18next";
-import Modal from "../../shared/modal/Modal";
-import { Link } from "react-router-dom";
-import Form from "../../shared/form/Form";
-import "./LoginPage.css";
-import Button from "../../shared/Button";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUi } from '../../../store/selectors';
+import { resetError } from '../../../store/slices/ui';
+import { authLogin, emailResetPassword } from '../../../store/slices/auth';
+import ErrorModal from '../../shared/modal/ErrorModal';
+import Spinner from '../../shared/spinner/Spinner';
+import Layout from '../../layout/Layout';
+import { useTranslation } from 'react-i18next';
+import Modal from '../../shared/modal/Modal';
+import { Link } from 'react-router-dom';
+import Form from '../../shared/form/Form';
+import './LoginPage.css';
+import Button from '../../shared/Button';
 
 //DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
 function LoginPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { isLoading, error, showModal } = useSelector(getUi);
-
+  const { isLoading, error } = useSelector(getUi);
+  const [toggleModal, setToggleModal] = useState(false);
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
     rememberMe: false,
   });
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(false);
+  };
 
   const [email, setEmail] = useState('');
 
   const handleErrorClick = () => {
     dispatch(resetError());
+    setShowModal(false);
   };
 
   const handleChange = event => {
@@ -48,17 +54,19 @@ function LoginPage() {
   };
 
   const handleResetPasswordLinkClick = () => {
-    dispatch(toggleModal());
+    setToggleModal(true);
   };
 
   const handleShowModalconfirm = async event => {
     event.preventDefault();
     dispatch(emailResetPassword(email));
-    dispatch(toggleModal());
+
+    setShowModal(true);
+    setToggleModal(false);
   };
 
   const handleShowModalCancel = () => {
-    dispatch(toggleModal());
+    setToggleModal(false);
   };
 
   const handleChangeEmail = e => {
@@ -79,7 +87,7 @@ function LoginPage() {
               classNameForm="form-group"
               classNameLabel="password-label"
               htmlFor="username"
-              text={t("Username")}
+              text={t('Username')}
               classNameInput="password-input"
               inputId="username"
               inputType="text"
@@ -108,7 +116,7 @@ function LoginPage() {
             <Form
               classNameForm="password-input-rememberme"
               htmlFor="rememberMe"
-              text={t("RememberMe")}
+              text={t('RememberMe')}
               inputId="rememberMe"
               inputType="checkbox"
               inputName="rememberMe"
@@ -123,13 +131,14 @@ function LoginPage() {
               type="submit"
               variant="accept"
               width="button-form"
-              disabled={buttonDisabled}>
-              {t("Log in")}
+              disabled={buttonDisabled}
+            >
+              {t('Log in')}
             </Button>
             <Link onClick={handleResetPasswordLinkClick}>
-              <h4 className="link-reset">{t("Forgot password?")}</h4>
+              <h4 className="link-reset">{t('Forgot password?')}</h4>
             </Link>
-            {showModal && (
+            {toggleModal && (
               <Modal
                 title={t('Recover password')}
                 message={
@@ -144,7 +153,7 @@ function LoginPage() {
                     inputName="reset-email"
                     value={email}
                     handleChange={handleChangeEmail}
-                    placeholder={t("Email")}
+                    placeholder={t('Email')}
                     required
                   />
                 }
@@ -155,11 +164,23 @@ function LoginPage() {
           </form>
         )}
 
+        {/* Mostrar el mensaje de error si hay un error */}
         {error && (
           <ErrorModal
             title="Error"
-            message={error.message}
+            message={error.data.error}
             onCancel={handleErrorClick}
+            testid="modalButton"
+          />
+        )}
+
+        {/* Mostrar el modal de éxito */}
+        {!error && showModal && (
+          <ErrorModal
+            title={t('Email')}
+            message={t('Email sent, check your email')}
+            onCancel={handleShowModal}
+            testid="showmodal"
           />
         )}
       </div>

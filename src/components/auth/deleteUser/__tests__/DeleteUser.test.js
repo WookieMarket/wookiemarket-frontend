@@ -1,18 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import LoginPage from '../LoginPage';
+import DeleteUserPage from '../DeleteUserPage';
 import userEvent from '@testing-library/user-event';
-import { authLogin } from '../../../../store/slices/auth';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import * as defaultState from '../../../../store/reducers';
+import { deleteAccount } from '../../../../store/slices/auth';
 
 jest.mock('../../../../store/slices/auth', () => ({
   __esModule: true,
-  authLogin: jest.fn(), // Mock only the authLogin action
+  deleteAccount: jest.fn(), // Mock only the deleteAccount action
 }));
-console.log('mock', authLogin);
 
-describe('LoginPage', () => {
+console.log('mock', deleteAccount);
+
+describe('DeleteUserPage', () => {
   const renderComponent = (error = null) => {
     const store = {
       getState: () => {
@@ -27,7 +28,7 @@ describe('LoginPage', () => {
     return render(
       <Provider store={store}>
         <MemoryRouter>
-          <LoginPage />
+          <DeleteUserPage />
         </MemoryRouter>
       </Provider>,
     );
@@ -38,31 +39,32 @@ describe('LoginPage', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('shoul dispatch authLogin action', () => {
-    const credentials = {
-      username: 'rober',
-      password: '123',
-      rememberMe: true,
-    };
+  test('should dispatch deleteAccount action', async () => {
+    const email = 'example@example.com';
 
     //NOTE I render the component
     renderComponent();
-    const usernameInput = screen.getByLabelText(/Username/);
-    const passwordInput = screen.getByLabelText(/Password/);
-    const checkboxInput = screen.getByLabelText(/RememberMe/);
-    const submitButton = screen.getByTestId('button');
+
+    const usernameEmail = screen.getByLabelText(/Enter your email/);
+
+    const submitButton = screen.getByTestId('buttonDelete');
     expect(submitButton).toBeDisabled();
 
     //NOTE to launch events
-    userEvent.type(usernameInput, credentials.username);
-    userEvent.type(passwordInput, credentials.password);
-    userEvent.click(checkboxInput, credentials.rememberMe);
+    userEvent.type(usernameEmail, email);
 
     expect(submitButton).toBeEnabled();
     userEvent.click(submitButton);
 
-    expect(authLogin).toHaveBeenCalledWith(credentials);
+    const modalConfirmButton = await screen.findByTestId('confirmButton');
+
+    expect(modalConfirmButton).toBeInTheDocument();
+
+    userEvent.click(modalConfirmButton);
+
+    expect(deleteAccount).toHaveBeenCalledWith(email);
   });
+
   test('should display an error', () => {
     //NOTE // Spy on resetError function
     const resetErrorSpy = jest.spyOn(
@@ -71,14 +73,14 @@ describe('LoginPage', () => {
     );
 
     const error = {
-      data: { error: 'invalid credentials' },
+      data: { error: 'You do not have permissions to delete this user.' },
     };
 
     renderComponent(error);
     const errorElement = screen.getByText(error.data.error);
 
     expect(errorElement).toBeInTheDocument();
-    const modalButton = screen.getByTestId('modalButton');
+    const modalButton = screen.getByTestId('modalDelete');
     userEvent.click(modalButton);
 
     expect(resetErrorSpy).toHaveBeenCalled();

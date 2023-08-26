@@ -1,6 +1,6 @@
-.container-reset-form {
-  width: 50%;
-  height: 50vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
+.container-delete-form {
+  width: 55%;
+  height: 30vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
   position: absolute; /* Cambia a posición absoluta */
   top: 55%; /* Alinea el borde superior del contenedor al 50% de la ventana */
   left: 50%; /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
@@ -13,11 +13,11 @@
   gap: 10px;
   border-radius: 10px;
   text-align: center;
-  border: 2px solid var(--border-color-form);
+  border: 2px solid var(--border-color);
   background-color: var(--background-color-form);
 }
 
-.container-reset-form .reset-form-group {
+.container-delete-form .delete-form-group {
   width: 100%;
   padding: 0 15px;
   display: flex;
@@ -25,13 +25,13 @@
   gap: 10px;
 }
 
-.container-reset-form .reset-form-label {
+.container-delete-form .delete-form-label {
   font-family: var(--font-family);
   font-size: 13px;
   margin-bottom: 10px;
 }
 
-.container-reset-form .reset-form-input {
+.container-reset-delete .delete-form-input {
   height: 20px;
   width: 100%;
   font-family: var(--font-family);
@@ -43,30 +43,30 @@
 }
 
 @media screen and (min-width: 768px) {
-  .container-reset-form {
-    width: 40%;
+  .container-delete-form {
+    width: 30%;
   }
-  .container-reset-form .reset-form-input {
+  .container-delete-form .delete-form-input {
     height: 25px;
     font-size: 13px;
   }
 
-  .container-reset-form .reset-form-label {
+  .container-delete-form .delete-form-label {
     font-size: 13px;
     margin-bottom: 10px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .container-reset-form {
-    width: 30%;
+  .container-delete-form {
+    width: 20%;
   }
-  .container-reset-form .reset-form-input {
+  .container-delete-form .delete-form-input {
     height: 30px;
     font-size: 14px;
   }
 
-  .container-reset-form .reset-form-label {
+  .container-delete-form .delete-form-label {
     font-size: 16px;
     margin-bottom: 10px;
   }

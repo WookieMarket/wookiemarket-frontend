@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
   width: 100%;
@@ -10,16 +10,14 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
-  max-width: 1300px;
+
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: auto;
 `;
 
 export const LogoContainer = styled.div`
-  margin-left: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -28,6 +26,7 @@ export const LogoContainer = styled.div`
 
   p {
     &:nth-child(2) {
+      padding-right: 10px;
       color: #fff;
     }
 
@@ -40,7 +39,8 @@ export const LogoContainer = styled.div`
 
   svg {
     fill: #e07924;
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
+    margin-left: 0.6rem;
   }
 `;
 
@@ -51,10 +51,10 @@ export const Menu = styled.ul`
   list-style: none;
 
   @media screen and (max-width: 960px) {
-    background-color: #23394d;
+    background-color: var(--background-navbar-color);
     position: absolute;
     top: 70px;
-    right: ${({ open }) => (open ? "0" : "-100%")}; //Import
+    right: ${({ open }) => (open ? '0' : '-100%')}; //Import
     width: 60%;
     height: 50vh;
     justify-content: center;
@@ -68,13 +68,15 @@ export const MenuItem = styled.li`
   height: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-right: 0.6rem;
 
   @media screen and (max-width: 960px) {
     width: 100%;
     height: 70px;
     display: flex;
     flex-direction: column;
-    justify-content: ce;
+    justify-content: center;
     align-items: center;
   }
 `;
@@ -85,7 +87,7 @@ export const MenuItemLink = styled(NavLink)`
   align-items: center;
   height: 100%;
   padding: 0.5rem 2.5rem;
-  color: #64b2ff;
+
   font-family: sans-serif;
   font-size: 1rem;
   font-weight: 300;
@@ -93,8 +95,8 @@ export const MenuItemLink = styled(NavLink)`
   transition: 0.5s all ease;
 
   &:hover {
-    color: #fff;
-    background-color: #e0792a;
+    color: var(--font-hover-color);
+    background-color: var(--background-hover-color);
     transition: 0.5s all ease;
 
     div {
@@ -113,7 +115,7 @@ export const MenuItemLink = styled(NavLink)`
 
     svg {
       display: none;
-      fill: #e0792a;
+      fill: var(--background-iconFa-color);
       margin-right: 0.5rem;
     }
   }
@@ -174,7 +176,7 @@ export const MobileIcon = styled.div`
     cursor: pointer;
 
     svg {
-      fill: #e07924;
+      fill: var(--background-menu-movil-color);
       margin-right: 0.5rem;
     }
   }

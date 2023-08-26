@@ -11,6 +11,7 @@ import ResetPasswordPage from './components/auth/resetPassword/ResetPasswordPage
 import AdNew from './components/ads/adsNew/AdNew';
 import { useTranslation } from 'react-i18next';
 import AdvertsListPage from './components/ads/AdvertsListPage/AdvertsListPage';
+import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 
 function App() {
   const { t } = useTranslation();
@@ -27,7 +28,15 @@ function App() {
             </RequireAuth>
           }
         />
-        
+        <Route
+          path="/delete-account"
+          element={
+            <RequireAuth>
+              <DeleteUserPage />
+            </RequireAuth>
+          }
+        />
+
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />

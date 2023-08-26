@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginPage snapshot 1`] = `
+exports[`DeleteUserPage snapshot 1`] = `
 <div>
   <div>
     <header
@@ -175,83 +175,39 @@ exports[`LoginPage snapshot 1`] = `
       <h2
         class="layout-title"
       >
-        Login Page
+        Delete User
       </h2>
-      <div>
-        <form
-          class="container-form"
+      <form
+        class="container-delete-form"
+      >
+        <div
+          class="delete-form-group"
         >
-          <div
-            class="form-group"
+          <label
+            class="delete-form-label"
+            for="delete-user"
           >
-            <label
-              class="password-label"
-              for="username"
-            >
-              Username
-            </label>
-            <input
-              class="password-input"
-              id="username"
-              name="username"
-              placeholder="Username"
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            class="form-group"
-          >
-            <label
-              class="password-label"
-              for="password"
-            >
-              Password
-            </label>
-            <input
-              class="password-input"
-              id="password"
-              name="password"
-              placeholder="Password"
-              type="password"
-              value=""
-            />
-          </div>
-          <div
-            class="password-input-rememberme"
-          >
-            <label
-              for="rememberMe"
-            >
-              RememberMe
-            </label>
-            <input
-              id="rememberMe"
-              name="rememberMe"
-              type="checkbox"
-              value=""
-            />
-          </div>
-          <button
-            class="sc-kFuwaP gUKuqw"
-            data-testid="button"
-            disabled=""
-            type="submit"
-            width="button-form"
-          >
-            Log in
-          </button>
-          <a
-            href="/"
-          >
-            <h4
-              class="link-reset"
-            >
-              Forgot password?
-            </h4>
-          </a>
-        </form>
-      </div>
+            Enter your email
+          </label>
+          <input
+            class="delete-form-input"
+            id="delete-user"
+            name="delete-user"
+            placeholder="Email"
+            type="email"
+            value=""
+          />
+        </div>
+        <button
+          class="sc-kFuwaP gUKuqw"
+          data-testid="buttonDelete"
+          disabled=""
+          type="submit"
+          width="button-form"
+        >
+          Delete
+        </button>
+      </form>
     </main>
     <footer>
       <hr />
