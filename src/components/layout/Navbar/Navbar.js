@@ -9,13 +9,14 @@ import {
   MobileIcon,
 } from './Navbar-css';
 import {
+  FaLock,
+  FaUpload,
   FaBattleNet,
   FaBars,
   FaTimes,
   FaHome,
-  FaUserAlt,
-  FaBriefcase,
 } from 'react-icons/fa';
+
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import '../Header.css';
@@ -62,7 +63,7 @@ const Navbar = () => {
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
               >
                 <div>
-                  <FaUserAlt />
+                  <FaHome />
                   {t('Home')}
                 </div>
               </MenuItemLink>
@@ -72,7 +73,7 @@ const Navbar = () => {
                   onClick={() => setShowMobileMenu(!showMobileMenu)}
                 >
                   <div>
-                    <FaBriefcase />
+                    <FaUpload />
                     {t('Upload')}
                   </div>
                 </MenuItemLink>
@@ -84,13 +85,14 @@ const Navbar = () => {
                   onClick={() => setShowMobileMenu(!showMobileMenu)}
                 >
                   <div>
-                    <FaHome />
+                    <FaLock />
                     {t('Signup')}
                   </div>
                 </MenuItemLink>
               )}
-
-              <UserOptions />
+              <MenuItem>
+                <UserOptions />
+              </MenuItem>
             </MenuItem>
           </Menu>
         </IconContext.Provider>

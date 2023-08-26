@@ -6,7 +6,7 @@ import {
   MobileIcon,
 } from './UserOptions-css';
 import {
-  FaExpeditedssl,
+  FaUnlockAlt,
   FaPowerOff,
   FaTrashAlt,
   FaEyeSlash,
@@ -62,7 +62,7 @@ const UserOptions = () => {
             </MenuItem>
           ) : (
             <MenuItem to="/login">
-              <FaExpeditedssl />
+              <FaUnlockAlt />
               <> {t('Login')}</>
             </MenuItem>
           )}
