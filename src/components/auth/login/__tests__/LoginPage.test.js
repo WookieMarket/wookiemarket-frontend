@@ -10,6 +10,7 @@ jest.mock('../../../../store/slices/auth', () => ({
   __esModule: true,
   authLogin: jest.fn(), // Mock only the authLogin action
 }));
+console.log('mock', authLogin);
 
 describe('LoginPage', () => {
   const renderComponent = (error = null) => {
@@ -49,7 +50,7 @@ describe('LoginPage', () => {
     const usernameInput = screen.getByLabelText(/Username/);
     const passwordInput = screen.getByLabelText(/Password/);
     const checkboxInput = screen.getByLabelText(/RememberMe/);
-    const submitButton = screen.getByTestId("button");
+    const submitButton = screen.getByTestId('button');
     expect(submitButton).toBeDisabled();
 
     //NOTE to launch events
