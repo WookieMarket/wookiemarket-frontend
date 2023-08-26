@@ -1,22 +1,25 @@
 import { render, screen } from '@testing-library/react';
-import SignupPage from '../SignupPage';
+import DeleteUserPage from '../DeleteUserPage';
 import userEvent from '@testing-library/user-event';
-import { authSignup } from '../../../../store/slices/auth';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import * as defaultState from '../../../../store/reducers';
+import { deleteAccount } from '../../../../store/slices/auth';
 
 jest.mock('../../../../store/slices/auth', () => ({
   __esModule: true,
-  authSignup: jest.fn(),
+  deleteAccount: jest.fn(), // Mock only the deleteAccount action
 }));
 
-describe('Signup', () => {
+console.log('mock', deleteAccount);
+
+describe('DeleteUserPage', () => {
   const renderComponent = (error = null) => {
     const store = {
       getState: () => {
-        const state = { ...defaultState };
-        state.ui.error = error;
+        const state = { ...defaultState }; // Create a copy of the state
+        state.ui.error = error; // Modify the copy instead of the original state
+
         return state;
       },
       subscribe: () => {},
@@ -25,7 +28,7 @@ describe('Signup', () => {
     return render(
       <Provider store={store}>
         <MemoryRouter>
-          <SignupPage />
+          <DeleteUserPage />
         </MemoryRouter>
       </Provider>,
     );
@@ -36,43 +39,45 @@ describe('Signup', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('should dispatch signup action', () => {
-    const userData = {
-      username: 'user123',
-      password: 'supersegurisimo',
-      email: 'user123@test.com',
-    };
+  test('should dispatch deleteAccount action', async () => {
+    const email = 'example@example.com';
 
-    // Render component
+    //NOTE I render the component
     renderComponent();
 
-    // Test UI components
-    const usernameInput = screen.getByLabelText(/Username/);
-    const passwordInput = screen.getByLabelText(/Password/);
-    const emailInput = screen.getByLabelText(/Email/);
-    const submitButton = screen.getByRole('button', { name: /Register/ });
+    const usernameEmail = screen.getByLabelText(/Enter your email/);
+
+    const submitButton = screen.getByTestId('buttonDelete');
     expect(submitButton).toBeDisabled();
 
-    // Test button after fulfilling text fields
-    userEvent.type(usernameInput, userData.username);
-    userEvent.type(passwordInput, userData.password);
-    userEvent.type(emailInput, userData.email);
+    //NOTE to launch events
+    userEvent.type(usernameEmail, email);
+
     expect(submitButton).toBeEnabled();
     userEvent.click(submitButton);
 
-    expect(authSignup).toHaveBeenCalledWith(userData);
+    const modalConfirmButton = await screen.findByTestId('confirmButton');
+
+    expect(modalConfirmButton).toBeInTheDocument();
+
+    userEvent.click(modalConfirmButton);
+
+    expect(deleteAccount).toHaveBeenCalledWith(email);
   });
 
   test('should display an error', () => {
+    //NOTE // Spy on resetError function
     const resetErrorSpy = jest.spyOn(
       require('../../../../store/slices/ui'),
       'resetError',
     );
 
-    const error = { message: 'Bad request' };
+    const error = {
+      data: { error: 'You do not have permissions to delete this user.' },
+    };
 
     renderComponent(error);
-    const errorElement = screen.getByText(error.message);
+    const errorElement = screen.getByText(error.data.error);
 
     expect(errorElement).toBeInTheDocument();
     const modalButton = screen.getByTestId('modalButton');

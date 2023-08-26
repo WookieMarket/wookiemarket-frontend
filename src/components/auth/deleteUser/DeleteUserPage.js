@@ -67,7 +67,7 @@ function DeleteUserPage() {
             />
 
             <Button
-              data-testid="button"
+              data-testid="buttonDelete"
               type="submit"
               variant="accept"
               width="button-form"

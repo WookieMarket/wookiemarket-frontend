@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AdNew snapshot 1`] = `
+exports[`DeleteUserPage snapshot 1`] = `
 <div>
   <div>
     <header
@@ -93,7 +93,7 @@ exports[`AdNew snapshot 1`] = `
               </a>
               <a
                 class="sc-jTrPJq iIRaXo"
-                href="/create-ad"
+                href="/signup"
               >
                 <div>
                   <svg
@@ -102,15 +102,15 @@ exports[`AdNew snapshot 1`] = `
                     stroke="currentColor"
                     stroke-width="0"
                     style="font-size: 2em;"
-                    viewBox="0 0 512 512"
+                    viewBox="0 0 576 512"
                     width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M320 336c0 8.84-7.16 16-16 16h-96c-8.84 0-16-7.16-16-16v-48H0v144c0 25.6 22.4 48 48 48h416c25.6 0 48-22.4 48-48V288H320v48zm144-208h-80V80c0-25.6-22.4-48-48-48H176c-25.6 0-48 22.4-48 48v48H48c-25.6 0-48 22.4-48 48v80h512v-80c0-25.6-22.4-48-48-48zm-144 0H192V96h128v32z"
+                      d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"
                     />
                   </svg>
-                  Upload
+                  Signup
                 </div>
               </a>
               <div
@@ -138,33 +138,8 @@ exports[`AdNew snapshot 1`] = `
                   class="sc-qRumB iQEWcd"
                 >
                   <a
-                    aria-current="page"
-                    class="sc-jsMahE eXalfo active"
-                    href="/"
-                  >
-                    <svg
-                      fill="currentColor"
-                      height="1em"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      style="font-size: 1.7em;"
-                      viewBox="0 0 512 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z"
-                      />
-                    </svg>
-                    <button
-                      class="navbar-list-item"
-                    >
-                      Logout
-                    </button>
-                  </a>
-                  <a
                     class="sc-jsMahE eXalfo"
-                    href="/delete-account"
+                    href="/login"
                   >
                     <svg
                       fill="currentColor"
@@ -172,15 +147,16 @@ exports[`AdNew snapshot 1`] = `
                       stroke="currentColor"
                       stroke-width="0"
                       style="font-size: 1.7em;"
-                      viewBox="0 0 448 512"
+                      viewBox="0 0 496 512"
                       width="1em"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                        d="M248 43.4C130.6 43.4 35.4 138.6 35.4 256S130.6 468.6 248 468.6 460.6 373.4 460.6 256 365.4 43.4 248 43.4zm-97.4 132.9c0-53.7 43.7-97.4 97.4-97.4s97.4 43.7 97.4 97.4v26.6c0 5-3.9 8.9-8.9 8.9h-17.7c-5 0-8.9-3.9-8.9-8.9v-26.6c0-82.1-124-82.1-124 0v26.6c0 5-3.9 8.9-8.9 8.9h-17.7c-5 0-8.9-3.9-8.9-8.9v-26.6zM389.7 380c0 9.7-8 17.7-17.7 17.7H124c-9.7 0-17.7-8-17.7-17.7V238.3c0-9.7 8-17.7 17.7-17.7h248c9.7 0 17.7 8 17.7 17.7V380zm-248-137.3v132.9c0 2.5-1.9 4.4-4.4 4.4h-8.9c-2.5 0-4.4-1.9-4.4-4.4V242.7c0-2.5 1.9-4.4 4.4-4.4h8.9c2.5 0 4.4 1.9 4.4 4.4zm141.7 48.7c0 13-7.2 24.4-17.7 30.4v31.6c0 5-3.9 8.9-8.9 8.9h-17.7c-5 0-8.9-3.9-8.9-8.9v-31.6c-10.5-6.1-17.7-17.4-17.7-30.4 0-19.7 15.8-35.4 35.4-35.4s35.5 15.8 35.5 35.4zM248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 478.3C121 486.3 17.7 383 17.7 256S121 25.7 248 25.7 478.3 129 478.3 256 375 486.3 248 486.3z"
                       />
                     </svg>
-                    Delete Account
+                     
+                    Login
                   </a>
                 </div>
               </div>
@@ -195,180 +171,37 @@ exports[`AdNew snapshot 1`] = `
       <h2
         class="layout-title"
       >
-        Create an ad
+        Delete User
       </h2>
       <form
-        class="container-form-creation"
-        enctype="multipart/form-data"
+        class="container-delete-form"
       >
         <div
-          class="form-group-creation"
+          class="delete-form-group"
         >
           <label
-            class="password-label-creation"
-            for="adname"
+            class="delete-form-label"
+            for="delete-user"
           >
-            Article
+            Enter your email
           </label>
           <input
-            class="password-input-creation"
-            id="adname"
-            name="name"
-            placeholder="Name"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="input-checked"
-        >
-          <div>
-            <label
-              class="checked-label-creation"
-              for="onsale"
-            >
-              Sell
-            </label>
-            <input
-              class="checked-input-creation"
-              id="onsale"
-              name="onSale"
-              type="radio"
-              value="true"
-            />
-          </div>
-          <div>
-            <label
-              class="checked-label-creation"
-              for="onsale"
-            >
-              Buy
-            </label>
-            <input
-              class="checked-input-creation"
-              id="onsale"
-              name="onSale"
-              type="radio"
-              value="false"
-            />
-          </div>
-        </div>
-        <div
-          class="form-group-creation"
-        >
-          <label
-            class="password-label-creation"
-            for="price"
-          >
-            Price
-          </label>
-          <input
-            class="password-input-creation"
-            id="price"
-            name="price"
-            placeholder="Price"
-            type="number"
-            value=""
-          />
-        </div>
-        <div
-          class="form-group-creation"
-        >
-          <label
-            class="password-label-creation"
-            for="category"
-          >
-            Category
-          </label>
-          <input
-            class="password-input-creation"
-            id="category"
-            name="category"
-            placeholder="Category"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="form-group-creation"
-        >
-          <label
-            class="password-label-creation"
-            for="description"
-          >
-            Description
-          </label>
-          <input
-            class="password-input-creation"
-            id="description"
-            name="description"
-            placeholder="Description"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="form-group-creation"
-        >
-          <label
-            class="password-label-creation"
-            for="status"
-          >
-            Status
-          </label>
-          <input
-            class="password-input-creation"
-            id="status"
-            name="status"
-            placeholder="Status"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="form-group-creation"
-        >
-          <label
-            class="password-label-creation"
-            for="coin"
-          >
-            Coin
-          </label>
-          <input
-            class="password-input-creation"
-            id="coin"
-            name="coin"
-            placeholder="Coin"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="form-group-creation"
-        >
-          <label
-            class="password-label-creation"
-            for="img"
-          >
-            Image
-          </label>
-          <input
-            accept="image/*"
-            class="img-input-creation"
-            id="img"
-            name="image"
-            type="file"
+            class="delete-form-input"
+            id="delete-user"
+            name="delete-user"
+            placeholder="Email"
+            type="email"
             value=""
           />
         </div>
         <button
           class="sc-kFuwaP gUKuqw"
-          data-testid="buttonAdNew"
+          data-testid="buttonDelete"
           disabled=""
           type="submit"
           width="button-form"
         >
-          Create
+          Delete
         </button>
       </form>
     </main>
