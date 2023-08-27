@@ -13,6 +13,7 @@ import Modal from '../../shared/modal/Modal';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import './advertPage.css';
 import { useState } from 'react';
+import Spinner from '../../shared/spinner/Spinner';
 
 const AdvertPage = () => {
   const token = localStorage.getItem('auth');
@@ -73,14 +74,12 @@ const AdvertPage = () => {
   const handleDeleteConfirm = async () => {
     setActiveModal(null);
     await dispatch(deleteAdvert(id));
-    navigate('/');
+    handleOpenModal(3);
+    setTimeout(() => {
+      navigate('/');
+    }, 3000);
   };
 
-  //TODO Si éxito al borrar,
-  //Shwo modal con spinner
-  //Show modal de 2s? diciendo que se ha borrado.
-  //Botón mandar a casa
-  //Retornar al home
   //TODO Edit Advert
 
   const handleEdit = () => {
@@ -95,16 +94,7 @@ const AdvertPage = () => {
   return (
     <>
       {isLoading ? (
-        <div className="loadingPage">
-          <div className="loadingInfo">
-            <h1>LOADING....</h1>
-            <div className="spinner" id="spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-        </div>
+        <Spinner message={t('LOADING......')} />
       ) : (
         <>
           {activeModal === 1 && (
@@ -131,7 +121,7 @@ const AdvertPage = () => {
               id={3}
               title={t('DELETED ADVERT')}
               message={t(`Your advert was deleted successfully`)}
-              onConfirm={handleDeleteConfirm}
+              onConfirm={() => navigate('/')}
             ></Modal>
           )}
           {error && (

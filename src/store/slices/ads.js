@@ -23,12 +23,8 @@ export const adsCreate = createAsyncThunk(
 export const advertsList = createAsyncThunk(
   'ads/list',
   async (_, { extra: { service }, rejectWithValue }) => {
-    console.log('Antes del try');
-    console.log('Antes del try');
     try {
-      //console.log('Despachando la acción advertsList');
       const adverts = await service.ads.getRecentAds();
-      //console.log('Anuncios obtenidos:', adverts);
       return adverts;
     } catch (error) {
       console.log(error);
@@ -57,10 +53,9 @@ export const deleteAdvert = createAsyncThunk(
   async (id, { extra: { service }, rejectWithValue }) => {
     try {
       await service.ads.deleteAdvert(id);
-      console.log('Deelted Advert');
+      console.log('Advert...delted');
       return true;
     } catch (error) {
-      // Maneja cualquier error que pueda ocurrir
       return rejectWithValue(error);
     }
   },
