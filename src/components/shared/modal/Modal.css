@@ -31,11 +31,16 @@
 
 .modal-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 20px;
 }
 
-.modal-button:disabled, button:disabled:hover {
+.modal-buttons > .oncancel + .onconfirm {
+  margin-left: auto;
+}
+
+.modal-button:disabled,
+button:disabled:hover {
   background-color: #999;
   opacity: 0.5;
   cursor: default;

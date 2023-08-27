@@ -3,21 +3,23 @@ import Button from '../Button';
 import './Modal.css';
 
 function Modal(props) {
-  const { message, title, onConfirm, onCancel } = props;
+  const { message, title, onConfirm, onCancel, showCancel = true } = props;
   const { t } = useTranslation();
 
   return (
     <div className="modal-container">
       <div className="modal">
         <div className="modal-header">{title}</div>
-        
+
         <div className="modal-body">{message}</div>
         <div className="modal-buttons">
-          <Button onClick={onCancel} className="oncancel">
-            {t("Cancel")}
-          </Button>
+          {showCancel && (
+            <Button onClick={onCancel} className="oncancel">
+              {t('Cancel')}
+            </Button>
+          )}
           <Button onClick={onConfirm} className="onconfirm">
-            {t("Confirm")}
+            {t('Confirm')}
           </Button>
         </div>
       </div>

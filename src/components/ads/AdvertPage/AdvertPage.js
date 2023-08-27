@@ -56,19 +56,7 @@ const AdvertPage = () => {
   const handleErrorClick = () => {
     dispatch(resetError());
   };
-
-  const handleDeletetClick = () => {
-    dispatch(toggleModal());
-  };
-
-  const handleShowModalconfirm = async event => {
-    dispatch(toggleModal());
-  };
-
-  const handleShowModalCancel = () => {
-    dispatch(toggleModal());
-  };
-  /* */
+  
 
   //Delete Advert
   const handleDeleteConfirm = async () => {
@@ -121,6 +109,7 @@ const AdvertPage = () => {
               id={3}
               title={t('DELETED ADVERT')}
               message={t(`Your advert was deleted successfully`)}
+              showCancel={false}
               onConfirm={() => navigate('/')}
             ></Modal>
           )}
