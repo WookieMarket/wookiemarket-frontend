@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdById, deleteAdvert } from '../../../store/slices/ads';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAdvertById, getUi } from '../../../store/selectors';
-import { resetError, toggleModal } from '../../../store/slices/ui';
+import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Header from '../../layout/Header';
 import Footer from '../../layout/Footer';
@@ -24,23 +24,23 @@ const AdvertPage = () => {
   const advert = useSelector(state => getAdvertById(state, id));
   const { isLoading, error } = useSelector(getUi);
 
-  //TODO Error al recargar
-  const username = useSelector(state => state.ads.data[0].username);
-  let realUser = false;
-  const realUserComp = username => {
-    const tokenUsername = JSON.parse(atob(token.split('.')[1]));
-    console.log('tokenUsername:' + tokenUsername.username);
-    username === tokenUsername.username
-      ? (realUser = true)
-      : //TODO MODALSHOW SAING THIS
-        console.log('El usuario autenticado NO es el propietario del anuncio');
-  };
-  const isDisabled = !useSelector(state => state.auth) && realUser === true;
-  !token //MODAL CON DEBE LOGUEARSE
-    ? console.log('Ud. no está logueado')
-    : realUserComp(username);
+  const username = useSelector(state =>
+    state.ads.data && state.ads.data.length > 0
+      ? state.ads.data[0].username
+      : undefined,
+  );
 
-  console.log('username: ' + username);
+  const isAdOwner = (token, username) => {
+    if (!token || token === null) {
+      return false;
+    }
+    const tokenUsername = JSON.parse(atob(token.split('.')[1]));
+
+    return username === tokenUsername.username;
+  };
+
+  const isDisabled =
+    useSelector(state => state.auth) && isAdOwner(token, username) === true;
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
@@ -56,7 +56,6 @@ const AdvertPage = () => {
   const handleErrorClick = () => {
     dispatch(resetError());
   };
-  
 
   //Delete Advert
   const handleDeleteConfirm = async () => {
@@ -133,7 +132,7 @@ const AdvertPage = () => {
             ) : (
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
-            {!isDisabled && (
+            {isDisabled && (
               <section id="buttonSection">
                 <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
                   {t('Delete Advert')}?
