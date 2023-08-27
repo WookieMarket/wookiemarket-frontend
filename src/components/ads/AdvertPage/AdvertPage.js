@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdById } from '../../../store/slices/ads';
+import { getAdById, deleteAdvert } from '../../../store/slices/ads';
 import { useParams } from 'react-router-dom';
-import {
-  getAdvertById,
-  getUi,
-  getUsernameFromAd,
-} from '../../../store/selectors';
+import { getAdvertById, getUi } from '../../../store/selectors';
 import { resetError, toggleModal } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Header from '../../layout/Header';
@@ -25,19 +21,22 @@ const AdvertPage = () => {
   const dispatch = useDispatch();
   const advert = useSelector(state => getAdvertById(state, id));
   const { isLoading, error } = useSelector(getUi);
-  const isDisabled = !useSelector(state => state.auth) && !token;
 
   //TODO Error al recargar
   const username = useSelector(state => state.ads.data[0].username);
-  const realUser = (username) => {
+  let realUser = false;
+  const realUserComp = username => {
     const tokenUsername = JSON.parse(atob(token.split('.')[1]));
-    console.log('tokenUsername:' + tokenUsername.username)
-    username === tokenUsername.username ? (
-      console.log('El usuario es autenticado es el propietario del anuncio')
-    ) : (console.log('El usuario autenticado NO es el propietario del anuncio'))
-  }
-  !token ? (//MODAL CON DEBE LOGUEARSE
-  console.log('Ud. no está logueado')) : (realUser(username))
+    console.log('tokenUsername:' + tokenUsername.username);
+    username === tokenUsername.username
+      ? (realUser = true)
+      : //TODO MODALSHOW SAING THIS
+        console.log('El usuario autenticado NO es el propietario del anuncio');
+  };
+  const isDisabled = !useSelector(state => state.auth) && realUser === true;
+  !token //MODAL CON DEBE LOGUEARSE
+    ? console.log('Ud. no está logueado')
+    : realUserComp(username);
 
   console.log('username: ' + username);
 
@@ -69,12 +68,10 @@ const AdvertPage = () => {
   };
   /* */
 
-  //TODO Delete Advert
-
+  //Delete Advert
   const handleDeleteConfirm = () => {
     setActiveModal(null);
-    //dispatch(deletedAdvert(id));
-    
+    dispatch(deleteAdvert(id));
   };
   //TODO Edit Advert
   const handleEdit = () => {
