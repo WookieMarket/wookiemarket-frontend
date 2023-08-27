@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdById, deleteAdvert } from '../../../store/slices/ads';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getAdvertById, getUi } from '../../../store/selectors';
 import { resetError, toggleModal } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
@@ -18,6 +18,7 @@ const AdvertPage = () => {
   const token = localStorage.getItem('auth');
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const advert = useSelector(state => getAdvertById(state, id));
   const { isLoading, error } = useSelector(getUi);
@@ -69,11 +70,19 @@ const AdvertPage = () => {
   /* */
 
   //Delete Advert
-  const handleDeleteConfirm = () => {
+  const handleDeleteConfirm = async () => {
     setActiveModal(null);
-    dispatch(deleteAdvert(id));
+    await dispatch(deleteAdvert(id));
+    navigate('/');
   };
+
+  //TODO Si éxito al borrar,
+  //Shwo modal con spinner
+  //Show modal de 2s? diciendo que se ha borrado.
+  //Botón mandar a casa
+  //Retornar al home
   //TODO Edit Advert
+
   const handleEdit = () => {
     setActiveModal(null);
     console.log('Edited Advert');
@@ -115,6 +124,14 @@ const AdvertPage = () => {
               message={t(`Are you really sure you want to delete this advert?`)}
               onConfirm={handleDeleteConfirm}
               onCancel={handleCloseModal}
+            ></Modal>
+          )}
+          {activeModal === 3 && (
+            <Modal
+              id={3}
+              title={t('DELETED ADVERT')}
+              message={t(`Your advert was deleted successfully`)}
+              onConfirm={handleDeleteConfirm}
             ></Modal>
           )}
           {error && (
