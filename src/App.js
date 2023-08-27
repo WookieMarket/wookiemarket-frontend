@@ -12,6 +12,7 @@ import AdNew from './components/ads/adsNew/AdNew';
 import { useTranslation } from 'react-i18next';
 import AdvertsListPage from './components/ads/AdvertsListPage/AdvertsListPage';
 import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
+import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 
 function App() {
   const { t } = useTranslation();
@@ -33,6 +34,15 @@ function App() {
           element={
             <RequireAuth>
               <DeleteUserPage />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/modify"
+          element={
+            <RequireAuth>
+              <ModifyAd />
             </RequireAuth>
           }
         />

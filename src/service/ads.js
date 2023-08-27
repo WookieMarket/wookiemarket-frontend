@@ -17,6 +17,16 @@ export const createAd = ad => {
   return client.post(url, ad, config);
 };
 
+export const modifyAd = (adId, ad) => {
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  const url = `${adUrl}/modify/${adId}`;
+  return client.put(url, ad, config);
+};
+
 // export const getLastAdv = () => {
 //   const url = `${adUrl}`;
 //   return client.get(url);

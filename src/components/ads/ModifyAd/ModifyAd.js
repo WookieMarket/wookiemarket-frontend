@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
@@ -6,39 +6,36 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
-import { adsCreate } from '../../../store/slices/ads';
+//import { adsCreate } from '../../../store/slices/ads';
 //import Form from '../../shared/form/Form';
 import AdForm from '../../AdForm/AdForm';
+import { getAd, modifyAd } from '../../../service/ads';
 //import Button from '../../shared/Button';
 //import AdForm from '../../AdForm/AdForm';
 
 //import './AdNew.css';
 
-function AdNew() {
+function ModifyAd({ match }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
-
+  const [ad, setAd] = useState(null);
   const [image, setImage] = useState(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    onSale: true,
-    price: '',
-    category: '',
-    description: '',
-    status: '',
-    coin: '',
-  });
 
-  const adNew = {
-    name: formData.name,
-    onSale: formData.onSale,
-    price: formData.price,
-    category: formData.category,
-    description: formData.description,
-    coin: formData.coin,
-    image: image ? image.image : null,
-  };
+  //const adId = match.params.id;
+  const adId = '64eb4bc75e26a79e96c9042e';
+
+  useEffect(() => {
+    const fetchAd = async () => {
+      try {
+        const fetchedAd = await dispatch(getAd(adId));
+        setAd(fetchedAd);
+      } catch (error) {
+        // Manejo de errores
+      }
+    };
+    fetchAd();
+  }, [adId, dispatch]);
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
@@ -47,15 +44,15 @@ function AdNew() {
   };
 
   const handleChange = event => {
-    setFormData({
-      ...formData,
+    setAd({
+      ...ad,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(adsCreate(adNew));
+    dispatch(modifyAd((adId, ad)));
   };
 
   const handleErrorClick = () => {
@@ -63,12 +60,12 @@ function AdNew() {
   };
 
   const buttonDisabled =
-    !formData.name ||
-    !formData.onSale ||
-    !formData.price ||
-    !formData.category ||
-    !formData.description ||
-    !formData.coin;
+    !ad.name ||
+    !ad.onSale ||
+    !ad.price ||
+    !ad.category ||
+    !ad.description ||
+    !ad.coin;
 
   return (
     <Layout title={t('Create an ad')}>
@@ -77,16 +74,16 @@ function AdNew() {
       ) : (
         <AdForm
           handleSubmit={handleSubmit}
-          valueInputName={formData.name}
+          valueInputName={ad.name}
           handleChange={handleChange}
-          valueInputPrice={formData.price}
-          valueInputCategory={formData.category}
-          valueInputDescription={formData.description}
-          valueInputCoin={formData.coin}
+          valueInputPrice={ad.price}
+          valueInputCategory={ad.category}
+          valueInputDescription={ad.description}
+          valueInputCoin={ad.coin}
           handleChangeInputFile={handleChangeInputFile}
           buttonDisabled={buttonDisabled}
-          testid={'buttonAdNew'}
-          nameButton={t('Create')}
+          testid={'buttonModifyAd'}
+          nameButton={t('Modify')}
         ></AdForm>
       )}
 
@@ -102,4 +99,4 @@ function AdNew() {
   );
 }
 
-export default AdNew;
+export default ModifyAd;
