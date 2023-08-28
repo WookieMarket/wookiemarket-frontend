@@ -27,6 +27,11 @@ export const modifyAd = (adId, ad) => {
   return client.put(url, ad, config);
 };
 
+export const getTags = () => {
+  const url = `${adUrl}/tags`;
+  return client.get(url);
+};
+
 // export const getLastAdv = () => {
 //   const url = `${adUrl}`;
 //   return client.get(url);
