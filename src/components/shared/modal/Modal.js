@@ -24,7 +24,7 @@ function Modal(props) {
           <Button
             onClick={onConfirm}
             className="onconfirm"
-            data-testid={confirmButton}
+            data-testid="confirmButton"
           >
             {t('Confirm')}
           </Button>

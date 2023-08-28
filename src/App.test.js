@@ -29,4 +29,4 @@ test('renders learn react link', () => {
   );
   const linkElement = screen.getByText(/welcomeMessage/);
   expect(linkElement).toBeInTheDocument();
-});*/
+});
