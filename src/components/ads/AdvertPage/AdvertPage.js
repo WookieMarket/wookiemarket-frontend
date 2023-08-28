@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAdById } from '../../../store/slices/ads';
 import { useParams } from 'react-router-dom';
 import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
-import { resetError, toggleModal } from '../../../store/slices/ui';
+import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Header from '../../layout/Header';
 import Footer from '../../layout/Footer';
@@ -18,13 +18,18 @@ const AdvertPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const advert = useSelector(state => getAdvertById(state, id));
-  const { showModal, isLoading, error } = useSelector(getUi);
-  const token = localStorage.getItem('auth');
-  const getIsLogged = useSelector(state => state.auth)
-  const isDisabled =  !useSelector(state => state.auth) && !token;
+  const advert = useSelector(getAdvertById(id));
+  const { isLoading, error } = useSelector(getUi);
+  //const token = localStorage.getItem('auth');
+  //const getIsLogged = useSelector(state => state.auth)
+  const isLogged = useSelector(getIsLogged);
 
- console.log('isDisabled: ' + getIsLogged)
+  //const isAdvertOwner = advert && isLogged && advert.ownerId === /* ID del usuario actual */;
+
+  //const isDisabled = !useSelector(state => state.auth) && !isLogged;
+  const isDisabled = !isLogged;
+
+  console.log('isDisabled: ' + getIsLogged);
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
@@ -41,27 +46,27 @@ const AdvertPage = () => {
     dispatch(resetError());
   };
 
-  const handleDeletetClick = () => {
-    dispatch(toggleModal());
-  };
+  // const handleDeletetClick = () => {
+  //   dispatch(toggleModal());
+  // };
 
-  const handleShowModalconfirm = async event => {
-    dispatch(toggleModal());
-  };
+  // const handleShowModalconfirm = async event => {
+  //   dispatch(toggleModal());
+  // };
 
-  const handleShowModalCancel = () => {
-    dispatch(toggleModal());
-  };
+  // const handleShowModalCancel = () => {
+  //   dispatch(toggleModal());
+  // };
   /* */
 
   //TODO Delete Advert
   const handleDeleteConfirm = () => {
-    setActiveModal(null)
+    setActiveModal(null);
     console.log('Deelted Advert');
   };
   //TODO Edit Advert
   const handleEdit = () => {
-    setActiveModal(null)
+    setActiveModal(null);
     console.log('Edited Advert');
   };
 
@@ -123,22 +128,16 @@ const AdvertPage = () => {
             ) : (
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
-            {!isDisabled && (<section id="buttonSection">
-              <Button
-                id="deleteButton"
-                onClick={() => handleOpenModal(1)}
-                
-              >
-                {t('Delete Advert')}?
-              </Button>
-              <Button
-                id="editButton"
-                onClick={handleEdit}
-                
-              >
-                {t('Edit Advert')}
-              </Button>
-            </section>)}
+            {!isDisabled && advert && (
+              <section id="buttonSection">
+                <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
+                  {t('Delete Advert')}?
+                </Button>
+                <Button id="editButton" onClick={handleEdit}>
+                  {t('Edit Advert')}
+                </Button>
+              </section>
+            )}
             <div
               className={`no-advert_content ${!advert ? 'no-advert' : ''}`}
             ></div>

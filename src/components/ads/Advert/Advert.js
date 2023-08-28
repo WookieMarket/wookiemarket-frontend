@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 
 function Advert(advert) {
   const { t } = useTranslation();
-  const advDate = new Date(advert.createdAt);
+  //const advDate = new Date(advert.createdAt);
   //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
-  const handleImageError = (event) => {
+  const handleImageError = event => {
     event.target.src = defaultImage;
   };
 
@@ -20,14 +20,14 @@ function Advert(advert) {
   // };
   return (
     <>
-      <div className='productInfo' id='advertOnly'>
-        <div className='advert-name'>
+      <div className="productInfo" id="advertOnly">
+        <div className="advert-name">
           <h2>{advert.name}</h2>
         </div>
       </div>
       <br />
-      <div className='productData '>
-        <div className='product-img'>
+      <div className="productData ">
+        <div className="product-img">
           {/*advert.image === '' ? (
             <img className='img' src={defaultImage} alt='Default Image'></img>
           ) : (
@@ -39,7 +39,7 @@ function Advert(advert) {
           )*/}
           {
             <img
-              className='img'
+              className="img"
               src={advert.image}
               onError={handleImageError}
               alt={t('Product image')}
@@ -47,29 +47,30 @@ function Advert(advert) {
           }
         </div>
         <br />
-        <div className='productInfo'>
-          <p className='advert_label'>{t('Description')}</p><br />
-          <span className='description'> {advert.description}</span>
+        <div className="productInfo">
+          <p className="advert_label">{t('Description')}</p>
+          <br />
+          <span className="description"> {advert.description}</span>
           <br />
           <br />
           <p>
             {t('Is&')}
             {advert.onSale ? (
-              <span id='isSale'> {t('for sale')} </span>
+              <span id="isSale"> {t('for sale')} </span>
             ) : (
-              <span id='isSale'> {t('purchased')} </span>
+              <span id="isSale"> {t('purchased')} </span>
             )}
             {t('this product by')}:
           </p>
-          <div className='price'>
+          <div className="price">
             <p>
-              {advert.price} <span id='price_coin'> €</span>
+              {advert.price} <span id="price_coin"> €</span>
             </p>
           </div>
-          <div className='advert_label'>
+          <div className="advert_label">
             <p>
               {t('Category')}:{' '}
-              <span className='advert_text'>
+              <span className="advert_text">
                 {advert.category === undefined
                   ? ''
                   : advert.category.join(', ').toLocaleUpperCase()}
@@ -78,8 +79,9 @@ function Advert(advert) {
           </div>
         </div>
         <div>
-          <p className='advert_label'>
-            {t('Username')}: <span className='advert-text'>{advert.username}</span>
+          <p className="advert_label">
+            {t('Username')}:{' '}
+            <span className="advert-text">{advert.username}</span>
           </p>
         </div>
       </div>
