@@ -8,3 +8,8 @@ export const getAdverts = state => (state.ads.data ? state.ads.data : []);
 
 export const getAdvertById = advertId => state =>
   state.ads.data.find(advert => advert._id === advertId);
+
+export const getAllTags = state =>
+  state.tags.areLoaded ? state.category.data : [];
+
+export const areTagsLoaded = state => state.category.areLoaded;

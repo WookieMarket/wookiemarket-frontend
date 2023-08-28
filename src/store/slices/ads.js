@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { areAdvertsLoaded } from '../selectors';
+import { areAdvertsLoaded, areTagsLoaded } from '../selectors';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -17,7 +17,7 @@ export const adsCreate = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const advertsList = createAsyncThunk(
@@ -36,8 +36,24 @@ export const advertsList = createAsyncThunk(
     }
   },
   {
+    condition: (_, { getState }) => !areTagsLoaded(getState()),
+  },
+);
+
+export const tagList = createAsyncThunk(
+  'tag/list',
+  async (_, { extra: { service }, rejectWithValue }) => {
+    try {
+      const tag = await service.ads.getTags();
+
+      return tag;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+  {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  }
+  },
 );
 
 export const getAdById = createAsyncThunk(
@@ -49,16 +65,22 @@ export const getAdById = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 const ads = createSlice({
   name: 'ads',
   initialState: {
-    areLoaded: false,
-    data: [],
+    ads: {
+      areLoaded: false,
+      data: [],
+    },
+    category: {
+      areLoaded: false,
+      data: [],
+    },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(adsCreate.fulfilled, (state, action) => {
         state.data.unshift(action.payload.result);
@@ -69,7 +91,11 @@ const ads = createSlice({
       })
       .addCase(getAdById.fulfilled, (state, action) => {
         state.areLoaded = false;
-        state.data = [action.payload.result]
+        state.data = [action.payload.result];
+      })
+      .addCase(tagList.fulfilled, (state, action) => {
+        state.areLoaded = true;
+        state.data = action.payload.results;
       });
   },
 });
