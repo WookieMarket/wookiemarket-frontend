@@ -6,14 +6,14 @@ export const adsCreate = createAsyncThunk(
   async (ad, { extra: { service }, rejectWithValue }) => {
     try {
       //TODO modificar cuando este implementado el detalle del anuncio
-      const { id } = await service.ads.createAd(ad);
-      //const id = await service.ads.createAd(ad);
+      //const { id } = await service.ads.createAd(ad);
+      const id = await service.ads.createAd(ad);
       console.log('Ante', id);
 
       //TODO modificar cuando este implementado el detalle del anuncio
-      const createdAd = await service.ads.getAd(id);
-      return createdAd;
-      //return id;
+      //const createdAd = await service.ads.getAd(id);
+      //return createdAd;
+      return id;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -71,14 +71,8 @@ export const getAdById = createAsyncThunk(
 const ads = createSlice({
   name: 'ads',
   initialState: {
-    ads: {
-      areLoaded: false,
-      data: [],
-    },
-    category: {
-      areLoaded: false,
-      data: [],
-    },
+    areLoaded: false,
+    data: [],
   },
   extraReducers: builder => {
     builder

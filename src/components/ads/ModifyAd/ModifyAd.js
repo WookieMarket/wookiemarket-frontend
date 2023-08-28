@@ -22,8 +22,7 @@ function ModifyAd({ match }) {
   const [ad, setAd] = useState(null);
   const [image, setImage] = useState(null);
 
-  //const adId = match.params.id;
-  const adId = '64eb4bc75e26a79e96c9042e';
+  const adId = match.params.id;
 
   useEffect(() => {
     const fetchAd = async () => {

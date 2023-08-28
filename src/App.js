@@ -10,6 +10,10 @@ import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 
+import './App.css';
+import './css/Variables.css';
+import './css/Reset.css';
+
 function App() {
   const { t } = useTranslation();
   return (

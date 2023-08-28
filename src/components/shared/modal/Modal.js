@@ -3,8 +3,7 @@ import Button from '../Button';
 import './Modal.css';
 
 function Modal(props) {
-  const { message, title, onConfirm, onCancel, cancelButton, confirmButton } =
-    props;
+  const { message, title, onConfirm, onCancel, cancelButton } = props;
   const { t } = useTranslation();
 
   return (
