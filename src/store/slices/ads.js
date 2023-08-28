@@ -17,17 +17,18 @@ export const adsCreate = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
+  }
 );
 
 export const advertsList = createAsyncThunk(
   'ads/list',
   async (_, { extra: { service }, rejectWithValue }) => {
     console.log('Antes del try');
+    console.log('Antes del try');
     try {
-      console.log('Despachando la acción advertsList');
+      //console.log('Despachando la acción advertsList');
       const adverts = await service.ads.getRecentAds();
-      console.log('Anuncios obtenidos:', adverts);
+      //console.log('Anuncios obtenidos:', adverts);
       return adverts;
     } catch (error) {
       console.log(error);
@@ -36,7 +37,19 @@ export const advertsList = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  },
+  }
+);
+
+export const getAdById = createAsyncThunk(
+  'ads/fetchAdvertById',
+  async (id, { extra: { service }, rejectWithValue }) => {
+    try {
+      const advert = await service.ads.getAd(id);
+      return advert;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
 );
 
 const ads = createSlice({
@@ -45,7 +58,7 @@ const ads = createSlice({
     areLoaded: false,
     data: [],
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(adsCreate.fulfilled, (state, action) => {
         state.data.unshift(action.payload.result);
@@ -53,6 +66,10 @@ const ads = createSlice({
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
+      })
+      .addCase(getAdById.fulfilled, (state, action) => {
+        state.areLoaded = false;
+        state.data = [action.payload.result]
       });
   },
 });

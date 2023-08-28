@@ -1,13 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import './Footer.css';
-export function Footer() {
+const Footer = () => {
   const { t } = useTranslation();
   return (
     <footer>
       <hr />
       <div className="footer">
-        <p>{t('footer')}</p>
+        <p>{t('@Keepcoding 2023 by Mandalorians')}</p>
       </div>
     </footer>
   );
 }
+
+export default Footer;

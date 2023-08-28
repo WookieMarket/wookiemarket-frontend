@@ -49,5 +49,26 @@
   "Delete User": "Delete user",
   "Delete": "Delete",
 
-  "Email sent, check your email": "Email sent, check your email"
+  "Email sent, check your email": "Email sent, check your email",
+
+  "Created at": "Created at",
+  "Sorry, no adverts yet": "Sorry, no adverts yet",
+  "Advertisements": "Advertisements",
+  "advertisements": "advertisements",
+  "Searching area": "Searching area",
+  "LOADING...": "LOADING...",
+  "home": "home",
+  "ADVERTISEMENTS AVIABLE": "ADVERTISEMENTS AVIABLE",
+  "ADVERT DETAIL": "ADVERT DETAIL",
+  "Sorry, the requested ad is not available": "Sorry, the requested ad is not available",
+  "Product image": "Product image",
+  "Is&": "Is",
+  "this product by": "this product by",
+  "purchased": "purchased",
+  "for sale": "for sale",
+  "Delete Advert": "Delete Advert",
+  "Edit Advert": "Edit Advert",
+  "Are you sure you want to delete this advert?": "'Are you sure you want to delete this advert?",
+  "DELETING ADVERTISEMENT": "DELETING ADVERTISEMENT",
+  "DELETING ADVERTISEMENT (confirmation)": "DELETING ADVERTISEMENT (confirmation)"
 }

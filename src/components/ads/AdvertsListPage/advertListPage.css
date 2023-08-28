@@ -23,6 +23,12 @@ a:active {
   color: var(--text-color);
 }
 
+.containerTittle h1 {
+  text-transform: lowercase;
+  font-family: var(--font-family);
+  font-size: 3em;
+}
+
 .pagination .page {
   cursor: pointer;
 }
