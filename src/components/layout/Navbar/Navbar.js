@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Container,
   LogoContainer,
@@ -7,7 +7,7 @@ import {
   MenuItem,
   MenuItemLink,
   MobileIcon,
-} from "./Navbar-css";
+} from './Navbar-css';
 import {
   FaBattleNet,
   FaBars,
@@ -16,16 +16,16 @@ import {
   FaUserAlt,
   FaBriefcase,
   FaGlasses,
-} from "react-icons/fa";
-import { IconContext } from "react-icons";
-import { useTranslation } from "react-i18next";
-import "../Header.css";
+} from 'react-icons/fa';
+import { IconContext } from 'react-icons';
+import { useTranslation } from 'react-i18next';
+import '../Header.css';
 //import { Link, NavLink } from "react-router-dom";
-import { toggleModal } from "../../../store/slices/ui";
-import { authLogout } from "../../../store/slices/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { getIsLogged, getUi } from "../../../store/selectors";
-import Modal from "../../shared/modal/Modal";
+import { toggleModal } from '../../../store/slices/ui';
+import { authLogout } from '../../../store/slices/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsLogged, getUi } from '../../../store/selectors';
+import Modal from '../../shared/modal/Modal';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -52,23 +52,23 @@ const Navbar = () => {
   return (
     <Container>
       <Wrapper>
-        <IconContext.Provider value={{ style: { fontSize: "2em" } }}>
+        <IconContext.Provider value={{ style: { fontSize: '2em' } }}>
           <LogoContainer>
             <FaBattleNet />
-            <p>{t("Mandalorians")}</p>
+            <p>{t('Mandalorians')}</p>
             <img
               className="icon-language"
               src="/images/languageIcons/es.png"
               alt="ES"
-              title={t("icon-hover")}
-              onClick={() => i18n.changeLanguage("es")}
+              title={t('icon-hover')}
+              onClick={() => i18n.changeLanguage('es')}
             />
             <img
               className="icon-language"
               src="/images/languageIcons/en.png"
               alt="EN"
-              title={t("icon-hover")}
-              onClick={() => i18n.changeLanguage("en")}
+              title={t('icon-hover')}
+              onClick={() => i18n.changeLanguage('en')}
             />
           </LogoContainer>
 
@@ -80,47 +80,64 @@ const Navbar = () => {
             <MenuItem>
               <MenuItemLink
                 to="/home"
-                onClick={() => setShowMobileMenu(!showMobileMenu)}>
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+              >
                 <div>
                   <FaUserAlt />
-                  {t("Home")}
+                  {t('Home')}
                 </div>
               </MenuItemLink>
               <MenuItemLink
                 to="/create-ad"
-                onClick={() => setShowMobileMenu(!showMobileMenu)}>
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+              >
                 <div>
                   <FaBriefcase />
-                  {t("Upload")}
+                  {t('Upload')}
                 </div>
               </MenuItemLink>
               <MenuItemLink
                 to="/signup"
-                onClick={() => setShowMobileMenu(!showMobileMenu)}>
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+              >
                 <div>
                   <FaHome />
-                  {t("Signup")}
+                  {t('Signup')}
                 </div>
               </MenuItemLink>
+              {isLogged && (
+                <MenuItemLink
+                  to="/user-info"
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
+                  <div>
+                    <FaGlasses />
+                    <> {t('User info')}</>
+                  </div>
+                </MenuItemLink>
+              )}
               {isLogged ? (
                 <MenuItemLink
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}>
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
                   <div>
                     <FaGlasses />
                     <button
                       onClick={handleLogoutClick}
-                      className="navbar-list-item">
-                      {t("Logout")}
+                      className="navbar-list-item"
+                    >
+                      {t('Logout')}
                     </button>
                   </div>
                 </MenuItemLink>
               ) : (
                 <MenuItemLink
                   to="/login"
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}>
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
                   <div>
                     <FaGlasses />
-                    <> {t("Login")}</>
+                    <> {t('Login')}</>
                   </div>
                 </MenuItemLink>
               )}
@@ -130,8 +147,8 @@ const Navbar = () => {
       </Wrapper>
       {showModal && (
         <Modal
-          title={t("Leave session")}
-          message={t("¿are you sure?")}
+          title={t('Leave session')}
+          message={t('¿are you sure?')}
           onConfirm={handleShowModalconfirm}
           onCancel={handleShowModalCancel}
         />

@@ -4,7 +4,6 @@
     "icon-hover": "Click here to change the language",
     "header": "Header",
     "footer": "@Keepcoding 2023 by Mandalorians",
-
     "Username": "username",
     "Password": "password",
     "RememberMe": "RememberMe",
@@ -24,8 +23,6 @@
     "Forgot password?": "Forgot password?",
     "Enter your email": "Enter your email",
     "Email": "Email",
-
-    
     "Reset Password": "Reset Password",
     "New password": "New password",
     "Confirm password": "Confirm password",
@@ -44,5 +41,8 @@
     "Create": "Create",
     "Signup Page": "User registration",
     "Register-button-title": "Register",
-    "Sign up": "Sign-up"
+    "Sign up": "Sign-up",
+    "User info": "User information ",
+    "Actualizar": "Update",
+    "update user info": "User information will be updated"
 }
