@@ -1,11 +1,16 @@
 import React from 'react';
-//import defaultImage from "../../assets/no_image.jpg";
 import './advert.css';
 import defaultImage from '../../../assets/no_image.jpg';
+import { useTranslation } from 'react-i18next';
 
 function Advert(advert) {
-  console.log('Rendering Advert component');
-  const advDate = new Date(advert.createdAt);
+  const { t } = useTranslation();
+  //const advDate = new Date(advert.createdAt);
+  //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
+  const handleImageError = event => {
+    event.target.src = defaultImage;
+  };
+
   // const images = image => {
   //   if (image) {
   //     return image;
@@ -21,41 +26,41 @@ function Advert(advert) {
         </div>
       </div>
       <br />
-      <div className="productData">
+      <div className="productData ">
         <div className="product-img">
-          {advert.image === '' ? (
-            <img
-              className="img"
-              src={defaultImage}
-              alt="imagenes anuncios"
-            ></img>
+          {/*advert.image === '' ? (
+            <img className='img' src={defaultImage} alt='Default Image'></img>
           ) : (
+            <img
+              className='img'
+              src={advert.image}
+              alt='imagenes anuncios'
+            ></img>
+          )*/}
+          {
             <img
               className="img"
               src={advert.image}
-              alt="imagenes anuncios"
+              onError={handleImageError}
+              alt={t('Product image')}
             ></img>
-          )}
-          {/* <img
-            className="productPhoto"
-            src={advert.image}
-            onError={onImageError}
-            alt="imagen del producto en venta"></img> */}
+          }
         </div>
         <br />
-        <div className="product_Info">
-          <p className="advert_label">Description: </p>
+        <div className="productInfo">
+          <p className="advert_label">{t('Description')}</p>
+          <br />
           <span className="description"> {advert.description}</span>
           <br />
           <br />
           <p>
-            Is
+            {t('Is&')}
             {advert.onSale ? (
-              <span id="isSale"> for sale </span>
+              <span id="isSale"> {t('for sale')} </span>
             ) : (
-              <span id="isSale"> purchased </span>
+              <span id="isSale"> {t('purchased')} </span>
             )}
-            this product by:
+            {t('this product by')}:
           </p>
           <div className="price">
             <p>
@@ -64,7 +69,7 @@ function Advert(advert) {
           </div>
           <div className="advert_label">
             <p>
-              Category:{' '}
+              {t('Category')}:{' '}
               <span className="advert_text">
                 {advert.category === undefined
                   ? ''
@@ -75,12 +80,9 @@ function Advert(advert) {
         </div>
         <div>
           <p className="advert_label">
-            Username: <span className="advert-text">{advert.username}</span>
+            {t('Username')}:{' '}
+            <span className="advert-text">{advert.username}</span>
           </p>
-          <small className="advert_label">
-            Created at:{' '}
-            <span className="advert_text">{`${advDate.toUTCString()}`}</span>
-          </small>
         </div>
       </div>
     </>
