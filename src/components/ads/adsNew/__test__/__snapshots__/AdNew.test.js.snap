@@ -360,7 +360,7 @@ exports[`AdNew snapshot 1`] = `
         class="footer"
       >
         <p>
-          footer
+          @Keepcoding 2023 by Mandalorians
         </p>
       </div>
     </footer>

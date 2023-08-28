@@ -56,7 +56,7 @@ describe('DeleteUserPage', () => {
     expect(submitButton).toBeEnabled();
     userEvent.click(submitButton);
 
-    const modalConfirmButton = await screen.findByTestId('confirmButton');
+    const modalConfirmButton = await screen.findByTestId('buttonDelete');
 
     expect(modalConfirmButton).toBeInTheDocument();
 
