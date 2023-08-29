@@ -28,10 +28,10 @@ export const successRedirects =
       router.navigate('/');
     }
 
-    //TODO modificar cuando este implementado el detalle del anuncio
-    if (action.type === 'ads/create/fulfilled') {
-      router.navigate('/home');
-    }
+    // //TODO modificar cuando este implementado el detalle del anuncio
+    // if (action.type === 'ads/create/fulfilled') {
+    //   router.navigate('/home');
+    // }
 
     //NOTE Add redirect to "Home" page after successful password change
     if (action.type === 'auth/resetPassword/fulfilled') {

@@ -21,16 +21,21 @@ function ModifyAd() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
-  //const [ad, setAd] = useState(null);
   const [image, setImage] = useState('');
-
   const { adId } = useParams();
-  console.log('id del anuncio', adId);
+
   // const advert = useSelector(getAdvertById(adId));
   // console.log('anuncio padina', advert);
 
-  //const [modifiedAd, setModifiedAd] = useState(null);
-  const [modifiedAd, setModifiedAd] = useState(''); // Inicializar con un objeto vacío
+  const [modifiedAd, setModifiedAd] = useState('');
+  // const [modifiedAd, setModifiedAd] = useState({
+  //   name: '',
+  //   onSale: true,
+  //   price: '',
+  //   category: '',
+  //   description: '',
+  //   coin: '',
+  // })
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
@@ -77,7 +82,7 @@ function ModifyAd() {
   //   !ad.coin;
 
   return (
-    <Layout title={t('Create an ad')}>
+    <Layout title={t('Edit an ad')}>
       {isLoading ? (
         <Spinner message={t('charging...')} />
       ) : (

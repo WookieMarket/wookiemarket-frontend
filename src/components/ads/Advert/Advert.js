@@ -55,7 +55,7 @@ function Advert(advert) {
           <br />
           <p>
             {t('Is&')}
-            {advert.onSale ? (
+            {advert.onSale === true ? (
               <span id="isSale"> {t('for sale')} </span>
             ) : (
               <span id="isSale"> {t('purchased')} </span>
@@ -64,7 +64,7 @@ function Advert(advert) {
           </p>
           <div className="price">
             <p>
-              {advert.price} <span id="price_coin"> €</span>
+              {advert.price} <span id="price_coin"> {advert.coin}</span>
             </p>
           </div>
           <div className="advert_label">
