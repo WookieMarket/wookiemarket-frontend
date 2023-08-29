@@ -42,7 +42,7 @@ function App() {
           />
 
           <Route
-            path="/modify"
+            path="/modify/:adId"
             element={
               <RequireAuth>
                 <ModifyAd />

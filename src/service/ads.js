@@ -23,9 +23,19 @@ export const modifyAd = (adId, ad) => {
       'Content-Type': 'multipart/form-data',
     },
   };
-  const url = `${adUrl}/modify/${adId}`;
+  const url = `${adUrl}/update/${adId}`;
   return client.put(url, ad, config);
 };
+
+// export const modifyAd = ad => {
+//   const config = {
+//     headers: {
+//       'Content-Type': 'multipart/form-data',
+//     },
+//   };
+//   const url = `${adUrl}/update`;
+//   return client.post(url, ad, config);
+// };
 
 export const getTags = () => {
   const url = `${adUrl}/tags`;

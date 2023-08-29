@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
@@ -9,32 +9,28 @@ import { useTranslation } from 'react-i18next';
 //import { adsCreate } from '../../../store/slices/ads';
 //import Form from '../../shared/form/Form';
 import AdForm from '../../AdForm/AdForm';
-import { getAd, modifyAd } from '../../../service/ads';
+//import { modifyAd } from '../../../service/ads';
+import { useParams } from 'react-router-dom';
+import { uploadModifiedAd } from '../../../store/slices/ads';
+
 //import Button from '../../shared/Button';
 //import AdForm from '../../AdForm/AdForm';
-
 //import './AdNew.css';
 
-function ModifyAd({ match }) {
+function ModifyAd() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
-  const [ad, setAd] = useState(null);
-  const [image, setImage] = useState(null);
+  //const [ad, setAd] = useState(null);
+  const [image, setImage] = useState('');
 
-  const adId = match.params.id;
+  const { adId } = useParams();
+  console.log('id del anuncio', adId);
+  // const advert = useSelector(getAdvertById(adId));
+  // console.log('anuncio padina', advert);
 
-  useEffect(() => {
-    const fetchAd = async () => {
-      try {
-        const fetchedAd = await dispatch(getAd(adId));
-        setAd(fetchedAd);
-      } catch (error) {
-        // Manejo de errores
-      }
-    };
-    fetchAd();
-  }, [adId, dispatch]);
+  //const [modifiedAd, setModifiedAd] = useState(null);
+  const [modifiedAd, setModifiedAd] = useState(''); // Inicializar con un objeto vacío
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
@@ -43,28 +39,42 @@ function ModifyAd({ match }) {
   };
 
   const handleChange = event => {
-    setAd({
-      ...ad,
+    setModifiedAd({
+      ...modifiedAd,
       [event.target.name]: event.target.value,
     });
+  };
+  const adNew = {
+    name: modifiedAd.name,
+    onSale: modifiedAd.onSale,
+    price: modifiedAd.price,
+    category: modifiedAd.category,
+    description: modifiedAd.description,
+    coin: modifiedAd.coin,
+    image: image ? image.image : null,
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(modifyAd((adId, ad)));
+    dispatch(uploadModifiedAd({ id: adId, ad: adNew }));
   };
 
   const handleErrorClick = () => {
     dispatch(resetError());
   };
 
-  const buttonDisabled =
-    !ad.name ||
-    !ad.onSale ||
-    !ad.price ||
-    !ad.category ||
-    !ad.description ||
-    !ad.coin;
+  // useEffect(() => {
+  //   // Cargar el anuncio con el adId
+  //   dispatch(getAdById(adId));
+  // }, [dispatch, adId]);
+
+  // const buttonDisabled =
+  //   !ad.name ||
+  //   !ad.onSale ||
+  //   !ad.price ||
+  //   !ad.category ||
+  //   !ad.description ||
+  //   !ad.coin;
 
   return (
     <Layout title={t('Create an ad')}>
@@ -73,14 +83,13 @@ function ModifyAd({ match }) {
       ) : (
         <AdForm
           handleSubmit={handleSubmit}
-          valueInputName={ad.name}
+          valueInputName={modifiedAd.name}
           handleChange={handleChange}
-          valueInputPrice={ad.price}
-          valueInputCategory={ad.category}
-          valueInputDescription={ad.description}
-          valueInputCoin={ad.coin}
+          valueInputPrice={modifiedAd.price}
+          valueInputCategory={modifiedAd.category}
+          valueInputDescription={modifiedAd.description}
+          valueInputCoin={modifiedAd.coin}
           handleChangeInputFile={handleChangeInputFile}
-          buttonDisabled={buttonDisabled}
           testid={'buttonModifyAd'}
           nameButton={t('Modify')}
         ></AdForm>
