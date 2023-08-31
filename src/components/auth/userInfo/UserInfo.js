@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUi, getUserInfo } from '../../../store/selectors';
 import { resetError, toggleModal } from '../../../store/slices/ui';
-import { authUserInfo } from '../../../store/slices/user';
+import { authUserInfo, editUserInfo } from '../../../store/slices/user';
 import storage from '../../../utils/storage';
 import Layout from '../../layout/Layout';
 import Form from '../../shared/form/Form';
@@ -36,6 +36,7 @@ function UserInfo() {
 
   const handleShowModalconfirm = async event => {
     dispatch(toggleModal());
+    dispatch(editUserInfo(userData)).catch(error => console.log(error));
   };
 
   const handleShowModalCancel = () => {
@@ -47,7 +48,9 @@ function UserInfo() {
   }, [dispatch, userId]);
 
   useEffect(() => {
-    setUserData({ email: userInfo.email, username: userInfo.username });
+    if (userInfo) {
+      setUserData({ email: userInfo.email, username: userInfo.username });
+    }
   }, [dispatch, userInfo]);
 
   const handleErrorClick = () => {
@@ -66,12 +69,7 @@ function UserInfo() {
     dispatch(toggleModal());
   };
 
-  const buttonDisabled =
-    isLoading ||
-    !userData.username ||
-    !userData.password ||
-    !userData.newPassword ||
-    !userData.email;
+  const buttonDisabled = isLoading || !userData.username || !userData.email;
 
   return (
     <Layout title={t('User info')}>
