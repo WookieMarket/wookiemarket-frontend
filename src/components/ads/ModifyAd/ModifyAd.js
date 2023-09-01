@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUi } from '../../../store/selectors';
+import { getAdvertById, getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import AdForm from '../../AdForm/AdForm';
 //import { modifyAd } from '../../../service/ads';
 import { useParams } from 'react-router-dom';
-import { uploadModifiedAd } from '../../../store/slices/ads';
+import { getAdById, uploadModifiedAd } from '../../../store/slices/ads';
 
 //import Button from '../../shared/Button';
 //import AdForm from '../../AdForm/AdForm';
@@ -24,10 +24,10 @@ function ModifyAd() {
   const [image, setImage] = useState('');
   const { adId } = useParams();
 
-  // const advert = useSelector(getAdvertById(adId));
+  const advert = useSelector(getAdvertById(adId));
   // console.log('anuncio padina', advert);
 
-  const [modifiedAd, setModifiedAd] = useState('');
+  const [modifiedAd, setModifiedAd] = useState(advert);
   // const [modifiedAd, setModifiedAd] = useState({
   //   name: '',
   //   onSale: true,
@@ -68,18 +68,18 @@ function ModifyAd() {
     dispatch(resetError());
   };
 
-  // useEffect(() => {
-  //   // Cargar el anuncio con el adId
-  //   dispatch(getAdById(adId));
-  // }, [dispatch, adId]);
+  useEffect(() => {
+    // Cargar el anuncio con el adId
+    dispatch(getAdById(adId));
+  }, [dispatch, adId]);
 
-  // const buttonDisabled =
-  //   !ad.name ||
-  //   !ad.onSale ||
-  //   !ad.price ||
-  //   !ad.category ||
-  //   !ad.description ||
-  //   !ad.coin;
+  const buttonDisabled =
+    !modifiedAd.name ||
+    !modifiedAd.onSale ||
+    !modifiedAd.price ||
+    !modifiedAd.category ||
+    !modifiedAd.description ||
+    !modifiedAd.coin;
 
   return (
     <Layout title={t('Edit an ad')}>
@@ -96,6 +96,7 @@ function ModifyAd() {
           valueInputCoin={modifiedAd.coin}
           handleChangeInputFile={handleChangeInputFile}
           testid={'buttonModifyAd'}
+          buttonDisabled={buttonDisabled}
           nameButton={t('Modify')}
         ></AdForm>
       )}
