@@ -6,16 +6,9 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
-//import { adsCreate } from '../../../store/slices/ads';
-//import Form from '../../shared/form/Form';
-import AdForm from '../../AdForm/AdForm';
-//import { modifyAd } from '../../../service/ads';
 import { useParams } from 'react-router-dom';
 import { getAdById, uploadModifiedAd } from '../../../store/slices/ads';
-
-//import Button from '../../shared/Button';
-//import AdForm from '../../AdForm/AdForm';
-//import './AdNew.css';
+import AdForm from '../../shared/AdForm/AdForm';
 
 function ModifyAd() {
   const { t } = useTranslation();
@@ -23,19 +16,8 @@ function ModifyAd() {
   const { isLoading, error } = useSelector(getUi);
   const [image, setImage] = useState('');
   const { adId } = useParams();
-
   const advert = useSelector(getAdvertById(adId));
-  // console.log('anuncio padina', advert);
-
   const [modifiedAd, setModifiedAd] = useState(advert);
-  // const [modifiedAd, setModifiedAd] = useState({
-  //   name: '',
-  //   onSale: true,
-  //   price: '',
-  //   category: '',
-  //   description: '',
-  //   coin: '',
-  // })
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
@@ -49,14 +31,21 @@ function ModifyAd() {
       [event.target.name]: event.target.value,
     });
   };
+
+  const [selectedTags, setSelectedTags] = useState([]);
   const adNew = {
     name: modifiedAd.name,
     onSale: modifiedAd.onSale,
     price: modifiedAd.price,
-    category: modifiedAd.category,
-    description: modifiedAd.description,
+    category: selectedTags ? selectedTags.value : '',
     coin: modifiedAd.coin,
     image: image ? image.image : null,
+  };
+
+  const handleTagChange = selectedOption => {
+    const selectedCategory = selectedOption ? selectedOption.value : '';
+    setSelectedTags(selectedOption);
+    handleChange({ target: { value: selectedCategory } });
   };
 
   const handleSubmit = event => {
@@ -69,17 +58,8 @@ function ModifyAd() {
   };
 
   useEffect(() => {
-    // Cargar el anuncio con el adId
     dispatch(getAdById(adId));
   }, [dispatch, adId]);
-
-  const buttonDisabled =
-    !modifiedAd.name ||
-    !modifiedAd.onSale ||
-    !modifiedAd.price ||
-    !modifiedAd.category ||
-    !modifiedAd.description ||
-    !modifiedAd.coin;
 
   return (
     <Layout title={t('Edit an ad')}>
@@ -91,12 +71,11 @@ function ModifyAd() {
           valueInputName={modifiedAd.name}
           handleChange={handleChange}
           valueInputPrice={modifiedAd.price}
-          valueInputCategory={modifiedAd.category}
           valueInputDescription={modifiedAd.description}
           valueInputCoin={modifiedAd.coin}
+          handleTagChange={handleTagChange}
           handleChangeInputFile={handleChangeInputFile}
           testid={'buttonModifyAd'}
-          buttonDisabled={buttonDisabled}
           nameButton={t('Modify')}
         ></AdForm>
       )}

@@ -37,8 +37,8 @@ export const modifyAd = (adId, ad) => {
 //   return client.post(url, ad, config);
 // };
 
-export const getTags = () => {
-  const url = `${adUrl}/tags`;
+export const getCategories = () => {
+  const url = `${adUrl}/categories?categories=true`;
   return client.get(url);
 };
 
@@ -48,6 +48,6 @@ export const getTags = () => {
 // };
 
 export const getRecentAds = () => {
-  const url = `${adUrl}`;
+  const url = `${adUrl}/filter`;
   return client.get(url);
 };

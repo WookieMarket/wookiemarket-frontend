@@ -7,12 +7,7 @@ import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
 import { adsCreate } from '../../../store/slices/ads';
-//import Form from '../../shared/form/Form';
-import AdForm from '../../AdForm/AdForm';
-//import Button from '../../shared/Button';
-//import AdForm from '../../AdForm/AdForm';
-
-//import './AdNew.css';
+import AdForm from '../../shared/AdForm/AdForm';
 
 function AdNew() {
   const { t } = useTranslation();
@@ -24,17 +19,17 @@ function AdNew() {
     name: '',
     onSale: true,
     price: '',
-    category: '',
     description: '',
     status: '',
     coin: '',
   });
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const adNew = {
     name: formData.name,
     onSale: formData.onSale,
     price: formData.price,
-    category: formData.category,
+    category: selectedTags ? selectedTags.value : '',
     description: formData.description,
     coin: formData.coin,
     image: image ? image.image : null,
@@ -44,6 +39,12 @@ function AdNew() {
     setImage({ ...image, image: e.target.files[0] });
     console.log('Selected image file:', e.target.files[0]);
     console.log(' image file:', image);
+  };
+
+  const handleTagChange = selectedOption => {
+    const selectedCategory = selectedOption ? selectedOption.value : '';
+    setSelectedTags(selectedOption);
+    handleChange({ target: { value: selectedCategory } });
   };
 
   const handleChange = event => {
@@ -66,9 +67,9 @@ function AdNew() {
     !formData.name ||
     !formData.onSale ||
     !formData.price ||
-    !formData.category ||
     !formData.description ||
-    !formData.coin;
+    !formData.coin ||
+    !selectedTags;
 
   return (
     <Layout title={t('Create an ad')}>
@@ -80,9 +81,9 @@ function AdNew() {
           valueInputName={formData.name}
           handleChange={handleChange}
           valueInputPrice={formData.price}
-          valueInputCategory={formData.category}
           valueInputDescription={formData.description}
           valueInputCoin={formData.coin}
+          handleTagChange={handleTagChange}
           handleChangeInputFile={handleChangeInputFile}
           buttonDisabled={buttonDisabled}
           testid={'buttonAdNew'}
