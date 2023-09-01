@@ -90,9 +90,7 @@ const Navbar = () => {
                   </div>
                 </MenuItemLink>
               )}
-              <MenuItem>
-                <UserOptions />
-              </MenuItem>
+              <UserOptions />
             </MenuItem>
           </Menu>
         </IconContext.Provider>

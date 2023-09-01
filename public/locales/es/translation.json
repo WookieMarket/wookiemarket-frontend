@@ -3,7 +3,7 @@
   "welcomeMessage": "Hola Mandalorians!",
   "icon-hover": "Pulse para cambiar el idioma",
   "header": "Cabecera",
-  "footer": "@Keepcoding 2023 por Mandalorians",
+  "@Keepcoding 2023 by Mandalorians": "@Keepcoding 2023 por Mandalorians",
 
   "Username": "usuario",
   "Password": "Contraseña",
@@ -23,7 +23,9 @@
   "Recover password": "Recuperar contraseña",
   "Forgot password?": "olvidó su contraseña?",
   "Enter your email": "introduce tu correo",
+  "Home": "Home",
   "Email": "Correo",
+  "Mandalorians": "Mandalorians",
 
   "Reset Password": "Restablecer la contraseña",
   "New password": "Nueva contraseña",
@@ -67,5 +69,6 @@
   "Edit Advert": "Editar Anuncio",
   "Are you sure you want to delete this advert?": "¿Está seguro de que edsea borrar este anuncio?",
   "DELETING ADVERTISEMENT": "BORRADO DE ANUNCIO",
-  "DELETING ADVERTISEMENT (confirmation)": "BORRADO DE ANUNCIO (confirmación)"
+  "DELETING ADVERTISEMENT (confirmation)": "BORRADO DE ANUNCIO (confirmación)",
+  "Edit an ad": "Edita un anuncio"
 }
