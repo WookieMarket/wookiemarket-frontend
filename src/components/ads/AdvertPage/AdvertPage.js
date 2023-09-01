@@ -12,6 +12,7 @@ import Button from '../../shared/Button';
 import Modal from '../../shared/modal/Modal';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import './advertPage.css';
+import '../../../css/holoTextEffect.css'
 import { useState } from 'react';
 
 const AdvertPage = () => {
@@ -29,7 +30,7 @@ const AdvertPage = () => {
   //const isDisabled = !useSelector(state => state.auth) && !isLogged;
   const isDisabled = !isLogged;
 
-  console.log('isDisabled: ' + getIsLogged);
+  //console.log('isDisabled: ' + isDisabled);
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
@@ -62,7 +63,7 @@ const AdvertPage = () => {
   //TODO Delete Advert
   const handleDeleteConfirm = () => {
     setActiveModal(null);
-    console.log('Deelted Advert');
+    console.log('Deleted Advert');
   };
   //TODO Edit Advert
   const handleEdit = () => {
@@ -118,7 +119,7 @@ const AdvertPage = () => {
           <Header />
           <div className={'content'}>
             <div className="holobackground"></div>
-            <h1>
+            <h1 className="hologram-text tv-text">
               <span className="StarWarsObject fontInverted">*</span>
               {t('ADVERT DETAIL')}
               <span className="StarWarsObject">*</span>

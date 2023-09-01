@@ -1,0 +1,69 @@
+/*HOLO TEXT*/
+
+.hologram-text {
+    text-shadow: 0 0 10px var(--background-navbar-color, 0.2);
+    color: transparent;
+    position: relative;
+    animation:
+      flicker 1s linear infinite,
+      gradientShift 9s linear infinite,
+      flickerLines 0.25s infinite alternate;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background-image: linear-gradient(
+      180deg,
+      #040404,
+      var(--background-navbar-color),
+      #2fcaf5
+    ), repeating-linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 1px, transparent 2px);;
+    background-size: 100% 30px;
+    background-blend-mode: overlay;
+    background-clip: text;
+    -webkit-background-clip: text;
+    filter: brightness(85%);
+  }
+  
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes gradientShift {
+    0% {
+      background-position: -100% 0%;
+    }
+    50% {
+      background-position: 0    100%;
+    }
+  }
+  
+  @keyframes flickerLines {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 100%;
+    }
+  }
+  
+  /*DISTORSION TV EFfECT*/
+  .tv-text {
+    font-size: 3rem;
+    position: relative;
+    animation:
+      scanline 4s linear infinite;
+  }
+  
+  @keyframes scanline {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 -100%;
+    }
+  }
