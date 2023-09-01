@@ -13,7 +13,7 @@ const Button = styled.button`
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
-  border-color: ${closedColor};
+  
   color: ${props => (props.variant === "accept" ? "white" : "black")};
   display: flex;
   align-items: center;
