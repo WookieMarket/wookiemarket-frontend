@@ -56,7 +56,7 @@ const Navbar = () => {
             {showMobileMenu ? <FaTimes /> : <FaBars />}
           </MobileIcon>
 
-          <Menu open={showMobileMenu}>
+          <Menu open={showMobileMenu ? 1 : 0}>
             <MenuItem>
               <MenuItemLink
                 to="/home"
