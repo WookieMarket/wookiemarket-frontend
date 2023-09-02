@@ -17,7 +17,8 @@ export const authLogin = createAsyncThunk(
   'auth/login',
   async (credentials, { extra: { service }, rejectWithValue }) => {
     try {
-      await service.auth.login(credentials);
+      const response = await service.auth.login(credentials);
+      return response;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -65,9 +66,18 @@ const auth = createSlice({
   initialState: false,
   extraReducers: builder => {
     builder
-      .addCase(authSignup.fulfilled, () => true)
-      .addCase(authLogin.fulfilled, () => true)
-      .addCase(authLogout.fulfilled, () => false);
+      .addCase(authSignup.fulfilled, (state, action) => ({
+        auth: true,
+        jwt: '',
+      }))
+      .addCase(authLogin.fulfilled, (state, action) => ({
+        auth: true,
+        jwt: action.payload,
+      }))
+      .addCase(authLogout.fulfilled, (state, action) => ({
+        auth: false,
+        jwt: '',
+      }));
   },
 });
 

@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUi, getUserInfo } from '../../../store/selectors';
+import { getJwt, getUi, getUserInfo } from '../../../store/selectors';
 import { resetError, toggleModal } from '../../../store/slices/ui';
 import { authUserInfo, editUserInfo } from '../../../store/slices/user';
 import storage from '../../../utils/storage';
@@ -22,6 +22,7 @@ function UserInfo() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
+  const jwt = useSelector(getJwt);
   const userInfo = useSelector(getUserInfo);
   const { showModal } = useSelector(getUi);
 
@@ -31,7 +32,7 @@ function UserInfo() {
     password: '',
     newPassword: '',
   });
-  const userJwt = storage.get('auth');
+  const userJwt = jwt || storage.get('auth');
   const userId = jwt_decode(userJwt)._id;
 
   const handleShowModalconfirm = async event => {
