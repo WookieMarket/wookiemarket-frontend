@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import SignupPage from '../SignupPage';
 import userEvent from '@testing-library/user-event';
 import { authSignup } from '../../../../store/slices/auth';
@@ -11,7 +11,7 @@ jest.mock('../../../../store/slices/auth', () => ({
   authSignup: jest.fn(),
 }));
 
-describe('Signup', () => {
+describe('SignupPage', () => {
   const renderComponent = (error = null) => {
     const store = {
       getState: () => {
@@ -36,7 +36,7 @@ describe('Signup', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('should dispatch signup action', () => {
+  test('should dispatch signup action', async () => {
     const userData = {
       username: 'user123',
       password: 'supersegurisimo',
@@ -53,14 +53,16 @@ describe('Signup', () => {
     const submitButton = screen.getByRole('button', { name: /Register/ });
     expect(submitButton).toBeDisabled();
 
-    // Test button after fulfilling text fields
-    userEvent.type(usernameInput, userData.username);
-    userEvent.type(passwordInput, userData.password);
-    userEvent.type(emailInput, userData.email);
-    expect(submitButton).toBeEnabled();
-    userEvent.click(submitButton);
+    await act(async () => {
+      // Test button after fulfilling text fields
+      userEvent.type(usernameInput, userData.username);
+      userEvent.type(passwordInput, userData.password);
+      userEvent.type(emailInput, userData.email);
+      expect(submitButton).toBeEnabled();
+      userEvent.click(submitButton);
 
-    expect(authSignup).toHaveBeenCalledWith(userData);
+      expect(authSignup).toHaveBeenCalledWith(userData);
+    });
   });
 
   test('should display an error', () => {
