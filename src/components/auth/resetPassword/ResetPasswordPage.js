@@ -12,7 +12,7 @@ import Form from '../../shared/form/Form';
 import Button from '../../shared/Button';
 import './ResetPasswordPage.css';
 
-//DONE change Password
+// Changes Password
 function ResetPasswordPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();

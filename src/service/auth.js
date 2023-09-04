@@ -5,9 +5,8 @@ import client, {
 import storage from '../utils/storage';
 
 export const signup = userData => {
-  return client.post('/api/auth/signup', userData).then(({ jwt }) => {
-    setAuthorizationHeader(jwt);
-    storage.set('auth', jwt);
+  return client.post('/api/auth/signup', userData).then(({ result }) => {
+    console.log(result);
   });
 };
 

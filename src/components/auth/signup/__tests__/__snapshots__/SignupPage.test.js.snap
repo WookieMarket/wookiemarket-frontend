@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signup snapshot 1`] = `
+exports[`SignupPage snapshot 1`] = `
 <div>
   <div>
     <header
@@ -64,7 +64,7 @@ exports[`Signup snapshot 1`] = `
             </svg>
           </div>
           <ul
-            class="sc-hLseeU fCUILo"
+            class="sc-hLseeU ggfyar"
           >
             <li
               class="sc-eDDNvR kOWhfy"

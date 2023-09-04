@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-//NOTE I use rejectWithValue to take care of the error
+// use rejectWithValue to take care of the error
 
 export const authSignup = createAsyncThunk(
   'auth/signup',

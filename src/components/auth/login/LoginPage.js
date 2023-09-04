@@ -13,7 +13,8 @@ import Form from '../../shared/form/Form';
 import './LoginPage.css';
 import Button from '../../shared/Button';
 
-//DONE Log in with username and password and a checkbox to give the option to persist the token, also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
+// Log in with username and password and a checkbox to give the option to persist the token,
+// also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
 
 function LoginPage() {
   const { t } = useTranslation();

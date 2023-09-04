@@ -10,7 +10,7 @@ export default function configureStore(preloadedState, { router }) {
     failureRedirects(router, { 401: '/login', 404: '/404' }),
     successRedirects(router, {
       [authSignup.fulfilled.type]: () => {
-        return router.state.location.state?.from?.pathname || '/';
+        return router.state.location.state?.from?.pathname || '/login';
       },
       [authLogin.fulfilled.type]: () => {
         return router.state.location.state?.from?.pathname || '/';
