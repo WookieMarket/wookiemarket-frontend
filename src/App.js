@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LoginPage from './components/auth/login/LoginPage';
+import UserInfo from './components/auth/userInfo/UserInfo';
 import RequireAuth from './components/auth/RequireAuth';
 import SignupPage from './components/auth/signup/SignupPage';
 import ResetPasswordPage from './components/auth/resetPassword/ResetPasswordPage';
@@ -58,7 +59,14 @@ function App() {
               </RequireAuth>
             }
           />
-
+          <Route
+            path="/user-info"
+            element={
+              <RequireAuth>
+                <UserInfo />
+              </RequireAuth>
+            }
+          />
           <Route path="/adverts/:id/:name" element={<AdvertPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/signup" element={<SignupPage />} />

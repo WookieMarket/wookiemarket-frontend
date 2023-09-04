@@ -26,7 +26,15 @@ const router = createBrowserRouter([
   },
 ]);
 
-const store = configureStore({ auth: !!accessToken }, { router });
+const store = configureStore(
+  {
+    auth: {
+      auth: !!accessToken,
+      jwt: '',
+    },
+  },
+  { router },
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

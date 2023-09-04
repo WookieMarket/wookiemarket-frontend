@@ -14,7 +14,11 @@ export const signup = userData => {
 export const login = credentials => {
   return client.post('/api/auth/login', credentials).then(({ jwt }) => {
     setAuthorizationHeader(jwt);
-    if (credentials.rememberMe) storage.set('auth', jwt);
+    if (credentials.rememberMe) {
+      storage.set('auth', jwt);
+    }
+    console.log('jwt,', jwt);
+    return jwt;
   });
 };
 
