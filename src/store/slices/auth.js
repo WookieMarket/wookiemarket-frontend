@@ -79,7 +79,7 @@ const auth = createSlice({
   extraReducers: builder => {
     builder
       .addCase(authSignup.fulfilled, (state, action) => ({
-        auth: true,
+        auth: false,
         jwt: '',
       }))
       .addCase(authLogin.fulfilled, (state, action) => ({
