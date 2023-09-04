@@ -15,6 +15,7 @@ import {
   FaBars,
   FaTimes,
   FaHome,
+  FaGlasses,
 } from 'react-icons/fa';
 
 import { IconContext } from 'react-icons';
@@ -35,6 +36,7 @@ const Navbar = () => {
         <IconContext.Provider value={{ style: { fontSize: '2em' } }}>
           <LogoContainer>
             <FaBattleNet />
+            <p>{t('Mandalorians')}</p>
             <p>{t('Mandalorians')}</p>
             <img
               className="icon-language"
@@ -67,6 +69,17 @@ const Navbar = () => {
                   {t('Home')}
                 </div>
               </MenuItemLink>
+              {isLogged && (
+                <MenuItemLink
+                  to="/user-info"
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
+                  <div>
+                    <FaGlasses />
+                    <> {t('User info')}</>
+                  </div>
+                </MenuItemLink>
+              )}
               {isLogged && (
                 <MenuItemLink
                   to="/create-ad"

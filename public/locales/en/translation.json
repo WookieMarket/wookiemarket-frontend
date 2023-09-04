@@ -4,7 +4,6 @@
   "icon-hover": "Click here to change the language",
   "header": "Header",
   "@Keepcoding 2023 by Mandalorians": "@Keepcoding 2023 by Mandalorians",
-
   "Username": "username",
   "Password": "password",
   "RememberMe": "RememberMe",
@@ -26,7 +25,6 @@
   "Home": "Home",
   "Email": "Email",
   "Mandalorians": "Mandalorians",
-
   "Reset Password": "Reset Password",
   "New password": "New password",
   "Confirm password": "Confirm password",
@@ -46,13 +44,10 @@
   "Signup Page": "User registration",
   "Register-button-title": "Register",
   "Sign up": "Sign-up",
-
   "Delete Account": "Delete Account",
   "Delete User": "Delete user",
   "Delete": "Delete",
-
   "Email sent, check your email": "Email sent, check your email",
-
   "Created at": "Created at",
   "Sorry, no adverts yet": "Sorry, no adverts yet",
   "Advertisements": "Advertisements",
@@ -73,5 +68,8 @@
   "Are you sure you want to delete this advert?": "'Are you sure you want to delete this advert?",
   "DELETING ADVERTISEMENT": "DELETING ADVERTISEMENT",
   "DELETING ADVERTISEMENT (confirmation)": "DELETING ADVERTISEMENT (confirmation)",
-  "Edit an ad": "edit an ad"
+  "Edit an ad": "edit an ad",
+  "User info": "User information ",
+  "Actualizar": "Update",
+  "update user info": "User information will be updated"
 }
