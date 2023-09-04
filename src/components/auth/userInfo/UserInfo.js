@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getJwt, getUi, getUserInfo } from '../../../store/selectors';
-import { resetError, toggleModal } from '../../../store/slices/ui';
+import { resetError } from '../../../store/slices/ui';
 import { authUserInfo, editUserInfo } from '../../../store/slices/user';
 import storage from '../../../utils/storage';
 import Layout from '../../layout/Layout';
@@ -19,7 +19,7 @@ function UserInfo() {
   const { isLoading, error } = useSelector(getUi);
   const jwt = useSelector(getJwt);
   const userInfo = useSelector(getUserInfo);
-  const { showModal } = useSelector(getUi);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const [userData, setUserData] = useState({
     email: '',
@@ -31,12 +31,12 @@ function UserInfo() {
   const userId = jwt_decode(userJwt)._id;
 
   const handleShowModalconfirm = async event => {
-    dispatch(toggleModal());
+    setToggleModal(false);
     dispatch(editUserInfo(userData)).catch(error => console.log(error));
   };
 
   const handleShowModalCancel = () => {
-    dispatch(toggleModal());
+    setToggleModal(false);
   };
   // get user info
   useEffect(() => {
@@ -62,7 +62,7 @@ function UserInfo() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    dispatch(toggleModal());
+    setToggleModal(true);
   };
 
   const buttonDisabled = isLoading || !userData.username || !userData.email;
@@ -137,7 +137,7 @@ function UserInfo() {
             </button>
           </form>
         )}
-        {showModal && (
+        {toggleModal && (
           <Modal
             title={t('update user info')}
             message={t('¿are you sure?')}

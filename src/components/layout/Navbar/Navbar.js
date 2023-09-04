@@ -37,7 +37,6 @@ const Navbar = () => {
           <LogoContainer>
             <FaBattleNet />
             <p>{t('Mandalorians')}</p>
-            <p>{t('Mandalorians')}</p>
             <img
               className="icon-language"
               src="/images/languageIcons/es.png"

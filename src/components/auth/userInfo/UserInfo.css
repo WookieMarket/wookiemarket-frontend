@@ -1,3 +1,7 @@
+.container-form {
+    height: 70vh;
+}
+
 .container-form input {
     height: 20px;
     width: 100%;
