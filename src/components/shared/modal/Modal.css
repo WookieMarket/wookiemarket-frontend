@@ -37,7 +37,7 @@
   font-weight: bold;
   font-size: 0.6em;
   margin-bottom: 20px;
-  color: black;
+  color: var(--border-color);
   text-transform: lowercase;
 }
 .modal-buttons {
@@ -93,7 +93,7 @@ button:disabled:hover {
   border-radius: 50%;
   animation: blink 5s infinite alternate;
   z-index: -1;
-} 
+}
 
 @keyframes blink {
   0% {

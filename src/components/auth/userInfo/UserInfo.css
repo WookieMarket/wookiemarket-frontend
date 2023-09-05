@@ -1,20 +1,20 @@
 .container-form {
-    height: 70vh;
+  height: 70vh;
 }
 
 .container-form input {
-    height: 20px;
-    width: 100%;
-    margin: auto;
-    font-size: 13px;
-    font-family: var(--font-family);
-    margin-bottom: 10px;
-    border-radius: 6px;
-    border: 3px solid gainsboro;
+  height: 20px;
+  width: 100%;
+  margin: auto;
+  font-size: 13px;
+  /* font-family: var(--font-family); */
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 3px solid gainsboro;
 }
 
 .container-form label {
-    font-family: var(--font-family);
-    font-size: 13px;
-    margin-bottom: 10px;
+  /* font-family: var(--font-family); */
+  font-size: 13px;
+  margin-bottom: 10px;
 }
