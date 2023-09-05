@@ -112,6 +112,15 @@ const handleDeleteConfirm = async () => {
               onCancel={handleCloseModal}
             ></Modal>
           )}
+          {activeModal === 3 && (
+            <Modal
+              id={3}
+              title={t('DELETED ADVERT')}
+              message={t(`Your advert was deleted successfully`)}
+              showCancel={false}
+              onConfirm={() => navigate('/')}
+            ></Modal>
+          )}
           {error && (
             <ErrorModal
               title="Error"

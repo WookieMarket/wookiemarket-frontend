@@ -27,25 +27,15 @@ export const modifyAd = (adId, ad) => {
   return client.put(url, ad, config);
 };
 
-// export const modifyAd = ad => {
-//   const config = {
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//     },
-//   };
-//   const url = `${adUrl}/update`;
-//   return client.post(url, ad, config);
-// };
+export const deleteAdvert = (advertId) => {
+  const url = `${adUrl}/${advertId}`;
+  return client.delete(url);
+};
 
 export const getCategories = () => {
   const url = `${adUrl}/categories?categories=true`;
   return client.get(url);
 };
-
-// export const getLastAdv = () => {
-//   const url = `${adUrl}`;
-//   return client.get(url);
-// };
 
 export const getRecentAds = () => {
   const url = `${adUrl}/filter`;
