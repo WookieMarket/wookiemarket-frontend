@@ -11,7 +11,7 @@ function Modal(props) {
     <div className="modal-container">
       <StarField />
       <div className="modal">
-        <div className="stars"></div> {/* Para las estrellas de fondo */}
+        <div className="stars"></div> {/* Background stars */}
         <div className="modal-content">
           <div className="modal-header">{title}</div>
           <div className="modal-body">{message}</div>

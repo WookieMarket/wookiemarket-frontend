@@ -37,7 +37,7 @@
   font-weight: bold;
   font-size: 0.6em;
   margin-bottom: 20px;
-  color: black;
+  color:var(border-color-form);
   text-transform: lowercase;
 }
 .modal-buttons {

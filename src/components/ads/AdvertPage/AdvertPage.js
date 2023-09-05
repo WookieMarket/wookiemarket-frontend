@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdById } from '../../../store/slices/ads';
+import { deleteAdvert, getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   getAdvertById,
@@ -70,11 +70,15 @@ const AdvertPage = () => {
 
   const isDisabled = !isAdvertOwner;
 
-  //TODO Delete Advert
-  const handleDeleteConfirm = () => {
-    setActiveModal(null);
-    console.log('Deleted Advert');
-  };
+//Delete Advert
+const handleDeleteConfirm = async () => {
+  setActiveModal(null);
+  await dispatch(deleteAdvert(id));
+  handleOpenModal(3);
+  setTimeout(() => {
+    navigate('/');
+  }, 3000);
+};
 
   const handleEdit = () => {
     setActiveModal(null);
