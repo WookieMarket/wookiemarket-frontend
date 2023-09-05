@@ -2,7 +2,6 @@ header,
 footer {
   width: 100%;
 }
-
 .content {
   font-size: 2em;
 }
@@ -19,7 +18,7 @@ footer {
   width: 75%;
   height: var(--holo-height);
   margin: -5px auto 0;
-  background-color: var(--color-holo-advert, 0.35);
+  background-color: var(--background-navbar-color, 0.35);
   border-radius: 100%;
   filter: blur(2.5px);
   transform: perspective(100px) rotateX(-30deg);
@@ -33,7 +32,7 @@ footer {
     right: -10px;
     content: '';
     height: 10px;
-    background-color: var(--color-holo-advert, 0.5);
+    background-color: var(--background-navbar-color, 0.5);
     border-radius: 100%;
     filter: blur(2.5px);
   }
@@ -44,6 +43,9 @@ footer {
   }
 }
 
+.productData {
+  border:none;
+}
 @keyframes float {
   from {
     will-change: unset;

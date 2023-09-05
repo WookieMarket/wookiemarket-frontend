@@ -7,8 +7,8 @@
     animation:
       flicker 1s linear infinite,
       gradientShift 9s linear infinite,
-      flickerLines 0.25s infinite alternate;
-    text-transform: uppercase;
+      flickerLines 0.5s infinite alternate;
+    
     letter-spacing: 3px;
     background-image: linear-gradient(
       180deg,
@@ -52,11 +52,11 @@
   }
   
   /*DISTORSION TV EFfECT*/
-  .tv-text {
-    font-size: 3rem;
+.tv-text {
+
     position: relative;
     animation:
-      scanline 4s linear infinite;
+      scanline 10s linear infinite;
   }
   
   @keyframes scanline {

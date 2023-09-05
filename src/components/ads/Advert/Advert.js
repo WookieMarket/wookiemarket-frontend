@@ -20,8 +20,8 @@ function Advert(advert) {
   // };
   return (
     <>
-      <div className="productInfo" id="advertOnly">
-        <div className="advert-name">
+      <div className="productInfo hologram-text tv-text" id="advertOnly">
+        <div id="advert-name" className="advert-name">
           <h2>{advert.name}</h2>
         </div>
       </div>
@@ -39,11 +39,16 @@ function Advert(advert) {
         </div>
         <br />
         <div className="productInfo">
-          <p className="advert_label">{t('Description')}</p>
+          <p className="advert_label hologram-text tv-text">
+            {t('Description')}:
+          </p>
 
-          <span className="description"> {advert.description}</span>
+          <span className="description hologram-text tv-text bottomSpace">
+            {' '}
+            {advert.description}
+          </span>
 
-          <p>
+          <p className="hologram-text tv-text bottomSpace">
             {t('Is&')}
             {advert.onSale === true ? (
               <span id="isSale"> {t('for sale')} </span>
@@ -52,12 +57,12 @@ function Advert(advert) {
             )}
             {t('this product by')}:
           </p>
-          <div className="price">
+          <div className="price .tv-text bottomSpace">
             <p>
               {advert.price} <span id="price_coin"> {advert.coin}</span>
             </p>
           </div>
-          <div className="advert_label">
+          <div className="advert_label hologram-text tv-text">
             <p>
               {t('Category')}:{' '}
               <span className="advert-text">
@@ -69,7 +74,7 @@ function Advert(advert) {
           </div>
         </div>
         <div>
-          <p className="advert_label">
+          <p className="advert_label hologram-text tv-text">
             {t('Username')}:{' '}
             <span className="advert-text">{advert.username}</span>
           </p>
