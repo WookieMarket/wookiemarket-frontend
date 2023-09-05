@@ -16,7 +16,7 @@ a {
   bottom: 0;
   z-index: -1;
   background-image: var(--background-image);
-  opacity: 0.75;
+
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -1;

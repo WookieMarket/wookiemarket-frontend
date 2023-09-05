@@ -3,32 +3,39 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
+import {
+  getAdvertById,
+  getIsLogged,
+  getJwt,
+  getUi,
+} from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Button from '../../shared/Button';
 import Modal from '../../shared/modal/Modal';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import './advertPage.css';
+import '../../../css/holoTextEffect.css';
 import { useState } from 'react';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
+import storage from '../../../utils/storage';
+import jwt_decode from 'jwt-decode';
 
 const AdvertPage = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
   const isLogged = useSelector(getIsLogged);
-  const advert = useSelector(getAdvertById(id));
-  const navigate = useNavigate(); // Hook para navegar
+  const jwt = useSelector(getJwt);
+  const userJwt = jwt || storage.get('auth');
 
-  //const isAdvertOwner = advert && isLogged && advert.ownerId === /* ID del usuario actual */;
-
-  //const isDisabled = !useSelector(state => state.auth) && !isLogged;
-  const isDisabled = !isLogged;
-
-  console.log('isDisabled: ' + getIsLogged);
+  //GETTING ADVERT BY ID
+  useEffect(() => {
+    dispatch(getAdById(id));
+  }, [dispatch, id]);
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
@@ -45,22 +52,36 @@ const AdvertPage = () => {
     dispatch(resetError());
   };
 
+  //USERINFO HANDLING
+  const advert = useSelector(getAdvertById(id));
+  
+  let isAdvertOwner;
+  let userId;
+  if (userJwt) {
+    try {
+      userId = jwt_decode(userJwt)._id;
+    } catch (error) {
+      console.error('Error decoding token: ', error);
+    }
+    isAdvertOwner = advert && isLogged && advert.userId === userId; 
+  }else{
+    isAdvertOwner = false;
+  }
+
+  const isDisabled = !isAdvertOwner;
+
   //TODO Delete Advert
   const handleDeleteConfirm = () => {
     setActiveModal(null);
-    console.log('Deelted Advert');
+    console.log('Deleted Advert');
   };
 
   const handleEdit = () => {
     setActiveModal(null);
     console.log('Edited Advert');
-    // Redirige a la página de modificación con el ID del anuncio
+    // Redirects to the modification page with the ID of the advertisement.
     navigate(`/modify/${id}`);
   };
-
-  useEffect(() => {
-    dispatch(getAdById(id));
-  }, [dispatch, id]);
 
   return (
     <Layout>
@@ -97,7 +118,7 @@ const AdvertPage = () => {
 
           <div className={'content'}>
             <div className="holobackground"></div>
-            <h1>
+            <h1 className="hologram-text tv-text">
               <span className="StarWarsObject fontInverted">*</span>
               {t('ADVERT DETAIL')}
               <span className="StarWarsObject">*</span>
