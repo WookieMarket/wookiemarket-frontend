@@ -75,21 +75,24 @@ export const deleteAccount = createAsyncThunk(
 
 const auth = createSlice({
   name: 'auth',
-  initialState: false,
+  initialState: {
+    auth: false,
+    jwt: '',
+  },
   extraReducers: builder => {
     builder
-      .addCase(authSignup.fulfilled, (state, action) => ({
-        auth: false,
-        jwt: '',
-      }))
-      .addCase(authLogin.fulfilled, (state, action) => ({
-        auth: true,
-        jwt: action.payload,
-      }))
-      .addCase(authLogout.fulfilled, (state, action) => ({
-        auth: false,
-        jwt: '',
-      }));
+      .addCase(authSignup.fulfilled, (state, action) => {
+        state.auth = false;
+        state.jwt = '';
+      })
+      .addCase(authLogin.fulfilled, (state, action) => {
+        state.auth = true;
+        state.jwt = action.payload;
+      })
+      .addCase(authLogout.fulfilled, (state, action) => {
+        state.auth = false;
+        state.jwt = '';
+      });
   },
 });
 

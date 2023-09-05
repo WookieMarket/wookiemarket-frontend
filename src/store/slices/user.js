@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const authUserInfo = createAsyncThunk(
-  'userInfo',
+  'userInfo/authUserInfo',
   async (id, { extra: { service }, rejectWithValue }) => {
     try {
       const response = await service.user.getUserInfo(id);
@@ -12,7 +12,7 @@ export const authUserInfo = createAsyncThunk(
   },
 );
 export const editUserInfo = createAsyncThunk(
-  'editUserInfo',
+  'userInfo/editUserInfo',
   async (data, { extra: { service }, rejectWithValue }) => {
     try {
       const response = await service.user.editUserData(data);
@@ -25,15 +25,17 @@ export const editUserInfo = createAsyncThunk(
 
 const user = createSlice({
   name: 'user',
-  initialState: { userInfo: {} },
+  initialState: {
+    userInfo: {},
+  },
   extraReducers: builder => {
     builder
-      .addCase(authUserInfo.fulfilled, (state, action) => ({
-        userInfo: action.payload.results,
-      }))
-      .addCase(editUserInfo.fulfilled, (state, action) => ({
-        userInfo: action.payload.results,
-      }));
+      .addCase(authUserInfo.fulfilled, (state, action) => {
+        state.userInfo = action.payload.results;
+      })
+      .addCase(editUserInfo.fulfilled, (state, action) => {
+        state.userInfo = action.payload.results;
+      });
   },
 });
 
