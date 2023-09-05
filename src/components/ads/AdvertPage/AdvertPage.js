@@ -29,7 +29,6 @@ const AdvertPage = () => {
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
   const isLogged = useSelector(getIsLogged);
-  //const advert = useSelector(getAdvertById(id));
   const jwt = useSelector(getJwt);
   const userJwt = jwt || storage.get('auth');
 
@@ -55,7 +54,6 @@ const AdvertPage = () => {
 
   //USERINFO HANDLING
   const advert = useSelector(getAdvertById(id));
-  console.log('advert.userId: ' + advert);
   
   let isAdvertOwner;
   let userId;
@@ -70,8 +68,6 @@ const AdvertPage = () => {
     isAdvertOwner = false;
   }
 
-
-  console.log('isAdvertOwner:' + isAdvertOwner);
   const isDisabled = !isAdvertOwner;
 
   //TODO Delete Advert
@@ -83,7 +79,7 @@ const AdvertPage = () => {
   const handleEdit = () => {
     setActiveModal(null);
     console.log('Edited Advert');
-    // Redirige a la página de modificación con el ID del anuncio
+    // Redirects to the modification page with the ID of the advertisement.
     navigate(`/modify/${id}`);
   };
 
