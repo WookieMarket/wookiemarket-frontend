@@ -55,6 +55,8 @@ export const Menu = styled.ul`
     position: absolute;
     top: 70px;
     right: ${({ open }) => (open ? '0' : '-100%')}; //Import
+    /* Establece un valor inicial para open */
+    opacity: ${({ open }) => (open ? '1' : '0')};
     width: 60%;
     height: 50vh;
     justify-content: center;

@@ -5,16 +5,19 @@ import client, {
 import storage from '../utils/storage';
 
 export const signup = userData => {
-  return client.post('/api/auth/signup', userData).then(({ jwt }) => {
-    setAuthorizationHeader(jwt);
-    storage.set('auth', jwt);
+  return client.post('/api/auth/signup', userData).then(({ result }) => {
+    console.log(result);
   });
 };
 
 export const login = credentials => {
   return client.post('/api/auth/login', credentials).then(({ jwt }) => {
     setAuthorizationHeader(jwt);
-    if (credentials.rememberMe) storage.set('auth', jwt);
+    if (credentials.rememberMe) {
+      storage.set('auth', jwt);
+    }
+    console.log('jwt,', jwt);
+    return jwt;
   });
 };
 

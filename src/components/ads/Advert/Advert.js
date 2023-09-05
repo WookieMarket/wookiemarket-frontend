@@ -28,15 +28,6 @@ function Advert(advert) {
       <br />
       <div className="productData ">
         <div className="product-img">
-          {/*advert.image === '' ? (
-            <img className='img' src={defaultImage} alt='Default Image'></img>
-          ) : (
-            <img
-              className='img'
-              src={advert.image}
-              alt='imagenes anuncios'
-            ></img>
-          )*/}
           {
             <img
               className="img"
@@ -49,13 +40,12 @@ function Advert(advert) {
         <br />
         <div className="productInfo">
           <p className="advert_label">{t('Description')}</p>
-          <br />
+
           <span className="description"> {advert.description}</span>
-          <br />
-          <br />
+
           <p>
             {t('Is&')}
-            {advert.onSale ? (
+            {advert.onSale === true ? (
               <span id="isSale"> {t('for sale')} </span>
             ) : (
               <span id="isSale"> {t('purchased')} </span>
@@ -64,13 +54,13 @@ function Advert(advert) {
           </p>
           <div className="price">
             <p>
-              {advert.price} <span id="price_coin"> €</span>
+              {advert.price} <span id="price_coin"> {advert.coin}</span>
             </p>
           </div>
           <div className="advert_label">
             <p>
               {t('Category')}:{' '}
-              <span className="advert_text">
+              <span className="advert-text">
                 {advert.category === undefined
                   ? ''
                   : advert.category.join(', ').toLocaleUpperCase()}

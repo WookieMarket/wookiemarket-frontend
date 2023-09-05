@@ -1,3 +1,7 @@
 .content {
-    min-height: 80vh;
+  width: 100%;
+  min-height: 80vh;
+}
+.layout-title {
+  font-size: 50%;
 }

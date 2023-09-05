@@ -2,28 +2,27 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdById } from '../../../store/slices/ads';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
-import Header from '../../layout/Header';
-import Footer from '../../layout/Footer';
 import Button from '../../shared/Button';
 import Modal from '../../shared/modal/Modal';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import './advertPage.css';
 import '../../../css/holoTextEffect.css'
 import { useState } from 'react';
+import Layout from '../../layout/Layout';
+import Spinner from '../../shared/spinner/Spinner';
 
 const AdvertPage = () => {
   const { t } = useTranslation();
-  const { id } = useParams();
   const dispatch = useDispatch();
-  const advert = useSelector(getAdvertById(id));
   const { isLoading, error } = useSelector(getUi);
-  //const token = localStorage.getItem('auth');
-  //const getIsLogged = useSelector(state => state.auth)
+  const { id } = useParams();
   const isLogged = useSelector(getIsLogged);
+  const advert = useSelector(getAdvertById(id));
+  const navigate = useNavigate(); // Hook para navegar
 
   //const isAdvertOwner = advert && isLogged && advert.ownerId === /* ID del usuario actual */;
 
@@ -47,28 +46,17 @@ const AdvertPage = () => {
     dispatch(resetError());
   };
 
-  // const handleDeletetClick = () => {
-  //   dispatch(toggleModal());
-  // };
-
-  // const handleShowModalconfirm = async event => {
-  //   dispatch(toggleModal());
-  // };
-
-  // const handleShowModalCancel = () => {
-  //   dispatch(toggleModal());
-  // };
-  /* */
-
   //TODO Delete Advert
   const handleDeleteConfirm = () => {
     setActiveModal(null);
     console.log('Deleted Advert');
   };
-  //TODO Edit Advert
+
   const handleEdit = () => {
     setActiveModal(null);
     console.log('Edited Advert');
+    // Redirige a la página de modificación con el ID del anuncio
+    navigate(`/modify/${id}`);
   };
 
   useEffect(() => {
@@ -76,18 +64,9 @@ const AdvertPage = () => {
   }, [dispatch, id]);
 
   return (
-    <>
+    <Layout>
       {isLoading ? (
-        <div className="loadingPage">
-          <div className="loadingInfo">
-            <h1>LOADING....</h1>
-            <div className="spinner" id="spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-        </div>
+        <Spinner message={t('charging...')} />
       ) : (
         <>
           {activeModal === 1 && (
@@ -116,7 +95,7 @@ const AdvertPage = () => {
               onCancel={handleErrorClick}
             />
           )}
-          <Header />
+
           <div className={'content'}>
             <div className="holobackground"></div>
             <h1 className="hologram-text tv-text">
@@ -146,10 +125,9 @@ const AdvertPage = () => {
           <div
             className={`holoBase ${!advert ? 'holoBaseNoAdvert' : ''}`}
           ></div>
-          <Footer />
         </>
       )}
-    </>
+    </Layout>
   );
 };
 

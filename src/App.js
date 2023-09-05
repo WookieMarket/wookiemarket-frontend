@@ -1,17 +1,16 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LoginPage from './components/auth/login/LoginPage';
+import UserInfo from './components/auth/userInfo/UserInfo';
 import RequireAuth from './components/auth/RequireAuth';
 import SignupPage from './components/auth/signup/SignupPage';
 import ResetPasswordPage from './components/auth/resetPassword/ResetPasswordPage';
 import AdNew from './components/ads/adsNew/AdNew';
 import AdvertsListPage from './components/ads/AdvertsListPage/AdvertsListPage';
 import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
+import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 
-import './App.css';
-import './css/Variables.css';
-import './css/Reset.css';
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
@@ -44,6 +43,15 @@ function App() {
           />
 
           <Route
+            path="/modify/:adId"
+            element={
+              <RequireAuth>
+                <ModifyAd />
+              </RequireAuth>
+            }
+          />
+
+          <Route
             path="/delete-account"
             element={
               <RequireAuth>
@@ -51,11 +59,19 @@ function App() {
               </RequireAuth>
             }
           />
-
+          <Route
+            path="/user-info"
+            element={
+              <RequireAuth>
+                <UserInfo />
+              </RequireAuth>
+            }
+          />
           <Route path="/adverts/:id/:name" element={<AdvertPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/404" element={<div>404 | Not found</div>} />
           <Route path="*" element={<Navigate to="/404" />} />

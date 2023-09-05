@@ -15,6 +15,7 @@ import {
   FaBars,
   FaTimes,
   FaHome,
+  FaGlasses,
 } from 'react-icons/fa';
 
 import { IconContext } from 'react-icons';
@@ -56,7 +57,7 @@ const Navbar = () => {
             {showMobileMenu ? <FaTimes /> : <FaBars />}
           </MobileIcon>
 
-          <Menu open={showMobileMenu}>
+          <Menu open={showMobileMenu ? 1 : 0}>
             <MenuItem>
               <MenuItemLink
                 to="/home"
@@ -67,6 +68,17 @@ const Navbar = () => {
                   {t('Home')}
                 </div>
               </MenuItemLink>
+              {isLogged && (
+                <MenuItemLink
+                  to="/user-info"
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                >
+                  <div>
+                    <FaGlasses />
+                    <> {t('User info')}</>
+                  </div>
+                </MenuItemLink>
+              )}
               {isLogged && (
                 <MenuItemLink
                   to="/create-ad"
@@ -90,9 +102,7 @@ const Navbar = () => {
                   </div>
                 </MenuItemLink>
               )}
-              <MenuItem>
-                <UserOptions />
-              </MenuItem>
+              <UserOptions />
             </MenuItem>
           </Menu>
         </IconContext.Provider>
