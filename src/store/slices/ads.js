@@ -67,6 +67,19 @@ export const uploadModifiedAd = createAsyncThunk(
   },
 );
 
+export const deleteAdvert = createAsyncThunk(
+  'ads/deleteAdvert',
+  async (id, { extra: { service }, rejectWithValue }) => {
+    try {
+      await service.ads.deleteAdvert(id);
+      console.log('Advert...delted');
+      return true;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const ads = createSlice({
   name: 'ads',
   initialState: {
