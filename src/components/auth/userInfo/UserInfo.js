@@ -20,11 +20,18 @@ function UserInfo() {
   const jwt = useSelector(getJwt);
   const userInfo = useSelector(getUserInfo);
   const [toggleModal, setToggleModal] = useState(false);
+  const [successfullyModal, setSuccessfullyModal] = useState(false);
+
+  const handleShowModal = () => {
+    setSuccessfullyModal(false);
+  };
 
   //cambie esto
   const [userData, setUserData] = useState({
     email: userInfo?.email || '',
     username: userInfo?.username || '',
+    password: '', // Inicializado como null
+    newPassword: '',
   });
 
   const userDataModify = {
@@ -38,8 +45,9 @@ function UserInfo() {
   const userId = jwt_decode(userJwt)._id;
 
   const handleShowModalconfirm = async event => {
-    setToggleModal(false);
     dispatch(editUserInfo(userDataModify)).catch(error => console.log(error));
+    setSuccessfullyModal(true);
+    setToggleModal(false);
   };
 
   const handleShowModalCancel = () => {
@@ -48,6 +56,7 @@ function UserInfo() {
 
   const handleErrorClick = () => {
     dispatch(resetError());
+    setSuccessfullyModal(false);
   };
 
   const handleChange = event => {
@@ -59,7 +68,6 @@ function UserInfo() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    dispatch(authUserInfo(userId));
     setToggleModal(true);
   };
 
@@ -69,6 +77,8 @@ function UserInfo() {
       setUserData({
         email: userInfo.email,
         username: userInfo.username,
+        password: '', // Inicializado como null
+        newPassword: '',
       });
     }
   }, [userInfo]);
@@ -160,8 +170,16 @@ function UserInfo() {
         {error && (
           <ErrorModal
             title="Error"
-            message={error.message}
+            message={error.data.error}
             onCancel={handleErrorClick}
+          />
+        )}
+
+        {!error && successfullyModal && (
+          <ErrorModal
+            title={t('User info')}
+            message={t('Updated user successfully')}
+            onCancel={handleShowModal}
           />
         )}
       </div>
