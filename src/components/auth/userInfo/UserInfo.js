@@ -21,9 +21,10 @@ function UserInfo() {
   const userInfo = useSelector(getUserInfo);
   const [toggleModal, setToggleModal] = useState(false);
 
+  //cambie esto
   const [userData, setUserData] = useState({
-    email: '',
-    username: '',
+    email: userInfo.email,
+    username: userInfo.username,
     password: '',
     newPassword: '',
   });
@@ -43,11 +44,12 @@ function UserInfo() {
     dispatch(authUserInfo(userId)).catch(error => console.log(error));
   }, [dispatch, userId]);
 
-  useEffect(() => {
-    if (userInfo) {
-      setUserData({ email: userInfo.email, username: userInfo.username });
-    }
-  }, [dispatch, userInfo]);
+  //esto de aqui no hace falta
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     setUserData({ email: userInfo.email, username: userInfo.username });
+  //   }
+  // }, [dispatch, userInfo]);
 
   const handleErrorClick = () => {
     dispatch(resetError());
@@ -62,6 +64,7 @@ function UserInfo() {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    dispatch(authUserInfo(userId));
     setToggleModal(true);
   };
 
