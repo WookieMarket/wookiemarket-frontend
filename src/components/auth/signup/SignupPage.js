@@ -8,6 +8,7 @@ import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
 import Form from '../../shared/form/Form';
+import './SignupPage.css';
 
 /**
  * This page allows user to create an account.
