@@ -23,43 +23,38 @@ function UserInfo() {
 
   //cambie esto
   const [userData, setUserData] = useState({
-    email: userInfo.email,
-    username: userInfo.username,
-    password: '',
-    newPassword: '',
+    email: userInfo?.email || '',
+    username: userInfo?.username || '',
   });
+
+  const userDataModify = {
+    email: userData.email,
+    username: userData.username,
+    password: userData.password,
+    newPassword: userData.newPassword,
+  };
+
   const userJwt = jwt || storage.get('auth');
   const userId = jwt_decode(userJwt)._id;
 
   const handleShowModalconfirm = async event => {
     setToggleModal(false);
-    dispatch(editUserInfo(userData)).catch(error => console.log(error));
+    dispatch(editUserInfo(userDataModify)).catch(error => console.log(error));
   };
 
   const handleShowModalCancel = () => {
     setToggleModal(false);
   };
-  // get user info
-  useEffect(() => {
-    dispatch(authUserInfo(userId)).catch(error => console.log(error));
-  }, [dispatch, userId]);
-
-  //esto de aqui no hace falta
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     setUserData({ email: userInfo.email, username: userInfo.username });
-  //   }
-  // }, [dispatch, userInfo]);
 
   const handleErrorClick = () => {
     dispatch(resetError());
   };
 
   const handleChange = event => {
-    setUserData(prevUserData => ({
-      ...prevUserData,
+    setUserData({
+      ...userData,
       [event.target.name]: event.target.value,
-    }));
+    });
   };
 
   const handleSubmit = async event => {
@@ -67,6 +62,20 @@ function UserInfo() {
     dispatch(authUserInfo(userId));
     setToggleModal(true);
   };
+
+  // Only run if userInfo.email and userInfo.username have values
+  useEffect(() => {
+    if (userInfo?.email && userInfo?.username) {
+      setUserData({
+        email: userInfo.email,
+        username: userInfo.username,
+      });
+    }
+  }, [userInfo]);
+  // get user info
+  useEffect(() => {
+    dispatch(authUserInfo(userId)).catch(error => console.log(error));
+  }, [dispatch, userId]);
 
   const buttonDisabled = isLoading || !userData.username || !userData.email;
 

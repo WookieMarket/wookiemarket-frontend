@@ -30,12 +30,12 @@ const user = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(authUserInfo.fulfilled, (state, action) => ({
-        userInfo: action.payload.results,
-      }))
-      .addCase(editUserInfo.fulfilled, (state, action) => ({
-        userInfo: action.payload.results,
-      }));
+      .addCase(authUserInfo.fulfilled, (state, action) => {
+        state.userInfo = action.payload.results;
+      })
+      .addCase(editUserInfo.fulfilled, (state, action) => {
+        state.userInfo = action.payload.results;
+      });
   },
 });
 
