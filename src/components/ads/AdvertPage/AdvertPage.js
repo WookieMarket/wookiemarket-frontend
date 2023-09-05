@@ -29,7 +29,7 @@ const AdvertPage = () => {
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
   const isLogged = useSelector(getIsLogged);
-  const advert = useSelector(getAdvertById(id));
+  //const advert = useSelector(getAdvertById(id));
   const jwt = useSelector(getJwt);
   const userJwt = jwt || storage.get('auth');
 
@@ -54,18 +54,23 @@ const AdvertPage = () => {
   };
 
   //USERINFO HANDLING
-  if (!userJwt) {
-    return;
-  }
+  const advert = useSelector(getAdvertById(id));
+  console.log('advert.userId: ' + advert);
+  
+  let isAdvertOwner;
   let userId;
-  try {
-    userId = jwt_decode(userJwt)._id;
-  } catch (error) {
-    console.error('Error decoding token: ', error);
+  if (userJwt) {
+    try {
+      userId = jwt_decode(userJwt)._id;
+    } catch (error) {
+      console.error('Error decoding token: ', error);
+    }
+    isAdvertOwner = advert && isLogged && advert.userId === userId; 
+  }else{
+    isAdvertOwner = false;
   }
 
-  const isAdvertOwner = advert && isLogged && advert.userId === userId;
-  console.log('advert.userId: ' + advert.userId);
+
   console.log('isAdvertOwner:' + isAdvertOwner);
   const isDisabled = !isAdvertOwner;
 
