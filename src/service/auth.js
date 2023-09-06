@@ -16,7 +16,8 @@ export const login = credentials => {
     if (credentials.rememberMe) {
       storage.set('auth', jwt);
     }
-    console.log('jwt,', jwt);
+    storage.set('username', credentials.username);
+    // console.log('jwt,', jwt);
     return jwt;
   });
 };
@@ -24,6 +25,7 @@ export const login = credentials => {
 export const logout = () => {
   return Promise.resolve().then(() => {
     removeAuthorizationHeader();
+    storage.remove('username');
     storage.remove('auth');
   });
 };
