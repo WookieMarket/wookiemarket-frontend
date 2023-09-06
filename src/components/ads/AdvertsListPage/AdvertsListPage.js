@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from '../Advert/Advert';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdverts, getUi } from '../../../store/selectors';
-import { advertsList } from '../../../store/slices/ads';
+import { getAdsPerPage, getAdverts, getUi } from '../../../store/selectors';
+import { advertsList, setAdsPerPage } from '../../../store/slices/ads';
 import './advertListPage.css';
 import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
@@ -18,8 +18,8 @@ const AdvertsListPage = () => {
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
 
-  const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
-  console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
+  //const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
+  //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
 
   useEffect(() => {
     dispatch(advertsList()).catch(error => console.log(error));
@@ -30,19 +30,35 @@ const AdvertsListPage = () => {
   };
 
   const filterAdName = ad =>
-    (ad.name ?? '').toUpperCase().startsWith(filterName.toUpperCase());
+    (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
   //NOTE añadir resto de campos de filtrado
 
   const filteredAds = ads
     //.filter(filterAdSaleValueOrDefault)
-    .filter(filterAdName);
-  //.filter(filterAdPrice)
-  //.filter(filterAdTags);
+    .filter(filterAdName)
+    //.filter(filterAdPrice)
+    //.filter(filterAdTags);
+    .sort((a, b) => {
+      const aDate = new Date(a.createdAt);
+      const bDate = new Date(b.createdAt);
+      if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
+        return isNaN(aDate.getTime()) ? 1 : -1;
+      }
+      return bDate - aDate;
+    });
+
+  //PAGINATION
+  const advertsPerPage = useSelector(getAdsPerPage);
   const totalPages = Math.ceil(filteredAds.length / advertsPerPage);
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
   const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
   const isLastPage = currentPage === totalPages;
+
+  const handleChangeAdsPerPage = event => {
+    const newAdsPerPage = parseInt(event.target.value);
+    dispatch(setAdsPerPage(newAdsPerPage));
+  };
 
   const handleFilterChange = event => {
     const value = event.target.value;
@@ -71,6 +87,16 @@ const AdvertsListPage = () => {
           <label className="advert_label">{t('Name')}: </label>
           <input type="text" onChange={handleFilterChange} />
         </section>
+        <section id="advertsPerPage">
+          <label className="advert_label">{t('Adverts per page')}: </label>
+          <select value={advertsPerPage} onChange={handleChangeAdsPerPage}>
+            <option value={2}>2</option>
+            <option value={4}>4</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
+        </section>
+
         <div className="container">
           {isLoading ? (
             <Spinner message={t('LOADING...')} />

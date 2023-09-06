@@ -80,11 +80,25 @@ export const deleteAdvert = createAsyncThunk(
   },
 );
 
+export const setAdsPerPage = createAsyncThunk(
+  'ads/setAdsPerPage',
+  async (adsPerPage, { dispatch }) => {
+    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
+  }
+);
+
 const ads = createSlice({
   name: 'ads',
   initialState: {
     areLoaded: false,
     data: [],
+    adsPerPage: 4,
+    totalCountAds: 0,
+  },
+  reducers: {
+    setAdsPerPage(state, action) {
+      state.adsPerPage = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -94,6 +108,7 @@ const ads = createSlice({
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
+        state.totalCountAds = action.payload.total;
       })
       .addCase(uploadModifiedAd.fulfilled, (state, action) => {
         //state.areLoaded = true;
