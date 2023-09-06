@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from '../Advert/Advert';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getUi } from '../../../store/selectors';
-import { advertsList } from '../../../store/slices/ads';
 import './AdsList.css';
 import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
@@ -16,14 +15,9 @@ const AdsList = ({ selector }) => {
   const [filterName, setFilterName] = useState('');
   const ads = useSelector(selector);
   const { isLoading } = useSelector(getUi);
-  const dispatch = useDispatch();
 
   const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
   console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
-
-  useEffect(() => {
-    dispatch(advertsList()).catch(error => console.log(error));
-  }, [dispatch]);
 
   const handlePageChange = page => {
     setCurrentPage(page);

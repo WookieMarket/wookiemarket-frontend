@@ -1,7 +1,15 @@
-import { getAdverts } from '../../../store/selectors';
 import AdsList from '../AdsList/AdsList';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { advertsList } from '../../../store/slices/ads';
+import { getAdverts } from '../../../store/selectors';
 
 const AdvertsListPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(advertsList()).catch(error => console.log(error));
+  }, [dispatch]);
+
   return <AdsList selector={getAdverts} />;
 };
 
