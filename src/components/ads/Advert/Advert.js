@@ -37,16 +37,11 @@ function Advert(advert) {
             ></img>
           }
         </div>
-        <br />
-        <div className="productInfo">
-          <p className="advert_label hologram-text tv-text">
-            {t('Description')}:
-          </p>
 
-          <span className="description hologram-text tv-text bottomSpace">
-            {' '}
-            {advert.description}
-          </span>
+        <div className="productInfo">
+          <p className="description">{t('Description')}:</p>
+
+          <span className="description "> {advert.description}</span>
 
           <p className="hologram-text tv-text bottomSpace">
             {t('Is&')}
