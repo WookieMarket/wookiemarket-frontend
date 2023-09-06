@@ -11,6 +11,7 @@ import {
   FaTrashAlt,
   FaEyeSlash,
   FaUserAlt,
+  FaListAlt,
 } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
@@ -19,10 +20,12 @@ import { getIsLogged } from '../../../store/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../shared/modal/Modal';
 import { authLogout } from '../../../store/slices/auth';
+import storage from '../../../utils/storage';
 
 const UserOptions = () => {
   const dispatch = useDispatch();
   const isLogged = useSelector(getIsLogged);
+  const username = storage.get('username');
   const { t } = useTranslation();
   const [showDropdown, setShowDropdown] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
@@ -44,6 +47,7 @@ const UserOptions = () => {
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
+    console.log(username);
   };
 
   return (
@@ -70,8 +74,14 @@ const UserOptions = () => {
           {isLogged && (
             <MenuItem to="/delete-account">
               <FaTrashAlt />
-
               {t('Delete Account')}
+            </MenuItem>
+          )}
+
+          {isLogged && (
+            <MenuItem to={`/adverts/${username}`}>
+              <FaListAlt />
+              {t('My Ads')}
             </MenuItem>
           )}
         </DropdownMenu>

@@ -26,7 +26,6 @@ export const advertsList = createAsyncThunk(
   'ads/list',
   async (_, { extra: { service }, rejectWithValue }) => {
     console.log('Antes del try');
-    console.log('Antes del try');
     try {
       //console.log('Despachando la acción advertsList');
       const adverts = await service.ads.getRecentAds();
@@ -80,11 +79,24 @@ export const deleteAdvert = createAsyncThunk(
   },
 );
 
+export const getAdsByUser = createAsyncThunk(
+  'user/ads',
+  async (username, { extra: { service }, rejectWithValue }) => {
+    try {
+      const response = await service.user.getUserAds(username);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const ads = createSlice({
   name: 'ads',
   initialState: {
     areLoaded: false,
     data: [],
+    userAds: [],
   },
   extraReducers: builder => {
     builder
@@ -102,6 +114,10 @@ const ads = createSlice({
       .addCase(getAdById.fulfilled, (state, action) => {
         state.areLoaded = false;
         state.data = [action.payload.result];
+      })
+      .addCase(getAdsByUser.fulfilled, (state, action) => {
+        state.areLoaded = true;
+        state.userAds = action.payload.results;
       });
   },
 });

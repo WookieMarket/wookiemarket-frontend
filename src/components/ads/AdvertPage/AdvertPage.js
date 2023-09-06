@@ -54,7 +54,7 @@ const AdvertPage = () => {
 
   //USERINFO HANDLING
   const advert = useSelector(getAdvertById(id));
-  
+
   let isAdvertOwner;
   let userId;
   if (userJwt) {
@@ -63,22 +63,22 @@ const AdvertPage = () => {
     } catch (error) {
       console.error('Error decoding token: ', error);
     }
-    isAdvertOwner = advert && isLogged && advert.userId === userId; 
-  }else{
+    isAdvertOwner = advert && isLogged && advert.userId === userId;
+  } else {
     isAdvertOwner = false;
   }
 
   const isDisabled = !isAdvertOwner;
 
-//Delete Advert
-const handleDeleteConfirm = async () => {
-  setActiveModal(null);
-  await dispatch(deleteAdvert(id));
-  handleOpenModal(3);
-  setTimeout(() => {
-    navigate('/');
-  }, 3000);
-};
+  //Delete Advert
+  const handleDeleteConfirm = async () => {
+    setActiveModal(null);
+    await dispatch(deleteAdvert(id));
+    handleOpenModal(3);
+    setTimeout(() => {
+      navigate('/');
+    }, 3000);
+  };
 
   const handleEdit = () => {
     setActiveModal(null);
