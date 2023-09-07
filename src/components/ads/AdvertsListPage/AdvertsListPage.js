@@ -17,16 +17,20 @@ const AdvertsListPage = () => {
   const [filterName, setFilterName] = useState('');
   const ads = useSelector(getAdverts);
   const { isLoading } = useSelector(getUi);
+  const advertsPerPage = useSelector(getAdsPerPage);
   const dispatch = useDispatch();
 
   //const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
   //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
 
   useEffect(() => {
-    dispatch(advertsList({ page: 1, limit: 10, sort: 'desc' })).catch(error =>
+    // Calculate the value of skip based on the current page and the number of ads per page
+    const skip = (currentPage - 1) * advertsPerPage;
+  
+    dispatch(advertsList({ limit: 10, sort: 'desc' })).catch(error =>
       console.log(error),
     );
-  }, [dispatch]);
+  }, [dispatch, currentPage, advertsPerPage]);
 
   const handlePageChange = page => {
     setCurrentPage(page);
@@ -51,7 +55,7 @@ const AdvertsListPage = () => {
     });
 
   //PAGINATION
-  const advertsPerPage = useSelector(getAdsPerPage);
+//  const advertsPerPage = useSelector(getAdsPerPage);
   const totalPages = Math.ceil(filteredAds.length / advertsPerPage);
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
@@ -83,6 +87,7 @@ const AdvertsListPage = () => {
     const cleanName = cleanUpForURL(advert.name);
     return `/adverts/${advert._id}/${cleanName}`;
   };
+
   return (
     <Layout>
       <>
