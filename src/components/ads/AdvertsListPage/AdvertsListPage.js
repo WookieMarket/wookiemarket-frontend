@@ -61,7 +61,9 @@ const AdvertsListPage = () => {
   const handleChangeAdsPerPage = event => {
     const newAdsPerPage = parseInt(event.target.value);
     dispatch(setAdsPerPage(newAdsPerPage));
+    setCurrentPage(1);
   };
+  
 
   const handleFilterChange = event => {
     const value = event.target.value;
