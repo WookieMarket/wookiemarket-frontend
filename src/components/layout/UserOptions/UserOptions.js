@@ -6,6 +6,8 @@ import {
   MobileIcon,
 } from './UserOptions-css';
 import {
+  FaPen,
+  FaBookmark,
   FaUnlockAlt,
   FaPowerOff,
   FaTrashAlt,
@@ -72,16 +74,30 @@ const UserOptions = () => {
           )}
 
           {isLogged && (
-            <MenuItem to="/delete-account">
-              <FaTrashAlt />
-              {t('Delete Account')}
+            <MenuItem to={`/adverts/${username}`}>
+              <FaListAlt />
+              {t('My Ads')}
             </MenuItem>
           )}
 
           {isLogged && (
-            <MenuItem to={`/adverts/${username}`}>
-              <FaListAlt />
-              {t('My Ads')}
+            <MenuItem to={'/favorite'}>
+              <FaBookmark />
+              {t('My favourites')}
+            </MenuItem>
+          )}
+
+          {isLogged && (
+            <MenuItem to="/user-info">
+              <FaPen />
+              {t('User info')}
+            </MenuItem>
+          )}
+
+          {isLogged && (
+            <MenuItem to="/delete-account">
+              <FaTrashAlt />
+              {t('Delete Account')}
             </MenuItem>
           )}
         </DropdownMenu>
