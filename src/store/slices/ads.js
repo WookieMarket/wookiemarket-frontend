@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { areAdvertsLoaded } from '../selectors';
+import {
+  areAdvertsLoaded,
+  areFavoriteAds,
+  areUsersAdsLoaded,
+} from '../selectors';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -89,14 +93,35 @@ export const getAdsByUser = createAsyncThunk(
       return rejectWithValue(error);
     }
   },
+  {
+    condition: (_, { getState }) => !areUsersAdsLoaded(getState()),
+  },
+);
+
+export const FavoriteAds = createAsyncThunk(
+  'user/getFavoriteAds',
+  async (_, { extra: { service }, rejectWithValue }) => {
+    try {
+      const favoriteAds = await service.user.getFavoriteAds();
+      return favoriteAds;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+  {
+    condition: (_, { getState }) => !areFavoriteAds(getState()),
+  },
 );
 
 const ads = createSlice({
   name: 'ads',
   initialState: {
     areLoaded: false,
+    favoriteAreLoaded: false,
+    usersAdsAreLoaded: false,
     data: [],
     userAds: [],
+    favoriteAds: [],
   },
   extraReducers: builder => {
     builder
@@ -116,8 +141,12 @@ const ads = createSlice({
         state.data = [action.payload.result];
       })
       .addCase(getAdsByUser.fulfilled, (state, action) => {
-        state.areLoaded = true;
+        state.usersAdsAreLoaded = true;
         state.userAds = action.payload.results;
+      })
+      .addCase(FavoriteAds.fulfilled, (state, action) => {
+        state.favoriteAreLoaded = true;
+        state.favoriteAds = action.payload.results;
       });
   },
 });

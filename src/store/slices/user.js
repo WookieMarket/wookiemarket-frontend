@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const authUserInfo = createAsyncThunk(
-  'userInfo/authUserInfo',
+  'user/authUserInfo',
   async (id, { extra: { service }, rejectWithValue }) => {
     try {
       const response = await service.user.getUserInfo(id);
@@ -12,7 +12,7 @@ export const authUserInfo = createAsyncThunk(
   },
 );
 export const editUserInfo = createAsyncThunk(
-  'userInfo/editUserInfo',
+  'user/editUserInfo',
   async (data, { extra: { service }, rejectWithValue }) => {
     try {
       const response = await service.user.editUserData(data);

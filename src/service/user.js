@@ -37,5 +37,6 @@ export const getUserAds = username => {
 };
 
 export const getFavoriteAds = () => {
-  return client.get('');
+  const url = `${usersUrl}/favorite-adverts`;
+  return client.get(url);
 };
