@@ -26,6 +26,7 @@ a:active {
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
+
 .pagination {
   text-align: center;
   color: var(--text-color);
@@ -35,10 +36,6 @@ a:active {
   text-transform: lowercase;
   font-family: var(--font-family);
   font-size: 3em;
-}
-
-.pagination .page {
-  cursor: pointer;
 }
 
 .advert-container {

@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
+import Pagination from '../../shared/pagination/Pagination';
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
@@ -22,7 +23,9 @@ const AdvertsListPage = () => {
   //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
 
   useEffect(() => {
-    dispatch(advertsList()).catch(error => console.log(error));
+    dispatch(advertsList({ page: 1, limit: 10, sort: 'desc' })).catch(error =>
+      console.log(error),
+    );
   }, [dispatch]);
 
   const handlePageChange = page => {
@@ -122,7 +125,7 @@ const AdvertsListPage = () => {
                         ))}
                     </div>
                   </div>
-                  <div className="pagination">
+                  {/*<div className="pagination">
                     <p>
                       <span
                         className={currentPage === 1 ? 'disabled' : 'page'}
@@ -164,7 +167,12 @@ const AdvertsListPage = () => {
                         &gt;
                       </span>
                     </p>
-                  </div>
+                    </div>*/}
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 </>
               ) : (
                 <EmptyList />
