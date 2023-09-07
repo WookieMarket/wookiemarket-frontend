@@ -36,7 +36,32 @@ export const getUserAds = username => {
   return client.get(url);
 };
 
+/**
+ * returns ads marked as a user's favorites
+ *
+ * @returns returns ads marked as a user's favorites
+ */
 export const getFavoriteAds = () => {
   const url = `${usersUrl}/favorite-adverts`;
   return client.get(url);
+};
+
+/**
+ * add the ad id to favorites
+ * @param {*} id
+ * @returns add the ad id to favorites
+ */
+export const includeFavoriteAds = id => {
+  const url = `${usersUrl}/favorites/${id}`;
+  return client.post(url);
+};
+
+/**
+ * delete the id of an ad if it is in favorites
+ *
+ * @returns delete the id of an ad if it is in favorites
+ */
+export const removeFavorite = id => {
+  const url = `${usersUrl}/favorites/${id}`;
+  return client.post(url);
 };

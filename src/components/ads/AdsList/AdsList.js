@@ -45,18 +45,18 @@ const AdsList = ({ selector }) => {
     setCurrentPage(1);
   };
 
-  //Cleaning & making friendly URL
-  const cleanUpForURL = text => {
-    return text
-      .toLowerCase()
-      .replace(/ /g, '-') // Replace spaces with hyphens
-      .replace(/[^\w-]/g, ''); // Remove special characters
-  };
-  // Generates the URL using the _id of the advert and the name field
-  const generateAdvertURL = advert => {
-    const cleanName = cleanUpForURL(advert.name);
-    return `/adverts/${advert._id}/${cleanName}`;
-  };
+  // //Cleaning & making friendly URL
+  // const cleanUpForURL = text => {
+  //   return text
+  //     .toLowerCase()
+  //     .replace(/ /g, '-') // Replace spaces with hyphens
+  //     .replace(/[^\w-]/g, ''); // Remove special characters
+  // };
+  // // Generates the URL using the _id of the advert and the name field
+  // const generateAdvertURL = advert => {
+  //   const cleanName = cleanUpForURL(advert.name);
+  //   return `/adverts/${advert._id}/${cleanName}`;
+  // };
   return (
     <Layout>
       <>
@@ -82,9 +82,7 @@ const AdsList = ({ selector }) => {
                         .map(advert => (
                           <div key={advert._id}>
                             <div className="advert-container">
-                              <Link to={generateAdvertURL(advert)}>
-                                <Advert {...advert} />
-                              </Link>
+                              <Advert {...advert} />
                             </div>
                           </div>
                         ))}

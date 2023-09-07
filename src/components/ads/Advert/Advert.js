@@ -2,6 +2,8 @@ import React from 'react';
 import './advert.css';
 import defaultImage from '../../../assets/no_image.jpg';
 import { useTranslation } from 'react-i18next';
+import FavoriteAds from '../../shared/FavoriteAds/FavoriteAds';
+import { Link } from 'react-router-dom';
 
 function Advert(advert) {
   const { t } = useTranslation();
@@ -10,7 +12,9 @@ function Advert(advert) {
   const handleImageError = event => {
     event.target.src = defaultImage;
   };
-
+  const adId = advert._id;
+  console.log('id del anuncio', advert._id);
+  console.log('id del anuncio2', adId);
   // const images = image => {
   //   if (image) {
   //     return image;
@@ -18,24 +22,40 @@ function Advert(advert) {
   //     return defaultImage;
   //   }
   // };
+  //Cleaning & making friendly URL
+  const cleanUpForURL = text => {
+    return text
+      .toLowerCase()
+      .replace(/ /g, '-') // Replace spaces with hyphens
+      .replace(/[^\w-]/g, ''); // Remove special characters
+  };
+
+  // Generates the URL using the _id of the advert and the name field
+  const generateAdvertURL = advert => {
+    const cleanName = cleanUpForURL(advert.name);
+    return `/adverts/${advert._id}/${cleanName}`;
+  };
+
   return (
     <>
       <div className="productInfo hologram-text tv-text" id="advertOnly">
         <div id="advert-name" className="advert-name">
           <h2>{advert.name}</h2>
+          <FavoriteAds id={adId} />
         </div>
       </div>
-      <br />
       <div className="productData ">
         <div className="product-img">
-          {
-            <img
-              className="img"
-              src={advert.image}
-              onError={handleImageError}
-              alt={t('Product image')}
-            ></img>
-          }
+          <Link to={generateAdvertURL(advert)}>
+            {
+              <img
+                className="img"
+                src={advert.image}
+                onError={handleImageError}
+                alt={t('Product image')}
+              ></img>
+            }
+          </Link>
         </div>
 
         <div className="productInfo">
