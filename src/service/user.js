@@ -1,4 +1,5 @@
 import client from '../api/client';
+const usersUrl = '/api/users';
 
 /**
  * This call fetch user informatiion
@@ -6,7 +7,8 @@ import client from '../api/client';
  * @returns User information
  */
 export const getUserInfo = id => {
-  return client.get('api/users/id/' + id);
+  const url = `${usersUrl}/id/${id}`;
+  return client.get(url);
 };
 
 /**
@@ -20,7 +22,8 @@ export const editUserData = data => {
       'Content-Type': 'multipart/form-data',
     },
   };
-  return client.post('api/users/user-info', data, config);
+  const url = `${usersUrl}/user-info`;
+  return client.post(url, data, config);
 };
 
 /**
@@ -29,5 +32,10 @@ export const editUserData = data => {
  * @returns list of ads
  */
 export const getUserAds = username => {
-  return client.get(`api/users/${username}/ads`);
+  const url = `${usersUrl}/${username}/ads`;
+  return client.get(url);
+};
+
+export const getFavoriteAds = () => {
+  return client.get('');
 };
