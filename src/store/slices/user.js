@@ -23,10 +23,35 @@ export const editUserInfo = createAsyncThunk(
   },
 );
 
+export const addFavorite = createAsyncThunk(
+  'user/addFavorite',
+  async (adId, { extra: { service }, rejectWithValue }) => {
+    try {
+      const favoriteAds = await service.user.includeFavoriteAds(adId);
+      return favoriteAds;
+    } catch (errorFavorites) {
+      return rejectWithValue(errorFavorites);
+    }
+  },
+);
+
+export const deleteFavorites = createAsyncThunk(
+  'user/deleteFavorites',
+  async (adId, { extra: { service }, rejectWithValue }) => {
+    try {
+      const favoriteAds = await service.user.removeFavorite(adId);
+      return favoriteAds;
+    } catch (errorFavorites) {
+      return rejectWithValue(errorFavorites);
+    }
+  },
+);
+
 const user = createSlice({
   name: 'user',
   initialState: {
     userInfo: {},
+    //favorites: [],
   },
   extraReducers: builder => {
     builder
@@ -36,6 +61,9 @@ const user = createSlice({
       .addCase(editUserInfo.fulfilled, (state, action) => {
         state.userInfo = action.payload.results;
       });
+    // .addCase(addFavorite.fulfilled, (state, action) => {
+    //   state.favorites.unshift = action.payload;
+    // });
   },
 });
 
