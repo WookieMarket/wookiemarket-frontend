@@ -56,7 +56,6 @@ const AdvertsListPage = () => {
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
   const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
-  const isLastPage = currentPage === totalPages;
 
   const handleChangeAdsPerPage = event => {
     const newAdsPerPage = parseInt(event.target.value);
@@ -127,49 +126,6 @@ const AdvertsListPage = () => {
                         ))}
                     </div>
                   </div>
-                  {/*<div className="pagination">
-                    <p>
-                      <span
-                        className={currentPage === 1 ? 'disabled' : 'page'}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                      >
-                        &lt;{' '}
-                      </span>
-                      {[...Array(totalPages)].map((_, index) => {
-                        if (
-                          totalPages > 5 &&
-                          index > 1 &&
-                          index < totalPages - 2
-                        ) {
-                          return (
-                            <span className="page" key={`ellipsis-${index}`}>
-                              ...
-                            </span>
-                          );
-                        } else {
-                          return (
-                            <span
-                              className={
-                                currentPage === index + 1 ? 'disabled' : 'page'
-                              }
-                              key={index}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
-                              {index + 1}
-                              {index < totalPages - 1 && <span> - </span>}
-                            </span>
-                          );
-                        }
-                      })}
-                      <span
-                        className={isLastPage ? 'disabled' : 'page'}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                      >
-                        {' '}
-                        &gt;
-                      </span>
-                    </p>
-                    </div>*/}
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
