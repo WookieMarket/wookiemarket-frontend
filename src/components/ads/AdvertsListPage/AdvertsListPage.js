@@ -10,6 +10,7 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 import Pagination from '../../shared/pagination/Pagination';
+import Button from '../../shared/Button';
 
 const AdvertsListPage = () => {
   const { t } = useTranslation();
@@ -19,15 +20,15 @@ const AdvertsListPage = () => {
   const { isLoading } = useSelector(getUi);
   const advertsPerPage = useSelector(getAdsPerPage);
   const dispatch = useDispatch();
+  let skip;
+  const limit = 10;
 
   //const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
   //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
 
   useEffect(() => {
-    // Calculate the value of skip based on the current page and the number of ads per page
-    const skip = (currentPage - 1) * advertsPerPage;
-  
-    dispatch(advertsList({ limit: 10, sort: 'desc' })).catch(error =>
+    const skip = 0;
+    dispatch(advertsList({ skip, limit, sort: 'desc' })).catch(error =>
       console.log(error),
     );
   }, [dispatch, currentPage, advertsPerPage]);
@@ -55,7 +56,7 @@ const AdvertsListPage = () => {
     });
 
   //PAGINATION
-//  const advertsPerPage = useSelector(getAdsPerPage);
+  //  const advertsPerPage = useSelector(getAdsPerPage);
   const totalPages = Math.ceil(filteredAds.length / advertsPerPage);
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
@@ -66,7 +67,6 @@ const AdvertsListPage = () => {
     dispatch(setAdsPerPage(newAdsPerPage));
     setCurrentPage(1);
   };
-  
 
   const handleFilterChange = event => {
     const value = event.target.value;
@@ -88,6 +88,17 @@ const AdvertsListPage = () => {
     return `/adverts/${advert._id}/${cleanName}`;
   };
 
+  const handleLoadMore = async () => {
+    skip = ads.length;
+    try {
+      await dispatch(advertsList({ skip, limit, sort: 'desc' }));
+      console.log('Debería haber hecho la llamada');
+      setCurrentPage(prevPage => prevPage + 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Layout>
       <>
@@ -101,6 +112,7 @@ const AdvertsListPage = () => {
           <select value={advertsPerPage} onChange={handleChangeAdsPerPage}>
             <option value={2}>2</option>
             <option value={4}>4</option>
+            <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={20}>20</option>
           </select>
@@ -131,6 +143,9 @@ const AdvertsListPage = () => {
                         ))}
                     </div>
                   </div>
+                  {currentPage === totalPages && (
+                    <Button onClick={handleLoadMore}>{t('more ads')}</Button>
+                  )}
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
