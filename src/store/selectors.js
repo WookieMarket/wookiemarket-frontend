@@ -26,3 +26,6 @@ export const areCategoriesLoaded = state => state.categories.areLoaded;
 export const areFavoriteAds = state => state.ads.favoriteAreLoaded;
 
 export const areUsersAdsLoaded = state => state.ads.usersAdsAreLoaded;
+
+export const isFavorite = id => state =>
+  state.ads.favoriteAds.some(favAd => favAd._id === id);
