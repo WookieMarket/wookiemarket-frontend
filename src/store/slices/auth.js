@@ -92,6 +92,10 @@ const auth = createSlice({
       .addCase(authLogout.fulfilled, (state, action) => {
         state.auth = false;
         state.jwt = '';
+      })
+      .addCase(deleteAccount.fulfilled, (state, action) => {
+        state.auth = false;
+        state.jwt = '';
       });
   },
 });

@@ -18,7 +18,7 @@ function FavoriteAds({ id }) {
     }
   };
 
-  const buttonClass = !isAdFavorite ? 'favorite-button' : 'not-favorite-button';
+  const buttonClass = isAdFavorite ? 'favorite-button' : 'not-favorite-button';
 
   return (
     <button className={buttonClass} onClick={toggleFavorite}>
