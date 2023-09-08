@@ -62,6 +62,6 @@ export const includeFavoriteAds = id => {
  * @returns delete the id of an ad if it is in favorites
  */
 export const removeFavorite = id => {
-  const url = `${usersUrl}/favorites/${id}`;
-  return client.post(url);
+  const url = `${usersUrl}/delete-favorite/${id}`;
+  return client.delete(url);
 };
