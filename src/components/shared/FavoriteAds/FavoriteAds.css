@@ -1,0 +1,27 @@
+.favorite-button {
+  background-color: yellow;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  margin: 0%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+}
+
+.not-favorite-button {
+  background-color: transparent;
+  border: none;
+  margin: 0%;
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+}
+
+svg {
+  fill: var(--background-iconFa-favorite-border-color);
+}

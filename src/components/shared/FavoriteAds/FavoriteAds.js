@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, deleteFavorites } from '../../../store/slices/ads';
 import { isFavorite } from '../../../store/selectors';
-
-//import { useParams } from 'react-router-dom';
+import { FaRegStar } from 'react-icons/fa';
+import './FavoriteAds.css';
 
 function FavoriteAds({ id }) {
   // Usa el selector isFavorite para obtener el estado de favoritos
@@ -18,31 +18,12 @@ function FavoriteAds({ id }) {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(getFavorite()).catch(error => console.log(error));
-  // }, [dispatch]);
-
-  // const toggleFavorite = () => {
-  //   if (isFavorite === true) {
-  //     // Si ya es favorito, quitar de favoritos
-  //     dispatch(deleteFavorites(id)); // Asegúrate de tener una acción para eliminar de favoritos
-  //   } else {
-  //     // Si no es favorito, agregar a favoritos
-  //     dispatch(addFavorite(id));
-  //   }
-  // };
+  const buttonClass = !isAdFavorite ? 'favorite-button' : 'not-favorite-button';
 
   return (
-    <button onClick={toggleFavorite}>
-      {isAdFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+    <button className={buttonClass} onClick={toggleFavorite}>
+      {isAdFavorite ? <FaRegStar /> : <FaRegStar />}
     </button>
-    // <div>
-    //   {isFavorite === false ? (
-    //     <button onClick={handleIncludeFavorites}>boton</button>
-    //   ) : (
-    //     <button onClick={handleDeleteFavorites}>boton</button>
-    //   )}
-    // </div>
   );
 }
 

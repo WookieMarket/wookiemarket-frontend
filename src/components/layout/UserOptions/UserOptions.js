@@ -6,7 +6,6 @@ import {
   MobileIcon,
 } from './UserOptions-css';
 import {
-  FaRegStar,
   FaPen,
   FaBookmark,
   FaUnlockAlt,
