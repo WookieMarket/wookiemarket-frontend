@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import Advert from '../Advert/Advert';
 import { useSelector } from 'react-redux';
 import { getUi } from '../../../store/selectors';
@@ -17,7 +17,7 @@ const AdsList = ({ selector }) => {
   const { isLoading } = useSelector(getUi);
 
   const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
-  console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
+  //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
 
   const handlePageChange = page => {
     setCurrentPage(page);

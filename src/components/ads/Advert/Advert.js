@@ -4,25 +4,21 @@ import defaultImage from '../../../assets/no_image.jpg';
 import { useTranslation } from 'react-i18next';
 import FavoriteAds from '../../shared/FavoriteAds/FavoriteAds';
 import { Link } from 'react-router-dom';
+import IsDisable from '../../../utils/isDisable';
 
 function Advert(advert) {
   const { t } = useTranslation();
+
   //const advDate = new Date(advert.createdAt);
   //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
   const handleImageError = event => {
     event.target.src = defaultImage;
   };
+
+  const isDisabled = IsDisable(advert);
+
   const adId = advert._id;
-  console.log('id del anuncio', advert._id);
-  console.log('id del anuncio2', adId);
-  // const images = image => {
-  //   if (image) {
-  //     return image;
-  //   } else {
-  //     return defaultImage;
-  //   }
-  // };
-  //Cleaning & making friendly URL
+
   const cleanUpForURL = text => {
     return text
       .toLowerCase()
@@ -41,7 +37,7 @@ function Advert(advert) {
       <div className="productInfo hologram-text tv-text" id="advertOnly">
         <div id="advert-name" className="advert-name">
           <h2>{advert.name}</h2>
-          <FavoriteAds id={adId} />
+          {isDisabled && <FavoriteAds id={adId} />}
         </div>
       </div>
       <div className="productData ">
@@ -59,7 +55,7 @@ function Advert(advert) {
         </div>
 
         <div className="productInfo">
-          <p className="description">{t('Description')}:</p>
+          <p>{t('Description')}:</p>
 
           <span className="description "> {advert.description}</span>
 
@@ -78,9 +74,9 @@ function Advert(advert) {
             </p>
           </div>
           <div className="advert_label hologram-text tv-text">
-            <p>
+            <p className="advert-text">
               {t('Category')}:{' '}
-              <span className="advert-text">
+              <span>
                 {advert.category === undefined
                   ? ''
                   : advert.category.join(', ').toLocaleUpperCase()}
