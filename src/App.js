@@ -33,14 +33,14 @@ function App() {
             }
           />
 
-          <Route
+          {/* <Route
             path="/ads"
             element={
               <RequireAuth>
                 <AdvertsListPage />
               </RequireAuth>
             }
-          />
+          /> */}
 
           <Route
             path="/modify/:adId"
