@@ -4,6 +4,7 @@ import { addFavorite, deleteFavorites } from '../../../store/slices/ads';
 import { isFavorite } from '../../../store/selectors';
 import { FaRegStar } from 'react-icons/fa';
 import './FavoriteAds.css';
+import estrella from '../../../assets/CSS-Images/estrella.png';
 
 function FavoriteAds({ id }) {
   // Usa el selector isFavorite para obtener el estado de favoritos
@@ -18,11 +19,15 @@ function FavoriteAds({ id }) {
     }
   };
 
-  const buttonClass = isAdFavorite ? 'favorite-button' : 'not-favorite-button';
+  //const buttonClass = isAdFavorite ? 'favorite-button' : 'not-favorite-button';
 
   return (
-    <button className={buttonClass} onClick={toggleFavorite}>
-      {isAdFavorite ? <FaRegStar /> : <FaRegStar />}
+    <button onClick={toggleFavorite}>
+      {isAdFavorite ? (
+        <img className="favorite-button" src={estrella} alt="estrella" />
+      ) : (
+        <FaRegStar className="not-favorite-button" />
+      )}
     </button>
   );
 }

@@ -1,13 +1,12 @@
 .favorite-button {
-  background-color: yellow;
+  width: 28px;
+  height: 28px;
   border: none;
-  font-size: 30px;
   cursor: pointer;
   margin: 0%;
   position: absolute;
   top: 0;
   right: 0;
-  text-decoration: none;
 }
 
 .not-favorite-button {
