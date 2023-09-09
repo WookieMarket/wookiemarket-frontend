@@ -45,6 +45,7 @@ const AdsList = ({ selector }) => {
   const [filterName, setFilterName] = useState('');
   const ads = useSelector(selector);
   const { isLoading } = useSelector(getUi);
+  const originalCategories = useSelector(getAllCategory);
   const categories = useSelector(getAllCategory);
   const adsPerPage = useSelector(getAdsPerPage);
   const uniqueCategories = getUniqueCategories(categories);
@@ -74,13 +75,13 @@ const AdsList = ({ selector }) => {
   }, [dispatch]);
 
   //Filter by category NOT WORKING
-  const handleCategoryChange = event => {
+   const handleCategoryChange = event => {
     const options = event.target.options;
 
     let selectedOptions = [];
     for (let i = 0; i < options.length; i++) {
       if (options[i].selected) {
-        selectedOptions.push(options[i].value);
+        selectedOptions.push(options[i].value.toLowerCase());
       }
     }
     setSelectedCategories(selectedOptions);
@@ -89,7 +90,7 @@ const AdsList = ({ selector }) => {
   const filterByCategory = ad =>
     selectedCategories.length === 0 ||
     ad.category.some(adCategory =>
-      selectedCategories.includes(adCategory.trim()),
+      selectedCategories.includes(adCategory.trim().toLowerCase()),
     );
 
   const handleFilterChange = event => {
