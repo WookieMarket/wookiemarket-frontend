@@ -41,6 +41,13 @@ export const advertsList = createAsyncThunk(
   },
 );
 
+export const setAdsPerPage = createAsyncThunk(
+  'ads/setAdsPerPage',
+  async (adsPerPage, { dispatch }) => {
+    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
+  },
+);
+
 export const getAdById = createAsyncThunk(
   'ads/fetchAdvertById',
   async (id, { extra: { service }, rejectWithValue }) => {

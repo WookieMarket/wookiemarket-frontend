@@ -1,148 +1,310 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from '../Advert/Advert';
-import { useSelector } from 'react-redux';
-import { getUi } from '../../../store/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getAdsPerPage,
+  getUi,
+  selectTotalCountAds,
+  getAllCategory,
+} from '../../../store/selectors';
 import './AdsList.css';
 import { useTranslation } from 'react-i18next';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
+import { categoriesList } from '../../../store/slices/categories';
+import { setAdsPerPage } from '../../../store/slices/ads';
+
+const getUniqueCategories = categories => {
+  //Removing blank spaces before and after commas
+  const trimmedCategories = categories.map(category =>
+    category.replace(/\s*,\s*/g, ','),
+  );
+  // Divide each item into subcategories and flatten the array
+  const splitCategories = trimmedCategories.flatMap(category =>
+    category.split(','),
+  );
+
+  //Convert the first letter of all values to capital letters
+  const capitalizedCategories = splitCategories.map(
+    category => category.charAt(0).toUpperCase() + category.slice(1),
+  );
+  //Remove duplicate values and convert to array
+  const uniqueCategories = Array.from(new Set(capitalizedCategories));
+  console.log('categories: ' + uniqueCategories);
+
+  return uniqueCategories;
+};
 
 const AdsList = ({ selector }) => {
+  
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [filterName, setFilterName] = useState('');
   const ads = useSelector(selector);
   const { isLoading } = useSelector(getUi);
+  const categories = useSelector(getAllCategory);
+  const adsPerPage = useSelector(getAdsPerPage);
+  const uniqueCategories = getUniqueCategories(categories);
+  const totalCountAds = useSelector(selectTotalCountAds);
 
-  const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
-  console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
+  const [noResults, setNoResult] = useState(true);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [queryPrice, setqueryPrice] = useState('');
+  const [queryMinPrice, setQueryMinPrice] = useState('');
+  const [queryMaxPrice, setQueryMaxPrice] = useState('');
 
+  let filteredAds;
+
+  //const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
+  //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
+
+  //ads list
   const handlePageChange = page => {
     setCurrentPage(page);
   };
 
-  const filterAdName = ad =>
-    (ad.name ?? '').toUpperCase().startsWith(filterName.toUpperCase());
-  //NOTE añadir resto de campos de filtrado
+  //Categories list
+  useEffect(() => {
+    dispatch(categoriesList()).catch(error => console.log(error));
+    console.log('categories: ' + categories);
+  }, [dispatch]);
 
-  const filteredAds = ads
-    //.filter(filterAdSaleValueOrDefault)
-    .filter(filterAdName);
-  //.filter(filterAdPrice)
-  //.filter(filterAdTags);
-  const totalPages = Math.ceil(filteredAds.length / advertsPerPage);
-  const startIndex = (currentPage - 1) * advertsPerPage;
-  const endIndex = startIndex + advertsPerPage;
-  const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
-  const isLastPage = currentPage === totalPages;
+  //Filter by category NOT WORKING
+  const handleCategoryChange = event => {
+    const options = event.target.options;
+
+    let selectedOptions = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedOptions.push(options[i].value);
+      }
+    }
+    setSelectedCategories(selectedOptions);
+  };
+
+  const filterByCategory = ad =>
+    selectedCategories.length === 0 ||
+    ad.category.some(adCategory =>
+      selectedCategories.includes(adCategory.trim()),
+    );
 
   const handleFilterChange = event => {
     const value = event.target.value;
     setFilterName(value);
-    //NOTE Resetear la página al cambiar el filtro
     setCurrentPage(1);
+  }
+    const handleChangePrice = event => {
+      setqueryPrice(event.target.value);
+      setNoResult(true);
+    };
+
+    const filterByPrice = ad =>
+      queryPrice === '' || ad.price === Number(queryPrice);
+
+    const handleChangeMinPrice = event => {
+      setQueryMinPrice(event.target.value);
+      setNoResult(true);
+    };
+
+    const handleChangeMaxPrice = event => {
+      setQueryMaxPrice(event.target.value);
+      setNoResult(true);
+    };
+
+    const filterByMinMaxPrice = ad => {
+      if (!queryMinPrice && !queryMaxPrice) return true;
+
+      const minPrice = parseInt(queryMinPrice) || 0;
+      const maxPrice = parseInt(queryMaxPrice) || Infinity;
+
+      return ad.price >= minPrice && ad.price <= maxPrice;
+    };
+
+    const filterAdName = ad =>
+      (ad.name ?? '').toUpperCase().startsWith(filterName.toUpperCase());
+
+      filteredAds = ads
+      .filter(filterAdName)
+      .filter(filterByCategory)
+      .filter(filterByPrice)
+      .filter(filterByMinMaxPrice);
+    
+
+    /*const totalPages = Math.ceil(filteredAds.length / adsPerPage);
+    const startIndex = (currentPage - 1) * adsPerPage;
+    const endIndex = startIndex + adsPerPage;
+    const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
+    const isLastPage = currentPage === totalPages;*/
+  
+    //Cleaning & making friendly URL
+    const cleanUpForURL = text => {
+      return text
+        .toLowerCase()
+        .replace(/ /g, '-') // Replace spaces with hyphens
+        .replace(/[^\w-]/g, ''); // Remove special characters
+    };
+
+    //PAGINATION
+    const handleAdsPerPageChange = event => {
+      dispatch(setAdsPerPage(event.target.value));
+    };
+
+    // Generates the URL using the _id of the advert and the name field
+    const generateAdvertURL = advert => {
+      const cleanName = cleanUpForURL(advert.name);
+      return `/adverts/${advert._id}/${cleanName}`;
+    };
+
+
+    return (
+      <Layout>
+        <>
+          <section className="searchSection">
+            <h1>{t('Searching area')}</h1>
+            <section id="advertsPerPage">
+              <label className="advert_label">{t('Adverts per page')}: </label>
+              <select value={adsPerPage} onChange={handleAdsPerPageChange}>
+                <option value={2}>2</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+              </select>
+            </section>
+            <section id="filters">
+              <section id="filterByName">
+                <label className="advert_label">{t('Name')}: </label>
+                <input type="text" onChange={handleFilterChange} />
+              </section>
+            </section>
+            <section id="filterByCategory">
+              <label className="advert_label">{t('Category')}:</label>
+              <select
+                id="categorySelect"
+                multiple
+                onChange={handleCategoryChange}
+              >
+                {uniqueCategories.map(category => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <p>
+                {t('Hold down the ctrl key to select more than one category')}.
+              </p>
+            </section>
+            <section id="filterByPrice">
+              <label className="advert_label">{t('Price')}:</label>
+              <input
+                type="number"
+                id="priceInput"
+                placeholder={t('Enter the exact price')}
+                value={queryPrice}
+                onChange={handleChangePrice}
+              />
+              <label className="form-label">Precio Mínimo:</label>
+              <input
+                className="form-input"
+                type="number"
+                placeholder={t('Enter minimum price')}
+                value={queryMinPrice}
+                onChange={handleChangeMinPrice}
+              />
+              <label className="form-label">{t('Maximum price')}:</label>
+              <input
+                className="form-input"
+                type="number"
+                placeholder={t('Enter maximum price')}
+                value={queryMaxPrice}
+                onChange={handleChangeMaxPrice}
+              />
+            </section>
+                </section>>
+          {/*<div className="container">
+            {isLoading ? (
+              <Spinner message={t('LOADING...')} />
+            ) : (
+              <div>
+                {!!ads.length ? (
+                  <>
+                    <div className="listContainer">
+                      <div className="containerTittle">
+                        <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
+                      </div>
+                      <div className="container-ad">
+                        {advertsToDisplay
+                          .sort((a, b) => a.createdAt > b.createdAt)
+                          .map(advert => (
+                            <div key={advert._id}>
+                              <div className="advert-container">
+                                <Link to={generateAdvertURL(advert)}>
+                                  <Advert {...advert} />
+                                </Link>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                    <div className="pagination">
+                      <p>
+                        <span
+                          className={currentPage === 1 ? 'disabled' : 'page'}
+                          onClick={() => handlePageChange(currentPage - 1)}
+                        >
+                          &lt;{' '}
+                        </span>
+                        {[...Array(totalPages)].map((_, index) => {
+                          if (
+                            totalPages > 5 &&
+                            index > 1 &&
+                            index < totalPages - 2
+                          ) {
+                            return (
+                              <span className="page" key={`ellipsis-${index}`}>
+                                ...
+                              </span>
+                            );
+                          } else {
+                            return (
+                              <span
+                                className={
+                                  currentPage === index + 1
+                                    ? 'disabled'
+                                    : 'page'
+                                }
+                                key={index}
+                                onClick={() => handlePageChange(index + 1)}
+                              >
+                                {index + 1}
+                                {index < totalPages - 1 && <span> - </span>}
+                              </span>
+                            );
+                          }
+                        })}
+                        <span
+                          className={isLastPage ? 'disabled' : 'page'}
+                          onClick={() => handlePageChange(currentPage + 1)}
+                        >
+                          {' '}
+                          &gt;
+                        </span>
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <EmptyList />
+                )}
+              </div>
+            )}
+                </div>*/}
+        </>
+      </Layout>
+    );
   };
 
-  //Cleaning & making friendly URL
-  const cleanUpForURL = text => {
-    return text
-      .toLowerCase()
-      .replace(/ /g, '-') // Replace spaces with hyphens
-      .replace(/[^\w-]/g, ''); // Remove special characters
-  };
-  // Generates the URL using the _id of the advert and the name field
-  const generateAdvertURL = advert => {
-    const cleanName = cleanUpForURL(advert.name);
-    return `/adverts/${advert._id}/${cleanName}`;
-  };
-  return (
-    <Layout>
-      <>
-        <section className="searchSection">
-          <h1>{t('Searching area')}</h1>
-          <label className="advert_label">{t('Name')}: </label>
-          <input type="text" onChange={handleFilterChange} />
-        </section>
-        <div className="container">
-          {isLoading ? (
-            <Spinner message={t('LOADING...')} />
-          ) : (
-            <div>
-              {!!ads.length ? (
-                <>
-                  <div className="listContainer">
-                    <div className="containerTittle">
-                      <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
-                    </div>
-                    <div className="container-ad">
-                      {advertsToDisplay
-                        .sort((a, b) => a.createdAt > b.createdAt)
-                        .map(advert => (
-                          <div key={advert._id}>
-                            <div className="advert-container">
-                              <Link to={generateAdvertURL(advert)}>
-                                <Advert {...advert} />
-                              </Link>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                  <div className="pagination">
-                    <p>
-                      <span
-                        className={currentPage === 1 ? 'disabled' : 'page'}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                      >
-                        &lt;{' '}
-                      </span>
-                      {[...Array(totalPages)].map((_, index) => {
-                        if (
-                          totalPages > 5 &&
-                          index > 1 &&
-                          index < totalPages - 2
-                        ) {
-                          return (
-                            <span className="page" key={`ellipsis-${index}`}>
-                              ...
-                            </span>
-                          );
-                        } else {
-                          return (
-                            <span
-                              className={
-                                currentPage === index + 1 ? 'disabled' : 'page'
-                              }
-                              key={index}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
-                              {index + 1}
-                              {index < totalPages - 1 && <span> - </span>}
-                            </span>
-                          );
-                        }
-                      })}
-                      <span
-                        className={isLastPage ? 'disabled' : 'page'}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                      >
-                        {' '}
-                        &gt;
-                      </span>
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <EmptyList />
-              )}
-            </div>
-          )}
-        </div>
-      </>
-    </Layout>
-  );
-};
 
 export default AdsList;
