@@ -74,9 +74,9 @@ export const deleteAdvert = createAsyncThunk(
   'ads/deleteAdvert',
   async (id, { extra: { service }, rejectWithValue }) => {
     try {
-      await service.ads.deleteAdvert(id);
+      const deleted = await service.ads.deleteAdvert(id);
       //console.log('Advert...delted');
-      return true;
+      return deleted.adDeleted;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -154,21 +154,15 @@ const ads = createSlice({
     builder
       .addCase(adsCreate.fulfilled, (state, action) => {
         state.data.unshift(action.payload.result);
+        state.userAds.unshift(action.payload.result);
       })
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
       })
-      // .addCase(advertsList.fulfilled, (state, action) => {
-      //   state.areLoaded = true;
-      //   state.data = action.payload.results.map(ad => ({
-      //     ...ad,
-      //     isFavorite: state.favoriteAds.some(favAd => favAd._id === ad._id),
-      //   }));
-      // })
       .addCase(uploadModifiedAd.fulfilled, (state, action) => {
-        //state.areLoaded = true;
         state.data.unshift(action.payload.result);
+        state.userAds.unshift(action.payload.result);
       })
       .addCase(getAdById.fulfilled, (state, action) => {
         state.areLoaded = false;
@@ -184,16 +178,21 @@ const ads = createSlice({
       })
       .addCase(addFavorite.fulfilled, (state, action) => {
         const newFavoriteAd = action.payload;
-        console.log('creado', newFavoriteAd);
+
         state.favoriteAds.unshift(newFavoriteAd);
       })
       .addCase(deleteFavorites.fulfilled, (state, action) => {
         const adIdToRemove = action.payload;
-        console.log('borrado', adIdToRemove);
 
         state.favoriteAds = state.favoriteAds.filter(
           ad => ad._id !== adIdToRemove,
         );
+      })
+      .addCase(deleteAdvert.fulfilled, (state, action) => {
+        const adToRemove = action.payload;
+
+        state.data = state.data.filter(ad => ad._id !== adToRemove);
+        state.userAds = state.userAds.filter(ad => ad._id !== adToRemove);
       });
   },
 });
