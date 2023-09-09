@@ -66,7 +66,7 @@ const AdsList = ({ selector }) => {
   const handlePageChange = page => {
     setCurrentPage(page);
   };
-  
+
   //Categories list
   useEffect(() => {
     dispatch(categoriesList()).catch(error => console.log(error));
@@ -97,7 +97,7 @@ const AdsList = ({ selector }) => {
     setFilterName(value);
     setCurrentPage(1);
   };
-  
+
   const handleChangePrice = event => {
     setqueryPrice(event.target.value);
     setNoResult(true);
@@ -129,18 +129,13 @@ const AdsList = ({ selector }) => {
     (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
   console.log('ads.length: ' + ads.length);
   if (ads.length > 0) {
-    filteredAds = ads.filter(filterAdName);
-    /*.filter(filterByCategory)
+    filteredAds = ads
+      .filter(filterAdName)
+      .filter(filterByCategory)
       .filter(filterByPrice)
-      .filter(filterByMinMaxPrice);*/
+      .filter(filterByMinMaxPrice);
   }
-  console.log('filteredAds.length: ' + filteredAds.length);
-  /*filteredAds = ads
-    .filter(filterAdName)
-    .filter(filterByCategory)
-    .filter(filterByPrice)
-    .filter(filterByMinMaxPrice);*/
-
+ 
   const totalPages =
     Array.isArray(filteredAds) && filteredAds.length > 0
       ? Math.ceil(filteredAds.length / adsPerPage)
