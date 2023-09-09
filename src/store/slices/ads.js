@@ -4,6 +4,7 @@ import {
   areFavoriteAds,
   areUsersAdsLoaded,
 } from '../selectors';
+import storage from '../../utils/storage';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -40,9 +41,9 @@ export const advertsList = createAsyncThunk(
       return rejectWithValue(error);
     }
   },
-  {
-    condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  },
+  // {
+  //   condition: (_, { getState }) => !areAdvertsLoaded(getState()),
+  // },
 );
 
 export const getAdById = createAsyncThunk(
@@ -139,6 +140,14 @@ export const deleteFavorites = createAsyncThunk(
   },
 );
 
+export const setAdsPerPage = createAsyncThunk(
+  'ads/setAdsPerPage',
+  async adsPerPage => {
+    storage.set('adsPerPage', adsPerPage);
+    return adsPerPage;
+  },
+);
+
 const ads = createSlice({
   name: 'ads',
   initialState: {
@@ -148,6 +157,9 @@ const ads = createSlice({
     data: [],
     userAds: [],
     favoriteAds: [],
+    adsPerPage: parseInt(
+      storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
+    ),
   },
 
   extraReducers: builder => {
@@ -155,6 +167,9 @@ const ads = createSlice({
       .addCase(adsCreate.fulfilled, (state, action) => {
         state.data.unshift(action.payload.result);
         state.userAds.unshift(action.payload.result);
+      })
+      .addCase(setAdsPerPage.fulfilled, (state, action) => {
+        state.adsPerPage = action.payload;
       })
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
