@@ -3,12 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdvert, getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  getAdvertById,
-  getIsLogged,
-  getJwt,
-  getUi,
-} from '../../../store/selectors';
+import { getAdvertById, getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Button from '../../shared/Button';
@@ -19,8 +14,7 @@ import '../../../css/holoTextEffect.css';
 import { useState } from 'react';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
-import storage from '../../../utils/storage';
-import jwt_decode from 'jwt-decode';
+import IsDisable from '../../../utils/isDisable';
 
 const AdvertPage = () => {
   const navigate = useNavigate();
@@ -28,9 +22,6 @@ const AdvertPage = () => {
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
-  const isLogged = useSelector(getIsLogged);
-  const jwt = useSelector(getJwt);
-  const userJwt = jwt || storage.get('auth');
 
   //GETTING ADVERT BY ID
   useEffect(() => {
@@ -55,20 +46,7 @@ const AdvertPage = () => {
   //USERINFO HANDLING
   const advert = useSelector(getAdvertById(id));
 
-  let isAdvertOwner;
-  let userId;
-  if (userJwt) {
-    try {
-      userId = jwt_decode(userJwt)._id;
-    } catch (error) {
-      console.error('Error decoding token: ', error);
-    }
-    isAdvertOwner = advert && isLogged && advert.userId === userId;
-  } else {
-    isAdvertOwner = false;
-  }
-
-  const isDisabled = !isAdvertOwner;
+  const isDisabled = IsDisable(advert);
 
   //Delete Advert
   const handleDeleteConfirm = async () => {
@@ -124,7 +102,7 @@ const AdvertPage = () => {
           {error && (
             <ErrorModal
               title="Error"
-              message={error.message}
+              message={error.data.error}
               onCancel={handleErrorClick}
             />
           )}

@@ -33,5 +33,5 @@ const ui = createSlice({
   },
 });
 
-export const { resetError, toggleModal } = ui.actions;
+export const { resetError } = ui.actions;
 export default ui.reducer;

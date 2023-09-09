@@ -30,6 +30,8 @@
   --background-iconFa-color: #e07924;
   --background-hover-color: #e07924;
   --background-iconFa-options-color: #e07924;
+  --background-iconFa-favorite-border-color: #f5df40;
+  --background-iconFa-favorite-color: transparent;
 
   /* holograms */
   --holo-color: #00fcfc;

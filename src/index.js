@@ -14,7 +14,7 @@ import Root from './Root';
 import { createBrowserRouter } from 'react-router-dom';
 
 const accessToken = storage.get('auth');
-console.log('index', accessToken);
+
 if (accessToken) {
   setAuthorizationHeader(accessToken);
 }
