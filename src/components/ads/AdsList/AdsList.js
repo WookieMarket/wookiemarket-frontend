@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Advert from '../Advert/Advert';
+import Pagination from '../../shared/pagination/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getAdsPerPage,
@@ -38,7 +39,6 @@ const getUniqueCategories = categories => {
 };
 
 const AdsList = ({ selector }) => {
-  
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,7 +56,8 @@ const AdsList = ({ selector }) => {
   const [queryMinPrice, setQueryMinPrice] = useState('');
   const [queryMaxPrice, setQueryMaxPrice] = useState('');
 
-  let filteredAds;
+  //let filteredAds = [];
+  let filteredAds = ads;
 
   //const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
   //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
@@ -65,7 +66,7 @@ const AdsList = ({ selector }) => {
   const handlePageChange = page => {
     setCurrentPage(page);
   };
-
+  
   //Categories list
   useEffect(() => {
     dispatch(categoriesList()).catch(error => console.log(error));
@@ -95,90 +96,104 @@ const AdsList = ({ selector }) => {
     const value = event.target.value;
     setFilterName(value);
     setCurrentPage(1);
-  }
-    const handleChangePrice = event => {
-      setqueryPrice(event.target.value);
-      setNoResult(true);
-    };
-
-    const filterByPrice = ad =>
-      queryPrice === '' || ad.price === Number(queryPrice);
-
-    const handleChangeMinPrice = event => {
-      setQueryMinPrice(event.target.value);
-      setNoResult(true);
-    };
-
-    const handleChangeMaxPrice = event => {
-      setQueryMaxPrice(event.target.value);
-      setNoResult(true);
-    };
-
-    const filterByMinMaxPrice = ad => {
-      if (!queryMinPrice && !queryMaxPrice) return true;
-
-      const minPrice = parseInt(queryMinPrice) || 0;
-      const maxPrice = parseInt(queryMaxPrice) || Infinity;
-
-      return ad.price >= minPrice && ad.price <= maxPrice;
-    };
-
-    const filterAdName = ad =>
-      (ad.name ?? '').toUpperCase().startsWith(filterName.toUpperCase());
-
-      filteredAds = ads
-      .filter(filterAdName)
-      .filter(filterByCategory)
-      .filter(filterByPrice)
-      .filter(filterByMinMaxPrice);
-    
-
-    /*const totalPages = Math.ceil(filteredAds.length / adsPerPage);
-    const startIndex = (currentPage - 1) * adsPerPage;
-    const endIndex = startIndex + adsPerPage;
-    const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
-    const isLastPage = currentPage === totalPages;*/
+  };
   
-    //Cleaning & making friendly URL
-    const cleanUpForURL = text => {
-      return text
-        .toLowerCase()
-        .replace(/ /g, '-') // Replace spaces with hyphens
-        .replace(/[^\w-]/g, ''); // Remove special characters
-    };
+  const handleChangePrice = event => {
+    setqueryPrice(event.target.value);
+    setNoResult(true);
+  };
 
-    //PAGINATION
-    const handleAdsPerPageChange = event => {
-      dispatch(setAdsPerPage(event.target.value));
-    };
+  const filterByPrice = ad =>
+    queryPrice === '' || ad.price === Number(queryPrice);
 
-    // Generates the URL using the _id of the advert and the name field
-    const generateAdvertURL = advert => {
-      const cleanName = cleanUpForURL(advert.name);
-      return `/adverts/${advert._id}/${cleanName}`;
-    };
+  const handleChangeMinPrice = event => {
+    setQueryMinPrice(event.target.value);
+    setNoResult(true);
+  };
 
+  const handleChangeMaxPrice = event => {
+    setQueryMaxPrice(event.target.value);
+    setNoResult(true);
+  };
 
-    return (
-      <Layout>
-        <>
-          <section className="searchSection">
-            <h1>{t('Searching area')}</h1>
-            <section id="advertsPerPage">
-              <label className="advert_label">{t('Adverts per page')}: </label>
-              <select value={adsPerPage} onChange={handleAdsPerPageChange}>
-                <option value={2}>2</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-              </select>
-            </section>
-            <section id="filters">
-              <section id="filterByName">
-                <label className="advert_label">{t('Name')}: </label>
-                <input type="text" onChange={handleFilterChange} />
-              </section>
+  const filterByMinMaxPrice = ad => {
+    if (!queryMinPrice && !queryMaxPrice) return true;
+
+    const minPrice = parseInt(queryMinPrice) || 0;
+    const maxPrice = parseInt(queryMaxPrice) || Infinity;
+
+    return ad.price >= minPrice && ad.price <= maxPrice;
+  };
+
+  const filterAdName = ad =>
+    (ad.name ?? '').toUpperCase().includes(filterName.toUpperCase());
+  console.log('ads.length: ' + ads.length);
+  if (ads.length > 0) {
+    filteredAds = ads.filter(filterAdName);
+    /*.filter(filterByCategory)
+      .filter(filterByPrice)
+      .filter(filterByMinMaxPrice);*/
+  }
+  console.log('filteredAds.length: ' + filteredAds.length);
+  /*filteredAds = ads
+    .filter(filterAdName)
+    .filter(filterByCategory)
+    .filter(filterByPrice)
+    .filter(filterByMinMaxPrice);*/
+
+  const totalPages =
+    Array.isArray(filteredAds) && filteredAds.length > 0
+      ? Math.ceil(filteredAds.length / adsPerPage)
+      : 1;
+
+  const startIndex = (currentPage - 1) * adsPerPage;
+  const endIndex = startIndex + adsPerPage;
+  const isLastPage = currentPage === totalPages;
+
+  const advertsToDisplay = filteredAds;
+  /*filteredAds.length > 0
+      ? filteredAds.slice(startIndex, endIndex)
+      : ads.slice(startIndex, endIndex);*/
+  console.log('advertsToDisplay: ' + advertsToDisplay);
+
+  //Cleaning & making friendly URL
+  const cleanUpForURL = text => {
+    return text
+      .toLowerCase()
+      .replace(/ /g, '-') // Replace spaces with hyphens
+      .replace(/[^\w-]/g, ''); // Remove special characters
+  };
+
+  //PAGINATION
+  const handleAdsPerPageChange = event => {
+    dispatch(setAdsPerPage(event.target.value));
+  };
+
+  // Generates the URL using the _id of the advert and the name field
+  const generateAdvertURL = advert => {
+    const cleanName = cleanUpForURL(advert.name);
+    return `/adverts/${advert._id}/${cleanName}`;
+  };
+
+  return (
+    <Layout>
+      <>
+        <section className="searchSection">
+          <h1>{t('Searching area')}</h1>
+          <section id="advertsPerPage">
+            <label className="advert_label">{t('Adverts per page')}: </label>
+            <select value={adsPerPage} onChange={handleAdsPerPageChange}>
+              <option value={2}>2</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+            </select>
+          </section>
+          <section id="filters">
+            <section id="filterByName">
+              <label className="advert_label">{t('Name')}: </label>
+              <input type="text" onChange={handleFilterChange} />
             </section>
             <section id="filterByCategory">
               <label className="advert_label">{t('Category')}:</label>
@@ -223,88 +238,87 @@ const AdsList = ({ selector }) => {
                 onChange={handleChangeMaxPrice}
               />
             </section>
-                </section>>
-          {/*<div className="container">
-            {isLoading ? (
-              <Spinner message={t('LOADING...')} />
-            ) : (
-              <div>
-                {!!ads.length ? (
-                  <>
-                    <div className="listContainer">
-                      <div className="containerTittle">
-                        <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
-                      </div>
-                      <div className="container-ad">
-                        {advertsToDisplay
-                          .sort((a, b) => a.createdAt > b.createdAt)
-                          .map(advert => (
-                            <div key={advert._id}>
-                              <div className="advert-container">
-                                <Link to={generateAdvertURL(advert)}>
-                                  <Advert {...advert} />
-                                </Link>
-                              </div>
+          </section>
+        </section>
+        <div className="container">
+          {isLoading ? (
+            <Spinner message={t('LOADING...')} />
+          ) : (
+            <div>
+              {!!ads.length ? (
+                <>
+                  <div className="listContainer">
+                    <div className="containerTittle">
+                      <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
+                    </div>
+                    <div className="container-ad">
+                      {advertsToDisplay
+                        .sort((a, b) => a.createdAt > b.createdAt)
+                        .map(advert => (
+                          <div key={advert._id}>
+                            <div className="advert-container">
+                              <Link to={generateAdvertURL(advert)}>
+                                <Advert {...advert} />
+                              </Link>
                             </div>
-                          ))}
-                      </div>
+                          </div>
+                        ))}
                     </div>
-                    <div className="pagination">
-                      <p>
-                        <span
-                          className={currentPage === 1 ? 'disabled' : 'page'}
-                          onClick={() => handlePageChange(currentPage - 1)}
-                        >
-                          &lt;{' '}
-                        </span>
-                        {[...Array(totalPages)].map((_, index) => {
-                          if (
-                            totalPages > 5 &&
-                            index > 1 &&
-                            index < totalPages - 2
-                          ) {
-                            return (
-                              <span className="page" key={`ellipsis-${index}`}>
-                                ...
-                              </span>
-                            );
-                          } else {
-                            return (
-                              <span
-                                className={
-                                  currentPage === index + 1
-                                    ? 'disabled'
-                                    : 'page'
-                                }
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                              >
-                                {index + 1}
-                                {index < totalPages - 1 && <span> - </span>}
-                              </span>
-                            );
-                          }
-                        })}
-                        <span
-                          className={isLastPage ? 'disabled' : 'page'}
-                          onClick={() => handlePageChange(currentPage + 1)}
-                        >
-                          {' '}
-                          &gt;
-                        </span>
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <EmptyList />
-                )}
-              </div>
-            )}
-                </div>*/}
-        </>
-      </Layout>
-    );
-  };
-
+                  </div>
+                  <Pagination />
+                  {/*<div className="pagination">
+                    <p>
+                      <span
+                        className={currentPage === 1 ? 'disabled' : 'page'}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                      >
+                        &lt;{' '}
+                      </span>
+                      {[...Array(totalPages)].map((_, index) => {
+                        if (
+                          totalPages > 5 &&
+                          index > 1 &&
+                          index < totalPages - 2
+                        ) {
+                          return (
+                            <span className="page" key={`ellipsis-${index}`}>
+                              ...
+                            </span>
+                          );
+                        } else {
+                          return (
+                            <span
+                              className={
+                                currentPage === index + 1 ? 'disabled' : 'page'
+                              }
+                              key={index}
+                              onClick={() => handlePageChange(index + 1)}
+                            >
+                              {index + 1}
+                              {index < totalPages - 1 && <span> - </span>}
+                            </span>
+                          );
+                        }
+                      })}
+                      <span
+                        className={isLastPage ? 'disabled' : 'page'}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                      >
+                        {' '}
+                        &gt;
+                      </span>
+                    </p>
+                    </div>*/}
+                </>
+              ) : (
+                <EmptyList />
+              )}
+            </div>
+          )}
+        </div>
+      </>
+    </Layout>
+  );
+};
 
 export default AdsList;
