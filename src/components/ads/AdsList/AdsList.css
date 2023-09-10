@@ -84,3 +84,9 @@ a:active {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+.button {
+  position: relative;
+  left: 50%;
+  right: auto;
+}

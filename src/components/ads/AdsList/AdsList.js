@@ -16,6 +16,7 @@ import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 import { categoriesList } from '../../../store/slices/categories';
 import { setAdsPerPage } from '../../../store/slices/ads';
+import Button from '../../shared/Button';
 
 const getUniqueCategories = categories => {
   //Removing blank spaces before and after commas
@@ -57,7 +58,7 @@ const AdsList = ({ selector }) => {
   const [queryMinPrice, setQueryMinPrice] = useState('');
   const [queryMaxPrice, setQueryMaxPrice] = useState('');
 
-    let filteredAds = ads;
+  let filteredAds = ads;
 
   //ads list
   const handlePageChange = page => {
@@ -142,14 +143,23 @@ const AdsList = ({ selector }) => {
 
   //PAGINATION
   const advertsPerPage = useSelector(getAdsPerPage);
-  const totalPages = Array.isArray(filteredAds) && filteredAds.length > 0
-  ? Math.ceil(filteredAds.length / adsPerPage)
-  : 1;
+  const totalPages =
+    Array.isArray(filteredAds) && filteredAds.length > 0
+      ? Math.ceil(filteredAds.length / adsPerPage)
+      : 1;
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
   const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
 
-  console.log('advertsToDisplay: ' + advertsToDisplay);
+  //PAGINATION
+  const handleAdsPerPageChange = event => {
+    dispatch(setAdsPerPage(event.target.value));
+  };
+
+  //Load more ads Button
+  const loadMoreAds = () => {
+    console.log('Botón presionado. Cargando más anuncios...');
+  };
 
   //Cleaning & making friendly URL
   const cleanUpForURL = text => {
@@ -157,11 +167,6 @@ const AdsList = ({ selector }) => {
       .toLowerCase()
       .replace(/ /g, '-') // Replace spaces with hyphens
       .replace(/[^\w-]/g, ''); // Remove special characters
-  };
-
-  //PAGINATION
-  const handleAdsPerPageChange = event => {
-    dispatch(setAdsPerPage(event.target.value));
   };
 
   // Generates the URL using the _id of the advert and the name field
@@ -260,6 +265,14 @@ const AdsList = ({ selector }) => {
                         ))}
                     </div>
                   </div>
+                  <Button
+                    className="button"
+                    variant="accept"
+                    onClick={loadMoreAds}
+                    disabled={totalCountAds <= ads.length}
+                  >
+                    Cargar más anuncios
+                  </Button>
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
@@ -309,7 +322,6 @@ const AdsList = ({ selector }) => {
                       </span>
                     </p>
                     </div>*/}
-                    
                 </>
               ) : (
                 <EmptyList />
