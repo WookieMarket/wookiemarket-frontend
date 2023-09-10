@@ -58,33 +58,53 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         }
       };
       
-    
-      return (
-        <div className="pagination">
-          <span className="pagination-number" onClick={() => onPageChange(1)}>
-            <code>&lt;</code>
-            <code>&lt;</code>
-            <code>&nbsp;</code>
-            <code>&nbsp;</code>
-          </span>
-          <span className="pagination-number" onClick={() => onPageChange(currentPage - 1)}>
-            <code>&lt;</code>
-            <code>&nbsp;</code>
-          </span>
-          {renderPageNumbers()}
-          <span className="pagination-number" onClick={() => onPageChange(currentPage + 1)}>
-            <code>&nbsp;</code>
-            <code>&gt;</code>
-            <code>&nbsp;</code>
-          </span>
-          <span className="pagination-number" onClick={() => onPageChange(totalPages)}>
-            <code>&gt;</code>
-            <code>&gt;</code>
-            <code>&nbsp;</code>
-            <code>&nbsp;</code>
-          </span>
-        </div>
-      );
-    };
-    
-    export default Pagination;
+return (
+    <div className="pagination">
+      <span className="pagination-number" onClick={() => onPageChange(1)}>
+        <span
+          className={`pagination-number ${
+            totalPages <= 2 ? 'hide-navigation' : ''
+          }`}
+          onClick={() => onPageChange(1)}
+        >
+          <code>&lt;</code>
+          <code>&lt;</code>
+        </span>
+        <code>&nbsp;</code>
+        <code>&nbsp;</code>
+      </span>
+      <span
+        className="pagination-number"
+        onClick={() => onPageChange(currentPage - 1)}
+      >
+        <code>&lt;</code>
+        <code>&nbsp;</code>
+      </span>
+      {renderPageNumbers()}
+      <span
+        className="pagination-number"
+        onClick={() => onPageChange(currentPage + 1)}
+      >
+        <code>&nbsp;</code>
+        <code>&gt;</code>
+        <code>&nbsp;</code>
+      </span>
+      <span
+        className="pagination-number"
+        onClick={() => onPageChange(totalPages)}
+      >
+        <span
+          className={`pagination-number ${
+            totalPages <= 2 ? 'hide-navigation' : ''
+          }`}
+          onClick={() => onPageChange(1)}
+        >
+          <code>&gt;</code>
+          <code>&gt;</code>
+        </span>
+      </span>
+    </div>
+  );
+};
+
+export default Pagination;
