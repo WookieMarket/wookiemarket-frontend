@@ -13,4 +13,7 @@
     font-weight: bold;
     text-decoration: underline;
   }
-  
+
+  .hide-navigation {
+    display: none;
+  }
