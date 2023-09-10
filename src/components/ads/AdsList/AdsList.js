@@ -4,7 +4,6 @@ import Advert from '../Advert/Advert';
 import Pagination from '../../shared/pagination/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  advertsPerPage,
   getAdsPerPage,
   getUi,
   selectTotalCountAds,
@@ -50,7 +49,6 @@ const AdsList = ({ selector }) => {
   const { isLoading } = useSelector(getUi);
   const originalCategories = useSelector(getAllCategory);
   const categories = useSelector(getAllCategory);
-  const adsPerPage = useSelector(getAdsPerPage);
   const uniqueCategories = getUniqueCategories(categories);
   const totalCountAds = useSelector(selectTotalCountAds);
 
@@ -147,16 +145,19 @@ const AdsList = ({ selector }) => {
   const advertsPerPage = useSelector(getAdsPerPage);
   const totalPages =
     Array.isArray(filteredAds) && filteredAds.length > 0
-      ? Math.ceil(filteredAds.length / adsPerPage)
+      ? Math.ceil(filteredAds.length / advertsPerPage)
       : 1;
+      console.log('Número total de páginas:', totalPages);
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
   const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
+  console.log('Índices de inicio y fin:', startIndex, endIndex);
 
-  //PAGINATION
   const handleAdsPerPageChange = event => {
-    dispatch(setAdsPerPage(event.target.value));
+    const selectedValue = parseInt(event.target.value); // Parse the selected value to an integer
+    dispatch(setAdsPerPage(selectedValue)); // Dispatch an action to update the state
   };
+  
 
   //Load more ads Button
   const loadMoreAds = () => {
@@ -184,7 +185,7 @@ const AdsList = ({ selector }) => {
           <h1>{t('Searching area')}</h1>
           <section id="advertsPerPage">
             <label className="advert_label">{t('Adverts per page')}: </label>
-            <select value={adsPerPage} onChange={handleAdsPerPageChange}>
+            <select value={advertsPerPage} onChange={handleAdsPerPageChange}>
               <option value={2}>2</option>
               <option value={4}>4</option>
               <option value={5}>5</option>
@@ -241,6 +242,14 @@ const AdsList = ({ selector }) => {
               />
             </section>
           </section>
+          <Button
+            className="button"
+            variant="accept"
+            //onClick={loadMoreAds}
+            disabled={totalCountAds === 0}
+          >
+            Aply Filter
+          </Button>
         </section>
         <div className="container">
           {isLoading ? (
@@ -280,50 +289,6 @@ const AdsList = ({ selector }) => {
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
                   />
-
-                  {/*<div className="pagination">
-                    <p>
-                      <span
-                        className={currentPage === 1 ? 'disabled' : 'page'}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                      >
-                        &lt;{' '}
-                      </span>
-                      {[...Array(totalPages)].map((_, index) => {
-                        if (
-                          totalPages > 5 &&
-                          index > 1 &&
-                          index < totalPages - 2
-                        ) {
-                          return (
-                            <span className="page" key={`ellipsis-${index}`}>
-                              ...
-                            </span>
-                          );
-                        } else {
-                          return (
-                            <span
-                              className={
-                                currentPage === index + 1 ? 'disabled' : 'page'
-                              }
-                              key={index}
-                              onClick={() => handlePageChange(index + 1)}
-                            >
-                              {index + 1}
-                              {index < totalPages - 1 && <span> - </span>}
-                            </span>
-                          );
-                        }
-                      })}
-                      <span
-                        className={isLastPage ? 'disabled' : 'page'}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                      >
-                        {' '}
-                        &gt;
-                      </span>
-                    </p>
-                    </div>*/}
                 </>
               ) : (
                 <EmptyList />
