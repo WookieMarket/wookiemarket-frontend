@@ -15,7 +15,7 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 import { categoriesList } from '../../../store/slices/categories';
-import { setAdsPerPage } from '../../../store/slices/ads';
+import { setAdsPerPage, getAdsWithFilters  } from '../../../store/slices/ads';
 import Button from '../../shared/Button';
 import { Link } from 'react-router-dom';
 
@@ -141,6 +141,18 @@ const AdsList = ({ selector }) => {
       .filter(filterByMinMaxPrice);
   }
 
+  const applyFilter = () => {
+    const filters = {
+      name: filterName,
+      category: selectedCategories.join(','),
+      price: queryPrice,
+      minPrice: queryMinPrice,
+      maxPrice: queryMaxPrice,
+    };
+  
+    dispatch(getAdsWithFilters(filters));
+  };
+
   //PAGINATION
   const advertsPerPage = useSelector(getAdsPerPage);
   const totalPages =
@@ -157,13 +169,9 @@ const AdsList = ({ selector }) => {
     const selectedValue = parseInt(event.target.value); // Parse the selected value to an integer
     dispatch(setAdsPerPage(selectedValue)); // Dispatch an action to update the state
   };
+
+
   
-
-  //Load more ads Button
-  const loadMoreAds = () => {
-    console.log('Botón presionado. Cargando más anuncios...');
-  };
-
   //Cleaning & making friendly URL
   const cleanUpForURL = text => {
     return text
@@ -245,7 +253,7 @@ const AdsList = ({ selector }) => {
           <Button
             className="button"
             variant="accept"
-            //onClick={loadMoreAds}
+            onClick={applyFilter}
             disabled={totalCountAds === 0}
           >
             Apply Filter
@@ -276,14 +284,6 @@ const AdsList = ({ selector }) => {
                         ))}
                     </div>
                   </div>
-                  <Button
-                    className="button"
-                    variant="accept"
-                    onClick={loadMoreAds}
-                    disabled={totalCountAds <= ads.length}
-                  >
-                    Cargar más anuncios
-                  </Button>
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}

@@ -48,9 +48,7 @@ export const setAdsPerPage = createAsyncThunk(
   'ads/setAdsPerPage',
   async (adsPerPage, { dispatch }) => {
     storage.set('adsPerPage', adsPerPage);
-
     dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
-
     return adsPerPage;
   },
 );
@@ -149,6 +147,16 @@ export const deleteFavorites = createAsyncThunk(
   },
 );
 
+export const getAdsWithFilters = createAsyncThunk(
+  'ads/getAdsWithFilters',
+  async (filters) => {
+    //Cambiar cuando se vaya a subir
+    const response = await fetch(`http://localhost:3001/api/ads/adverts/filter?${new URLSearchParams(filters)}`);
+    const data = await response.json();
+    return data;
+  }
+);
+
 const ads = createSlice({
   name: 'ads',
   initialState: {
@@ -214,9 +222,13 @@ const ads = createSlice({
       })
       .addCase(deleteAdvert.fulfilled, (state, action) => {
         const adToRemove = action.payload;
-
         state.data = state.data.filter(ad => ad._id !== adToRemove);
         state.userAds = state.userAds.filter(ad => ad._id !== adToRemove);
+      })
+      .addCase(getAdsWithFilters.fulfilled, (state, action) => {
+        state.areLoaded = true;
+        state.data = action.payload.results;
+        state.totalCountAds = action.payload.total;
       });
   },
 });
