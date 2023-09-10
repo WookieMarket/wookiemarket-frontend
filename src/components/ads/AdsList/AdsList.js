@@ -248,7 +248,7 @@ const AdsList = ({ selector }) => {
             //onClick={loadMoreAds}
             disabled={totalCountAds === 0}
           >
-            Aply Filter
+            Apply Filter
           </Button>
         </section>
         <div className="container">
