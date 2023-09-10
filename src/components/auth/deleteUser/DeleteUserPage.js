@@ -11,6 +11,7 @@ import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import './DeleteUserPage.css';
 import Form from '../../shared/form/Form';
+import storage from '../../../utils/storage';
 
 function DeleteUserPage() {
   const { t } = useTranslation();
@@ -30,7 +31,8 @@ function DeleteUserPage() {
 
   const handleShowModalconfirm = async event => {
     dispatch(deleteAccount(email));
-    setToggleModal(true);
+    setToggleModal(false);
+    storage.remove('auth');
   };
 
   const handleShowModalCancel = () => {

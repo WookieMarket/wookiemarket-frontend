@@ -10,6 +10,7 @@ import UserAdsListPage from './components/ads/AdvertsListPage/UserAdsListPage';
 import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
+import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
 
 import './App.css';
 import './css/Variables.css';
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<AdvertsListPage />} />
           
+
           <Route
             path="/create-ad"
             element={
@@ -32,7 +34,7 @@ function App() {
             }
           />
 
-          <Route path="/ads" element={<AdvertsListPage />} />
+          {/* <Route path="/ads" element={<AdvertsListPage />} /> */}
 
           <Route
             path="/modify/:adId"
@@ -51,6 +53,7 @@ function App() {
               </RequireAuth>
             }
           />
+
           <Route
             path="/user-info"
             element={
@@ -59,6 +62,7 @@ function App() {
               </RequireAuth>
             }
           />
+
           <Route
             path="/adverts/:username"
             element={
@@ -67,9 +71,22 @@ function App() {
               </RequireAuth>
             }
           />
+
+          <Route
+            path="/favorite"
+            element={
+              <RequireAuth>
+                <FavoriteAdsList />
+              </RequireAuth>
+            }
+          />
+
           <Route path="/adverts/:id/:name" element={<AdvertPage />} />
+
           <Route path="/reset-password" element={<ResetPasswordPage />} />
+
           <Route path="/signup" element={<SignupPage />} />
+
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/" element={<Navigate to="/home" />} />

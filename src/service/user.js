@@ -1,4 +1,5 @@
 import client from '../api/client';
+const usersUrl = '/api/users';
 
 /**
  * This call fetch user informatiion
@@ -6,7 +7,8 @@ import client from '../api/client';
  * @returns User information
  */
 export const getUserInfo = id => {
-  return client.get('api/users/id/' + id);
+  const url = `${usersUrl}/id/${id}`;
+  return client.get(url);
 };
 
 /**
@@ -20,7 +22,8 @@ export const editUserData = data => {
       'Content-Type': 'multipart/form-data',
     },
   };
-  return client.post('api/users/user-info', data, config);
+  const url = `${usersUrl}/user-info`;
+  return client.post(url, data, config);
 };
 
 /**
@@ -29,5 +32,36 @@ export const editUserData = data => {
  * @returns list of ads
  */
 export const getUserAds = username => {
-  return client.get(`api/users/${username}/ads`);
+  const url = `${usersUrl}/${username}/ads`;
+  return client.get(url);
+};
+
+/**
+ * returns ads marked as a user's favorites
+ *
+ * @returns returns ads marked as a user's favorites
+ */
+export const getFavoriteAds = () => {
+  const url = `${usersUrl}/favorite-adverts`;
+  return client.get(url);
+};
+
+/**
+ * add the ad id to favorites
+ * @param {*} id
+ * @returns add the ad id to favorites
+ */
+export const includeFavoriteAds = id => {
+  const url = `${usersUrl}/favorites/${id}`;
+  return client.post(url);
+};
+
+/**
+ * delete the id of an ad if it is in favorites
+ *
+ * @returns delete the id of an ad if it is in favorites
+ */
+export const removeFavorite = id => {
+  const url = `${usersUrl}/delete-favorite/${id}`;
+  return client.delete(url);
 };

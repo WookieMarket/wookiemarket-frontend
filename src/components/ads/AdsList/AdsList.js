@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
 import Advert from '../Advert/Advert';
 import Pagination from '../../shared/pagination/Pagination';
-import { useDispatch, useSelector } from 'react-redux';
-import {
+import { useDispatch, useDispatch, useSelector } from 'react-redux';
+import { advertsPerPage,
   getAdsPerPage,
   getUi,
   selectTotalCountAds,

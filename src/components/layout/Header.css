@@ -35,4 +35,5 @@ img.icon-language {
   border-radius: 25px;
   background-color: var(--background-reject-button-color);
   padding: 2px 5px;
+  cursor: pointer;
 }

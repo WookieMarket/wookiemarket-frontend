@@ -1,6 +1,6 @@
 .container-ad {
   display: grid;
-  grid-template-columns: repeat(2, 2fr);
+  grid-template-columns: repeat(2, 1fr);
 
   align-items: center;
   align-content: center;
@@ -27,6 +27,7 @@ a:active {
   cursor: pointer;
 }
 
+
 .pagination {
   text-align: center;
   color: var(--text-color);
@@ -36,6 +37,7 @@ a:active {
   text-transform: lowercase;
   font-family: var(--font-family);
   font-size: 3em;
+  margin: 20px 0 10px 0;
 }
 
 .advert-container {
@@ -44,9 +46,10 @@ a:active {
   padding: 16px;
   margin: 5px;
   text-align: center;
+  background-color: #dcdcdc7a;
 }
 
-.advert-container img {
+.advert-container .img {
   display: block;
   object-fit: cover;
   width: 610px;
@@ -73,6 +76,7 @@ a:active {
   border-radius: 8px;
   margin: 1.3rem;
 }
+
 @media (max-width: 600px) {
   .advert-container {
     font-size: 14px;

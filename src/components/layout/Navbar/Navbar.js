@@ -15,7 +15,6 @@ import {
   FaBars,
   FaTimes,
   FaHome,
-  FaGlasses,
 } from 'react-icons/fa';
 
 import { IconContext } from 'react-icons';
@@ -24,11 +23,14 @@ import '../Header.css';
 import { getIsLogged } from '../../../store/selectors';
 import { useSelector } from 'react-redux';
 import UserOptions from '../UserOptions/UserOptions';
+import storage from '../../../utils/storage';
+import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const isLogged = useSelector(getIsLogged);
+  const username = storage.get('username');
 
   return (
     <Container>
@@ -51,6 +53,12 @@ const Navbar = () => {
               title={t('icon-hover')}
               onClick={() => i18n.changeLanguage('en')}
             />
+            {isLogged && (
+              <p>
+                {t('Welcome: ')}
+                {capitalizeFirstLetter(username)}
+              </p>
+            )}
           </LogoContainer>
 
           <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
@@ -68,17 +76,7 @@ const Navbar = () => {
                   {t('Home')}
                 </div>
               </MenuItemLink>
-              {isLogged && (
-                <MenuItemLink
-                  to="/user-info"
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}
-                >
-                  <div>
-                    <FaGlasses />
-                    <> {t('User info')}</>
-                  </div>
-                </MenuItemLink>
-              )}
+
               {isLogged && (
                 <MenuItemLink
                   to="/create-ad"
@@ -102,6 +100,7 @@ const Navbar = () => {
                   </div>
                 </MenuItemLink>
               )}
+
               <UserOptions />
             </MenuItem>
           </Menu>

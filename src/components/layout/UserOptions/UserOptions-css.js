@@ -23,6 +23,7 @@ export const DropdownMenu = styled.div`
   background-color: var(--background-navbar-color);
   width: 200px;
   display: ${({ open }) => (open ? 'block' : 'none')};
+  z-index: 1000;
 `;
 
 export const MenuItem = styled(NavLink)`
