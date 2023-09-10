@@ -12,6 +12,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   const renderPageNumbers = () => {
+
     const visiblePages = [];
     if (totalPages <= 3) {
       return pageNumbers.map((number, index) => (
@@ -78,8 +79,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div className="pagination">
       <span className="pagination-number" onClick={() => onPageChange(1)}>
-        <code>&lt;</code>
-        <code>&lt;</code>
+        <span
+          className={`pagination-number ${
+            totalPages <= 2 ? 'hide-navigation' : ''
+          }`}
+          onClick={() => onPageChange(1)}
+        >
+          <code>&lt;</code>
+          <code>&lt;</code>
+        </span>
         <code>&nbsp;</code>
         <code>&nbsp;</code>
       </span>
@@ -103,8 +111,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className="pagination-number"
         onClick={() => onPageChange(totalPages)}
       >
-        <code>&gt;</code>
-        <code>&gt;</code>
+        <span
+          className={`pagination-number ${
+            totalPages <= 2 ? 'hide-navigation' : ''
+          }`}
+          onClick={() => onPageChange(1)}
+        >
+          <code>&gt;</code>
+          <code>&gt;</code>
+        </span>
       </span>
     </div>
   );

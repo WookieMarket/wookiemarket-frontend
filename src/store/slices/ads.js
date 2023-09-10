@@ -97,13 +97,6 @@ export const getAdsByUser = createAsyncThunk(
   },
 );
 
-export const setAdsPerPage = createAsyncThunk(
-  'ads/setAdsPerPage',
-  async (adsPerPage, { dispatch }) => {
-    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
-  }
-);
-
 const ads = createSlice({
   name: 'ads',
   initialState: {

@@ -29,3 +29,7 @@
     text-decoration: underline;
   }
   
+  .hide-navigation {
+    display: none;
+  }
+ 

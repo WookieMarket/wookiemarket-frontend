@@ -57,11 +57,7 @@ const AdsList = ({ selector }) => {
   const [queryMinPrice, setQueryMinPrice] = useState('');
   const [queryMaxPrice, setQueryMaxPrice] = useState('');
 
-  //let filteredAds = [];
-  let filteredAds = ads;
-
-  //const advertsPerPage = process.env.REACT_APP_ADS_PER_PAGE;
-  //console.log('anuncios', process.env.REACT_APP_ADS_PER_PAGE);
+    let filteredAds = ads;
 
   //ads list
   const handlePageChange = page => {
@@ -71,7 +67,6 @@ const AdsList = ({ selector }) => {
   //Categories list
   useEffect(() => {
     dispatch(categoriesList()).catch(error => console.log(error));
-    console.log('categories: ' + categories);
   }, [dispatch]);
 
   //Filter by category NOT WORKING
@@ -145,19 +140,15 @@ const AdsList = ({ selector }) => {
       .filter(filterByMinMaxPrice);
   }
 
-  const totalPages =
-    Array.isArray(filteredAds) && filteredAds.length > 0
-      ? Math.ceil(filteredAds.length / adsPerPage)
-      : 1;
+  //PAGINATION
+  const advertsPerPage = useSelector(getAdsPerPage);
+  const totalPages = Array.isArray(filteredAds) && filteredAds.length > 0
+  ? Math.ceil(filteredAds.length / adsPerPage)
+  : 1;
+  const startIndex = (currentPage - 1) * advertsPerPage;
+  const endIndex = startIndex + advertsPerPage;
+  const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
 
-  const startIndex = (currentPage - 1) * adsPerPage;
-  const endIndex = startIndex + adsPerPage;
-  const isLastPage = currentPage === totalPages;
-
-  const advertsToDisplay = filteredAds;
-  /*filteredAds.length > 0
-      ? filteredAds.slice(startIndex, endIndex)
-      : ads.slice(startIndex, endIndex);*/
   console.log('advertsToDisplay: ' + advertsToDisplay);
 
   //Cleaning & making friendly URL
@@ -318,6 +309,7 @@ const AdsList = ({ selector }) => {
                       </span>
                     </p>
                     </div>*/}
+                    
                 </>
               ) : (
                 <EmptyList />
@@ -330,4 +322,4 @@ const AdsList = ({ selector }) => {
   );
 };
 
-export default AdsList;*/
+export default AdsList;
