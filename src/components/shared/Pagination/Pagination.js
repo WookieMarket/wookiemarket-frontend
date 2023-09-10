@@ -51,12 +51,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           {page === '...' ? (
             <span
               className="pagination-number"
-              onClick={() =>
-                onPageChange(
-                  currentPage +
-                    (index === visiblePages.indexOf('...') ? 3 : -3),
-                )
-              }
+              onClick={() => onPageChange(currentPage + (index === 3 ? 2 : -2))}
             >
               <code>{page}</code>
             </span>
@@ -65,7 +60,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
               className={`pagination-number ${
                 page === currentPage ? 'active' : ''
               }`}
-              onClick={() => onPageChange(page)}
+              onClick={() => {
+                if (page !== '...') {
+                  onPageChange(page);
+                }
+              }}
             >
               <code>{page}</code>
             </span>
