@@ -13,3 +13,19 @@
   font-weight: bold;
   text-decoration: underline;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pagination-number {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination-number.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  

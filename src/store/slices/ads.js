@@ -24,12 +24,11 @@ export const adsCreate = createAsyncThunk(
 
 export const advertsList = createAsyncThunk(
   'ads/list',
-  async (_, { extra: { service }, rejectWithValue }) => {
-    console.log('Antes del try');
+  async ({ skip, limit, sort }, { extra: { service }, rejectWithValue }) => {
     try {
-      //console.log('Despachando la acción advertsList');
-      const adverts = await service.ads.getRecentAds();
-      //console.log('Anuncios obtenidos:', adverts);
+
+      const adverts = await service.ads.getRecentAds(skip, limit);
+
       return adverts;
     } catch (error) {
       console.log(error);
@@ -98,11 +97,25 @@ export const getAdsByUser = createAsyncThunk(
   },
 );
 
+export const setAdsPerPage = createAsyncThunk(
+  'ads/setAdsPerPage',
+  async (adsPerPage, { dispatch }) => {
+    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
+  }
+);
+
 const ads = createSlice({
   name: 'ads',
   initialState: {
     areLoaded: false,
     data: [],
+    adsPerPage: 4,
+    totalCountAds: 0,
+  },
+  reducers: {
+    setAdsPerPage(state, action) {
+      state.adsPerPage = action.payload;
+    },
     userAds: [],
   },
   extraReducers: builder => {
@@ -113,6 +126,7 @@ const ads = createSlice({
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
+        state.totalCountAds = action.payload.total;
       })
       .addCase(uploadModifiedAd.fulfilled, (state, action) => {
         //state.areLoaded = true;
