@@ -38,6 +38,6 @@ export const getCategories = () => {
 };
 
 export const getRecentAds = (skip, limit) => {
-  const url = `${adUrl}/filter?skip=${skip}&limit=${limit}`;
+  const url = `${adUrl}/filter?skip=${skip}`;
   return client.get(url);
 };
