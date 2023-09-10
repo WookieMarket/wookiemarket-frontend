@@ -6,6 +6,8 @@ export const getUi = state => state.ui;
 
 export const areAdvertsLoaded = state => state.ads.areLoaded;
 
+export const advertsPerPage = state => state.ads.adsPerPage;
+
 export const getUserInfo = state => state.user.userInfo;
 
 export const getAdverts = state => (state.ads.data ? state.ads.data : []);
