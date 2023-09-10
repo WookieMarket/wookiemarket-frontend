@@ -24,6 +24,7 @@ import { getIsLogged } from '../../../store/selectors';
 import { useSelector } from 'react-redux';
 import UserOptions from '../UserOptions/UserOptions';
 import storage from '../../../utils/storage';
+import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -54,7 +55,7 @@ const Navbar = () => {
             />
             <p>
               {t('Welcome: ')}
-              {username}
+              {capitalizeFirstLetter(username)}
             </p>
           </LogoContainer>
 
