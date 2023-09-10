@@ -149,12 +149,14 @@ export const deleteFavorites = createAsyncThunk(
 
 export const getAdsWithFilters = createAsyncThunk(
   'ads/getAdsWithFilters',
-  async (filters) => {
-    //Cambiar cuando se vaya a subir
-    const response = await fetch(`http://localhost:3001/api/ads/adverts/filter?${new URLSearchParams(filters)}`);
+  async filters => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    const response = await fetch(
+      `${apiUrl}/api/ads/adverts/filter?${new URLSearchParams(filters)}`,
+    );
     const data = await response.json();
     return data;
-  }
+  },
 );
 
 const ads = createSlice({
@@ -166,16 +168,15 @@ const ads = createSlice({
     data: [],
     userAds: [],
     favoriteAds: [],
-    adsPerPage: 4 || parseInt(
-      storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
-    ),
+    adsPerPage:
+      4 ||
+      parseInt(storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE),
     totalCountAds: 0,
   },
   reducers: {
     setAdsPerPage(state, action) {
       state.adsPerPage = action.payload;
     },
-    
   },
 
   extraReducers: builder => {
