@@ -75,7 +75,7 @@ const AdsList = ({ selector }) => {
   }, [dispatch]);
 
   //Filter by category NOT WORKING
-   const handleCategoryChange = event => {
+  const handleCategoryChange = event => {
     const options = event.target.options;
 
     let selectedOptions = [];
@@ -87,11 +87,19 @@ const AdsList = ({ selector }) => {
     setSelectedCategories(selectedOptions);
   };
 
-  const filterByCategory = ad =>
-    selectedCategories.length === 0 ||
-    ad.category.some(adCategory =>
-      selectedCategories.includes(adCategory.trim().toLowerCase()),
+  const filterByCategory = ad => {
+    if (selectedCategories.length === 0) {
+      return true;
+    }
+
+    const lowerCaseCategories = selectedCategories.map(category =>
+      category.trim().toLowerCase(),
     );
+
+    return ad.category.some(adCategory =>
+      lowerCaseCategories.includes(adCategory.trim().toLowerCase()),
+    );
+  };
 
   const handleFilterChange = event => {
     const value = event.target.value;
@@ -136,7 +144,7 @@ const AdsList = ({ selector }) => {
       .filter(filterByPrice)
       .filter(filterByMinMaxPrice);
   }
- 
+
   const totalPages =
     Array.isArray(filteredAds) && filteredAds.length > 0
       ? Math.ceil(filteredAds.length / adsPerPage)
@@ -261,7 +269,12 @@ const AdsList = ({ selector }) => {
                         ))}
                     </div>
                   </div>
-                  <Pagination />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
+
                   {/*<div className="pagination">
                     <p>
                       <span

@@ -105,8 +105,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       >
         <code>&gt;</code>
         <code>&gt;</code>
-        <code>&nbsp;</code>
-        <code>&nbsp;</code>
       </span>
     </div>
   );
