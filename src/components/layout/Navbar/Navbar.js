@@ -53,10 +53,12 @@ const Navbar = () => {
               title={t('icon-hover')}
               onClick={() => i18n.changeLanguage('en')}
             />
-            <p>
-              {t('Welcome: ')}
-              {capitalizeFirstLetter(username)}
-            </p>
+            {isLogged && (
+              <p>
+                {t('Welcome: ')}
+                {capitalizeFirstLetter(username)}
+              </p>
+            )}
           </LogoContainer>
 
           <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
