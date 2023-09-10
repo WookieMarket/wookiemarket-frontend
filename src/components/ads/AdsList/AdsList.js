@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Advert from '../Advert/Advert';
 import Pagination from '../../shared/pagination/Pagination';
-import { useDispatch, useDispatch, useSelector } from 'react-redux';
-import { advertsPerPage,
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  advertsPerPage,
   getAdsPerPage,
   getUi,
   selectTotalCountAds,
@@ -17,6 +18,7 @@ import EmptyList from '../EmptyList/EmptyList';
 import { categoriesList } from '../../../store/slices/categories';
 import { setAdsPerPage } from '../../../store/slices/ads';
 import Button from '../../shared/Button';
+import { Link } from 'react-router-dom';
 
 const getUniqueCategories = categories => {
   //Removing blank spaces before and after commas

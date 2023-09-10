@@ -31,7 +31,6 @@ export const advertsList = createAsyncThunk(
   'ads/list',
   async ({ skip, limit, sort }, { extra: { service }, rejectWithValue }) => {
     try {
-
       const adverts = await service.ads.getRecentAds(skip, limit);
 
       return adverts;
@@ -43,20 +42,16 @@ export const advertsList = createAsyncThunk(
   // {
   //   condition: (_, { getState }) => !areAdvertsLoaded(getState()),
   // },
-  
 );
 
 export const setAdsPerPage = createAsyncThunk(
   'ads/setAdsPerPage',
   async (adsPerPage, { dispatch }) => {
-    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
-  },
-);
+    storage.set('adsPerPage', adsPerPage);
 
-export const setAdsPerPage = createAsyncThunk(
-  'ads/setAdsPerPage',
-  async (adsPerPage, { dispatch }) => {
     dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
+
+    return adsPerPage;
   },
 );
 
@@ -154,14 +149,6 @@ export const deleteFavorites = createAsyncThunk(
   },
 );
 
-export const setAdsPerPage = createAsyncThunk(
-  'ads/setAdsPerPage',
-  async adsPerPage => {
-    storage.set('adsPerPage', adsPerPage);
-    return adsPerPage;
-  },
-);
-
 const ads = createSlice({
   name: 'ads',
   initialState: {
@@ -169,18 +156,18 @@ const ads = createSlice({
     favoriteAreLoaded: false,
     usersAdsAreLoaded: false,
     data: [],
-    adsPerPage: 4,
+    userAds: [],
+    favoriteAds: [],
+    adsPerPage: 4 || parseInt(
+      storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
+    ),
     totalCountAds: 0,
   },
   reducers: {
     setAdsPerPage(state, action) {
       state.adsPerPage = action.payload;
     },
-    userAds: [],
-    favoriteAds: [],
-    adsPerPage: parseInt(
-      storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
-    ),
+    
   },
 
   extraReducers: builder => {

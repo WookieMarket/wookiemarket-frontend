@@ -1,5 +1,5 @@
 import React from 'react';
-import './pagination.css';
+import './Pagination.css';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   if (totalPages <= 1) {
@@ -12,11 +12,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   const renderPageNumbers = () => {
-
     const visiblePages = [];
     if (totalPages <= 3) {
       return pageNumbers.map((number, index) => (
-        <>
+        <span key={`ellipsis-${index}`}>
           {index > 0 && <code> - </code>}
           <span
             key={number}
@@ -27,7 +26,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           >
             <code>{number}</code>
           </span>
-        </>
+        </span>
       ));
     } else {
       if (currentPage <= 3) {
@@ -52,12 +51,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           {page === '...' ? (
             <span
               className="pagination-number"
-              onClick={() =>
-                onPageChange(
-                  currentPage +
-                    (index === visiblePages.indexOf('...') ? 3 : -3),
-                )
-              }
+              onClick={() => onPageChange(currentPage + (index === 3 ? 2 : -2))}
             >
               <code>{page}</code>
             </span>
@@ -66,7 +60,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
               className={`pagination-number ${
                 page === currentPage ? 'active' : ''
               }`}
-              onClick={() => onPageChange(page)}
+              onClick={() => {
+                if (page !== '...') {
+                  onPageChange(page);
+                }
+              }}
             >
               <code>{page}</code>
             </span>
@@ -78,49 +76,45 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <div className="pagination">
-      <span className="pagination-number" onClick={() => onPageChange(1)}>
+      {currentPage !== 1 ? (
+        <span className="pagination-number" onClick={() => onPageChange(1)}>
+          <code>&lt;</code>
+          <code>&lt;</code>
+          <code>&nbsp;</code>
+          <code>&nbsp;</code>
+        </span>
+      ) : null}
+      {currentPage !== 1 ? (
         <span
-          className={`pagination-number ${
-            totalPages <= 2 ? 'hide-navigation' : ''
-          }`}
-          onClick={() => onPageChange(1)}
+          className="pagination-number"
+          onClick={() => onPageChange(currentPage - 1)}
         >
           <code>&lt;</code>
-          <code>&lt;</code>
+          <code>&nbsp;</code>
         </span>
-        <code>&nbsp;</code>
-        <code>&nbsp;</code>
-      </span>
-      <span
-        className="pagination-number"
-        onClick={() => onPageChange(currentPage - 1)}
-      >
-        <code>&lt;</code>
-        <code>&nbsp;</code>
-      </span>
+      ) : null}
       {renderPageNumbers()}
-      <span
-        className="pagination-number"
-        onClick={() => onPageChange(currentPage + 1)}
-      >
-        <code>&nbsp;</code>
-        <code>&gt;</code>
-        <code>&nbsp;</code>
-      </span>
-      <span
-        className="pagination-number"
-        onClick={() => onPageChange(totalPages)}
-      >
+      {currentPage !== totalPages ? (
         <span
-          className={`pagination-number ${
-            totalPages <= 2 ? 'hide-navigation' : ''
-          }`}
-          onClick={() => onPageChange(1)}
+          className="pagination-number"
+          onClick={() => onPageChange(currentPage + 1)}
+        >
+          <code>&nbsp;</code>
+          <code>&gt;</code>
+          <code>&nbsp;</code>
+        </span>
+      ) : null}
+      {currentPage !== totalPages ? (
+        <span
+          className="pagination-number"
+          onClick={() => onPageChange(totalPages)}
         >
           <code>&gt;</code>
           <code>&gt;</code>
+          <code>&nbsp;</code>
+          <code>&nbsp;</code>
         </span>
-      </span>
+      ) : null}
     </div>
   );
 };
