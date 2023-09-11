@@ -11,12 +11,28 @@ import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
+import io from 'socket.io-client';
 
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    const socket = io('http://localhost:3001');
+    console.log('Conexión establecida con el servidor de Socket.io');
+    // Escucha el evento 'precioActualizado' del servidor
+    socket.on('anuncios', ({ advertId, nuevoPrecio }) => {
+      console.log(
+        'Evento precioActualizado recibido. advertId:',
+        advertId,
+        'nuevoPrecio:',
+        nuevoPrecio,
+      );
+    });
+  }, []);
+
   return (
     <div className="App">
       <div className="background"></div>

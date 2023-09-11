@@ -9,8 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { getAdById, uploadModifiedAd } from '../../../store/slices/ads';
 import AdForm from '../../shared/AdForm/AdForm';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3001');
 
 function ModifyAd() {
+  const [anuncios, setAnuncios] = useState([]);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
@@ -21,8 +25,8 @@ function ModifyAd() {
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    console.log('Selected image file:', e.target.files[0]);
-    console.log(' image file:', image);
+    //console.log('Selected image file:', e.target.files[0]);
+    //console.log(' image file:', image);
   };
 
   const handleChange = event => {
@@ -51,6 +55,15 @@ function ModifyAd() {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(uploadModifiedAd({ id: adId, ad: adNew }));
+    socket.emit('precioActualizado', {
+      advertId: adId,
+      nuevoPrecio: adNew.price,
+    });
+    console.log(
+      'Emitiendo modificacionExitosa con advertId y nuevoPrecio:',
+      adId,
+      adNew.price,
+    );
   };
 
   const handleErrorClick = () => {
