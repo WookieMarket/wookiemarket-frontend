@@ -49,6 +49,7 @@ export const Menu = styled.ul`
   display: flex;
   justify-content: space-between;
   list-style: none;
+  z-index: 2;
 
   @media screen and (max-width: 960px) {
     background-color: var(--background-navbar-color);
@@ -58,7 +59,7 @@ export const Menu = styled.ul`
     /* Establece un valor inicial para open */
     opacity: ${({ open }) => (open ? '1' : '0')};
     width: 60%;
-    height: 50vh;
+    height: 60vh;
     justify-content: center;
     flex-direction: column;
     align-items: center;

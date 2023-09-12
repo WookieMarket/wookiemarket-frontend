@@ -45,7 +45,7 @@ a:active {
 
 .advert-container {
   border: 2px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 80px;
   padding: 16px;
   margin: 5px;
   text-align: center;
@@ -96,6 +96,7 @@ input.filter {
   background-image: url('../../../../public/searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
+  border-radius: 20px;
 }
 
 

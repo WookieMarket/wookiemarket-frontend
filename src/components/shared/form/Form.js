@@ -1,3 +1,4 @@
+import './Form.css';
 function Form(props) {
   const {
     classNameForm,
@@ -15,7 +16,7 @@ function Form(props) {
   } = props;
 
   return (
-    <div className={classNameForm}>
+    <div className={classNameForm + ' element-form'}>
       <label className={classNameLabel} htmlFor={htmlFor}>
         {text}
       </label>

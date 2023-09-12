@@ -11,6 +11,11 @@
 }
 
 :root {
+  --primary-color: #F5F5F5;
+  --secondary-color: #F2EAD3;
+  --tertiary-color: #DFD7BF;
+  --neutral-color: #3F2305;
+
   --text-color: #60cfe0;
   --border-color: rgb(242, 204, 108);
   --price-color: rgb(255, 0, 0);
