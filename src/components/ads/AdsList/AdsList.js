@@ -10,8 +10,6 @@ import Spinner from '../../shared/spinner/Spinner';
 import AdvertReduced from '../Advert/AdvertReduced';
 import EmptyList from '../EmptyList/EmptyList';
 import './AdsList.css';
-import { IoSearchSharp } from 'react-icons/io5';
-import { IconContext } from 'react-icons';
 
 const AdsList = ({ selector }) => {
   const { t } = useTranslation();

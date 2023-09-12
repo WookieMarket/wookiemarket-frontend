@@ -55,9 +55,6 @@ function Advert(advert) {
 
         <div className="productInfo">
           <h2>{advert.name}</h2>
-
-          <span className="description "> {advert.description}</span>
-
           <p className="hologram-text tv-text bottomSpace">
             {t('Is&')}
             {advert.onSale === true ? (
@@ -88,6 +85,7 @@ function Advert(advert) {
             <span className="advert-text">{advert.username}</span>
           </p>
         </div>
+        <p className=" "> {advert.description}</p>
       </div>
     </>
   );

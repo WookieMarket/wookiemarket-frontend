@@ -1,6 +1,6 @@
-.layout .content {
+.layout>.content {
   width: 100%;
-  max-height: 80vh;
+  height: 80vh;
   overflow-y: scroll;
 }
 
