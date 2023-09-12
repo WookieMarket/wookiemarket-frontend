@@ -26,7 +26,7 @@ export const successRedirects =
 
     // Redirects to "Home" page after account successfully created
     if (action.type === 'auth/signup/fulfilled') {
-      router.navigate('/login');
+      router.navigate('/');
     }
 
     // TODO modificar cuando este implementado el detalle del anuncio
