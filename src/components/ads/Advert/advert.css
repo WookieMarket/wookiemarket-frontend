@@ -6,19 +6,15 @@
 h2 {
   font-family: var(--font-family);
 }
+
 .advert-text {
   font-size: 25px;
   font-weight: normal;
 }
+
 #advert-name {
   margin-top: 25px;
   font-size: 1.5em;
-  text-transform: uppercase;
-}
-
-.advert_label {
-  font-weight: bold;
-  font-style: oblique;
   text-transform: uppercase;
 }
 
@@ -78,6 +74,7 @@ h2 {
   display: flex;
   justify-content: center;
 }
+
 .img {
   border-radius: 25px;
 }

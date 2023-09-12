@@ -58,7 +58,7 @@
   "Product image": "Imagen del producto",
   "Is&": "Se",
   "this product by": "este producto por",
-  "purchased": "busca/compra",
+  "purchased": "compra",
   "for sale": "vende",
   "Delete Advert": "¿Borrar anuncio",
   "Edit Advert": "Editar Anuncio",
@@ -72,5 +72,6 @@
   "Actualizar": "Actualizar",
   "update user info": "Se actualizará la información de usuario",
   "My Ads": "Mis anuncios",
-  "My favourites": "Mis favoritos"
+  "My favourites": "Mis favoritos",
+  "Adverts per page": "Anuncios por página"
 }

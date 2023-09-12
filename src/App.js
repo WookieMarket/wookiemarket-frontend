@@ -18,7 +18,7 @@ import './css/Reset.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <div className="background"></div>
       <div className="content">
         <Routes>

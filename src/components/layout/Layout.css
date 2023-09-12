@@ -1,7 +1,9 @@
-.content {
+.layout .content {
   width: 100%;
-  min-height: 80vh;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
+
 .layout-title {
   font-size: 50%;
 }

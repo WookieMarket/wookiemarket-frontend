@@ -9,12 +9,13 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 100%;
+  // width: 100%;
 
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 20px;
 `;
 
 export const LogoContainer = styled.div`

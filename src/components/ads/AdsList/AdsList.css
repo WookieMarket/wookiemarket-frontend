@@ -1,10 +1,14 @@
 .container-ad {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: repeat(auto-fill, 450px);
 
-  align-items: center;
+  column-gap: 20px;
+  row-gap: 20px;
+  justify-content: center;
+  /* align-items: center;
   align-content: center;
-  text-align: center;
+  text-align: center; */
 
   padding-top: 10px;
   padding-bottom: 40px;
@@ -51,8 +55,8 @@ a:active {
 .advert-container .img {
   display: block;
   object-fit: cover;
-  width: 610px;
-  height: 400px;
+  width: 400x;
+  height: 200px;
 }
 
 .advert-container h2 {
@@ -70,11 +74,32 @@ a:active {
 .searchSection h1 {
   color: var(--text-color);
 }
+
 .searchSection {
-  border: 2px solid var(--text-color);
+  border: 0px solid var(--text-color);
   border-radius: 8px;
   margin: 1.3rem;
+
 }
+
+.advert_label {
+  /* font-weight: bold;
+  font-style: oblique;
+  text-transform: uppercase; */
+  font-size: 1rem;
+}
+
+input.filter {
+  color: blue;
+  width: 100%;
+  padding: 10px 30px;
+  background-image: url('../../../../public/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+}
+
+
+
 
 @media (max-width: 600px) {
   .advert-container {

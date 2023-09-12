@@ -6,7 +6,7 @@ import FavoriteAds from '../../shared/FavoriteAds/FavoriteAds';
 import { Link } from 'react-router-dom';
 import IsDisable from '../../../utils/isDisable';
 
-function Advert(advert) {
+function AdvertReduced(advert) {
   const { t } = useTranslation();
 
   //const advDate = new Date(advert.createdAt);
@@ -56,7 +56,7 @@ function Advert(advert) {
         <div className="productInfo">
           <h2>{advert.name}</h2>
 
-          <span className="description "> {advert.description}</span>
+          {/* <span className="description "> {advert.description}</span> */}
 
           <p className="hologram-text tv-text bottomSpace">
             {t('Is&')}
@@ -82,15 +82,15 @@ function Advert(advert) {
             </p>
           </div>
         </div>
-        <div>
+        {/* <div>
           <p className="advert_label hologram-text tv-text">
             {t('Username')}:{' '}
             <span className="advert-text">{advert.username}</span>
           </p>
-        </div>
+        </div> */}
       </div>
     </>
   );
 }
 
-export default Advert;
+export default AdvertReduced;

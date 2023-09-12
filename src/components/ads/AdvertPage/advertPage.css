@@ -2,15 +2,19 @@ header,
 footer {
   width: 100%;
 }
+
 .content {
+  width: 100%;
   font-size: 2em;
 }
+
 .content h1 {
   margin-bottom: 5px;
   text-transform: lowercase;
   font-family: var(--font-family);
   font-size: 1.2em;
 }
+
 .holoBase {
   z-index: 2;
   position: relative;
@@ -37,20 +41,22 @@ footer {
     filter: blur(2.5px);
   }
 
-  + .holo {
+  +.holo {
     animation-duration: 0.75s;
     opacity: 0.5;
   }
 }
 
 .productData {
-  border:none;
+  border: none;
 }
+
 @keyframes float {
   from {
     will-change: unset;
     transform: translateY(-10px);
   }
+
   to {
     will-change: transform;
     transform: translateY(-30px);
@@ -77,6 +83,7 @@ footer {
       0 -65px 80px var(--holo-color, 1),
       0 -75px 90px var(--holo-color, 1);
   }
+
   to {
     will-change: unset;
     box-shadow:
@@ -121,6 +128,7 @@ footer {
   -o-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+
 #buttonSection {
   display: flex;
   justify-content: space-around;
