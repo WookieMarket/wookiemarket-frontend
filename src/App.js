@@ -11,6 +11,7 @@ import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
+import UserProfilePage from './components/user/UserProfilePage';
 
 import './App.css';
 import './css/Variables.css';
@@ -68,7 +69,7 @@ function App() {
               </RequireAuth>
             }
           />
-
+          {/* Display ads for current user - private area */}
           <Route
             path="/adverts/:username"
             element={
@@ -77,7 +78,10 @@ function App() {
               </RequireAuth>
             }
           />
-
+          {/* Display ads of a user - public area */}
+          <Route path="/:username/ads" element={<UserAdsListPage />} />
+          {/* Redirects to user profile - public area */}
+          <Route path="/:username/profile" element={<UserProfilePage />} />
           <Route
             path="/favorite"
             element={
