@@ -82,5 +82,6 @@
   "update user info": "User information will be updated",
   "My Ads": "My Ads",
   "My favourites": "My favourites",
-  "Apply Filter": "Apply Filter"
+  "Apply Filter": "Apply Filter",
+  "Email validation error": "Invalid email"
 }

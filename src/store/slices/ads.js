@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
-  areAdvertsLoaded,
+  //areAdvertsLoaded,
   areFavoriteAds,
   areUsersAdsLoaded,
 } from '../selectors';

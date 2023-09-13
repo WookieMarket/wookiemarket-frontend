@@ -5,8 +5,10 @@ import client, {
 import storage from '../utils/storage';
 
 export const signup = userData => {
-  return client.post('/api/auth/signup', userData).then(({ result }) => {
-    console.log(result);
+  return client.post('/api/auth/signup', userData).then(({ message, jwt }) => {
+    setAuthorizationHeader(jwt);
+    console.log(message);
+    storage.set('username', userData.username);
   });
 };
 

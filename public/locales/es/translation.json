@@ -79,5 +79,6 @@
   "update user info": "Se actualizará la información de usuario",
   "My Ads": "Mis anuncios",
   "My favourites": "Mis favoritos",
-  "Apply Filter": "Aplicar filtros"
+  "Apply Filter": "Aplicar filtros",
+  "Email validation error": "Email inválido"
 }
