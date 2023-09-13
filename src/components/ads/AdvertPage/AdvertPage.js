@@ -15,6 +15,7 @@ import { useState } from 'react';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import IsDisable from '../../../utils/isDisable';
+import AdBuyPage from '../AdBuyPage/AdBuyPage';
 
 const AdvertPage = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const AdvertPage = () => {
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = modalId => {
     setActiveModal(modalId);
@@ -63,6 +65,15 @@ const AdvertPage = () => {
     console.log('Edited Advert');
     // Redirects to the modification page with the ID of the advertisement.
     navigate(`/modify/${id}`);
+  };
+
+  // const handleBuy = () => {
+  //   setActiveModal(null);
+  //   console.log('Clicked Buy Advert');
+  //   handleOpenModal(4);
+  // };
+  const handleBuy = () => {
+    setShowModal(true);
   };
 
   return (
@@ -99,6 +110,21 @@ const AdvertPage = () => {
               onConfirm={() => navigate('/')}
             ></Modal>
           )}
+          {/* {isDisabled && activeModal === 4 && (
+            <Modal
+              id={4}
+              title={t('DELETED ADVERT')}
+              message={<AdBuyPage />}
+              //showCancel={false}
+              //onConfirm={() => navigate('/')}
+            ></Modal>
+          )} */}
+
+          {showModal && <AdBuyPage />}
+
+          {/* Agrega una verificación para mostrar o no AdBuyPage
+           {showModal && isDisabled && advert && <AdBuyPage />} */}
+
           {error && (
             <ErrorModal
               title="Error"
@@ -119,6 +145,9 @@ const AdvertPage = () => {
             ) : (
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
+            <Button id="buyButton" onClick={handleBuy}>
+              {t('Buy Advert')}
+            </Button>
             {!isDisabled && advert && (
               <section id="buttonSection">
                 <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
