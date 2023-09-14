@@ -1,0 +1,84 @@
+.container-form-creation-buy {
+  width: 50%;
+  height: 68vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
+  position: absolute; /* Cambia a posición absoluta */
+  top: 190%; /* Alinea el borde superior del contenedor al 50% de la ventana */
+  left: 50%; /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
+  transform: translate(-50%, -50%); /* Centra vertical y horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 10px 2px 10px;
+  gap: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid var(--border-color-form);
+  background-color: var(--background-color-form);
+  z-index: 10;
+}
+
+.container-form-creation-buy .form-group-creation-buy {
+  width: 100%;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.container-form-creation-buy .password-label-creation-buy {
+  /* font-family: var(--font-family); */
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.container-form-creation-buy .password-input-creation-buy {
+  height: 20px;
+  width: 100%;
+  align-items: center;
+  /* font-family: var(--font-family); */
+  margin: auto;
+  font-size: 11px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 3px solid gainsboro;
+}
+
+@media screen and (min-width: 768px) {
+  .container-form-creation-buy {
+    height: 68vh;
+    width: 30%;
+    top: 327%;
+    gap: 0px;
+  }
+  .container-form-creation-buy .password-input-creation-buy {
+    height: 25px;
+    font-size: 16px;
+  }
+
+  .container-form-creation-buy .password-label-creation-buy {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .container-form-creation-buy .img-input-creation {
+    margin: 8px 0px 20px 0px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container-form-creation-buy {
+    height: 72vh;
+    width: 30%;
+    top: 327%;
+    gap: 0px;
+  }
+  .container-form-creation-buy .password-input-creation-buy {
+    height: 30px;
+    font-size: 20px;
+  }
+
+  .container-form-creation-buy .password-label-creation-buy {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+}

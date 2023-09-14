@@ -10,6 +10,7 @@ import {
 } from '../../../store/slices/categories';
 import { useEffect } from 'react';
 import AdCategorySelect from '../AdCategory/AdCategory';
+import './AdForm.css';
 
 function AdForm(props) {
   const {
