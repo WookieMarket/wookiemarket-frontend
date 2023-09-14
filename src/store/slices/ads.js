@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import storage from '../../utils/storage';
 import {
   areAdvertsLoaded,
   areFavoriteAds,
   areUsersAdsLoaded,
 } from '../selectors';
-import storage from '../../utils/storage';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',

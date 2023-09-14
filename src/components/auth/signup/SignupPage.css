@@ -1,10 +1,15 @@
 .container-form {
   width: 30%;
-  height: 45vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
-  position: absolute; /* Cambia a posición absoluta */
-  top: 55%; /* Alinea el borde superior del contenedor al 50% de la ventana */
-  left: 50%; /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
-  transform: translate(-50%, -50%); /* Centra vertical y horizontalmente */
+  height: 45vh;
+  /* Establece la altura del contenedor en el 50% de la altura de la ventana */
+  position: absolute;
+  /* Cambia a posición absoluta */
+  top: 55%;
+  /* Alinea el borde superior del contenedor al 50% de la ventana */
+  left: 50%;
+  /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
+  transform: translate(-50%, -50%);
+  /* Centra vertical y horizontalmente */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,6 +21,7 @@
   border: 2px solid var(--border-color-form);
   background-color: var(--background-color-form);
 }
+
 .container-form .form-group {
   width: 100%;
   padding: 0 15px;
@@ -46,6 +52,7 @@
   border-radius: 6px;
   border: 3px solid gainsboro;
 }
+
 .container-form .email-input {
   height: 20px;
   width: 100%;

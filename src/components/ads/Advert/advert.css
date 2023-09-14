@@ -6,19 +6,15 @@
 h2 {
   font-family: var(--font-family);
 }
+
 .advert-text {
   font-size: 25px;
   font-weight: normal;
 }
+
 #advert-name {
   margin-top: 25px;
   font-size: 1.5em;
-  text-transform: uppercase;
-}
-
-.advert_label {
-  font-weight: bold;
-  font-style: oblique;
   text-transform: uppercase;
 }
 
@@ -48,8 +44,8 @@ h2 {
 #isSale {
   font-weight: bold;
   font-style: italic;
-  font-size: 1.8 rem;
-  text-transform: uppercase;
+  /* font-size: 1.8 rem;
+  text-transform: uppercase; */
 }
 
 .price {
@@ -64,7 +60,7 @@ h2 {
   color: var(--price-color);
   border-radius: 8px;
   border-color: var(--price-color);
-  border: 2px dashed;
+  border: 0px dashed;
   text-shadow: none;
   overflow: hidden;
   white-space: normal;
@@ -78,10 +74,29 @@ h2 {
   display: flex;
   justify-content: center;
 }
+
+.product-img-detail {
+  display: flex;
+  justify-content: center;
+}
+
+.product-img-detail img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
 .img {
   border-radius: 25px;
 }
 
 .bottomSpace {
   margin-bottom: 0.45em;
+}
+
+p.text {
+  margin-top: 20px;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-size: 2rem;
+  text-align: justify;
 }

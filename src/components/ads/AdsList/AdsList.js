@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
-import Advert from '../Advert/Advert';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertsPerPage, getUi } from '../../../store/selectors';
-import './AdsList.css';
-import { useTranslation } from 'react-i18next';
-import Layout from '../../layout/Layout';
-import Spinner from '../../shared/spinner/Spinner';
-import EmptyList from '../EmptyList/EmptyList';
-import Pagination from '../../shared/Pagination/Pagination';
 import { setAdsPerPage } from '../../../store/slices/ads';
+import Layout from '../../layout/Layout';
+import Pagination from '../../shared/Pagination/Pagination';
+import Spinner from '../../shared/spinner/Spinner';
+import AdvertReduced from '../Advert/AdvertReduced';
+import EmptyList from '../EmptyList/EmptyList';
+import './AdsList.css';
 
 const AdsList = ({ selector }) => {
   const { t } = useTranslation();
@@ -50,36 +50,22 @@ const AdsList = ({ selector }) => {
     dispatch(setAdsPerPage(newAdsPerPage));
   };
 
-  // //Cleaning & making friendly URL
-  // const cleanUpForURL = text => {
-  //   return text
-  //     .toLowerCase()
-  //     .replace(/ /g, '-') // Replace spaces with hyphens
-  //     .replace(/[^\w-]/g, ''); // Remove special characters
-  // };
-  // // Generates the URL using the _id of the advert and the name field
-  // const generateAdvertURL = advert => {
-  //   const cleanName = cleanUpForURL(advert.name);
-  //   return `/adverts/${advert._id}/${cleanName}`;
-  // };
   return (
     <Layout>
+      <div className="containerTittle">
+        <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
+      </div>
       <section className="searchSection">
-        <h1>{t('Searching area')}</h1>
-        <label className="advert_label">{t('Name')}: </label>
-        <input type="text" onChange={handleFilterChange} />
-      </section>
-      <section id="advertsPerPage">
-        <label className="advert_label">{t('Adverts per page')}: </label>
-        <select value={adsPerPage} onChange={handleChangeAdsPerPage}>
-          <option value={2}>2</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-        </select>
-      </section>
+        {/* <h1>{t('Searching area')}</h1> */}
+        {/* <label className="advert_label">{t('Name')}: </label> */}
 
+        <input
+          type="text"
+          onChange={handleFilterChange}
+          placeholder={t('Searching area')}
+          className="filter"
+        />
+      </section>
       <div className="container">
         {isLoading ? (
           <Spinner message={t('LOADING...')} />
@@ -88,17 +74,12 @@ const AdsList = ({ selector }) => {
             {!!ads.length ? (
               <>
                 <div className="listContainer">
-                  <div className="containerTittle">
-                    <h1>{t('ADVERTISEMENTS AVIABLE')}</h1>
-                  </div>
                   <div className="container-ad">
                     {advertsToDisplay
                       .sort((a, b) => a.createdAt > b.createdAt)
                       .map(advert => (
-                        <div key={advert._id}>
-                          <div className="advert-container">
-                            <Advert {...advert} />
-                          </div>
+                        <div className="advert-container" key={advert._id}>
+                          <AdvertReduced {...advert} />
                         </div>
                       ))}
                   </div>
@@ -118,6 +99,16 @@ const AdsList = ({ selector }) => {
           </div>
         )}
       </div>
+      <section id="advertsPerPage">
+        <label className="advert_label">{t('Adverts per page')}: </label>
+        <select value={adsPerPage} onChange={handleChangeAdsPerPage}>
+          <option value={2}>2</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+        </select>
+      </section>
     </Layout>
   );
 };

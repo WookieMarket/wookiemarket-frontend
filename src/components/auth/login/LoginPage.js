@@ -79,7 +79,7 @@ function LoginPage() {
 
   return (
     <Layout title={t('Login Page')}>
-      <div>
+      <div className="form">
         {isLoading ? (
           <Spinner message={t('charging...')} />
         ) : (

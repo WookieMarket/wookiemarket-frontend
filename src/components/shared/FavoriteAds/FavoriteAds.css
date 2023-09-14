@@ -22,6 +22,6 @@
   text-decoration: none;
 }
 
-svg {
+svg.favorite {
   fill: var(--background-iconFa-favorite-border-color);
 }

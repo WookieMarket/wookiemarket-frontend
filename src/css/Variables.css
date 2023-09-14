@@ -1,16 +1,34 @@
 @font-face {
   font-family: 'Star Jedi';
-  src: url('../assets/fonts/Starjedi.ttf'); /*<--Debereía ser una url con nuestra dirección real*/
+  src: url('../assets/fonts/Starjedi.ttf');
+  /*<--Debereía ser una url con nuestra dirección real*/
 }
+
 @font-face {
   font-family: 'StarWars Objects';
-  src: url('../assets/fonts/StarWars.ttf'); /*<--Debereía ser una url con nuestra dirección real*/
+  src: url('../assets/fonts/StarWars.ttf');
+  /*<--Debereía ser una url con nuestra dirección real*/
 }
+
 :root {
+  /* --primary-color: #F5F5F5;
+  --secondary-color: #F2EAD3;
+  --tertiary-color: #DFD7BF;
+  --neutral-color: #3F2305; */
+  --primary-color: #F0F0F0;
+  --secondary-color: #213555;
+  --tertiary-color: #4F709C;
+  --neutral-color: #E5D283;
+  --text-nav-footer: white;
+  --text-color-label: var(--secondary-color);
+
   --text-color: #60cfe0;
-  --border-color: rgb(242, 204, 108);
+  --border-color: var(--neutral-color);
+  --background-layout: white;
+  --background-advert: var(--primary-color);
+  /* --border-color: rgb(242, 204, 108); */
   --price-color: rgb(255, 0, 0);
-  --border-color: #e8cf04;
+  /* --border-color: #e8cf04; */
 
   /* font */
   --font-family: 'Star Jedi', sans-serif;
@@ -21,28 +39,41 @@
   --border-color-form: #e8cf04;
 
   /* Button */
-  --background-accept-button-color: #578d57;
+  /* --background-accept-button-color: #578d57; */
+  --background-accept-button-color: var(--secondary-color);
   --background-reject-button-color: #da2413;
+  --text-color-button: var(--neutral-color);
 
   /* navbar */
-  --background-navbar-color: #2055a1;
+  /* --background-navbar-color: #2055a1;
   --background-menu-movil-color: #e07924;
   --background-iconFa-color: #e07924;
   --background-hover-color: #e07924;
-  --background-iconFa-options-color: #e07924;
+  --background-iconFa-options-color: #e07924; */
+  /* Refactor estilos */
+  --background-navbar-color: var(--secondary-color);
+  --background-menu-movil-color: var(--text-nav-footer);
+  --background-iconFa-color: var(--text-nav-footer);
+  --background-hover-color: var(--neutral-color);
+  --background-iconFa-options-color: var(--text-nav-footer);
   --background-iconFa-favorite-border-color: #f5df40;
   --background-iconFa-favorite-color: transparent;
 
   /* holograms */
-  --holo-color: #00fcfc;
+  /* --holo-color: #00fcfc; */
+  --holo-color: var(--neutral-color);
   --color-holo-advert: #088598;
-  --background-image-url: url('https://www.viajeromagico.com/wp-content/uploads/2020/11/Starcruiser-2.jpg'); /*No me funciona*/
+  --background-image-url: url('https://www.viajeromagico.com/wp-content/uploads/2020/11/Starcruiser-2.jpg');
+  /*No me funciona*/
   --background-image: url('../../src/assets/CSS-Images/Starcruiser-2.jpg');
   --holo-width: 150px;
   --holo-height: 5px;
   --headline-color: #222222;
 
   /* not Found */
-  --noAdvertFound-image: url('../../public/images/advertNotFound_Image.avif'); /*<--Debereía ser una url con nuestra dirección real*/
-  --notFound_404: url('../../public/images/star_wars_hd.png'); /*<--Debereía ser una url con nuestra dirección real*/
+  --noAdvertFound-image: url('../../public/images/advertNotFound_Image.avif');
+  /*<--Debereía ser una url con nuestra dirección real*/
+  --notFound_404: url('../../public/images/star_wars_hd.png');
+  /*<--Debereía ser una url con nuestra dirección real*/
+  --size-border: 5px;
 }

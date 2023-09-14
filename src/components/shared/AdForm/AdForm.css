@@ -1,10 +1,15 @@
 .container-form-creation {
   width: 50%;
-  height: 68vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
-  position: absolute; /* Cambia a posición absoluta */
-  top: 57%; /* Alinea el borde superior del contenedor al 50% de la ventana */
-  left: 50%; /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
-  transform: translate(-50%, -50%); /* Centra vertical y horizontalmente */
+  height: 68vh;
+  /* Establece la altura del contenedor en el 50% de la altura de la ventana */
+  position: absolute;
+  /* Cambia a posición absoluta */
+  top: 57%;
+  /* Alinea el borde superior del contenedor al 50% de la ventana */
+  left: 50%;
+  /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
+  transform: translate(-50%, -50%);
+  /* Centra vertical y horizontalmente */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +32,6 @@
 
 .container-form-creation .password-label-creation {
   /* font-family: var(--font-family); */
-  font-size: 13px;
   margin-bottom: 10px;
 }
 
@@ -76,15 +80,15 @@
     top: 57%;
     gap: 0px;
   }
+
   .container-form-creation .password-input-creation {
     height: 25px;
-    font-size: 16px;
   }
 
   .container-form-creation .password-label-creation {
-    font-size: 16px;
     margin-bottom: 10px;
   }
+
   .container-form-creation .img-input-creation {
     margin: 8px 0px 20px 0px;
   }
@@ -97,15 +101,15 @@
     top: 53%;
     gap: 0px;
   }
+
   .container-form-creation .password-input-creation {
     height: 30px;
-    font-size: 20px;
   }
 
   .container-form-creation .password-label-creation {
-    font-size: 20px;
     margin-bottom: 10px;
   }
+
   .container-form-creation .img-input-creation {
     margin: 8px 0px 8px 0px;
   }
