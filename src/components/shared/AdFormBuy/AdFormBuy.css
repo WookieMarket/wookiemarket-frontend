@@ -1,4 +1,4 @@
-.container-form-creation {
+.container-form-creation-buy {
   width: 50%;
   height: 68vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
   position: absolute; /* Cambia a posición absoluta */
@@ -18,7 +18,7 @@
   z-index: 10;
 }
 
-.container-form-creation .form-group-creation {
+.container-form-creation-buy .form-group-creation-buy {
   width: 100%;
   padding: 0 15px;
   display: flex;
@@ -26,13 +26,13 @@
   gap: 1px;
 }
 
-.container-form-creation .password-label-creation {
+.container-form-creation-buy .password-label-creation-buy {
   /* font-family: var(--font-family); */
   font-size: 13px;
   margin-bottom: 10px;
 }
 
-.container-form-creation .password-input-creation {
+.container-form-creation-buy .password-input-creation-buy {
   height: 20px;
   width: 100%;
   align-items: center;
@@ -44,70 +44,41 @@
   border: 3px solid gainsboro;
 }
 
-.input-checked {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.checked-label-creation {
-  margin-left: 20px;
-  /* font-family: var(--font-family); */
-  font-size: 13px;
-}
-
-.checked-input-creation {
-  margin-left: 10px;
-  align-items: center;
-  padding: 0px 10px 0px 5px;
-  font-size: 11px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 3px solid gainsboro;
-}
-
-.container-form-creation .img-input-creation {
-  margin: 8px 0px 0px 0px;
-}
-
 @media screen and (min-width: 768px) {
-  .container-form-creation {
+  .container-form-creation-buy {
     height: 68vh;
     width: 30%;
-    top: 190%;
+    top: 327%;
     gap: 0px;
   }
-  .container-form-creation .password-input-creation {
+  .container-form-creation-buy .password-input-creation-buy {
     height: 25px;
     font-size: 16px;
   }
 
-  .container-form-creation .password-label-creation {
+  .container-form-creation-buy .password-label-creation-buy {
     font-size: 16px;
     margin-bottom: 10px;
   }
-  .container-form-creation .img-input-creation {
+  .container-form-creation-buy .img-input-creation {
     margin: 8px 0px 20px 0px;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .container-form-creation {
+  .container-form-creation-buy {
     height: 72vh;
     width: 30%;
-    top: 190%;
+    top: 327%;
     gap: 0px;
   }
-  .container-form-creation .password-input-creation {
+  .container-form-creation-buy .password-input-creation-buy {
     height: 30px;
     font-size: 20px;
   }
 
-  .container-form-creation .password-label-creation {
+  .container-form-creation-buy .password-label-creation-buy {
     font-size: 20px;
     margin-bottom: 10px;
-  }
-  .container-form-creation .img-input-creation {
-    margin: 8px 0px 8px 0px;
   }
 }

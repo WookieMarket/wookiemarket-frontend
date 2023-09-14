@@ -18,15 +18,15 @@ function AdFormBuy(props) {
     <>
       <form
         onSubmit={handleSubmit}
-        className="container-form-creation"
+        className="container-form-creation-buy"
         encType="multipart/form-data"
       >
         <Form
-          classNameForm="form-group-creation"
-          classNameLabel="password-label-creation"
+          classNameForm="form-group-creation-buy"
+          classNameLabel="password-label-creation-buy"
           htmlFor="email-buy"
           text={t('Buy')}
-          classNameInput="password-input-creation"
+          classNameInput="password-input-creation-buy"
           inputId="email-buy"
           inputType="text"
           inputName="email"

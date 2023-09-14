@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
-  //areAdvertsLoaded,
+  areAdvertsLoaded,
   areFavoriteAds,
   areUsersAdsLoaded,
 } from '../selectors';
@@ -150,7 +150,7 @@ export const emailBuyAd = createAsyncThunk(
       await service.user.emailBuy(adOwnerId, custom_message);
       // console.log('Ad removed from favorites:', adId);
       // return adId;
-      return { adOwnerId, custom_message };
+      //return { adOwnerId, custom_message };
     } catch (error) {
       return rejectWithValue(error);
     }

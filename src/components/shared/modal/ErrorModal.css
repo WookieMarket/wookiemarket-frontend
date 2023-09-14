@@ -1,4 +1,4 @@
-.modal-container {
+.modal-container-error {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,10 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 20;
+  z-index: 1000;
 }
 
-.modal {
+.modal-error {
   position: relative;
   font-family: var(--font-family);
   background-color: rgba(0, 0, 0);
@@ -21,19 +21,18 @@
   text-align: center;
   color: var(--border-color);
   text-transform: lowercase;
-  z-index: 21;
+  z-index: 1000;
 }
 
-.modal-header {
+.modal-header-error {
   font-weight: bold;
   font-size: 0.4em;
   margin-bottom: 20px;
   color: var(--border-color);
   text-transform: lowercase;
-  z-index: 23;
 }
 
-.modal-body {
+.modal-body-error {
   font-weight: bold;
   font-size: 0.6em;
   margin-bottom: 20px;
@@ -45,7 +44,6 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  z-index: 23;
 }
 
 .modal-button:disabled,
@@ -55,7 +53,7 @@ button:disabled:hover {
   cursor: default;
 }
 
-.modal-errorButton {
+.modal-errorButton-error {
   display: flex;
   justify-content: center;
   margin-top: 30px;
@@ -70,7 +68,6 @@ button:disabled:hover {
   border: 0;
   padding: 6px 6px;
   margin-bottom: 10px;
-  z-index: 23;
 }
 
 .onconfirm {
@@ -82,7 +79,6 @@ button:disabled:hover {
   border: 0;
   padding: 6px 6px;
   margin-bottom: 10px;
-  z-index: 23;
 }
 
 /* STARS */
@@ -93,7 +89,6 @@ button:disabled:hover {
   background-color: #fff;
   border-radius: 50%;
   animation: blink 5s infinite alternate;
-  z-index: -1;
 }
 
 @keyframes blink {
