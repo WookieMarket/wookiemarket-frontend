@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdvert, getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAdvertById, getUi } from '../../../store/selectors';
+import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Button from '../../shared/Button';
@@ -20,6 +20,7 @@ const AdvertPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isLogged = useSelector(getIsLogged);
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
 
@@ -65,6 +66,12 @@ const AdvertPage = () => {
     navigate(`/modify/${id}`);
   };
 
+  const handleChat = () => {
+    setActiveModal(null);
+    console.log('Chat Window');
+    // Redirects to the Chat with the advert owner
+    //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
+  };
   return (
     <Layout>
       {isLoading ? (
@@ -128,6 +135,11 @@ const AdvertPage = () => {
                   {t('Edit Advert')}
                 </Button>
               </section>
+            )}
+            {isLogged && advert && (
+              <Button id="chatButton" onClick={handleChat}>
+                {t('Chat with ad owner')}
+              </Button>
             )}
             <div
               className={`no-advert_content ${!advert ? 'no-advert' : ''}`}
