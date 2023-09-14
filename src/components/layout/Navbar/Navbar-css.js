@@ -9,12 +9,13 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 100%;
+  // width: 100%;
 
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 20px;
 `;
 
 export const LogoContainer = styled.div`
@@ -48,6 +49,7 @@ export const Menu = styled.ul`
   display: flex;
   justify-content: space-between;
   list-style: none;
+  z-index: 2;
 
   @media screen and (max-width: 960px) {
     background-color: var(--background-navbar-color);
@@ -57,7 +59,7 @@ export const Menu = styled.ul`
     /* Establece un valor inicial para open */
     opacity: ${({ open }) => (open ? '1' : '0')};
     width: 60%;
-    height: 50vh;
+    height: 60vh;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -95,29 +97,28 @@ export const MenuItemLink = styled(NavLink)`
   cursor: pointer;
   transition: 0.5s all ease;
 
-  &:hover {
-    color: var(--font-hover-color);
-    background-color: var(--background-hover-color);
-    transition: 0.5s all ease;
-
-    div {
-      svg {
-        fill: #23394d;
-      }
-    }
-  }
-
   div {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    color: var(--background-iconFa-color);
     svg {
-      display: none;
       fill: var(--background-iconFa-color);
       margin-right: 0.5rem;
+    }
+  }
+  &:hover {
+    color: var(--font-hover-color);
+    background-color: var(--background-hover-color);
+    transition: 0.5s all ease;
+
+    div {
+      color: var(--secondary-color);
+      svg {
+        fill: var(--secondary-color);
+      }
     }
   }
 
