@@ -40,7 +40,7 @@ function Advert(advert) {
         </div>
       </div>
       <div className="productData ">
-        <div className="product-img">
+        <div className="product-img-detail">
           <Link to={generateAdvertURL(advert)}>
             {
               <img
@@ -55,7 +55,7 @@ function Advert(advert) {
 
         <div className="productInfo">
           <h2>{advert.name}</h2>
-          <p className="hologram-text tv-text bottomSpace">
+          <p className="hologram-text tv-text ">
             {t('Is&')}
             {advert.onSale === true ? (
               <span id="isSale"> {t('for sale')} </span>
@@ -63,7 +63,7 @@ function Advert(advert) {
               <span id="isSale"> {t('purchased')} </span>
             )}
           </p>
-          <div className="price .tv-text bottomSpace">
+          <div className="price .tv-text ">
             <p>
               {advert.price} <span id="price_coin"> {advert.coin}</span>
             </p>
@@ -85,7 +85,7 @@ function Advert(advert) {
             <span className="advert-text">{advert.username}</span>
           </p>
         </div>
-        <p className=" "> {advert.description}</p>
+        <p className="text"> {advert.description}</p>
       </div>
     </>
   );

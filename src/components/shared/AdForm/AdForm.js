@@ -46,7 +46,7 @@ function AdForm(props) {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="form">
       <form
         onSubmit={handleSubmit}
         className="container-form-creation"
@@ -187,7 +187,7 @@ function AdForm(props) {
           {nameButton}
         </Button>
       </form>
-    </>
+    </div>
   );
 }
 

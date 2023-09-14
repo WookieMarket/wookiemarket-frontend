@@ -27,29 +27,29 @@ a:link,
 a:visited,
 a:active {
   text-decoration: none;
-  color: rgb(0, 0, 0);
+  color: var(--text-nav-footer);
   cursor: pointer;
 }
 
 .pagination {
   text-align: center;
-  color: var(--text-color);
+  color: var(--tertiary-color);
 }
 
 .containerTittle h1 {
   text-transform: lowercase;
   font-family: var(--font-family);
-  font-size: 3em;
+  font-size: 1.1em;
   margin: 20px 0 10px 0;
 }
 
 .advert-container {
-  border: 2px solid var(--border-color);
+  border: var(--size-border) solid var(--border-color);
   border-radius: 80px;
   padding: 16px;
   margin: 5px;
   text-align: center;
-  background-color: #dcdcdc7a;
+  background-color: var(--background-advert);
 }
 
 .advert-container .img {
@@ -90,15 +90,28 @@ a:active {
 }
 
 input.filter {
-  color: blue;
   width: 100%;
   padding: 10px 30px;
   background-image: url('../../../../public/searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
   border-radius: 20px;
+  border: var(--size-border) solid var(--border-color);
 }
 
+#advertsPerPage>label {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--tertiary-color);
+}
+
+#advertsPerPage>select {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--tertiary-color);
+  border: 2px solid var(--tertiary-color);
+  border-radius: 10px;
+}
 
 
 

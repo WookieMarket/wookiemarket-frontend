@@ -5,3 +5,11 @@
     margin: 10px 10px;
     gap: 10px;
 }
+
+.element-form>label {
+    color: var(--text-color-label);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.element-form>input {}

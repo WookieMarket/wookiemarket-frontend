@@ -62,9 +62,9 @@ const UserOptions = () => {
           {isLogged ? (
             <MenuItem>
               <FaPowerOff />
-              <button onClick={handleLogoutClick} className="navbar-list-item">
+              <span href="none" onClick={handleLogoutClick} className="">
                 {t('Logout')}
-              </button>
+              </span>
             </MenuItem>
           ) : (
             <MenuItem to="/login">

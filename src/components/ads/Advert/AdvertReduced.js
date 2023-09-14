@@ -55,10 +55,7 @@ function AdvertReduced(advert) {
 
         <div className="productInfo">
           <h2>{advert.name}</h2>
-
-          {/* <span className="description "> {advert.description}</span> */}
-
-          <p className="hologram-text tv-text bottomSpace">
+          <p className="hologram-text tv-text ">
             {t('Is&')}
             {advert.onSale === true ? (
               <span id="isSale"> {t('for sale')} </span>
@@ -66,7 +63,7 @@ function AdvertReduced(advert) {
               <span id="isSale"> {t('purchased')} </span>
             )}
           </p>
-          <div className="price .tv-text bottomSpace">
+          <div className="price .tv-text ">
             <p>
               {advert.price} <span id="price_coin"> {advert.coin}</span>
             </p>

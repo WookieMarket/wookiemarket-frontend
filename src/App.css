@@ -25,3 +25,12 @@ a {
   background-repeat: no-repeat;
   z-index: -1;
 }
+
+/*Refactor estilso text color*/
+p {
+  color: var(--tertiary-color);
+}
+
+h1 {
+  color: var(--tertiary-color) !important;
+}

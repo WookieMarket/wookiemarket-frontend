@@ -60,7 +60,7 @@ h2 {
   color: var(--price-color);
   border-radius: 8px;
   border-color: var(--price-color);
-  border: 2px dashed;
+  border: 0px dashed;
   text-shadow: none;
   overflow: hidden;
   white-space: normal;
@@ -75,10 +75,28 @@ h2 {
   justify-content: center;
 }
 
+.product-img-detail {
+  display: flex;
+  justify-content: center;
+}
+
+.product-img-detail img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
 .img {
   border-radius: 25px;
 }
 
 .bottomSpace {
   margin-bottom: 0.45em;
+}
+
+p.text {
+  margin-top: 20px;
+  margin-right: 10%;
+  margin-left: 10%;
+  font-size: 2rem;
+  text-align: justify;
 }

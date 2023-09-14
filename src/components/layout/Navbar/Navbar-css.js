@@ -97,29 +97,28 @@ export const MenuItemLink = styled(NavLink)`
   cursor: pointer;
   transition: 0.5s all ease;
 
-  &:hover {
-    color: var(--font-hover-color);
-    background-color: var(--background-hover-color);
-    transition: 0.5s all ease;
-
-    div {
-      svg {
-        fill: #23394d;
-      }
-    }
-  }
-
   div {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    color: var(--background-iconFa-color);
     svg {
-      display: none;
       fill: var(--background-iconFa-color);
       margin-right: 0.5rem;
+    }
+  }
+  &:hover {
+    color: var(--font-hover-color);
+    background-color: var(--background-hover-color);
+    transition: 0.5s all ease;
+
+    div {
+      color: var(--secondary-color);
+      svg {
+        fill: var(--secondary-color);
+      }
     }
   }
 
