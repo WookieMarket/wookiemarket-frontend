@@ -15,6 +15,7 @@ import { useState } from 'react';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import IsDisable from '../../../utils/isDisable';
+import AdBuyPage from '../AdBuyPage/AdBuyPage';
 
 const AdvertPage = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const AdvertPage = () => {
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = modalId => {
     setActiveModal(modalId);
@@ -72,6 +74,10 @@ const AdvertPage = () => {
     // Redirects to the Chat with the advert owner
     //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
   };
+  const handleBuy = () => {
+    setShowModal(true);
+  };
+
   return (
     <Layout>
       {isLoading ? (
@@ -106,6 +112,9 @@ const AdvertPage = () => {
               onConfirm={() => navigate('/')}
             ></Modal>
           )}
+
+          {showModal && <AdBuyPage />}
+
           {error && (
             <ErrorModal
               title="Error"
@@ -126,6 +135,15 @@ const AdvertPage = () => {
             ) : (
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
+
+            {isDisabled && (
+              <section id="buttonSection">
+                <Button id="buyButton" onClick={handleBuy}>
+                  {t('Buy Advert')}
+                </Button>
+              </section>
+            )}
+
             {!isDisabled && advert && (
               <section id="buttonSection">
                 <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
