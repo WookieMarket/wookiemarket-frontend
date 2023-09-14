@@ -70,10 +70,16 @@
   "DELETING ADVERTISEMENT": "DELETING ADVERTISEMENT",
   "DELETING ADVERTISEMENT (confirmation)": "DELETING ADVERTISEMENT (confirmation)",
   "Your advert was deleted successfully": "Your advert was deleted successfully",
+  "Chat with ad owner": "Chat with ad owner",
   "Edit an ad": "edit an ad",
   "User info": "User information ",
   "Actualizar": "Update",
   "update user info": "User information will be updated",
   "My Ads": "My Ads",
-  "My favourites": "My favourites"
+  "My favourites": "My favourites",
+  "Email validation error": "Invalid email",
+  "user profile": "User Profile",
+  "user avatar": "User avatar",
+  "user ads": "See user ads",
+  "Adverts per page": "Adverts per page"
 }

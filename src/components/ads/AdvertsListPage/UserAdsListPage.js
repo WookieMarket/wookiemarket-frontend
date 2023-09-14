@@ -9,6 +9,7 @@ const UserAdsListPage = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(username);
     dispatch(getAdsByUser(username)).catch(error => console.log(error));
   }, [username, dispatch]);
 

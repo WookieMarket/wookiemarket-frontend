@@ -65,3 +65,19 @@ export const removeFavorite = id => {
   const url = `${usersUrl}/delete-favorite/${id}`;
   return client.delete(url);
 };
+
+/**
+ * Send email to the owner of the ad to buy it
+ *
+ * @returns Send email to the owner of the ad to buy it
+ */
+export const emailBuy = (adOwnerId, custom_message) => {
+  // const config = {
+  //   headers: {
+  //     'Content-Type': 'multipart/form-data',
+  //   },
+  // };
+  const data = { adOwnerId, custom_message };
+  const url = `${usersUrl}/email-buy`;
+  return client.post(url, data);
+};

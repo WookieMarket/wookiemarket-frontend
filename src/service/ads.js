@@ -27,7 +27,7 @@ export const modifyAd = (adId, ad) => {
   return client.put(url, ad, config);
 };
 
-export const deleteAdvert = (advertId) => {
+export const deleteAdvert = advertId => {
   const url = `${adUrl}/${advertId}`;
   return client.delete(url);
 };

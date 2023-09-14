@@ -6,7 +6,7 @@ import FavoriteAds from '../../shared/FavoriteAds/FavoriteAds';
 import { Link } from 'react-router-dom';
 import IsDisable from '../../../utils/isDisable';
 
-function Advert(advert) {
+function AdvertReduced(advert) {
   const { t } = useTranslation();
 
   //const advDate = new Date(advert.createdAt);
@@ -32,10 +32,6 @@ function Advert(advert) {
     return `/adverts/${advert._id}/${cleanName}`;
   };
 
-  const generateUserProfileURL = username => {
-    return `/${username}/profile`;
-  };
-
   return (
     <>
       <div className="productInfo hologram-text tv-text" id="advertOnly">
@@ -44,7 +40,7 @@ function Advert(advert) {
         </div>
       </div>
       <div className="productData ">
-        <div className="product-img-detail">
+        <div className="product-img">
           <Link to={generateAdvertURL(advert)}>
             {
               <img
@@ -83,18 +79,15 @@ function Advert(advert) {
             </p>
           </div>
         </div>
-        <div>
+        {/* <div>
           <p className="advert_label hologram-text tv-text">
             {t('Username')}:{' '}
-            <Link to={generateUserProfileURL(advert.username)}>
-              {<span className="advert-text">{advert.username}</span>}
-            </Link>
+            <span className="advert-text">{advert.username}</span>
           </p>
-        </div>
-        <p className="text"> {advert.description}</p>
+        </div> */}
       </div>
     </>
   );
 }
 
-export default Advert;
+export default AdvertReduced;

@@ -10,6 +10,7 @@ import {
 } from '../../../store/slices/categories';
 import { useEffect } from 'react';
 import AdCategorySelect from '../AdCategory/AdCategory';
+import './AdForm.css';
 
 function AdForm(props) {
   const {
@@ -46,7 +47,7 @@ function AdForm(props) {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="form">
       <form
         onSubmit={handleSubmit}
         className="container-form-creation"
@@ -187,7 +188,7 @@ function AdForm(props) {
           {nameButton}
         </Button>
       </form>
-    </>
+    </div>
   );
 }
 

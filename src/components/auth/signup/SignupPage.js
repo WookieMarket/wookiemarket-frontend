@@ -7,6 +7,7 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
+import validateEmail from '../../../utils/validation';
 import Form from '../../shared/form/Form';
 import './SignupPage.css';
 
@@ -25,22 +26,34 @@ function SignupPage() {
     username: '',
     password: '',
   });
+  const [emailValidationError, setEmailValidationError] = useState('');
 
   const handleErrorClick = () => {
     dispatch(resetError());
   };
 
   const handleChange = event => {
+    setEmailValidationError('');
     setUserData(prevUserData => ({
       ...prevUserData,
       [event.target.name]: event.target.value,
     }));
   };
 
+  const validateForm = () => {
+    if (!validateEmail(userData.email)) {
+      setEmailValidationError(t('Email validation error'));
+      return false;
+    } else {
+      setEmailValidationError('');
+      return true;
+    }
+  };
   const handleSubmit = async event => {
     event.preventDefault();
-
-    dispatch(authSignup(userData));
+    if (validateForm()) {
+      dispatch(authSignup(userData));
+    }
   };
 
   const buttonDisabled =
@@ -64,6 +77,8 @@ function SignupPage() {
               value={userData.email}
               handleChange={handleChange}
               placeholder={t('Email')}
+              classValidationMessageLabel={'validation-message-label'}
+              validationMessage={emailValidationError}
               required
             />
             <Form
@@ -103,7 +118,7 @@ function SignupPage() {
             </button>
           </form>
         )}
-
+        {/* Mostrar el mensaje de error si hay un error */}
         {error && (
           <ErrorModal
             title="Error"

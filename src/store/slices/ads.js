@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import storage from '../../utils/storage';
 import {
   areAdvertsLoaded,
   areFavoriteAds,
   areUsersAdsLoaded,
 } from '../selectors';
-import storage from '../../utils/storage';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -41,9 +41,9 @@ export const advertsList = createAsyncThunk(
       return rejectWithValue(error);
     }
   },
-  // {
-  //   condition: (_, { getState }) => !areAdvertsLoaded(getState()),
-  // },
+  {
+    condition: (_, { getState }) => !areAdvertsLoaded(getState()),
+  },
 );
 
 export const getAdById = createAsyncThunk(
@@ -140,6 +140,23 @@ export const deleteFavorites = createAsyncThunk(
   },
 );
 
+export const emailBuyAd = createAsyncThunk(
+  'ads/emailBuy',
+  async (
+    { adOwnerId, custom_message },
+    { extra: { service }, rejectWithValue },
+  ) => {
+    try {
+      await service.user.emailBuy(adOwnerId, custom_message);
+      // console.log('Ad removed from favorites:', adId);
+      // return adId;
+      //return { adOwnerId, custom_message };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 export const setAdsPerPage = createAsyncThunk(
   'ads/setAdsPerPage',
   async adsPerPage => {
@@ -193,7 +210,6 @@ const ads = createSlice({
       })
       .addCase(addFavorite.fulfilled, (state, action) => {
         const newFavoriteAd = action.payload;
-
         state.favoriteAds.unshift(newFavoriteAd);
       })
       .addCase(deleteFavorites.fulfilled, (state, action) => {

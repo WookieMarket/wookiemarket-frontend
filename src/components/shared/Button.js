@@ -1,20 +1,23 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const accentColor = "var(--background-accept-button-color)";
-const closedColor = "var(--background-reject-button-color)";
+const accentColor = 'var(--background-accept-button-color)';
+const closedColor = 'var(--background-reject-button-color)';
 
 const Button = styled.button`
   cursor: pointer;
   background-color: ${props =>
-    props.variant === "accept" ? accentColor : "white"};
+    props.variant === 'accept' ? accentColor : 'white'};
   background-color: ${props =>
-    props.variant === "decline" ? closedColor : "#13c1ac"};
+    props.variant === 'decline'
+      ? closedColor
+      : 'var(--background-accept-button-color)'};
 
   border-radius: 25px;
   border-style: solid;
   border-width: 1px;
-  
-  color: ${props => (props.variant === "accept" ? "white" : "black")};
+
+  color: ${props =>
+    props.variant === 'accept' ? 'white' : 'var(--text-color-button)'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +25,7 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 10px;
   height: 30px;
-  width: ${props => (props.width === "button-form" ? "29%" : "auto")};
+  width: ${props => (props.width === 'button-form' ? '29%' : 'auto')};
   opacity: ${props => (props.disabled ? 0.5 : 1)};
   padding: 6px 6px;
   text-decoration: none;
@@ -30,18 +33,18 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${props =>
-      props.variant === "accept" ? accentColor : accentColor};
-    color: ${props => (props.variant === "accept" ? "black" : "white")};
+      props.variant === 'accept' ? accentColor : accentColor};
+    color: ${props => (props.variant === 'accept' ? 'black' : 'white')};
   }
 
   @media screen and (min-width: 768px) {
-    width: ${props => (props.width === "button-form" ? "45%" : "auto")};
+    width: ${props => (props.width === 'button-form' ? '45%' : 'auto')};
     font-size: 14px;
     padding: 7px 7px;
   }
 
   @media screen and (min-width: 1024px) {
-    width: ${props => (props.width === "button-form" ? "35%" : "auto")};
+    width: ${props => (props.width === 'button-form' ? '35%' : 'auto')};
     font-size: 17px;
     padding: 8px 8px;
   }
@@ -51,8 +54,8 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${props =>
-      props.variant === "accept" ? accentColor : accentColor};
-    color: ${props => (props.variant === "accept" ? "black" : "white")};
+      props.variant === 'accept' ? accentColor : accentColor};
+    color: ${props => (props.variant === 'accept' ? 'black' : 'white')};
   }
 `;
 

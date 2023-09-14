@@ -22,7 +22,11 @@ function FavoriteAds({ id }) {
 
   return (
     <button className={buttonClass} onClick={toggleFavorite}>
-      {isAdFavorite ? <img src={estrella} alt="estrella" /> : <FaRegStar />}
+      {isAdFavorite ? (
+        <img src={estrella} alt="estrella" className="favorite" />
+      ) : (
+        <FaRegStar className="favorite" />
+      )}
     </button>
   );
 }

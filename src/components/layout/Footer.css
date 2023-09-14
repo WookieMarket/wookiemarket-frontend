@@ -1,4 +1,13 @@
+footer {
+    background-color: var(--secondary-color);
+    min-height: 10vh;
+}
+
 .footer {
     display: flex;
     justify-content: center;
+}
+
+.footer>p {
+    color: var(--text-nav-footer);
 }

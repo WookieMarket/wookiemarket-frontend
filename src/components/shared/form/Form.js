@@ -1,3 +1,4 @@
+import './Form.css';
 function Form(props) {
   const {
     classNameForm,
@@ -9,13 +10,16 @@ function Form(props) {
     inputType,
     inputName,
     value,
+    handleValidation,
     handleChange,
     accept,
     placeholder,
+    classValidationMessageLabel,
+    validationMessage,
   } = props;
 
   return (
-    <div className={classNameForm}>
+    <div className={classNameForm + ' element-form'}>
       <label className={classNameLabel} htmlFor={htmlFor}>
         {text}
       </label>
@@ -25,10 +29,14 @@ function Form(props) {
         type={inputType}
         name={inputName}
         value={value}
+        onBlur={handleValidation}
         onChange={handleChange}
         accept={accept}
         placeholder={placeholder}
       />
+      <label className={classValidationMessageLabel} htmlFor={htmlFor}>
+        {validationMessage}
+      </label>
     </div>
   );
 }

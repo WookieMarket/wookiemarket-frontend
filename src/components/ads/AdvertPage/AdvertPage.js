@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdvert, getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAdvertById, getUi } from '../../../store/selectors';
+import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Button from '../../shared/Button';
@@ -15,11 +15,13 @@ import { useState } from 'react';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import IsDisable from '../../../utils/isDisable';
+import AdBuyPage from '../AdBuyPage/AdBuyPage';
 
 const AdvertPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isLogged = useSelector(getIsLogged);
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
 
@@ -30,6 +32,7 @@ const AdvertPage = () => {
 
   //MODAL WINDOWS
   const [activeModal, setActiveModal] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = modalId => {
     setActiveModal(modalId);
@@ -63,6 +66,16 @@ const AdvertPage = () => {
     console.log('Edited Advert');
     // Redirects to the modification page with the ID of the advertisement.
     navigate(`/modify/${id}`);
+  };
+
+  const handleChat = () => {
+    setActiveModal(null);
+    console.log('Chat Window');
+    // Redirects to the Chat with the advert owner
+    //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
+  };
+  const handleBuy = () => {
+    setShowModal(true);
   };
 
   return (
@@ -99,6 +112,9 @@ const AdvertPage = () => {
               onConfirm={() => navigate('/')}
             ></Modal>
           )}
+
+          {showModal && <AdBuyPage />}
+
           {error && (
             <ErrorModal
               title="Error"
@@ -119,6 +135,15 @@ const AdvertPage = () => {
             ) : (
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
+
+            {isDisabled && (
+              <section id="buttonSection">
+                <Button id="buyButton" onClick={handleBuy}>
+                  {t('Buy Advert')}
+                </Button>
+              </section>
+            )}
+
             {!isDisabled && advert && (
               <section id="buttonSection">
                 <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
@@ -128,6 +153,11 @@ const AdvertPage = () => {
                   {t('Edit Advert')}
                 </Button>
               </section>
+            )}
+            {isLogged && advert && (
+              <Button id="chatButton" onClick={handleChat}>
+                {t('Chat with ad owner')}
+              </Button>
             )}
             <div
               className={`no-advert_content ${!advert ? 'no-advert' : ''}`}
