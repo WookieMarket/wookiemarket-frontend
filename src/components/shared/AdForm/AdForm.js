@@ -11,9 +11,11 @@ import {
 import { useEffect } from 'react';
 import AdCategorySelect from '../AdCategory/AdCategory';
 import './AdForm.css';
+import SelectForm from '../SelectForm/SelectForm';
 
 function AdForm(props) {
   const {
+    handleOpcionsChange,
     handleSubmit,
     valueInputName,
     handleChange,
@@ -26,6 +28,7 @@ function AdForm(props) {
     buttonDisabled,
     testid,
     nameButton,
+    showSoldReservedOptions,
   } = props;
   const { t } = useTranslation();
   const tags = useSelector(getAllCategory);
@@ -53,6 +56,10 @@ function AdForm(props) {
         className="container-form-creation"
         encType="multipart/form-data"
       >
+        {showSoldReservedOptions && ( // Condición para mostrar las opciones "Sell" y "Buy"
+          <SelectForm onChange={handleOpcionsChange} />
+        )}
+
         <Form
           classNameForm="form-group-creation"
           classNameLabel="password-label-creation"
