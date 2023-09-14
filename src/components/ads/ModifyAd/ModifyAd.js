@@ -33,11 +33,14 @@ function ModifyAd() {
   };
 
   const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTOpcions, setSelectedOpcions] = useState([]);
   const adNew = {
+    status: selectedTOpcions ? selectedTOpcions.value : '',
     name: modifiedAd.name,
     onSale: modifiedAd.onSale,
     price: modifiedAd.price,
     category: selectedTags ? selectedTags.value : '',
+    description: modifiedAd.description,
     coin: modifiedAd.coin,
     image: image ? image.image : null,
   };
@@ -46,6 +49,12 @@ function ModifyAd() {
     const selectedCategory = selectedOption ? selectedOption.value : '';
     setSelectedTags(selectedOption);
     handleChange({ target: { value: selectedCategory } });
+  };
+
+  const handleOpcionsChange = selectedOption => {
+    const selectedOpcion = selectedOption ? selectedOption.value : '';
+    setSelectedOpcions(selectedOption);
+    handleChange({ target: { value: selectedOpcion } });
   };
 
   const handleSubmit = event => {
@@ -67,6 +76,7 @@ function ModifyAd() {
         <Spinner message={t('charging...')} />
       ) : (
         <AdForm
+          handleOpcionsChange={handleOpcionsChange}
           handleSubmit={handleSubmit}
           valueInputName={modifiedAd.name}
           handleChange={handleChange}
@@ -77,6 +87,7 @@ function ModifyAd() {
           handleChangeInputFile={handleChangeInputFile}
           testid={'buttonModifyAd'}
           nameButton={t('Modify')}
+          showSoldReservedOptions={true}
         ></AdForm>
       )}
 

@@ -20,7 +20,7 @@ function AdNew() {
     onSale: true,
     price: '',
     description: '',
-    status: '',
+    status: 'available',
     coin: '',
   });
   const [selectedTags, setSelectedTags] = useState([]);
@@ -31,6 +31,7 @@ function AdNew() {
     price: formData.price,
     category: selectedTags ? selectedTags.value : '',
     description: formData.description,
+    status: 'available',
     coin: formData.coin,
     image: image ? image.image : null,
   };
@@ -88,6 +89,7 @@ function AdNew() {
           buttonDisabled={buttonDisabled}
           testid={'buttonAdNew'}
           nameButton={t('Create')}
+          showSoldReservedOptions={false}
         ></AdForm>
       )}
 
