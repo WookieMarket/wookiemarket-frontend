@@ -51,7 +51,7 @@ function Advert(advert) {
           {isDisabled && <FavoriteAds id={adId} />}
         </div>
         {statusText && (
-          <span className={`reservado ${statusText.toLowerCase()}`}>
+          <span className={`statustext ${statusText.toLowerCase()}`}>
             {statusText}
           </span>
         )}

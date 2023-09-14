@@ -101,9 +101,9 @@ p.text {
   text-align: justify;
 }
 /* En tu archivo CSS */
-.reservado {
+.statustext {
   position: absolute;
-  top: 1010%; /* Ajusta la posición vertical del texto */
+  top: 185px; /* Ajusta la posición vertical del texto */
   left: 50%;
   transform: translate(-50%, -50%) rotate(-45deg); /* Inclina el texto en diagonal */
   color: white; /* Texto en blanco */

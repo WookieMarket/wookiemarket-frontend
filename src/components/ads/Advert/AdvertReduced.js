@@ -31,6 +31,17 @@ function AdvertReduced(advert) {
     const cleanName = cleanUpForURL(advert.name);
     return `/adverts/${advert._id}/${cleanName}`;
   };
+  // Función para obtener el texto de estado (Reservado o Vendido)
+  const getStatusText = () => {
+    if (advert.status === 'reserved') {
+      return t('reserved');
+    } else if (advert.status === 'sold') {
+      return t('sold');
+    }
+    return ''; // Puedes manejar otros estados aquí si es necesario
+  };
+
+  const statusText = getStatusText(); // Obtén el texto de estado
 
   return (
     <>
@@ -38,6 +49,11 @@ function AdvertReduced(advert) {
         <div id="advert-name" className="advert-name">
           {isDisabled && <FavoriteAds id={adId} />}
         </div>
+        {statusText && (
+          <span className={`statustext ${statusText.toLowerCase()}`}>
+            {statusText}
+          </span>
+        )}
       </div>
       <div className="productData ">
         <div className="product-img">
