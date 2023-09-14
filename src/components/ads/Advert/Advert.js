@@ -32,17 +32,30 @@ function Advert(advert) {
     return `/adverts/${advert._id}/${cleanName}`;
   };
 
-  const generateUserProfileURL = username => {
-    return `/${username}/profile`;
+  // Función para obtener el texto de estado (Reservado o Vendido)
+  const getStatusText = () => {
+    if (advert.status === 'reserved') {
+      return t('reserved');
+    } else if (advert.status === 'sold') {
+      return t('sold');
+    }
+    return ''; // Puedes manejar otros estados aquí si es necesario
   };
+
+  const statusText = getStatusText(); // Obtén el texto de estado
 
   return (
     <>
-      <div className="productInfo hologram-text tv-text" id="advertOnly">
+      <div className={`productInfo hologram-text tv-text`} id="advertOnly">
         <div id="advert-name" className="advert-name">
           <h2>{advert.name}</h2>
           {isDisabled && <FavoriteAds id={adId} />}
         </div>
+        {statusText && (
+          <span className={`reservado ${statusText.toLowerCase()}`}>
+            {statusText}
+          </span>
+        )}
       </div>
       <div className="productData ">
         <div className="product-img">
@@ -91,9 +104,7 @@ function Advert(advert) {
         <div>
           <p className="advert_label hologram-text tv-text">
             {t('Username')}:{' '}
-            <Link to={generateUserProfileURL(advert.username)}>
-              {<span className="advert-text">{advert.username}</span>}
-            </Link>
+            <span className="advert-text">{advert.username}</span>
           </p>
         </div>
       </div>
