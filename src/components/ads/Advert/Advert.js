@@ -32,6 +32,10 @@ function Advert(advert) {
     return `/adverts/${advert._id}/${cleanName}`;
   };
 
+  const generateUserProfileURL = username => {
+    return `/${username}/profile`;
+  };
+
   return (
     <>
       <div className="productInfo hologram-text tv-text" id="advertOnly">
@@ -87,7 +91,9 @@ function Advert(advert) {
         <div>
           <p className="advert_label hologram-text tv-text">
             {t('Username')}:{' '}
-            <span className="advert-text">{advert.username}</span>
+            <Link to={generateUserProfileURL(advert.username)}>
+              {<span className="advert-text">{advert.username}</span>}
+            </Link>
           </p>
         </div>
       </div>

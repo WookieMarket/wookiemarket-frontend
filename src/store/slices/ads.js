@@ -193,7 +193,6 @@ const ads = createSlice({
       })
       .addCase(addFavorite.fulfilled, (state, action) => {
         const newFavoriteAd = action.payload;
-
         state.favoriteAds.unshift(newFavoriteAd);
       })
       .addCase(deleteFavorites.fulfilled, (state, action) => {
