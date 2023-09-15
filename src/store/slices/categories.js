@@ -6,7 +6,7 @@ export const categoriesList = createAsyncThunk(
   async (_, { extra: { service }, rejectWithValue }) => {
     try {
       const categories = await service.ads.getCategories();
-      console.log('category', categories);
+
       return categories;
     } catch (error) {
       console.log(error);

@@ -82,6 +82,7 @@ function App() {
           <Route path="/:username/ads" element={<UserAdsListPage />} />
           {/* Redirects to user profile - public area */}
           <Route path="/:username/profile" element={<UserProfilePage />} />
+
           <Route
             path="/favorite"
             element={

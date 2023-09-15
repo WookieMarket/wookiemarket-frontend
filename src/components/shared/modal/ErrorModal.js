@@ -1,7 +1,7 @@
 import './ErrorModal.css';
 
 function ErrorModal(props) {
-  const { message, title, onCancel, testid } = props;
+  const { message, title, onCancel, testid, buttonErrorId } = props;
 
   return (
     <div className="modal-container-error">
@@ -9,7 +9,7 @@ function ErrorModal(props) {
         <div className="modal-header-error">{title}</div>
         <div className="modal-body-error">{message}</div>
         <div className="modal-errorButton-error">
-          <button data-testid={testid} onClick={onCancel}>
+          <button id={buttonErrorId} data-testid={testid} onClick={onCancel}>
             Click
           </button>
         </div>

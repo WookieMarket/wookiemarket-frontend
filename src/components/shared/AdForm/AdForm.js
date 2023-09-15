@@ -28,18 +28,18 @@ function AdForm(props) {
     buttonDisabled,
     testid,
     nameButton,
+    nameButtonCancel,
     showSoldReservedOptions,
+    handleButtonClick,
   } = props;
   const { t } = useTranslation();
   const tags = useSelector(getAllCategory);
   const dispatch = useDispatch();
 
-  console.log('categoriasform', tags);
   const formattedTags = tags.map(tag => ({
     label: tag,
     value: tag,
   }));
-  console.log('formated', formattedTags);
 
   const handleCreateCategory = newCategory => {
     dispatch(addNewCategory(newCategory));
@@ -57,7 +57,7 @@ function AdForm(props) {
         encType="multipart/form-data"
       >
         {showSoldReservedOptions && ( // Condición para mostrar las opciones "Sell" y "Buy"
-          <SelectForm onChange={handleOpcionsChange} />
+          <SelectForm inputId="status" onChange={handleOpcionsChange} />
         )}
 
         <Form
@@ -112,19 +112,7 @@ function AdForm(props) {
           handleChange={handleChange}
           placeholder={t('Price')}
         />
-        {/* <Form
-          classNameForm="form-group-creation"
-          classNameLabel="password-label-creation"
-          htmlFor="category"
-          text={t('Category')}
-          classNameInput="password-input-creation"
-          inputId="category"
-          inputType="text"
-          inputName="category"
-          value={valueInputCategory}
-          handleChange={handleChange}
-          placeholder={t('Category')}
-        /> */}
+
         <Form
           classNameForm="form-group-creation"
           classNameLabel="password-label-creation"
@@ -154,6 +142,7 @@ function AdForm(props) {
         />
 
         <AdCategorySelect
+          inputId="category"
           options={formattedTags}
           value={valueInputCategory}
           onChange={newValue => {
@@ -185,15 +174,28 @@ function AdForm(props) {
           handleChange={handleChangeInputFile}
         />
 
-        <Button
-          data-testid={testid}
-          type="submit"
-          variant="accept"
-          width="button-form"
-          disabled={buttonDisabled}
-        >
-          {nameButton}
-        </Button>
+        <div className="container-button">
+          <Button
+            id="adformcancel"
+            data-testid={testid}
+            type="button"
+            variant="decline"
+            width="button-form"
+            onClick={handleButtonClick}
+          >
+            {nameButtonCancel}
+          </Button>
+          <Button
+            id="adform"
+            data-testid={testid}
+            type="submit"
+            variant="accept"
+            width="button-form"
+            disabled={buttonDisabled}
+          >
+            {nameButton}
+          </Button>
+        </div>
       </form>
     </div>
   );

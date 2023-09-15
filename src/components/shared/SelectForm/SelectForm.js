@@ -7,10 +7,11 @@ function SelectForm(props) {
     { value: 'reserved', label: 'reserved' },
     { value: 'sold', label: 'sold' },
   ];
-  const { value, onChange } = props;
+  const { value, onChange, inputId } = props;
 
   return (
     <Select
+      id={inputId}
       options={options}
       value={value} // Asegúrate de que selectedTOpcions sea el valor seleccionado
       onChange={onChange}

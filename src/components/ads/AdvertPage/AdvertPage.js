@@ -63,7 +63,7 @@ const AdvertPage = () => {
 
   const handleEdit = () => {
     setActiveModal(null);
-    console.log('Edited Advert');
+
     // Redirects to the modification page with the ID of the advertisement.
     navigate(`/modify/${id}`);
   };
@@ -86,6 +86,8 @@ const AdvertPage = () => {
         <>
           {activeModal === 1 && (
             <Modal
+              buttonId1="delete1"
+              buttonId2="delete2"
               id="deleteModal1"
               title={t('DELETING ADVERTISEMENT')}
               message={t('Are you sure you want to delete this advert?')}
@@ -96,6 +98,8 @@ const AdvertPage = () => {
 
           {activeModal === 2 && (
             <Modal
+              buttonId1="delete3"
+              buttonId2="delete4"
               id={2}
               title={t('DELETING ADVERTISEMENT (confirmation)')}
               message={t(`Are you really sure you want to delete this advert?`)}
@@ -105,6 +109,8 @@ const AdvertPage = () => {
           )}
           {activeModal === 3 && (
             <Modal
+              buttonId1="delete5"
+              buttonId2="delete6"
               id={3}
               title={t('DELETED ADVERT')}
               message={t(`Your advert was deleted successfully`)}
@@ -117,6 +123,7 @@ const AdvertPage = () => {
 
           {error && (
             <ErrorModal
+              buttonErrorId="errorAdvertPage"
               title="Error"
               message={error.data.error}
               onCancel={handleErrorClick}

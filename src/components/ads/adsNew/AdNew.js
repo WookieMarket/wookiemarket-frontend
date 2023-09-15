@@ -8,8 +8,10 @@ import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
 import { adsCreate } from '../../../store/slices/ads';
 import AdForm from '../../shared/AdForm/AdForm';
+import { useNavigate } from 'react-router-dom';
 
 function AdNew() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
@@ -38,8 +40,6 @@ function AdNew() {
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    console.log('Selected image file:', e.target.files[0]);
-    console.log(' image file:', image);
   };
 
   const handleTagChange = selectedOption => {
@@ -62,6 +62,10 @@ function AdNew() {
 
   const handleErrorClick = () => {
     dispatch(resetError());
+  };
+
+  const handleButtonClick = () => {
+    navigate('/');
   };
 
   const buttonDisabled =
@@ -89,12 +93,15 @@ function AdNew() {
           buttonDisabled={buttonDisabled}
           testid={'buttonAdNew'}
           nameButton={t('Create')}
+          nameButtonCancel={t('Cancel')}
           showSoldReservedOptions={false}
+          handleButtonClick={handleButtonClick}
         ></AdForm>
       )}
 
       {error && (
         <ErrorModal
+          buttonErrorId="errorAdNew"
           title="Error"
           message={error.message}
           onCancel={handleErrorClick}
