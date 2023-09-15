@@ -6,7 +6,7 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAdById, uploadModifiedAd } from '../../../store/slices/ads';
 import AdForm from '../../shared/AdForm/AdForm';
 //import io from 'socket.io-client';
@@ -14,19 +14,17 @@ import AdForm from '../../shared/AdForm/AdForm';
 //const socket = io('http://localhost:3001');
 
 function ModifyAd() {
-  //const [anuncios, setAnuncios] = useState([]);
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
   const [image, setImage] = useState('');
   const { adId } = useParams();
   const advert = useSelector(getAdvertById(adId));
-  const [modifiedAd, setModifiedAd] = useState(advert);
+  const [modifiedAd, setModifiedAd] = useState(advert || {});
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    //console.log('Selected image file:', e.target.files[0]);
-    //console.log(' image file:', image);
   };
 
   const handleChange = event => {
@@ -84,6 +82,10 @@ function ModifyAd() {
     dispatch(getAdById(adId));
   }, [dispatch, adId]);
 
+  const handleButtonClick = () => {
+    navigate(`/adverts/${adId}/${advert.name}`);
+  };
+
   return (
     <Layout title={t('Edit an ad')}>
       {isLoading ? (
@@ -101,12 +103,15 @@ function ModifyAd() {
           handleChangeInputFile={handleChangeInputFile}
           testid={'buttonModifyAd'}
           nameButton={t('Modify')}
+          nameButtonCancel={t('Cancel')}
           showSoldReservedOptions={true}
+          handleButtonClick={handleButtonClick}
         ></AdForm>
       )}
 
       {error && (
         <ErrorModal
+          buttonErrorId="errorModify"
           title="Error"
           message={error.data.error}
           onCancel={handleErrorClick}

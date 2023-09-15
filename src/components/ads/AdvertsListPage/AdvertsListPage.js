@@ -32,7 +32,7 @@ const AdvertsListPage = () => {
       {error && (
         <ErrorModal
           title="Error"
-          message={error.data.error}
+          message={error.message}
           onCancel={handleErrorClick}
         />
       )}

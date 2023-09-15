@@ -10,14 +10,9 @@ export const adsCreate = createAsyncThunk(
   'ads/create',
   async (ad, { extra: { service }, rejectWithValue }) => {
     try {
-      //TODO modificar cuando este implementado el detalle del anuncio
-      //const { createAd } = await service.ads.createAd(ad);
       const createAd = await service.ads.createAd(ad);
-      //console.log('Ante', createAd);
-
       const createdAdId = createAd.result._id;
 
-      //TODO modificar cuando este implementado el detalle del anuncio
       const fetchedAd = await service.ads.getAd(createdAdId);
       //return createdAd;
       return fetchedAd;
@@ -30,11 +25,9 @@ export const adsCreate = createAsyncThunk(
 export const advertsList = createAsyncThunk(
   'ads/list',
   async (_, { extra: { service }, rejectWithValue }) => {
-    //console.log('Antes del try');
     try {
-      //console.log('Despachando la acción advertsList');
       const adverts = await service.ads.getRecentAds();
-      //console.log('Anuncios obtenidos:', adverts);
+
       return adverts;
     } catch (error) {
       console.log(error);
@@ -62,7 +55,6 @@ export const uploadModifiedAd = createAsyncThunk(
   'ads/uploadModifiedAd',
   async ({ id, ad }, { extra: { service }, rejectWithValue }) => {
     try {
-      //ad = await service.ads.getAd(id);
       const modifiedAd = await service.ads.modifyAd(id, ad);
       return modifiedAd;
     } catch (error) {
@@ -76,7 +68,7 @@ export const deleteAdvert = createAsyncThunk(
   async (id, { extra: { service }, rejectWithValue }) => {
     try {
       const deleted = await service.ads.deleteAdvert(id);
-      //console.log('Advert...delted');
+
       return deleted.adDeleted;
     } catch (error) {
       return rejectWithValue(error);
@@ -148,9 +140,6 @@ export const emailBuyAd = createAsyncThunk(
   ) => {
     try {
       await service.user.emailBuy(adOwnerId, custom_message);
-      // console.log('Ad removed from favorites:', adId);
-      // return adId;
-      //return { adOwnerId, custom_message };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -193,8 +182,14 @@ const ads = createSlice({
         state.data = action.payload.results;
       })
       .addCase(uploadModifiedAd.fulfilled, (state, action) => {
-        state.data.unshift(action.payload.result);
-        state.userAds.unshift(action.payload.result);
+        // Delete old status ad
+        const modifiedAd = action.payload.result;
+
+        state.data = state.data.filter(ad => ad._id !== modifiedAd._id);
+        state.userAds = state.userAds.filter(ad => ad._id !== modifiedAd._id);
+
+        state.data.unshift(modifiedAd);
+        state.userAds.unshift(modifiedAd);
       })
       .addCase(getAdById.fulfilled, (state, action) => {
         state.areLoaded = false;

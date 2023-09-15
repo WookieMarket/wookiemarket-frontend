@@ -72,7 +72,7 @@ const AdBuyPage = () => {
       )} */}
       {activeModal === 1 && (
         <Modal
-          id="deleteModal1"
+          buttonId="buyModal1"
           title={t('Email')}
           message={t('Email sent')}
           onConfirm={() => handleOpenModal(1)}
@@ -81,6 +81,7 @@ const AdBuyPage = () => {
       )}
       {error && (
         <ErrorModal
+          buttonErrorId="errorAdBuy"
           title="Error"
           message={error.data.error}
           onCancel={handleErrorClick}

@@ -32,14 +32,14 @@ function Advert(advert) {
     return `/adverts/${advert._id}/${cleanName}`;
   };
 
-  // Función para obtener el texto de estado (Reservado o Vendido)
+  // Function to get the status text (Reserved or Sold)
   const getStatusText = () => {
     if (advert.status === 'reserved') {
       return t('reserved');
     } else if (advert.status === 'sold') {
       return t('sold');
     }
-    return ''; // Puedes manejar otros estados aquí si es necesario
+    return '';
   };
 
   const statusText = getStatusText(); // Obtén el texto de estado
