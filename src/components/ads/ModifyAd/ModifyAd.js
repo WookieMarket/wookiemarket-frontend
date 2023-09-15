@@ -17,12 +17,10 @@ function ModifyAd() {
   const [image, setImage] = useState('');
   const { adId } = useParams();
   const advert = useSelector(getAdvertById(adId));
-  const [modifiedAd, setModifiedAd] = useState(advert);
+  const [modifiedAd, setModifiedAd] = useState(advert || {});
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    console.log('Selected image file:', e.target.files[0]);
-    console.log(' image file:', image);
   };
 
   const handleChange = event => {
@@ -93,6 +91,7 @@ function ModifyAd() {
 
       {error && (
         <ErrorModal
+          buttonErrorId="errorModify"
           title="Error"
           message={error.data.error}
           onCancel={handleErrorClick}

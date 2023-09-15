@@ -63,7 +63,6 @@ const AdvertPage = () => {
 
   const handleEdit = () => {
     setActiveModal(null);
-    console.log('Edited Advert');
     // Redirects to the modification page with the ID of the advertisement.
     navigate(`/modify/${id}`);
   };

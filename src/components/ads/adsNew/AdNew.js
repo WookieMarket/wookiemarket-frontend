@@ -38,8 +38,6 @@ function AdNew() {
 
   const handleChangeInputFile = e => {
     setImage({ ...image, image: e.target.files[0] });
-    console.log('Selected image file:', e.target.files[0]);
-    console.log(' image file:', image);
   };
 
   const handleTagChange = selectedOption => {

@@ -34,12 +34,10 @@ function AdForm(props) {
   const tags = useSelector(getAllCategory);
   const dispatch = useDispatch();
 
-  console.log('categoriasform', tags);
   const formattedTags = tags.map(tag => ({
     label: tag,
     value: tag,
   }));
-  console.log('formated', formattedTags);
 
   const handleCreateCategory = newCategory => {
     dispatch(addNewCategory(newCategory));
