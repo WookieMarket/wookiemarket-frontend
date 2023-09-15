@@ -5,17 +5,19 @@ import { useTranslation } from 'react-i18next';
 import FavoriteAds from '../../shared/FavoriteAds/FavoriteAds';
 import { Link } from 'react-router-dom';
 import IsDisable from '../../../utils/isDisable';
+import { getIsLogged } from '../../../store/selectors';
+import { useSelector } from 'react-redux';
 
 function AdvertReduced(advert) {
   const { t } = useTranslation();
-
+  const isLogged = useSelector(getIsLogged);
   //const advDate = new Date(advert.createdAt);
   //const defaultImage = process.env.DEFAULT_NO_IMAGE_URL;
   const handleImageError = event => {
     event.target.src = defaultImage;
   };
 
-  const isDisabled = IsDisable(advert);
+  const isDisabled = isLogged ? IsDisable(advert) : true;
 
   const adId = advert._id;
 
@@ -47,7 +49,7 @@ function AdvertReduced(advert) {
     <>
       <div className="productInfo hologram-text tv-text" id="advertOnly">
         <div id="advert-name" className="advert-name">
-          {isDisabled && <FavoriteAds id={adId} />}
+          {isLogged && isDisabled && <FavoriteAds id={adId} />}
         </div>
         {statusText && (
           <span className={`statustext ${statusText.toLowerCase()}`}>
