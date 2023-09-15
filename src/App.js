@@ -11,31 +11,17 @@ import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 import UserProfilePage from './components/user/UserProfilePage';
 
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
-import { useEffect } from 'react';
+import Notifications from './components/Notifications/Notifications';
+
+//import { useEffect } from 'react';
 
 function App() {
-  useEffect(() => {
-    const socket = io('http://localhost:3001');
-    console.log('Conexión establecida con el servidor de Socket.io');
-    // Escucha el evento 'precioActualizado' del servidor
-    // Unirse a la sala 'anuncios'
-    socket.emit('joinRoom', 'anuncios'); // Envía una solicitud al servidor
-    socket.on('priceActualizado', ({ advertId, nuevoPrecio }) => {
-      console.log(
-        'Evento precioActualizado recibido. advertId:',
-        advertId,
-        'nuevoPrecio:',
-        nuevoPrecio,
-      );
-    });
-  }, []);
-
   return (
     <div className="app">
       <div className="background"></div>
@@ -48,6 +34,15 @@ function App() {
             element={
               <RequireAuth>
                 <AdNew />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/notifications"
+            element={
+              <RequireAuth>
+                <Notifications />
               </RequireAuth>
             }
           />
