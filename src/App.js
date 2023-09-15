@@ -24,7 +24,9 @@ function App() {
     const socket = io('http://localhost:3001');
     console.log('Conexión establecida con el servidor de Socket.io');
     // Escucha el evento 'precioActualizado' del servidor
-    socket.on('anuncios', ({ advertId, nuevoPrecio }) => {
+    // Unirse a la sala 'anuncios'
+    socket.emit('joinRoom', 'anuncios'); // Envía una solicitud al servidor
+    socket.on('priceActualizado', ({ advertId, nuevoPrecio }) => {
       console.log(
         'Evento precioActualizado recibido. advertId:',
         advertId,
