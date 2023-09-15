@@ -25,6 +25,7 @@ import { useSelector } from 'react-redux';
 import UserOptions from '../UserOptions/UserOptions';
 import storage from '../../../utils/storage';
 import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -38,7 +39,9 @@ const Navbar = () => {
         <IconContext.Provider value={{ style: { fontSize: '2em' } }}>
           <LogoContainer>
             <FaBattleNet />
-            <p>{t('Mandalorians')}</p>
+            <Link to="/home">
+              <p>{t('Mandalorians')}</p>
+            </Link>
             <img
               className="icon-language"
               src="/images/languageIcons/es.png"

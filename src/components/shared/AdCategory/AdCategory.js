@@ -1,7 +1,7 @@
 import CreatableSelect from 'react-select/creatable';
 
 function AdCategorySelect(props) {
-  const { value, options, onChange, inputId } = props;
+  const { value, options, onChange, inputId, className } = props;
 
   return (
     <CreatableSelect
@@ -10,6 +10,7 @@ function AdCategorySelect(props) {
       options={options}
       value={value}
       onChange={onChange}
+      className={className}
     />
   );
 }

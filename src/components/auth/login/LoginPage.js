@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import Form from '../../shared/form/Form';
 import './LoginPage.css';
 import Button from '../../shared/Button';
+import '../../shared/AdForm/AdForm.css';
 
 // Log in with username and password and a checkbox to give the option to persist the token,
 // also handle errors and user feedback. When doing Login I want to send the user to the page they wanted to go to.
@@ -83,7 +84,7 @@ function LoginPage() {
         {isLoading ? (
           <Spinner message={t('charging...')} />
         ) : (
-          <form onSubmit={handleSubmit} className="container-form">
+          <form onSubmit={handleSubmit} className="container-form-refactor">
             <Form
               classNameForm="form-group"
               classNameLabel="password-label"

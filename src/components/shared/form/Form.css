@@ -4,6 +4,7 @@
 }
 
 .element-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -17,4 +18,6 @@
     font-size: 1.5rem;
 }
 
-.element-form>input {}
+.element-form>input {
+    width: 100%;
+}

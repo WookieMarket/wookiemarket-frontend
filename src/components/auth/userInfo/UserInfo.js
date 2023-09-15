@@ -91,11 +91,11 @@ function UserInfo() {
 
   return (
     <Layout title={t('User info')}>
-      <div>
+      <div className="form">
         {isLoading ? (
           <Spinner message={t('charging...')} />
         ) : (
-          <form onSubmit={handleSubmit} className="container-form">
+          <form onSubmit={handleSubmit} className="container-form-refactor">
             <Form
               classNameLabel="email-label"
               htmlFor="email"

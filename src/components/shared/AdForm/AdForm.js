@@ -53,11 +53,15 @@ function AdForm(props) {
     <div className="form">
       <form
         onSubmit={handleSubmit}
-        className="container-form-creation"
+        className="container-form-creation-refactor"
         encType="multipart/form-data"
       >
         {showSoldReservedOptions && ( // Condición para mostrar las opciones "Sell" y "Buy"
-          <SelectForm inputId="status" onChange={handleOpcionsChange} />
+          <SelectForm
+            inputId="status"
+            onChange={handleOpcionsChange}
+            className="select-form-status"
+          />
         )}
 
         <Form
@@ -145,6 +149,7 @@ function AdForm(props) {
           inputId="category"
           options={formattedTags}
           value={valueInputCategory}
+          className="select-form-categories"
           onChange={newValue => {
             const selectedValue = newValue ? newValue.value : null;
 
