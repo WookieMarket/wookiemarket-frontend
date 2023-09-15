@@ -4,7 +4,15 @@ import StarField from './StarField';
 import './Modal.css';
 
 function Modal(props) {
-  const { message, title, onConfirm, onCancel, cancelButton } = props;
+  const {
+    message,
+    title,
+    onConfirm,
+    onCancel,
+    cancelButton,
+    buttonId1,
+    buttonId2,
+  } = props;
   const { t } = useTranslation();
 
   return (
@@ -17,17 +25,19 @@ function Modal(props) {
           <div className="modal-body">{message}</div>
           <div className="modal-buttons">
             <Button
-            onClick={onCancel}
-            className="oncancel"
-            data-testid={cancelButton}
-          >
+              id={buttonId1}
+              onClick={onCancel}
+              className="oncancel"
+              data-testid={cancelButton}
+            >
               {t('Cancel')}
             </Button>
             <Button
-            onClick={onConfirm}
-            className="onconfirm"
-            data-testid="confirmButton"
-          >
+              id={buttonId2}
+              onClick={onConfirm}
+              className="onconfirm"
+              data-testid="confirmButton"
+            >
               {t('Confirm')}
             </Button>
           </div>

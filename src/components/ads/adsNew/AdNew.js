@@ -95,6 +95,7 @@ function AdNew() {
 
       {error && (
         <ErrorModal
+          buttonErrorId="errorAdNew"
           title="Error"
           message={error.message}
           onCancel={handleErrorClick}

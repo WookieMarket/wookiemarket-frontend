@@ -21,7 +21,7 @@ function FavoriteAds({ id }) {
   const buttonClass = isAdFavorite ? 'favorite-button' : 'not-favorite-button';
 
   return (
-    <button className={buttonClass} onClick={toggleFavorite}>
+    <button id="favorite" className={buttonClass} onClick={toggleFavorite}>
       {isAdFavorite ? (
         <img src={estrella} alt="estrella" className="favorite" />
       ) : (

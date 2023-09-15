@@ -57,7 +57,7 @@ function AdForm(props) {
         encType="multipart/form-data"
       >
         {showSoldReservedOptions && ( // Condición para mostrar las opciones "Sell" y "Buy"
-          <SelectForm onChange={handleOpcionsChange} />
+          <SelectForm inputId="status" onChange={handleOpcionsChange} />
         )}
 
         <Form
@@ -154,6 +154,7 @@ function AdForm(props) {
         />
 
         <AdCategorySelect
+          inputId="category"
           options={formattedTags}
           value={valueInputCategory}
           onChange={newValue => {
@@ -186,6 +187,7 @@ function AdForm(props) {
         />
 
         <Button
+          id="adform"
           data-testid={testid}
           type="submit"
           variant="accept"

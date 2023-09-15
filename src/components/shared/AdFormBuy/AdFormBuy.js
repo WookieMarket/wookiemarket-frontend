@@ -36,6 +36,7 @@ function AdFormBuy(props) {
         />
 
         <Button
+          id="adformbuy"
           data-testid={testid}
           type="submit"
           variant="accept"
