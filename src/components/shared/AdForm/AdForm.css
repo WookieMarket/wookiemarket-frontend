@@ -4,7 +4,7 @@
   /* Establece la altura del contenedor en el 50% de la altura de la ventana */
   position: absolute;
   /* Cambia a posición absoluta */
-  top: 57%;
+  top: 13%;
   /* Alinea el borde superior del contenedor al 50% de la ventana */
   left: 50%;
   /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
@@ -113,4 +113,9 @@
   .container-form-creation .img-input-creation {
     margin: 8px 0px 8px 0px;
   }
+}
+
+.container-button {
+  display: flex;
+  justify-content: space-around;
 }

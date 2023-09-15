@@ -28,7 +28,9 @@ function AdForm(props) {
     buttonDisabled,
     testid,
     nameButton,
+    nameButtonCancel,
     showSoldReservedOptions,
+    handleButtonClick,
   } = props;
   const { t } = useTranslation();
   const tags = useSelector(getAllCategory);
@@ -110,19 +112,7 @@ function AdForm(props) {
           handleChange={handleChange}
           placeholder={t('Price')}
         />
-        {/* <Form
-          classNameForm="form-group-creation"
-          classNameLabel="password-label-creation"
-          htmlFor="category"
-          text={t('Category')}
-          classNameInput="password-input-creation"
-          inputId="category"
-          inputType="text"
-          inputName="category"
-          value={valueInputCategory}
-          handleChange={handleChange}
-          placeholder={t('Category')}
-        /> */}
+
         <Form
           classNameForm="form-group-creation"
           classNameLabel="password-label-creation"
@@ -184,16 +174,29 @@ function AdForm(props) {
           handleChange={handleChangeInputFile}
         />
 
-        <Button
-          id="adform"
-          data-testid={testid}
-          type="submit"
-          variant="accept"
-          width="button-form"
-          disabled={buttonDisabled}
-        >
-          {nameButton}
-        </Button>
+        <div className="container-button">
+          <Button
+            id="adformcancel"
+            data-testid={testid}
+            type="button"
+            variant="decline"
+            width="button-form"
+            disabled={buttonDisabled}
+            onClick={handleButtonClick}
+          >
+            {nameButtonCancel}
+          </Button>
+          <Button
+            id="adform"
+            data-testid={testid}
+            type="submit"
+            variant="accept"
+            width="button-form"
+            disabled={buttonDisabled}
+          >
+            {nameButton}
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -25,7 +25,7 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 10px;
   height: 30px;
-  width: ${props => (props.width === 'button-form' ? '29%' : 'auto')};
+  width: ${props => (props.width === 'button-form' ? '100%' : 'auto')};
   opacity: ${props => (props.disabled ? 0.5 : 1)};
   padding: 6px 6px;
   text-decoration: none;

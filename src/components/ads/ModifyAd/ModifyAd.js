@@ -6,11 +6,12 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Spinner from '../../shared/spinner/Spinner';
 import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAdById, uploadModifiedAd } from '../../../store/slices/ads';
 import AdForm from '../../shared/AdForm/AdForm';
 
 function ModifyAd() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
@@ -68,6 +69,10 @@ function ModifyAd() {
     dispatch(getAdById(adId));
   }, [dispatch, adId]);
 
+  const handleButtonClick = () => {
+    navigate(`/adverts/${adId}/${advert.name}`);
+  };
+
   return (
     <Layout title={t('Edit an ad')}>
       {isLoading ? (
@@ -85,7 +90,9 @@ function ModifyAd() {
           handleChangeInputFile={handleChangeInputFile}
           testid={'buttonModifyAd'}
           nameButton={t('Modify')}
+          nameButtonCancel={t('Cancel')}
           showSoldReservedOptions={true}
+          handleButtonClick={handleButtonClick}
         ></AdForm>
       )}
 
