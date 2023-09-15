@@ -8,8 +8,10 @@ import Layout from '../../layout/Layout';
 import { useTranslation } from 'react-i18next';
 import { adsCreate } from '../../../store/slices/ads';
 import AdForm from '../../shared/AdForm/AdForm';
+import { useNavigate } from 'react-router-dom';
 
 function AdNew() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
@@ -62,6 +64,10 @@ function AdNew() {
     dispatch(resetError());
   };
 
+  const handleButtonClick = () => {
+    navigate('/');
+  };
+
   const buttonDisabled =
     !formData.name ||
     !formData.onSale ||
@@ -87,7 +93,9 @@ function AdNew() {
           buttonDisabled={buttonDisabled}
           testid={'buttonAdNew'}
           nameButton={t('Create')}
+          nameButtonCancel={t('Cancel')}
           showSoldReservedOptions={false}
+          handleButtonClick={handleButtonClick}
         ></AdForm>
       )}
 

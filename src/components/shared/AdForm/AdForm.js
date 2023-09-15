@@ -181,7 +181,6 @@ function AdForm(props) {
             type="button"
             variant="decline"
             width="button-form"
-            disabled={buttonDisabled}
             onClick={handleButtonClick}
           >
             {nameButtonCancel}
