@@ -27,6 +27,10 @@ a {
 }
 
 /*Refactor estilso text color*/
+a>p {
+  color: var(--text-nav-footer);
+}
+
 p {
   color: var(--tertiary-color);
 }

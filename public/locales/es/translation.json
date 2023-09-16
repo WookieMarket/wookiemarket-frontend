@@ -4,7 +4,7 @@
   "icon-hover": "Pulse para cambiar el idioma",
   "header": "Cabecera",
   "@Keepcoding 2023 by Mandalorians": "@Keepcoding 2023 por Mandalorians",
-  "Username": "Usuari@",
+  "Username": "Usuario",
   "Password": "Contraseña",
   "RememberMe": "Recuerdame",
   "Log in": "Acceso",
@@ -14,7 +14,7 @@
   "Upload": "Publicar",
   "Ads": "Anuncios",
   "charging...": "cargando...",
-  "Login Page": "inicio de sesión",
+  "Login Page": "Inicio de sesión",
   "Cancel": "Cancelar",
   "Confirm": "Confirmar",
   "Leave session": "Salir de la sesión",
@@ -55,8 +55,8 @@
   "Searching area": "Área de búsqueda",
   "LOADING...": "CARGANDO...",
   "home": "inicio",
-  "ADVERTISEMENTS AVIABLE": "ANUNCIOS DISPONIBLES",
-  "ADVERT DETAIL": "DETALLE DEL ANUNCIO",
+  "ADVERTISEMENTS AVIABLE": "Anuncios disponibles",
+  "ADVERT DETAIL": "Detalle del anuncio",
   "Sorry, the requested ad is not available": "Lo sentimos, el anuncio solicitado no está disponible",
   "Product image": "Imagen del producto",
   "Is&": "Se",
@@ -84,5 +84,6 @@
   "sold": "Vendido",
   "reserved": "Reservado",
   "user ads": "Ver anucios de usuario",
-  "Modify": "Modificar"
+  "Modify": "Modificar",
+  "Categories": "Categorías"
 }

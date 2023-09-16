@@ -31,8 +31,10 @@
   /* --border-color: #e8cf04; */
 
   /* font */
-  --font-family: 'Star Jedi', sans-serif;
-  --font-family-SraWarsObjects: 'StarWars Objects';
+  /* --font-family: 'Star Jedi', sans-serif;
+  --font-family-SraWarsObjects: 'StarWars Objects'; */
+  --font-family: Wallie, Helvetica;
+
 
   /* form */
   --background-color-form: whitesmoke;

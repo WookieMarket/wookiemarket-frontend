@@ -144,7 +144,7 @@ const AdvertPage = () => {
             )}
 
             {isDisabled && (
-              <section id="buttonSection">
+              <section className="buttonSection">
                 <Button id="buyButton" onClick={handleBuy}>
                   {t('Buy Advert')}
                 </Button>
@@ -152,7 +152,7 @@ const AdvertPage = () => {
             )}
 
             {!isDisabled && advert && (
-              <section id="buttonSection">
+              <section className="buttonSection">
                 <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
                   {t('Delete Advert')}?
                 </Button>
@@ -162,9 +162,11 @@ const AdvertPage = () => {
               </section>
             )}
             {isLogged && advert && (
-              <Button id="chatButton" onClick={handleChat}>
-                {t('Chat with ad owner')}
-              </Button>
+              <section className="buttonSection">
+                <Button id="chatButton" onClick={handleChat}>
+                  {t('Chat with ad owner')}
+                </Button>
+              </section>
             )}
             <div
               className={`no-advert_content ${!advert ? 'no-advert' : ''}`}

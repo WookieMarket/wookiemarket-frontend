@@ -13,10 +13,6 @@ import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
 import UserProfilePage from './components/user/UserProfilePage';
 
-import './App.css';
-import './css/Variables.css';
-import './css/Reset.css';
-
 function App() {
   return (
     <div className="app">

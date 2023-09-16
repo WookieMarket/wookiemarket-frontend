@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import './css/Variables.css';
+import './css/Reset.css';
 import './index.css';
+import './App.css';
 import App from './App';
 
 // import i18n (needs to be bundled ;))
