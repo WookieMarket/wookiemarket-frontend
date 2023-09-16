@@ -1,3 +1,59 @@
 .see-ad {
   color: black;
 }
+.server {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+/* Contenedor principal */
+.notification-container {
+  height: 300px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.notification {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para el botón "leído" */
+.notification button {
+  background-color: #007bff; /* Color de fondo azul */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Estilo para el enlace "Ver anuncio" */
+.notification .see-ad {
+  text-decoration: none;
+  color: #007bff;
+  margin-top: 5px;
+}
+
+/* Cambiar el estilo de los enlaces al pasar el mouse */
+.notification .see-ad:hover {
+  text-decoration: underline;
+}
+
+.notification.read {
+  opacity: 0.6; /* Reduce la opacidad para hacerlo más tenue */
+}

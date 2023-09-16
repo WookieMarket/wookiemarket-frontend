@@ -13,7 +13,7 @@ export const getUserInfo = state => state.user.userInfo;
 export const getAdverts = state => (state.ads.data ? state.ads.data : []);
 
 export const getNotification = state =>
-  state.user.notification ? state.user.notification : [];
+  state.user.notifications ? state.user.notifications : [];
 
 export const getFavoriteAds = state =>
   state.ads.favoriteAds ? state.ads.favoriteAds : [];
