@@ -53,11 +53,18 @@ function AdForm(props) {
     <div className="form">
       <form
         onSubmit={handleSubmit}
-        className="container-form-creation"
+        className="container-form-creation-refactor"
         encType="multipart/form-data"
       >
         {showSoldReservedOptions && ( // Condición para mostrar las opciones "Sell" y "Buy"
-          <SelectForm inputId="status" onChange={handleOpcionsChange} />
+          <div className=" element-form">
+            <label>{t('Status')}</label>
+            <SelectForm
+              inputId="status"
+              onChange={handleOpcionsChange}
+              className="select-form-status"
+            />
+          </div>
         )}
 
         <Form
@@ -140,27 +147,31 @@ function AdForm(props) {
           handleChange={handleChange}
           placeholder={t('Coin')}
         />
+        <div className=" element-form">
+          <label>{t('Categories')}</label>
 
-        <AdCategorySelect
-          inputId="category"
-          options={formattedTags}
-          value={valueInputCategory}
-          onChange={newValue => {
-            const selectedValue = newValue ? newValue.value : null;
+          <AdCategorySelect
+            inputId="category"
+            options={formattedTags}
+            value={valueInputCategory}
+            className="select-form-categories"
+            onChange={newValue => {
+              const selectedValue = newValue ? newValue.value : null;
 
-            if (selectedValue) {
-              const categoryExists = formattedTags.some(
-                tag => tag.value === selectedValue,
-              );
+              if (selectedValue) {
+                const categoryExists = formattedTags.some(
+                  tag => tag.value === selectedValue,
+                );
 
-              if (!categoryExists) {
-                handleCreateCategory(selectedValue);
+                if (!categoryExists) {
+                  handleCreateCategory(selectedValue);
+                }
               }
-            }
 
-            handleTagChange(newValue);
-          }}
-        />
+              handleTagChange(newValue);
+            }}
+          />
+        </div>
         <Form
           classNameForm="form-group-creation"
           classNameLabel="password-label-creation"
@@ -180,7 +191,7 @@ function AdForm(props) {
             data-testid={testid}
             type="button"
             variant="decline"
-            width="button-form"
+            // width="button-form"
             onClick={handleButtonClick}
           >
             {nameButtonCancel}
@@ -190,7 +201,7 @@ function AdForm(props) {
             data-testid={testid}
             type="submit"
             variant="accept"
-            width="button-form"
+            // width="button-form"
             disabled={buttonDisabled}
           >
             {nameButton}

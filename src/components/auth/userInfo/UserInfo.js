@@ -12,6 +12,7 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Modal from '../../shared/modal/Modal';
 import Spinner from '../../shared/spinner/Spinner';
 import './UserInfo.css';
+import Button from '../../shared/Button';
 
 function UserInfo() {
   const { t } = useTranslation();
@@ -91,11 +92,11 @@ function UserInfo() {
 
   return (
     <Layout title={t('User info')}>
-      <div>
+      <div className="form">
         {isLoading ? (
           <Spinner message={t('charging...')} />
         ) : (
-          <form onSubmit={handleSubmit} className="container-form">
+          <form onSubmit={handleSubmit} className="container-form-refactor">
             <Form
               classNameLabel="email-label"
               htmlFor="email"
@@ -149,14 +150,14 @@ function UserInfo() {
               placeholder={t('New password')}
               required
             />
-            <button
+            <Button
               data-testid="button"
               type="submit"
               width="button-form"
               disabled={buttonDisabled}
             >
               {t('Actualizar')}
-            </button>
+            </Button>
           </form>
         )}
         {toggleModal && (

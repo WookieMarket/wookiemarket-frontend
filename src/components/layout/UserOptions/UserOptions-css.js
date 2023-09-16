@@ -32,7 +32,7 @@ export const MenuItem = styled(NavLink)`
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
-  font-family: sans-serif;
+  font-family:var(--font-family);
   font-size: 1rem;
   font-weight: 300;
   cursor: pointer;

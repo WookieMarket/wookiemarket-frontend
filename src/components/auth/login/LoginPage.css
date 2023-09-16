@@ -22,7 +22,7 @@
   background-color: var(--background-color-form);
 }
 
-.container-form-refactor {
+/* .container-form-refactor {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +33,7 @@
   text-align: center;
   border: 2px solid var(--border-color-form);
   background-color: var(--background-color-form);
-}
+} */
 
 .container-form .form-group {
   width: 100%;
@@ -80,7 +80,8 @@
   margin-bottom: 10px;
 }
 
-.container-form .password-input-rememberme {
+
+.password-input-rememberme {
   display: flex;
   font-family: var(--font-family);
   align-items: center;
@@ -152,4 +153,11 @@ div.form {
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+  margin-top: 10vh;
+}
+
+a>h4 {
+  color: var(--secondary-color);
+  font-size: 2rem;
+  padding-bottom: 20px;
 }

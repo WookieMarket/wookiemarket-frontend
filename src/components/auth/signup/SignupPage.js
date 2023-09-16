@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import validateEmail from '../../../utils/validation';
 import Form from '../../shared/form/Form';
 import './SignupPage.css';
+import Button from '../../shared/Button';
 
 /**
  * This page allows user to create an account.
@@ -61,11 +62,11 @@ function SignupPage() {
 
   return (
     <Layout title={t('Signup Page')}>
-      <div>
+      <div className="form">
         {isLoading ? (
           <Spinner message={t('charging...')} />
         ) : (
-          <form onSubmit={handleSubmit} className="container-form">
+          <form onSubmit={handleSubmit} className="container-form-refactor">
             <Form
               classNameLabel="email-label"
               htmlFor="email"
@@ -108,14 +109,15 @@ function SignupPage() {
               placeholder={t('Password')}
               required
             />
-            <button
+            <Button
               data-testid="button"
               type="submit"
+              variant="accept"
               width="button-form"
               disabled={buttonDisabled}
             >
               {t('Register-button-title')}
-            </button>
+            </Button>
           </form>
         )}
         {/* Mostrar el mensaje de error si hay un error */}

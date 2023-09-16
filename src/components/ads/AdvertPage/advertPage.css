@@ -10,7 +10,7 @@ footer {
 
 .content h1 {
   margin-bottom: 5px;
-  text-transform: lowercase;
+  /* text-transform: lowercase; */
   font-family: var(--font-family);
   font-size: 1.2rem;
 }
@@ -22,7 +22,7 @@ footer {
   width: 75%;
   height: var(--holo-height);
   margin: -5px auto 0;
-  background-color: var(--background-navbar-color, 0.35);
+  background-color: var(--neutral-color, 0.35);
   border-radius: 100%;
   filter: blur(2.5px);
   transform: perspective(100px) rotateX(-30deg);
@@ -36,7 +36,7 @@ footer {
     right: -10px;
     content: '';
     height: 10px;
-    background-color: var(--background-navbar-color, 0.5);
+    background-color: var(--neutral-color, 0.5);
     border-radius: 100%;
     filter: blur(2.5px);
   }
@@ -133,7 +133,7 @@ footer {
   transform: scaleX(-1);
 }
 
-#buttonSection {
+.buttonSection {
   display: flex;
   justify-content: space-around;
 }
