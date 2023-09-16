@@ -3,7 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAdvert, getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
+import {
+  getAdOwnerUsername,
+  getAdvertById,
+  getIsLogged,
+  getJwt,
+  getUi,
+} from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import Advert from '../Advert/Advert';
 import Button from '../../shared/Button';
@@ -16,8 +22,12 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import IsDisable from '../../../utils/isDisable';
 import AdBuyPage from '../AdBuyPage/AdBuyPage';
+import storage from '../../../utils/storage';
+import jwt_decode from 'jwt-decode';
 
 const AdvertPage = () => {
+  const jwt = useSelector(getJwt);
+  const adOwnerUsername = useSelector(getAdOwnerUsername);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -70,10 +80,43 @@ const AdvertPage = () => {
 
   const handleChat = () => {
     setActiveModal(null);
+    const ownerUserName = adOwnerUsername.username
+    const userJwt = jwt || storage.get('auth');
+    const userId = jwt_decode(userJwt)._id;
+    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+    
+    console.log('userId: ' + userId)
+    console.log('adOwnerUsername: ' + ownerUserName)
     console.log('Chat Window');
+
+    // Llamar a la API para iniciar el chat
+    fetch(`${apiBaseUrl}/api/chat/${userId}`, {
+
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data.message);
+        // Aquí puedes realizar cualquier otra lógica que necesites con la respuesta.
+      })
+      .catch(error => {
+        console.error('Error al iniciar el chat:', error);
+      });
+    
+    
     // Redirects to the Chat with the advert owner
     //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
   };
+
   const handleBuy = () => {
     setShowModal(true);
   };
@@ -137,7 +180,7 @@ const AdvertPage = () => {
             )}
 
             {isDisabled && (
-              <section id="buttonSection">
+              <section id="buyButtonSection" className="buttonSection">
                 <Button id="buyButton" onClick={handleBuy}>
                   {t('Buy Advert')}
                 </Button>
@@ -145,7 +188,7 @@ const AdvertPage = () => {
             )}
 
             {!isDisabled && advert && (
-              <section id="buttonSection">
+              <section id="buttonSection" className="buttonSection">
                 <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
                   {t('Delete Advert')}?
                 </Button>
@@ -155,9 +198,11 @@ const AdvertPage = () => {
               </section>
             )}
             {isLogged && advert && (
-              <Button id="chatButton" onClick={handleChat}>
-                {t('Chat with ad owner')}
-              </Button>
+              <section id="chatButtonSection" className="buttonSection">
+                <Button id="chatButton" onClick={handleChat}>
+                  {t('Chat with ad owner')}
+                </Button>
+              </section>
             )}
             <div
               className={`no-advert_content ${!advert ? 'no-advert' : ''}`}

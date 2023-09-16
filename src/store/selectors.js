@@ -31,3 +31,6 @@ export const areUsersAdsLoaded = state => state.ads.usersAdsAreLoaded;
 
 export const isFavorite = id => state =>
   state.ads.favoriteAds.some(favAd => favAd._id === id);
+
+export const getAdOwnerUsername = state =>
+  state.ads.data[0];

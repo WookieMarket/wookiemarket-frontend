@@ -41,7 +41,7 @@ footer {
     filter: blur(2.5px);
   }
 
-  +.holo {
+  + .holo {
     animation-duration: 0.75s;
     opacity: 0.5;
   }
@@ -133,17 +133,16 @@ footer {
   transform: scaleX(-1);
 }
 
-#buttonSection {
+.buttonSection {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 25px;
 }
-
 
 @media screen and (min-width: 768px) {
   .content h1 {
     font-size: 1.5rem;
   }
-
 }
 
 @media screen and (min-width: 1024px) {
