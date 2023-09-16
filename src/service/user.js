@@ -81,3 +81,13 @@ export const emailBuy = (adOwnerId, custom_message) => {
   const url = `${usersUrl}/email-buy`;
   return client.post(url, data);
 };
+
+/**
+ * returns user notifications
+ *
+ * @returns returns user notifications
+ */
+export const notification = () => {
+  const url = `${usersUrl}/notification`;
+  return client.get(url);
+};

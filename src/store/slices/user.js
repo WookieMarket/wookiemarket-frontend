@@ -23,10 +23,24 @@ export const editUserInfo = createAsyncThunk(
   },
 );
 
+export const userNotification = createAsyncThunk(
+  'user/notification',
+  async (_, { extra: { service }, rejectWithValue }) => {
+    try {
+      const userNotification = await service.user.notification();
+      console.log('notificaciones', userNotification);
+      return userNotification;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const user = createSlice({
   name: 'user',
   initialState: {
     userInfo: {},
+    notification: [],
   },
   extraReducers: builder => {
     builder
@@ -35,6 +49,9 @@ const user = createSlice({
       })
       .addCase(editUserInfo.fulfilled, (state, action) => {
         state.userInfo = action.payload.results;
+      })
+      .addCase(userNotification.fulfilled, (state, action) => {
+        state.notification = action.payload;
       });
   },
 });

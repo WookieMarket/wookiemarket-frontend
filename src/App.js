@@ -105,7 +105,7 @@ function App() {
             }
           />
 
-          <Route path="/adverts/:id/:name" element={<AdvertPage />} />
+          <Route path="/adverts/:id/*" element={<AdvertPage />} />
 
           <Route path="/reset-password" element={<ResetPasswordPage />} />
 
