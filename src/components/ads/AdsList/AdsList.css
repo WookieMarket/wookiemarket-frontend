@@ -37,8 +37,8 @@ a:active {
 }
 
 .containerTittle h1 {
-  text-transform: lowercase;
-  font-family: var(--font-family);
+  /* text-transform: lowercase; */
+  /* font-family: var(--font-family); */
   font-size: 1.1em;
   margin: 20px 0 10px 0;
 }
@@ -124,5 +124,6 @@ input.filter {
 @media screen and (max-width: 768px) {
   .container-ad {
     grid-template-columns: repeat(1, 1fr);
+    padding: 30px;
   }
 }

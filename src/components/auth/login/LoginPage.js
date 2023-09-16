@@ -138,7 +138,7 @@ function LoginPage() {
               {t('Log in')}
             </Button>
             <Link onClick={handleResetPasswordLinkClick}>
-              <h4 className="link-reset">{t('Forgot password?')}</h4>
+              <h4 className="link-reset color-blue">{t('Forgot password?')}</h4>
             </Link>
             {toggleModal && (
               <Modal

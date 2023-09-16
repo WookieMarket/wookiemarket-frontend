@@ -14,6 +14,7 @@
 
 .element-form>label {
     color: var(--text-color-label);
+    font-family: var(--font-family);
     font-weight: bold;
     font-size: 1.5rem;
 }

@@ -23,7 +23,7 @@ export const LogoContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   font-size: 1.2rem;
-  font-family: sans-serif;
+  font-family: var(--font-family);
 
   p {
     &:nth-child(2) {
@@ -91,7 +91,7 @@ export const MenuItemLink = styled(NavLink)`
   height: 100%;
   padding: 0.5rem 2.5rem;
 
-  font-family: sans-serif;
+  font-family: var(--font-family);
   font-size: 1rem;
   font-weight: 300;
   cursor: pointer;

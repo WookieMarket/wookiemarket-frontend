@@ -80,7 +80,8 @@
   margin-bottom: 10px;
 }
 
-.container-form .password-input-rememberme {
+
+.password-input-rememberme {
   display: flex;
   font-family: var(--font-family);
   align-items: center;
@@ -153,4 +154,10 @@ div.form {
   justify-content: center;
   align-items: center;
   margin-top: 10vh;
+}
+
+a>h4 {
+  color: var(--secondary-color);
+  font-size: 2rem;
+  padding-bottom: 20px;
 }

@@ -79,9 +79,12 @@ function AdvertReduced(advert) {
               <span id="isSale"> {t('purchased')} </span>
             )}
           </p>
-          <div className="price .tv-text ">
+          <div className="price tv-text ">
             <p>
-              {advert.price} <span id="price_coin"> {advert.coin}</span>
+              {advert.price.toLocaleString(navigator.language, {
+                useGrouping: true,
+              })}
+              <span id="price_coin"> {advert.coin}</span>
             </p>
           </div>
           <div className="advert_label hologram-text tv-text">

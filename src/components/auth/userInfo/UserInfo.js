@@ -12,6 +12,7 @@ import ErrorModal from '../../shared/modal/ErrorModal';
 import Modal from '../../shared/modal/Modal';
 import Spinner from '../../shared/spinner/Spinner';
 import './UserInfo.css';
+import Button from '../../shared/Button';
 
 function UserInfo() {
   const { t } = useTranslation();
@@ -149,14 +150,14 @@ function UserInfo() {
               placeholder={t('New password')}
               required
             />
-            <button
+            <Button
               data-testid="button"
               type="submit"
               width="button-form"
               disabled={buttonDisabled}
             >
               {t('Actualizar')}
-            </button>
+            </Button>
           </form>
         )}
         {toggleModal && (
