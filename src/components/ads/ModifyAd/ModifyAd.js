@@ -9,6 +9,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAdById, uploadModifiedAd } from '../../../store/slices/ads';
 import AdForm from '../../shared/AdForm/AdForm';
+//import io from 'socket.io-client';
+
+//const socket = io('http://localhost:3001');
 
 function ModifyAd() {
   const navigate = useNavigate();
@@ -33,6 +36,7 @@ function ModifyAd() {
 
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedTOpcions, setSelectedOpcions] = useState([]);
+
   const adNew = {
     status: selectedTOpcions ? selectedTOpcions.value : '',
     name: modifiedAd.name,
@@ -59,6 +63,15 @@ function ModifyAd() {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(uploadModifiedAd({ id: adId, ad: adNew }));
+    //   socket.emit('precioActualizado', {
+    //     advertId: adId,
+    //     nuevoPrecio: adNew.price,
+    //   });
+    //   console.log(
+    //     'Emitiendo modificacionExitosa con advertId y nuevoPrecio:',
+    //     adId,
+    //     adNew.price,
+    //   );
   };
 
   const handleErrorClick = () => {

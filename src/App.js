@@ -11,7 +11,15 @@ import DeleteUserPage from './components/auth/deleteUser/DeleteUserPage';
 import ModifyAd from './components/ads/ModifyAd/ModifyAd';
 import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
+//import io from 'socket.io-client';
 import UserProfilePage from './components/user/UserProfilePage';
+
+import './App.css';
+import './css/Variables.css';
+import './css/Reset.css';
+import Notifications from './components/Notifications/Notifications';
+
+//import { useEffect } from 'react';
 
 function App() {
   return (
@@ -26,6 +34,15 @@ function App() {
             element={
               <RequireAuth>
                 <AdNew />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/notifications"
+            element={
+              <RequireAuth>
+                <Notifications />
               </RequireAuth>
             }
           />
@@ -88,7 +105,7 @@ function App() {
             }
           />
 
-          <Route path="/adverts/:id/:name" element={<AdvertPage />} />
+          <Route path="/adverts/:id/*" element={<AdvertPage />} />
 
           <Route path="/reset-password" element={<ResetPasswordPage />} />
 

@@ -72,12 +72,27 @@ export const removeFavorite = id => {
  * @returns Send email to the owner of the ad to buy it
  */
 export const emailBuy = (adOwnerId, custom_message) => {
-  // const config = {
-  //   headers: {
-  //     'Content-Type': 'multipart/form-data',
-  //   },
-  // };
   const data = { adOwnerId, custom_message };
   const url = `${usersUrl}/email-buy`;
   return client.post(url, data);
+};
+
+/**
+ * returns user notifications
+ *
+ * @returns returns user notifications
+ */
+export const notification = () => {
+  const url = `${usersUrl}/notification`;
+  return client.get(url);
+};
+
+/**
+ * returns user notifications
+ *
+ * @returns returns user notifications
+ */
+export const isRead = notificationId => {
+  const url = `${usersUrl}/isread`;
+  return client.put(url, { notificationId });
 };
