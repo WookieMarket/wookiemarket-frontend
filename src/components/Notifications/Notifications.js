@@ -68,7 +68,7 @@ const Notifications = () => {
   }, [dispatch, lastNotificationDate]);
 
   useEffect(() => {
-    const socket = io('http://localhost:3001');
+    const socket = io(process.env.REACT_APP_API_BASE_URL);
     console.log('Conexión establecida con el servidor de Socket.io');
 
     // Escucha el evento 'mensajeDesdeServidor' del servidor
