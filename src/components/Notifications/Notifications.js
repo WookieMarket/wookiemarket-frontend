@@ -33,7 +33,20 @@ const Notifications = () => {
   };
 
   useEffect(() => {
-    dispatch(userNotification()).catch(error => console.log(error));
+    // Función para cargar notificaciones
+    const loadNotifications = () => {
+      dispatch(userNotification()).catch(error => console.log(error));
+    };
+
+    // Cargar notificaciones al montar el componente
+    loadNotifications();
+
+    const intervalId = setInterval(() => {
+      loadNotifications();
+    }, 30000);
+
+    // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(intervalId);
   }, [dispatch]);
 
   useEffect(() => {
