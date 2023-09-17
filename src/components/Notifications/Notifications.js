@@ -4,6 +4,7 @@ import { readNotifications, userNotification } from '../../store/slices/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNotification } from '../../store/selectors';
 import { Link } from 'react-router-dom';
+import { BsCheckAll } from 'react-icons/bs';
 
 //import { isRead } from '../../service/user';
 import './Notifications.css';
@@ -122,32 +123,35 @@ const Notifications = () => {
               key={index2}
               className={`notification ${notificacion.isRead ? 'read' : ''}`}
             >
-              {notificacion.isRead ? (
-                // Si la notificación está marcada como leída, muestra el mensaje de leído
-                <span>Leído</span>
-              ) : (
-                // Si la notificación no está marcada como leída, muestra el botón
-                <button
-                  onClick={() => {
-                    console.log('ID de notificación:', notificacion._id);
-                    handleIsRead(notificacion._id);
-                  }}
-                >
-                  Marcar como leído
-                </button>
-              )}
               <span>
-                Anuncio: {notificacion.name} Ha modificado su precio a{' '}
+                {notificacion.name} Ha modificado su precio a{' '}
                 {notificacion.message}
-                {notificacion.coin} y su estado es: {notificacion.status}
+                {notificacion.coin} y su estado es {notificacion.status}
               </span>
-              <Link
-                className="see-ad "
-                to={`/adverts/${notificacion.advertId}/${notificacion.name}`}
-                style={{ color: 'black' }}
-              >
-                Ver anuncio
-              </Link>
+              <div className="footer-notification">
+                <Link
+                  className="see-ad "
+                  to={`/adverts/${notificacion.advertId}/${notificacion.name}`}
+                  style={{ color: 'black' }}
+                >
+                  Ver anuncio
+                </Link>
+                {notificacion.isRead ? (
+                  // Si la notificación está marcada como leída, muestra el mensaje de leído
+                  <span>Leído</span>
+                ) : (
+                  // Si la notificación no está marcada como leída, muestra el botón
+                  <button
+                    onClick={() => {
+                      console.log('ID de notificación:', notificacion._id);
+                      handleIsRead(notificacion._id);
+                    }}
+                  >
+                    Marcar como leído
+                    <BsCheckAll />
+                  </button>
+                )}
+              </div>
             </li>
           ))}
         </ul>

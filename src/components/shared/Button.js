@@ -44,7 +44,7 @@ const Button = styled.button`
   }
 
   @media screen and (min-width: 1024px) {
-    width: ${props => (props.width === 'button-form' ? '35%' : 'auto')};
+    width: ${props => (props.width === 'button-form' ? '45%' : 'auto')};
     font-size: 17px;
     padding: 8px 8px;
   }

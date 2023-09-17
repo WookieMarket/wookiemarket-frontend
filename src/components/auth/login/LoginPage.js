@@ -126,20 +126,23 @@ function LoginPage() {
               handleChange={handleChange}
               required
             />
-
-            <Button
-              //className="login-button"
-              data-testid="button"
-              type="submit"
-              variant="accept"
-              width="button-form"
-              disabled={buttonDisabled}
-            >
-              {t('Log in')}
-            </Button>
-            <Link onClick={handleResetPasswordLinkClick}>
-              <h4 className="link-reset color-blue">{t('Forgot password?')}</h4>
-            </Link>
+            <div className="button-rememberme">
+              <Button
+                //className="login-button"
+                data-testid="button"
+                type="submit"
+                variant="accept"
+                width="button-form"
+                disabled={buttonDisabled}
+              >
+                {t('Log in')}
+              </Button>
+              <Link onClick={handleResetPasswordLinkClick}>
+                <h4 className="link-reset color-blue">
+                  {t('Forgot password?')}
+                </h4>
+              </Link>
+            </div>
             {toggleModal && (
               <Modal
                 title={t('Recover password')}
