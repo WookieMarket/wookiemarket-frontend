@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   LogoContainer,
@@ -9,6 +9,7 @@ import {
   MobileIcon,
 } from './Navbar-css';
 import {
+  FaBell,
   FaLock,
   FaUpload,
   FaBattleNet,
@@ -20,18 +21,54 @@ import {
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import '../Header.css';
-import { getIsLogged } from '../../../store/selectors';
+import { getIsLogged, getNotification } from '../../../store/selectors';
 import { useSelector } from 'react-redux';
 import UserOptions from '../UserOptions/UserOptions';
 import storage from '../../../utils/storage';
 import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
 import { Link } from 'react-router-dom';
+import Notifications from '../../Notifications/Notifications';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const isLogged = useSelector(getIsLogged);
   const username = storage.get('username');
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
+
+  // Calcula si hay notificaciones sin leer
+  const notifications = useSelector(getNotification);
+
+  useEffect(() => {
+    // Comprueba notificaciones sin leer al cargar el componente
+    const hasUnreadNotifications = notifications.some(
+      notification => !notification.isRead,
+    );
+    setHasUnreadNotifications(hasUnreadNotifications);
+
+    // Establece un intervalo para comprobar cada 30 segundos
+    const intervalId = setInterval(() => {
+      const hasUnreadNotifications = notifications.some(
+        notification => !notification.isRead,
+      );
+      setHasUnreadNotifications(hasUnreadNotifications);
+    }, 30000);
+
+    // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(intervalId);
+  }, [notifications]);
+
+  // Agregar esta función para abrir notificaciones
+  const handleNotificationsClick = () => {
+    setShowMobileMenu(!showMobileMenu);
+    setShowNotifications(!showNotifications);
+    // Verificar notificaciones nuevamente al hacer clic
+    const hasUnreadNotifications = notifications.some(
+      notification => !notification.isRead,
+    );
+    setHasUnreadNotifications(hasUnreadNotifications);
+  };
 
   return (
     <Container>
@@ -91,6 +128,17 @@ const Navbar = () => {
                   </div>
                 </MenuItemLink>
               )}
+              {isLogged && (
+                <MenuItemLink onClick={handleNotificationsClick}>
+                  <div>
+                    <FaBell
+                      style={{
+                        fill: hasUnreadNotifications ? 'red' : '', // Aplica color rojo si hay notificaciones sin leer
+                      }}
+                    />
+                  </div>
+                </MenuItemLink>
+              )}
 
               {!isLogged && (
                 <MenuItemLink
@@ -109,6 +157,8 @@ const Navbar = () => {
           </Menu>
         </IconContext.Provider>
       </Wrapper>
+      {/* Renderiza el componente de notificaciones si showNotifications es true */}
+      {showNotifications && <Notifications />}
     </Container>
   );
 };

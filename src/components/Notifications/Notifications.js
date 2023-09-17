@@ -14,17 +14,19 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const [mensajes, setMensajes] = useState([]);
   const notification = useSelector(getNotification);
+  const [lastNotificationDate, setLastNotificationDate] = useState(null);
+
   console.log('Notification:', notification);
   // const [mensajes2, setMensajes2] = useState([]);
 
-  // Utiliza la función map() para extraer los valores de advertId
-  const advertData = notification.map(notification => ({
-    advertId: notification.advertId,
-    message: notification.message,
-    // Agrega aquí todas las demás propiedades que quieras extraer
-  }));
+  // // Utiliza la función map() para extraer los valores de advertId
+  // const advertData = notification.map(notification => ({
+  //   advertId: notification.advertId,
+  //   message: notification.message,
+  //   // Agrega aquí todas las demás propiedades que quieras extraer
+  // }));
 
-  console.log('info', advertData.message);
+  // console.log('info', advertData.message);
 
   const handleIsRead = notificationId => {
     dispatch(readNotifications(notificationId)).catch(error =>
@@ -33,21 +35,37 @@ const Notifications = () => {
   };
 
   useEffect(() => {
-    // Función para cargar notificaciones
     const loadNotifications = () => {
-      dispatch(userNotification()).catch(error => console.log(error));
+      dispatch(userNotification())
+        .then(newNotifications => {
+          if (newNotifications.length > 0) {
+            // Find the most recent notification in new notifications
+            const mostRecentNotification = newNotifications.reduce(
+              (prev, current) =>
+                new Date(current.createdAt.$date) >
+                new Date(prev.createdAt.$date)
+                  ? current
+                  : prev,
+            );
+
+            // Compares the date of the most recent notification with the date of the last uploaded notification
+            if (
+              !lastNotificationDate ||
+              new Date(mostRecentNotification.createdAt.$date) >
+                new Date(lastNotificationDate)
+            ) {
+              // If the most recent notification is newer, upload it and update the date of the last uploaded notification
+              setLastNotificationDate(mostRecentNotification.createdAt.$date);
+            }
+          }
+          console.log('Notificaciones cargadas:', newNotifications);
+        })
+        .catch(error => console.log(error));
     };
 
     // Cargar notificaciones al montar el componente
     loadNotifications();
-
-    const intervalId = setInterval(() => {
-      loadNotifications();
-    }, 30000);
-
-    // Limpia el intervalo cuando el componente se desmonta
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [dispatch, lastNotificationDate]);
 
   useEffect(() => {
     const socket = io('http://localhost:3001');
