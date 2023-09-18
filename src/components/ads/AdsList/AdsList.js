@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import Advert from '../Advert/Advert';
-import Pagination from '../../shared/pagination/Pagination';
+import Pagination from '../../shared/Pagination/Pagination';
+// import Pagination from '../../shared/pagination/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getAdsPerPage,
@@ -15,7 +16,7 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 import { categoriesList } from '../../../store/slices/categories';
-import { setAdsPerPage, getAdsWithFilters  } from '../../../store/slices/ads';
+import { setAdsPerPage, getAdsWithFilters } from '../../../store/slices/ads';
 import Button from '../../shared/Button';
 import { Link } from 'react-router-dom';
 
@@ -149,7 +150,7 @@ const AdsList = ({ selector }) => {
       minPrice: queryMinPrice,
       maxPrice: queryMaxPrice,
     };
-  
+
     dispatch(getAdsWithFilters(filters));
   };
 
@@ -159,7 +160,7 @@ const AdsList = ({ selector }) => {
     Array.isArray(filteredAds) && filteredAds.length > 0
       ? Math.ceil(filteredAds.length / advertsPerPage)
       : 1;
-      console.log('Número total de páginas:', totalPages);
+  console.log('Número total de páginas:', totalPages);
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
   const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
@@ -170,8 +171,6 @@ const AdsList = ({ selector }) => {
     dispatch(setAdsPerPage(selectedValue)); // Dispatch an action to update the state
   };
 
-
-  
   //Cleaning & making friendly URL
   const cleanUpForURL = text => {
     return text
