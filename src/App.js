@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Navigate, Routes } from 'react-router-dom';
 import LoginPage from './components/auth/login/LoginPage';
 import UserInfo from './components/auth/userInfo/UserInfo';
 import RequireAuth from './components/auth/RequireAuth';
@@ -16,6 +16,7 @@ import UserProfilePage from './components/user/UserProfilePage';
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
+import ChatRoom from './components/chatRoom/ChatRoom';
 
 function App() {
   return (
@@ -90,7 +91,10 @@ function App() {
               </RequireAuth>
             }
           />
-
+          <Route
+            path="/chatRoom/:userId/:recipientUsername"
+            element={<ChatRoom />}
+          />
           <Route path="/adverts/:id/:name" element={<AdvertPage />} />
 
           <Route path="/reset-password" element={<ResetPasswordPage />} />

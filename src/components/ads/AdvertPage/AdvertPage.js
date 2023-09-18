@@ -88,33 +88,9 @@ const AdvertPage = () => {
     console.log('userId: ' + userId)
     console.log('adOwnerUsername: ' + ownerUserName)
     console.log('Chat Window');
-
-    // Llamar a la API para iniciar el chat
-    fetch(`${apiBaseUrl}/api/chat/${userId}`, {
-
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt}`,
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data.message);
-        // Aquí puedes realizar cualquier otra lógica que necesites con la respuesta.
-      })
-      .catch(error => {
-        console.error('Error al iniciar el chat:', error);
-      });
-    
     
     // Redirects to the Chat with the advert owner
-    //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
+    navigate(`/chatRoom/${userId}/${ownerUserName}`);
   };
 
   const handleBuy = () => {
