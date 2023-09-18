@@ -28,7 +28,6 @@ export const userNotification = createAsyncThunk(
   async (_, { extra: { service }, rejectWithValue }) => {
     try {
       const userNotification = await service.user.notification();
-      console.log('notificaciones', userNotification);
       return userNotification;
     } catch (error) {
       return rejectWithValue(error);
@@ -41,8 +40,6 @@ export const readNotifications = createAsyncThunk(
   async (notificationId, { extra: { service }, rejectWithValue }) => {
     try {
       const notification = await service.user.isRead(notificationId);
-      console.log('notificaciones', notification);
-      console.log('true', notification.result);
       return notification.result;
     } catch (error) {
       return rejectWithValue(error);
@@ -65,13 +62,12 @@ const user = createSlice({
         state.userInfo = action.payload.results;
       })
       .addCase(readNotifications.fulfilled, (state, action) => {
-        const modifiedNotifications = action.payload;
+        const { _id, readAt } = action.payload;
 
-        state.notifications = state.notifications.filter(
-          notification => notification._id !== modifiedNotifications._id,
+        let notification = state.notifications.find(
+          notification => notification._id === _id,
         );
-        console.log('payload', action.payload);
-        state.notifications.unshift(modifiedNotifications);
+        notification.readAt = readAt;
       })
       .addCase(userNotification.fulfilled, (state, action) => {
         state.notifications = action.payload;
