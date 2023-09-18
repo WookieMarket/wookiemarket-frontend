@@ -6,6 +6,7 @@ import { getAdverts, getUi } from '../../../store/selectors';
 import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import storage from '../../../utils/storage';
+import { userNotification } from '../../../store/slices/user';
 
 const AdvertsListPage = () => {
   const { error } = useSelector(getUi);
@@ -20,6 +21,14 @@ const AdvertsListPage = () => {
     if (accessToken) {
       dispatch(getFavorite()).catch(error => console.log(error));
     }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const loadNotifications = () => {
+      dispatch(userNotification()).catch(error => console.log(error));
+    };
+
+    loadNotifications();
   }, [dispatch]);
 
   const handleErrorClick = () => {

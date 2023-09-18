@@ -44,20 +44,9 @@ const Navbar = () => {
   useEffect(() => {
     // Comprueba notificaciones sin leer al cargar el componente
     const hasUnreadNotifications = notifications.some(
-      notification => !notification.isRead,
+      notification => !notification.readAt,
     );
     setHasUnreadNotifications(hasUnreadNotifications);
-
-    // Establece un intervalo para comprobar cada 30 segundos
-    const intervalId = setInterval(() => {
-      const hasUnreadNotifications = notifications.some(
-        notification => !notification.isRead,
-      );
-      setHasUnreadNotifications(hasUnreadNotifications);
-    }, 30000);
-
-    // Limpia el intervalo cuando el componente se desmonta
-    return () => clearInterval(intervalId);
   }, [notifications]);
 
   // Agregar esta función para abrir notificaciones
@@ -66,7 +55,7 @@ const Navbar = () => {
     setShowNotifications(!showNotifications);
     // Verificar notificaciones nuevamente al hacer clic
     const hasUnreadNotifications = notifications.some(
-      notification => !notification.isRead,
+      notification => !notification.readAt,
     );
     setHasUnreadNotifications(hasUnreadNotifications);
   };

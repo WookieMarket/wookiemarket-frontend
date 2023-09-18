@@ -20,7 +20,7 @@
   text-align: center;
   border: 2px solid var(--border-color-form);
   background-color: var(--background-color-form);
-  z-index: 10;
+  z-index: 9000;
 }
 
 .container-form-creation-buy .form-group-creation-buy {
