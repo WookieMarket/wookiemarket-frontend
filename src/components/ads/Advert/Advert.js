@@ -34,6 +34,10 @@ function Advert(advert) {
     return `/adverts/${advert._id}/${cleanName}`;
   };
 
+  const generateUserProfileURL = username => {
+    return `/${username}/profile`;
+  };
+
   // Function to get the status text (Reserved or Sold)
   const getStatusText = () => {
     if (advert.status === 'reserved') {
@@ -104,7 +108,9 @@ function Advert(advert) {
         <div>
           <p className="advert_label hologram-text tv-text">
             {t('Username')}:{' '}
-            <span className="advert-text">{advert.username}</span>
+            <Link to={generateUserProfileURL(advert.username)}>
+              <span className="advert-text">{advert.username}</span>
+            </Link>
           </p>
         </div>
         <p className="text"> {advert.description}</p>
