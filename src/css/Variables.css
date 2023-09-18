@@ -79,5 +79,5 @@
   /*<--Debereía ser una url con nuestra dirección real*/
   --notFound_404: url('../../public/images/star_wars_hd.png');
   /*<--Debereía ser una url con nuestra dirección real*/
-  --size-border: 5px;
+  --size-border: 2px;
 }

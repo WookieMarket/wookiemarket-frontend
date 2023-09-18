@@ -1,10 +1,15 @@
 .container-form-creation-buy {
   width: 50%;
-  height: 68vh; /* Establece la altura del contenedor en el 50% de la altura de la ventana */
-  position: absolute; /* Cambia a posición absoluta */
-  top: 190%; /* Alinea el borde superior del contenedor al 50% de la ventana */
-  left: 50%; /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
-  transform: translate(-50%, -50%); /* Centra vertical y horizontalmente */
+  height: 68vh;
+  /* Establece la altura del contenedor en el 50% de la altura de la ventana */
+  position: absolute;
+  /* Cambia a posición absoluta */
+  top: 50%;
+  /* Alinea el borde superior del contenedor al 50% de la ventana */
+  left: 50%;
+  /* Alinea el borde izquierdo del contenedor al 50% de la ventana */
+  transform: translate(-50%, -50%);
+  /* Centra vertical y horizontalmente */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,9 +53,10 @@
   .container-form-creation-buy {
     height: 68vh;
     width: 30%;
-    top: 327%;
+    top: 50%;
     gap: 0px;
   }
+
   .container-form-creation-buy .password-input-creation-buy {
     height: 25px;
     font-size: 16px;
@@ -60,6 +66,7 @@
     font-size: 16px;
     margin-bottom: 10px;
   }
+
   .container-form-creation-buy .img-input-creation {
     margin: 8px 0px 20px 0px;
   }
@@ -69,9 +76,10 @@
   .container-form-creation-buy {
     height: 72vh;
     width: 30%;
-    top: 327%;
+    top: 50%;
     gap: 0px;
   }
+
   .container-form-creation-buy .password-input-creation-buy {
     height: 30px;
     font-size: 20px;
