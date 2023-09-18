@@ -91,7 +91,6 @@ function AdvertReduced(advert) {
           </div>
           <div className="advert_label hologram-text tv-text">
             <p className="advert-text">
-              {/* {t('Category')}:{' '} */}
               <span>
                 {advert.category === undefined
                   ? ''
@@ -100,12 +99,6 @@ function AdvertReduced(advert) {
             </p>
           </div>
         </div>
-        {/* <div>
-          <p className="advert_label hologram-text tv-text">
-            {t('Username')}:{' '}
-            <span className="advert-text">{advert.username}</span>
-          </p>
-        </div> */}
       </div>
     </>
   );

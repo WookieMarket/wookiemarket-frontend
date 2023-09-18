@@ -187,6 +187,7 @@ export const MobileIcon = styled.div`
 `;
 
 export const LoggedMessage = styled.p`
+  margin-left: 20px;
   @media screen and (max-width: 600px) {
     display: none;
   }
