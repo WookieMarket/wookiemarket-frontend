@@ -17,9 +17,6 @@ import UserProfilePage from './components/user/UserProfilePage';
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
-import Notifications from './components/Notifications/Notifications';
-
-//import { useEffect } from 'react';
 
 function App() {
   return (
@@ -34,15 +31,6 @@ function App() {
             element={
               <RequireAuth>
                 <AdNew />
-              </RequireAuth>
-            }
-          />
-
-          <Route
-            path="/notifications"
-            element={
-              <RequireAuth>
-                <Notifications />
               </RequireAuth>
             }
           />
