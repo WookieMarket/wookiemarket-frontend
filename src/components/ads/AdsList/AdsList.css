@@ -55,7 +55,7 @@ a:active {
 .advert-container .img {
   display: block;
   object-fit: cover;
-  width: 400x;
+  width: 300px;
   height: 200px;
 }
 
@@ -119,6 +119,19 @@ input.filter {
   .advert-container {
     font-size: 14px;
   }
+
+  .advert-container .img {
+    display: block;
+    object-fit: cover;
+    width: 150px;
+    height: 100px;
+  }
+
+  #advertsPerPage>label,
+  #advertsPerPage>select {
+    font-size: 1.5rem;
+  }
+
 }
 
 @media screen and (max-width: 768px) {

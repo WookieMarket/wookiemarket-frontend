@@ -132,11 +132,7 @@ const AdvertPage = () => {
 
           <div className={'content'}>
             <div className="holobackground"></div>
-            <h1 className="hologram-text tv-text">
-              <span className="StarWarsObject fontInverted">*</span>
-              {t('ADVERT DETAIL')}
-              <span className="StarWarsObject">*</span>
-            </h1>
+            <h1 className="hologram-text tv-text">{t('ADVERT DETAIL')}</h1>
             {advert ? (
               <Advert {...advert} />
             ) : (

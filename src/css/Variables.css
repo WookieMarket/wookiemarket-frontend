@@ -21,6 +21,8 @@
   --neutral-color: #E5D283;
   --text-nav-footer: white;
   --text-color-label: var(--secondary-color);
+  --font-size-mobile: 1.5rem;
+  --font-size-mobile-reduced: 1rem;
 
   --text-color: #60cfe0;
   --border-color: var(--neutral-color);

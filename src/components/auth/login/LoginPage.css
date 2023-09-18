@@ -161,3 +161,10 @@ a>h4 {
   font-size: 2rem;
   padding-bottom: 20px;
 }
+
+.button-rememberme {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
