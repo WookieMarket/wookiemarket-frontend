@@ -52,15 +52,17 @@ export const Menu = styled.ul`
   z-index: 2;
 
   @media screen and (max-width: 960px) {
+    display: ${({ open }) => (open ? 'flex' : 'none')};
     background-color: var(--background-navbar-color);
     position: absolute;
-    top: 70px;
+    top: 60px;
     right: ${({ open }) => (open ? '0' : '-100%')}; //Import
     /* Establece un valor inicial para open */
     opacity: ${({ open }) => (open ? '1' : '0')};
     width: 60%;
-    height: 60vh;
-    justify-content: center;
+    height: 200px;
+    justify-content: start;
+    padding-top: 60px;
     flex-direction: column;
     align-items: center;
     transition: 0.5s all ease;
@@ -172,7 +174,7 @@ export const MenuItemLink = styled(NavLink)`
 export const MobileIcon = styled.div`
   display: none;
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1024px) {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -181,5 +183,11 @@ export const MobileIcon = styled.div`
       fill: var(--background-menu-movil-color);
       margin-right: 0.5rem;
     }
+  }
+`;
+
+export const LoggedMessage = styled.p`
+  @media screen and (max-width: 600px) {
+    display: none;
   }
 `;

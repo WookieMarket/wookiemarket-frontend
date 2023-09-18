@@ -56,7 +56,7 @@ const UserOptions = () => {
     <Container>
       <IconContext.Provider value={{ style: { fontSize: '1.7em' } }}>
         <MobileIcon onClick={toggleDropdown}>
-          {showDropdown ? <FaEyeSlash /> : <FaUserAlt />}
+          {showDropdown ? <FaEyeSlash size={30} /> : <FaUserAlt size={30} />}
         </MobileIcon>
         <DropdownMenu open={showDropdown}>
           {isLogged ? (

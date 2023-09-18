@@ -9,11 +9,13 @@ export const MobileIcon = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  justify-content: center;
+  padding-right: 50px;
 
   svg {
     fill: var(--background-iconFa-options-color);
     margin-right: 0.5rem;
-    
+  }
 `;
 
 export const DropdownMenu = styled.div`

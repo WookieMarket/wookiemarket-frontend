@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuItemLink,
   MobileIcon,
+  LoggedMessage,
 } from './Navbar-css';
 import {
   FaBell,
@@ -94,10 +95,10 @@ const Navbar = () => {
               onClick={() => i18n.changeLanguage('en')}
             />
             {isLogged && (
-              <p>
+              <LoggedMessage className="logged-message">
                 {t('Welcome: ')}
                 {capitalizeFirstLetter(username)}
-              </p>
+              </LoggedMessage>
             )}
           </LogoContainer>
 

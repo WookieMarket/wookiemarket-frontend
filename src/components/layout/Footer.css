@@ -11,3 +11,9 @@ footer {
 .footer>p {
     color: var(--text-nav-footer);
 }
+
+@media screen and (max-width: 600px) {
+    .footer>p {
+        font-size: var(--font-size-mobile-reduced)
+    }
+}
