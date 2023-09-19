@@ -53,6 +53,12 @@
   "Advertisements": "Advertisements",
   "advertisements": "advertisements",
   "Searching area": "Searching area",
+  "Adverts per page": "Adverts per page",
+  "Enter the exact price": "Enter the exact price",
+  "Enter minimum price": "Enter minimum price",
+  "Enter maximum price": "Enter maximum price",
+  "Hold down the ctrl key to select more than one category": "Hold down the ctrl key to select more than one category",
+  "more ads": "more ads",
   "LOADING...": "LOADING...",
   "home": "home",
   "ADVERTISEMENTS AVIABLE": "ADVERTISEMENTS AVIABLE",
@@ -70,7 +76,7 @@
   "DELETING ADVERTISEMENT": "DELETING ADVERTISEMENT",
   "DELETING ADVERTISEMENT (confirmation)": "DELETING ADVERTISEMENT (confirmation)",
   "Your advert was deleted successfully": "Your advert was deleted successfully",
-  "Chat with ad owner": "Chat with ad owner",
+  "Chat button title": "Chat with seller",
   "Edit an ad": "edit an ad",
   "User info": "User information ",
   "Actualizar": "Update",
@@ -80,7 +86,6 @@
   "Email validation error": "Invalid email",
   "user profile": "User Profile",
   "user avatar": "User avatar",
-  "Adverts per page": "Adverts per page",
   "sold": "Sold",
   "reserved": "reserved",
   "user ads": "See user ads",
@@ -92,5 +97,7 @@
   "Read": "Read",
   "Modify": "Modify",
   "There are no notifications.": "There are no notifications.",
-  "Categories": "Categories"
+  "Categories": "Categories",
+  "Filter": "Filter",
+  "Buy button title": "Buy"
 }

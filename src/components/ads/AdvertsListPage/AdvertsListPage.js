@@ -11,11 +11,16 @@ import { userNotification } from '../../../store/slices/user';
 const AdvertsListPage = () => {
   const { error } = useSelector(getUi);
   const dispatch = useDispatch();
+  const limit = 10;
+  const accessToken = storage.get('auth');
+
   useEffect(() => {
-    dispatch(advertsList()).catch(error => console.log(error));
+    const skip = 0;
+    dispatch(advertsList({ skip, limit, sort: 'desc' })).catch(error =>
+      console.log(error),
+    );
   }, [dispatch]);
 
-  const accessToken = storage.get('auth');
   // load only if there is token
   useEffect(() => {
     if (accessToken) {

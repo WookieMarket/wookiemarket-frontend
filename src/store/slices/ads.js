@@ -24,9 +24,9 @@ export const adsCreate = createAsyncThunk(
 
 export const advertsList = createAsyncThunk(
   'ads/list',
-  async (_, { extra: { service }, rejectWithValue }) => {
+  async ({ skip, limit, sort }, { extra: { service }, rejectWithValue }) => {
     try {
-      const adverts = await service.ads.getRecentAds();
+      const adverts = await service.ads.getRecentAds(skip, limit);
 
       return adverts;
     } catch (error) {
@@ -36,6 +36,15 @@ export const advertsList = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areAdvertsLoaded(getState()),
+  },
+);
+
+export const setAdsPerPage = createAsyncThunk(
+  'ads/setAdsPerPage',
+  async (adsPerPage, { dispatch }) => {
+    storage.set('adsPerPage', adsPerPage);
+    dispatch({ type: 'ads/setAdsPerPage', payload: adsPerPage });
+    return adsPerPage;
   },
 );
 
@@ -146,11 +155,15 @@ export const emailBuyAd = createAsyncThunk(
   },
 );
 
-export const setAdsPerPage = createAsyncThunk(
-  'ads/setAdsPerPage',
-  async adsPerPage => {
-    storage.set('adsPerPage', adsPerPage);
-    return adsPerPage;
+export const getAdsWithFilters = createAsyncThunk(
+  'ads/getAdsWithFilters',
+  async filters => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    const response = await fetch(
+      `${apiUrl}/api/ads/adverts/filter?${new URLSearchParams(filters)}`,
+    );
+    const data = await response.json();
+    return data;
   },
 );
 
@@ -163,9 +176,15 @@ const ads = createSlice({
     data: [],
     userAds: [],
     favoriteAds: [],
-    adsPerPage: parseInt(
-      storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
-    ),
+    adsPerPage:
+      4 ||
+      parseInt(storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE),
+    totalCountAds: 0,
+  },
+  reducers: {
+    setAdsPerPage(state, action) {
+      state.adsPerPage = action.payload;
+    },
   },
 
   extraReducers: builder => {
@@ -180,6 +199,7 @@ const ads = createSlice({
       .addCase(advertsList.fulfilled, (state, action) => {
         state.areLoaded = true;
         state.data = action.payload.results;
+        state.totalCountAds = action.payload.total;
       })
       .addCase(uploadModifiedAd.fulfilled, (state, action) => {
         // Delete old status ad
@@ -216,9 +236,13 @@ const ads = createSlice({
       })
       .addCase(deleteAdvert.fulfilled, (state, action) => {
         const adToRemove = action.payload;
-
         state.data = state.data.filter(ad => ad._id !== adToRemove);
         state.userAds = state.userAds.filter(ad => ad._id !== adToRemove);
+      })
+      .addCase(getAdsWithFilters.fulfilled, (state, action) => {
+        state.areLoaded = true;
+        state.data = action.payload.results;
+        state.totalCountAds = action.payload.total;
       });
   },
 });
