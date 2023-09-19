@@ -142,7 +142,7 @@ const AdvertPage = () => {
             {isDisabled && (
               <section className="buttonSection">
                 <Button id="buyButton" onClick={handleBuy}>
-                  {t('Buy Advert')}
+                  {t('Buy button title')}
                 </Button>
               </section>
             )}
@@ -160,7 +160,7 @@ const AdvertPage = () => {
             {isLogged && advert && (
               <section className="buttonSection">
                 <Button id="chatButton" onClick={handleChat}>
-                  {t('Chat with ad owner')}
+                  {t('Chat button title')}
                 </Button>
               </section>
             )}
