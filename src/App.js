@@ -13,6 +13,7 @@ import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
 //import io from 'socket.io-client';
 import UserProfilePage from './components/user/UserProfilePage';
+import Page404 from './components/shared/page404/Page404';
 
 import './App.css';
 import './css/Variables.css';
@@ -25,7 +26,6 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/home" element={<AdvertsListPage />} />
-          
 
           <Route
             path="/create-ad"
@@ -96,7 +96,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/404" element={<div>404 | Not found</div>} />
+          <Route path="/404" element={<Page404 />} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       </div>
