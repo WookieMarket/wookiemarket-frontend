@@ -4,7 +4,6 @@ import Pagination from '../../shared/Pagination/Pagination';
 // import Pagination from '../../shared/pagination/Pagination';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   getAdsPerPage,
   getAllCategory,
@@ -163,20 +162,6 @@ const AdsList = ({ selector }) => {
     dispatch(setAdsPerPage(selectedValue)); // Dispatch an action to update the state
   };
 
-  //Cleaning & making friendly URL
-  const cleanUpForURL = text => {
-    return text
-      .toLowerCase()
-      .replace(/ /g, '-') // Replace spaces with hyphens
-      .replace(/[^\w-]/g, ''); // Remove special characters
-  };
-
-  // Generates the URL using the _id of the advert and the name field
-  const generateAdvertURL = advert => {
-    const cleanName = cleanUpForURL(advert.name);
-    return `/adverts/${advert._id}/${cleanName}`;
-  };
-
   return (
     <Layout>
       <>
@@ -268,9 +253,7 @@ const AdsList = ({ selector }) => {
                         .map(advert => (
                           <div key={advert._id}>
                             <div className="advert-container">
-                              <Link to={generateAdvertURL(advert)}>
-                                <AdvertReduced {...advert} />
-                              </Link>
+                              <AdvertReduced {...advert} />
                             </div>
                           </div>
                         ))}
