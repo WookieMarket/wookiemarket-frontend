@@ -65,10 +65,9 @@
   "ADVERT DETAIL": "Detalle del anuncio",
   "Sorry, the requested ad is not available": "Lo sentimos, el anuncio solicitado no está disponible",
   "Product image": "Imagen del producto",
-  "Is&": "Se",
   "this product by": "este producto por",
-  "purchased": "compra",
-  "for sale": "vende",
+  "purchased": "Se compra",
+  "for sale": "Se vende",
   "Delete Advert": "¿Borrar anuncio",
   "Edit Advert": "Editar Anuncio",
   "Are you sure you want to delete this advert?": "¿Está seguro de que desea borrar este anuncio?",
@@ -99,5 +98,5 @@
   "There are no notifications.": "No hay notificaciones.",
   "Categories": "Categorías",
   "Filter": "Filtrar",
-  "Buy button title": "Comprar"
+  "Buy button title": "Contactar"
 }
