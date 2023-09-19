@@ -57,9 +57,9 @@ function AdvertReduced(advert) {
           </span>
         )}
       </div>
-      <div className="productData ">
-        <div className="product-img">
-          <Link to={generateAdvertURL(advert)}>
+      <Link to={generateAdvertURL(advert)}>
+        <div className="productData ">
+          <div className="product-img">
             {
               <img
                 className="img"
@@ -68,38 +68,38 @@ function AdvertReduced(advert) {
                 alt={t('Product image')}
               ></img>
             }
-          </Link>
-        </div>
+          </div>
 
-        <div className="productInfo">
-          <h2>{advert.name}</h2>
-          <p className="hologram-text tv-text ">
-            {t('Is&')}
-            {advert.onSale === true ? (
-              <span id="isSale"> {t('for sale')} </span>
-            ) : (
-              <span id="isSale"> {t('purchased')} </span>
-            )}
-          </p>
-          <div className="price tv-text ">
-            <p>
-              {advert.price.toLocaleString(navigator.language, {
-                useGrouping: true,
-              })}
-              <span id="price_coin"> {advert.coin}</span>
+          <div className="productInfo">
+            <h2>{advert.name}</h2>
+            <p className="hologram-text tv-text ">
+              {t('Is&')}
+              {advert.onSale === true ? (
+                <span id="isSale"> {t('for sale')} </span>
+              ) : (
+                <span id="isSale"> {t('purchased')} </span>
+              )}
             </p>
-          </div>
-          <div className="advert_label hologram-text tv-text">
-            <p className="advert-text">
-              <span>
-                {advert.category === undefined
-                  ? ''
-                  : advert.category.join(', ').toLocaleUpperCase()}
-              </span>
-            </p>
+            <div className="price tv-text ">
+              <p>
+                {advert.price.toLocaleString(navigator.language, {
+                  useGrouping: true,
+                })}
+                <span id="price_coin"> {advert.coin}</span>
+              </p>
+            </div>
+            <div className="advert_label hologram-text tv-text">
+              <p className="advert-text">
+                <span>
+                  {advert.category === undefined
+                    ? ''
+                    : advert.category.join(', ').toLocaleUpperCase()}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 }
