@@ -15,7 +15,7 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const [mensajes, setMensajes] = useState([]);
   const notifications = useSelector(getNotification);
-  const [lastNotificationDate, setLastNotificationDate] = useState(null);
+  //const [lastNotificationDate, setLastNotificationDate] = useState(null);
 
   // const [mensajes2, setMensajes2] = useState([]);
 
@@ -25,29 +25,29 @@ const Notifications = () => {
     );
   };
 
-  useEffect(() => {
-    if (notifications.length > 0) {
-      // Find the most recent notification in new notifications
-      const mostRecentNotification = notifications.reduce((prev, current) =>
-        new Date(current.notification.createdAt.$date) >
-        new Date(prev.notification.createdAt.$date)
-          ? current
-          : prev,
-      );
+  // useEffect(() => {
+  //   if (notifications.length > 0) {
+  //     // Find the most recent notification in new notifications
+  //     const mostRecentNotification = notifications.reduce((prev, current) =>
+  //       new Date(current.notification.createdAt.$date) >
+  //       new Date(prev.notification.createdAt.$date)
+  //         ? current
+  //         : prev,
+  //     );
 
-      // Compares the date of the most recent notification with the date of the last uploaded notification
-      if (
-        !lastNotificationDate ||
-        new Date(mostRecentNotification.notification.createdAt.$date) >
-          new Date(lastNotificationDate)
-      ) {
-        // If the most recent notification is newer, upload it and update the date of the last uploaded notification
-        setLastNotificationDate(
-          mostRecentNotification.notification.createdAt.$date,
-        );
-      }
-    }
-  }, [notifications, lastNotificationDate]);
+  //     // Compares the date of the most recent notification with the date of the last uploaded notification
+  //     if (
+  //       !lastNotificationDate ||
+  //       new Date(mostRecentNotification.notification.createdAt.$date) >
+  //         new Date(lastNotificationDate)
+  //     ) {
+  //       // If the most recent notification is newer, upload it and update the date of the last uploaded notification
+  //       setLastNotificationDate(
+  //         mostRecentNotification.notification.createdAt.$date,
+  //       );
+  //     }
+  //   }
+  // }, [notifications, lastNotificationDate]);
 
   useEffect(() => {
     const socket = io(process.env.REACT_APP_API_BASE_URL);

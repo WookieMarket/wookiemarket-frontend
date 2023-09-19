@@ -15,21 +15,23 @@ const AdvertsListPage = () => {
     dispatch(advertsList()).catch(error => console.log(error));
   }, [dispatch]);
 
+  const accessToken = storage.get('auth');
   // load only if there is token
   useEffect(() => {
-    const accessToken = storage.get('auth');
     if (accessToken) {
       dispatch(getFavorite()).catch(error => console.log(error));
     }
-  }, [dispatch]);
+  }, [dispatch, accessToken]);
 
   useEffect(() => {
-    const loadNotifications = () => {
-      dispatch(userNotification()).catch(error => console.log(error));
-    };
+    if (accessToken) {
+      const loadNotifications = () => {
+        dispatch(userNotification()).catch(error => console.log(error));
+      };
 
-    loadNotifications();
-  }, [dispatch]);
+      loadNotifications();
+    }
+  }, [dispatch, accessToken]);
 
   const handleErrorClick = () => {
     dispatch(resetError());
