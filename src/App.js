@@ -25,6 +25,7 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/home" element={<AdvertsListPage />} />
+          
 
           <Route
             path="/create-ad"
@@ -35,14 +36,7 @@ function App() {
             }
           />
 
-          {/* <Route
-            path="/ads"
-            element={
-              <RequireAuth>
-                <AdvertsListPage />
-              </RequireAuth>
-            }
-          /> */}
+          {/* <Route path="/ads" element={<AdvertsListPage />} /> */}
 
           <Route
             path="/modify/:adId"
