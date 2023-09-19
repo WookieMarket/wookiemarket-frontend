@@ -76,7 +76,7 @@
   "DELETING ADVERTISEMENT": "DELETING ADVERTISEMENT",
   "DELETING ADVERTISEMENT (confirmation)": "DELETING ADVERTISEMENT (confirmation)",
   "Your advert was deleted successfully": "Your advert was deleted successfully",
-  "Chat with ad owner": "Chat with ad owner",
+  "Chat button title": "Chat with seller",
   "Edit an ad": "edit an ad",
   "User info": "User information ",
   "Actualizar": "Update",
@@ -98,5 +98,6 @@
   "Modify": "Modify",
   "There are no notifications.": "There are no notifications.",
   "Categories": "Categories",
-  "Filter": "Filter"
+  "Filter": "Filter",
+  "Buy button title": "Buy"
 }
