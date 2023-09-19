@@ -19,10 +19,14 @@ export const getFavoriteAds = state =>
   state.ads.favoriteAds ? state.ads.favoriteAds : [];
 
 export const getUserAds = state => (state.ads.userAds ? state.ads.userAds : []);
+
 export const getAdsPerPage = state => state.ads.adsPerPage;
+
 export const getAllCategory = state =>
   state.categories.data ? state.categories.data : [];
+
 export const selectTotalCountAds = state => state.ads.totalCountAds;
+
 export const getAdvertById = advertId => state =>
   state.ads.data.find(advert => advert._id === advertId);
 

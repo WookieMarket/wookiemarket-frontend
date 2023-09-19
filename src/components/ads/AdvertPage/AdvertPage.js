@@ -78,6 +78,10 @@ const AdvertPage = () => {
     setShowModal(true);
   };
 
+  const handleButtonClick = () => {
+    setShowModal(false);
+  };
+
   return (
     <Layout>
       {isLoading ? (
@@ -119,7 +123,7 @@ const AdvertPage = () => {
             ></Modal>
           )}
 
-          {showModal && <AdBuyPage />}
+          {showModal && <AdBuyPage handleButtonClick={handleButtonClick} />}
 
           {error && (
             <ErrorModal

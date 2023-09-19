@@ -18,6 +18,8 @@ import Spinner from '../../shared/spinner/Spinner';
 import AdvertReduced from '../Advert/AdvertReduced';
 import EmptyList from '../EmptyList/EmptyList';
 import './AdsList.css';
+import storage from '../../../utils/storage';
+import { userNotification } from '../../../store/slices/user';
 
 const getUniqueCategories = categories => {
   //Removing blank spaces before and after commas
@@ -50,6 +52,7 @@ const AdsList = ({ selector }) => {
   const categories = useSelector(getAllCategory);
   const uniqueCategories = getUniqueCategories(categories);
   const totalCountAds = useSelector(selectTotalCountAds);
+  const accessToken = storage.get('auth');
 
   // const [result, setNoResult] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -63,6 +66,17 @@ const AdsList = ({ selector }) => {
   const handlePageChange = page => {
     setCurrentPage(page);
   };
+
+  // notifications
+  useEffect(() => {
+    if (accessToken) {
+      const loadNotifications = () => {
+        dispatch(userNotification()).catch(error => console.log(error));
+      };
+
+      loadNotifications();
+    }
+  }, [dispatch, accessToken]);
 
   //Categories list
   useEffect(() => {

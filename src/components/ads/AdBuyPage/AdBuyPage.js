@@ -1,26 +1,25 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-//import Modal from '../../shared/modal/Modal';
 import AdFormBuy from '../../shared/AdFormBuy/AdFormBuy';
 import { useDispatch, useSelector } from 'react-redux';
 import { emailBuyAd } from '../../../store/slices/ads';
 import { getUi } from '../../../store/selectors';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import { resetError } from '../../../store/slices/ui';
-import Modal from '../../shared/modal/Modal';
+import { useNavigate } from 'react-router-dom';
 
-const AdBuyPage = () => {
+const AdBuyPage = ({ handleButtonClick }) => {
   const { t } = useTranslation();
   const { id } = useParams();
+  const { name } = useParams();
+  console.log('nombre', name);
   const dispatch = useDispatch();
-  console.log('id', id);
   const [showModal, setShowModal] = useState(false);
+  const [showModalEmail, setShowModalEmail] = useState(false);
   const { error } = useSelector(getUi);
+  const navigate = useNavigate();
 
-  // const handleShowModalEmail = () => {
-  //   setShowModal(false);
-  // };
   const handleErrorClick = () => {
     dispatch(resetError());
     setShowModal(false);
@@ -29,7 +28,6 @@ const AdBuyPage = () => {
   const [formData, setFormData] = useState({
     email: '',
   });
-  console.log('texto', formData);
 
   const handleChange = event => {
     setFormData({
@@ -38,47 +36,44 @@ const AdBuyPage = () => {
     });
   };
 
-  const handleSubmit = event => {
+  const handleShowModal = () => {
+    setShowModalEmail(false);
+  };
+
+  const handleSubmitEmail = async event => {
     event.preventDefault();
     dispatch(emailBuyAd({ adOwnerId: id, custom_message: formData.email }));
-    handleOpenModal(1);
-    // setTimeout(() => {
-    //   navigate('/');
-    // }, 3000);
-    //setShowModal(true);
-    // console.log('id', id);
-    // console.log('texto', formData);
-    // console.log('showModalEmail despues', showModal);
+    console.log('Después del dispatch, showModal debería ser true:', showModal);
+    setShowModal(true);
+    console.log('Después de setShowModal(true), showModal es:', showModal);
+    //navigate('/');
   };
-  const [activeModal, setActiveModal] = useState(null);
-  const handleOpenModal = modalId => {
-    setActiveModal(modalId);
-  };
-  const handleCloseModal = () => {
-    setActiveModal(null);
-  };
+
   const buttonDisabled = !formData.email;
   console.log('showModalEmail:', showModal);
 
   return (
     <>
-      {/* {!error && showModal && (
+      <AdFormBuy
+        handleSubmit={handleSubmitEmail}
+        valueInputEmail={formData.email}
+        handleChange={handleChange}
+        buttonDisabled={buttonDisabled}
+        testid={'buttonAdNew'}
+        nameButton={t('Buy')}
+        handleButtonClick={handleButtonClick}
+        nameButtonCancel={t('Cancel')}
+      />
+
+      {!error && showModalEmail && (
         <ErrorModal
           title={t('Email')}
           message={t('Email sent')}
-          onCancel={handleShowModalEmail}
+          onCancel={handleShowModal}
           testid="showmodal"
         />
-      )} */}
-      {activeModal === 1 && (
-        <Modal
-          buttonId="buyModal1"
-          title={t('Email')}
-          message={t('Email sent')}
-          onConfirm={() => handleOpenModal(1)}
-          onCancel={handleCloseModal}
-        ></Modal>
       )}
+
       {error && (
         <ErrorModal
           buttonErrorId="errorAdBuy"
@@ -88,14 +83,6 @@ const AdBuyPage = () => {
           testid="modalButton"
         />
       )}
-      <AdFormBuy
-        handleSubmit={handleSubmit}
-        valueInputEmail={formData.email}
-        handleChange={handleChange}
-        buttonDisabled={buttonDisabled}
-        testid={'buttonAdNew'}
-        nameButton={t('Buy')}
-      />
     </>
   );
 };

@@ -17,15 +17,15 @@ const FavoriteAdsList = () => {
     dispatch(getFavorite()).catch(error => console.log(error));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (accessToken) {
-      const loadNotifications = () => {
-        dispatch(userNotification()).catch(error => console.log(error));
-      };
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     const loadNotifications = () => {
+  //       dispatch(userNotification()).catch(error => console.log(error));
+  //     };
 
-      loadNotifications();
-    }
-  }, [dispatch, accessToken]);
+  //     loadNotifications();
+  //   }
+  // }, [dispatch, accessToken]);
 
   const handleErrorClick = () => {
     dispatch(resetError());
