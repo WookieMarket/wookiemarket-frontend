@@ -1,16 +1,5 @@
+.not-favorite-button,
 .favorite-button {
-  width: 28px;
-  height: 28px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin: 0%;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.not-favorite-button {
   background-color: transparent;
   border: none;
   margin: 0%;
