@@ -1,4 +1,4 @@
-.validation-message-label {
+.element-form label.validation-message-label {
     color: red;
     font-weight: bold;
 }

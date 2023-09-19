@@ -53,6 +53,12 @@
   "Advertisements": "Anuncios",
   "advertisements": "anuncios",
   "Searching area": "Área de búsqueda",
+  "Adverts per page": "Anuncios por página",
+  "Enter the exact price": "Introduce el precio exacto",
+  "Enter minimum price": "Introduce precio mínimo",
+  "Enter maximum price": "Introduce precio máximo",
+  "Hold down the ctrl key to select more than one category": "Mantener pulsado la tecla ctrl para seleccionar más de una categoría",
+  "more ads": "más anuncios",
   "LOADING...": "CARGANDO...",
   "home": "inicio",
   "ADVERTISEMENTS AVIABLE": "Anuncios disponibles",
@@ -80,7 +86,6 @@
   "Email validation error": "Email invalido",
   "user profile": "Perfil de Usuario",
   "user avatar": "Avatar",
-  "Adverts per page": "Anuncios por página",
   "sold": "Vendido",
   "reserved": "Reservado",
   "user ads": "Ver anucios de usuario",
@@ -92,5 +97,6 @@
   "See advertisement": "Ver anuncio",
   "Read": "Leer",
   "There are no notifications.": "No hay notificaciones.",
-  "Categories": "Categorías"
+  "Categories": "Categorías",
+  "Filter": "Filtrar"
 }

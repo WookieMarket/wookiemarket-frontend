@@ -11,25 +11,32 @@ import { userNotification } from '../../../store/slices/user';
 const AdvertsListPage = () => {
   const { error } = useSelector(getUi);
   const dispatch = useDispatch();
+  const limit = 10;
+  const accessToken = storage.get('auth');
+
   useEffect(() => {
-    dispatch(advertsList()).catch(error => console.log(error));
+    const skip = 0;
+    dispatch(advertsList({ skip, limit, sort: 'desc' })).catch(error =>
+      console.log(error),
+    );
   }, [dispatch]);
 
   // load only if there is token
   useEffect(() => {
-    const accessToken = storage.get('auth');
     if (accessToken) {
       dispatch(getFavorite()).catch(error => console.log(error));
     }
-  }, [dispatch]);
+  }, [dispatch, accessToken]);
 
   useEffect(() => {
     const loadNotifications = () => {
       dispatch(userNotification()).catch(error => console.log(error));
     };
 
-    loadNotifications();
-  }, [dispatch]);
+    if (accessToken) {
+      loadNotifications();
+    }
+  }, [dispatch, accessToken]);
 
   const handleErrorClick = () => {
     dispatch(resetError());
