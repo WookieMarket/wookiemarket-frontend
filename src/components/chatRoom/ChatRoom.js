@@ -1,18 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getAdOwnerUsername, getJwt } from '../../store/selectors';
+import { useNavigate, useParams } from 'react-router-dom';
 import storage from '../../utils/storage';
-import jwt_decode from 'jwt-decode';
 import Layout from '../layout/Layout';
+import { t } from 'i18next';
+import { getIsLogged, getJwt } from '../../store/selectors';
+import io from 'socket.io-client';
+import Button from '../shared/Button';
+import Modal from '../shared/modal/Modal';
 
 const ChatRoom = () => {
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-    let { userId, recipientUsername } = useParams();
-    /*
-    console.log('userId: ' + userId)
-    console.log('adOwnerUsername: ' + ownerUserName)
-    console.log('Chat Window');
+  const isLogged = useSelector(getIsLogged);
+  const navigate = useNavigate();
+  const jwt = useSelector(getJwt);
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+  const { userId, recipientUsername } = useParams();
+  const username = storage.get('username');
+  const newSocket = io(`${apiBaseUrl}`);
+
+  console.log('userId: ' + userId)
+  console.log('recipientUsername: ' + recipientUsername)
+  console.log('Chat Window');
+
+  const [socket, setSocket] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
+
+  useEffect(() => {
+    newSocket.connect();
+    setSocket(newSocket);
 
     // Llamar a la API para iniciar el chat
     fetch(`${apiBaseUrl}/api/chat/${userId}`, {
@@ -30,34 +45,59 @@ const ChatRoom = () => {
       })
       .then(data => {
         console.log(data.message);
-        // Aquí puedes realizar cualquier otra lógica que necesites con la respuesta.
       })
       .catch(error => {
         console.error('Error al iniciar el chat:', error);
       });
-    
-    
-    // Redirects to the Chat with the advert owner
-    //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
-  useEffect(() => {
-    const socket = io(`${apiBaseUrl}`);
 
     // Escuchar eventos desde el servidor
-    socket.on('chat message', (msg) => {
+    /*socket.on('chat message', msg => {
       console.log(`Mensaje del servidor: ${msg}`);
-    });
+    });*/
+  }, [apiBaseUrl, userId, jwt, newSocket, socket]);
 
-    // ... (otros eventos y lógica de chat)
-  }, []);*/
+  const handleCloseChat = () => {
+    if (socket) {
+      socket.disconnect();
+      console.log('Chat cerrado');
+    }
+    navigate(-1);
+    console.log('Chat cerrado');
+  };
+
+  const handleCloseModal = () => {
+    setActiveModal(null);
+  };
 
   return (
-  <Layout>
-
-    <div><h2>Chat Room</h2>
-      <p>User ID: {userId}</p>
-      <p>Username: {recipientUsername}</p></div>
-  </Layout>
-  )
+    <Layout>
+      {isLogged ? (
+        <div>
+          <h2>Chat Room</h2>
+          <p>
+            {t('User')}: {username}
+          </p>
+          <p>
+            {t('Ad owner')}: {recipientUsername}
+          </p>
+          <section>
+            <Button id="closeButton" onClick={() => handleCloseChat()}>
+              {t('Close chat')}
+            </Button>
+          </section>
+        </div>
+      ) : (
+        // Renderizar tu ventana modal aquí
+        <Modal
+          id="noLoginModal1"
+          title={t('please, login before start chat')}
+          message={t('You need to be logged to start a chat with the owner.')}
+          onConfirm={() => navigate('/login')}
+          onCancel={handleCloseModal}
+        />
+      )}
+    </Layout>
+  );
 };
 
 export default ChatRoom;

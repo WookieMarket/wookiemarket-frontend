@@ -83,11 +83,6 @@ const AdvertPage = () => {
     const ownerUserName = adOwnerUsername.username
     const userJwt = jwt || storage.get('auth');
     const userId = jwt_decode(userJwt)._id;
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-    
-    console.log('userId: ' + userId)
-    console.log('adOwnerUsername: ' + ownerUserName)
-    console.log('Chat Window');
     
     // Redirects to the Chat with the advert owner
     navigate(`/chatRoom/${userId}/${ownerUserName}`);
