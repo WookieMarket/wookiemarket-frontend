@@ -65,9 +65,8 @@
   "ADVERT DETAIL": "ADVERT DETAIL",
   "Sorry, the requested ad is not available": "Sorry, the requested ad is not available",
   "Product image": "Product image",
-  "Is&": "Is",
   "this product by": "this product by",
-  "purchased": "purchased",
+  "purchased": "wanted",
   "for sale": "for sale",
   "Delete Advert": "Delete Advert",
   "Edit Advert": "Edit Advert",
@@ -99,5 +98,5 @@
   "There are no notifications.": "There are no notifications.",
   "Categories": "Categories",
   "Filter": "Filter",
-  "Buy button title": "Buy"
+  "Buy button title": "Contact"
 }
