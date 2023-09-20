@@ -38,5 +38,9 @@ export const successRedirects =
       router.navigate('/');
     }
 
+    if (action.type === 'user/editUserInfo/fulfilled') {
+      router.navigate('/');
+    }
+
     return result;
   };
