@@ -1,6 +1,5 @@
 .container-form-creation-buy {
   width: 50%;
-  height: 68vh;
   /* Establece la altura del contenedor en el 50% de la altura de la ventana */
   position: absolute;
   /* Cambia a posición absoluta */
@@ -51,7 +50,6 @@
 
 @media screen and (min-width: 768px) {
   .container-form-creation-buy {
-    height: 68vh;
     width: 30%;
     top: 50%;
     gap: 0px;
@@ -74,7 +72,6 @@
 
 @media screen and (min-width: 1024px) {
   .container-form-creation-buy {
-    height: 72vh;
     width: 30%;
     top: 50%;
     gap: 0px;

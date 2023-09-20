@@ -20,7 +20,6 @@
   border-radius: 15px;
   text-align: center;
   color: var(--border-color);
-  text-transform: lowercase;
   z-index: 21;
 }
 
@@ -29,7 +28,6 @@
   font-size: 0.4em;
   margin-bottom: 20px;
   color: var(--border-color);
-  text-transform: lowercase;
   z-index: 23;
 }
 
@@ -38,7 +36,6 @@
   font-size: 0.6em;
   margin-bottom: 20px;
   color: var(border-color-form);
-  text-transform: lowercase;
 }
 
 .modal-buttons {
@@ -100,15 +97,19 @@ button:disabled:hover {
   0% {
     opacity: 1;
   }
+
   49.5% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
+
   50.5% {
     opacity: 1;
   }
+
   100% {
     opacity: 1;
   }

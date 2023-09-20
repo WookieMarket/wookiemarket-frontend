@@ -72,8 +72,8 @@
   "Edit Advert": "Editar Anuncio",
   "Are you sure you want to delete this advert?": "¿Está seguro de que desea borrar este anuncio?",
   "Are you really sure you want to delete this advert?": "¿Está realmente seguro de que desea borrar este anuncio?",
-  "DELETING ADVERTISEMENT": "BORRADO DE ANUNCIO",
-  "DELETING ADVERTISEMENT (confirmation)": "BORRADO DE ANUNCIO (confirmación)",
+  "DELETING ADVERTISEMENT": "Borrado de anuncio",
+  "DELETING ADVERTISEMENT (confirmation)": "Borrado de anuncio (confirmación)",
   "Your advert was deleted successfully": "Anuncio borrado satisfactoriamente",
   "Chat button title": "Hablar con el propìetario del anuncio",
   "Edit an ad": "Edita un anuncio",
@@ -82,7 +82,7 @@
   "update user info": "Se actualizará la información de usuario",
   "My Ads": "Mis anuncios",
   "My favourites": "Mis favoritos",
-  "Email validation error": "Email invalido",
+  "Email validation error": "Email inválido",
   "user profile": "Perfil de Usuario",
   "user avatar": "Avatar",
   "sold": "Vendido",
@@ -98,5 +98,6 @@
   "There are no notifications.": "No hay notificaciones.",
   "Categories": "Categorías",
   "Filter": "Filtrar",
-  "Buy button title": "Contactar"
+  "Buy button title": "Contactar",
+  "Buy Advert": "Comprar"
 }
