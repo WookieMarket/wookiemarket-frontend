@@ -23,6 +23,7 @@ const AdvertPage = () => {
   const isLogged = useSelector(getIsLogged);
   const { isLoading, error } = useSelector(getUi);
   const { id } = useParams();
+  const [showModalEmail, setShowModalEmail] = useState(false);
 
   //GETTING ADVERT BY ID
   useEffect(() => {
@@ -104,7 +105,13 @@ const AdvertPage = () => {
             ></Modal>
           )}
 
-          {showModal && <AdBuyPage handleButtonClick={handleButtonClick} />}
+          {showModal && (
+            <AdBuyPage
+              handleButtonClick={handleButtonClick}
+              showModalEmail={showModalEmail}
+              setShowModalEmail={setShowModalEmail}
+            />
+          )}
 
           {error && (
             <ErrorModal
