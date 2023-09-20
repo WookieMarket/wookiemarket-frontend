@@ -88,9 +88,9 @@ export const notification = () => {
 };
 
 /**
- * returns user notifications
+ * mark a notification as read
  *
- * @returns returns user notifications
+ * @returns mark a notification as read
  */
 export const isRead = notificationId => {
   const url = `${usersUrl}/isread`;

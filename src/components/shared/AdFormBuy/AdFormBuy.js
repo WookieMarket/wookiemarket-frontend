@@ -18,11 +18,7 @@ function AdFormBuy(props) {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="container-form-creation-buy"
-        encType="multipart/form-data"
-      >
+      <form onSubmit={handleSubmit} className="container-form-creation-buy">
         <Form
           classNameForm="form-group-creation-buy"
           classNameLabel="password-label-creation-buy"

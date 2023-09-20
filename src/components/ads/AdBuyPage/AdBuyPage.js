@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import AdFormBuy from '../../shared/AdFormBuy/AdFormBuy';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,13 +13,13 @@ const AdBuyPage = ({ handleButtonClick, handleSubmitEmail }) => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
+  //const [showModal, setShowModal] = useState(false);
   const [showModalEmail, setShowModalEmail] = useState(false);
   const { error } = useSelector(getUi);
 
   const handleErrorClick = () => {
     dispatch(resetError());
-    setShowModal(false);
+    setShowModalEmail(false);
   };
 
   const [formData, setFormData] = useState({
@@ -38,15 +38,14 @@ const AdBuyPage = ({ handleButtonClick, handleSubmitEmail }) => {
   };
 
   handleSubmitEmail = async event => {
+    console.log('handleSubmitEmail se está llamando');
     event.preventDefault();
     dispatch(emailBuyAd({ adOwnerId: id, custom_message: formData.email }));
-    console.log('Después del dispatch, showModal debería ser true:', showModal);
-    setShowModal(true);
-    console.log('Después de setShowModal(true), showModal es:', showModal);
+
+    setShowModalEmail(true);
   };
 
   const buttonDisabled = !formData.email;
-  console.log('showModalEmail:', showModal);
 
   return (
     <>
