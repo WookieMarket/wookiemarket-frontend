@@ -123,6 +123,19 @@ function AdForm(props) {
         <Form
           classNameForm="form-group-creation"
           classNameLabel="password-label-creation"
+          htmlFor="coin"
+          text={t('Coin')}
+          classNameInput="password-input-creation"
+          inputId="coin"
+          inputType="text"
+          inputName="coin"
+          value={valueInputCoin}
+          handleChange={handleChange}
+          placeholder={t('Coin')}
+        />
+        <Form
+          classNameForm="form-group-creation"
+          classNameLabel="password-label-creation"
           htmlFor="description"
           text={t('Description')}
           classNameInput="password-input-creation"
@@ -134,19 +147,6 @@ function AdForm(props) {
           placeholder={t('Description')}
         />
 
-        <Form
-          classNameForm="form-group-creation"
-          classNameLabel="password-label-creation"
-          htmlFor="coin"
-          text={t('Coin')}
-          classNameInput="password-input-creation"
-          inputId="coin"
-          inputType="text"
-          inputName="coin"
-          value={valueInputCoin}
-          handleChange={handleChange}
-          placeholder={t('Coin')}
-        />
         <div className=" element-form">
           <label>{t('Categories')}</label>
 

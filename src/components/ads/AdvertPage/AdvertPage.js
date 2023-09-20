@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAdvert, getAdById } from '../../../store/slices/ads';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
-import { resetError } from '../../../store/slices/ui';
-import Advert from '../Advert/Advert';
-import Button from '../../shared/Button';
-import Modal from '../../shared/modal/Modal';
-import ErrorModal from '../../shared/modal/ErrorModal';
-import './advertPage.css';
 import '../../../css/holoTextEffect.css';
-import { useState } from 'react';
-import Layout from '../../layout/Layout';
-import Spinner from '../../shared/spinner/Spinner';
+import { getAdvertById, getIsLogged, getUi } from '../../../store/selectors';
+import { deleteAdvert, getAdById } from '../../../store/slices/ads';
+import { resetError } from '../../../store/slices/ui';
 import IsDisable from '../../../utils/isDisable';
+import Layout from '../../layout/Layout';
+import Button from '../../shared/Button';
+import ErrorModal from '../../shared/modal/ErrorModal';
+import Modal from '../../shared/modal/Modal';
+import Spinner from '../../shared/spinner/Spinner';
 import AdBuyPage from '../AdBuyPage/AdBuyPage';
+import Advert from '../Advert/Advert';
+import './advertPage.css';
 
 const AdvertPage = () => {
   const navigate = useNavigate();
@@ -68,12 +67,6 @@ const AdvertPage = () => {
     navigate(`/modify/${id}`);
   };
 
-  const handleChat = () => {
-    setActiveModal(null);
-    console.log('Chat Window');
-    // Redirects to the Chat with the advert owner
-    //navigate(`/chatRoom/${KEY}`); --> Ensure the key for chatRoom
-  };
   const handleBuy = () => {
     setShowModal(true);
   };
@@ -84,24 +77,12 @@ const AdvertPage = () => {
         <Spinner message={t('charging...')} />
       ) : (
         <>
-          {activeModal === 1 && (
-            <Modal
-              buttonId1="delete1"
-              buttonId2="delete2"
-              id="deleteModal1"
-              title={t('DELETING ADVERTISEMENT')}
-              message={t('Are you sure you want to delete this advert?')}
-              onConfirm={() => handleOpenModal(2)}
-              onCancel={handleCloseModal}
-            ></Modal>
-          )}
-
           {activeModal === 2 && (
             <Modal
               buttonId1="delete3"
               buttonId2="delete4"
               id={2}
-              title={t('DELETING ADVERTISEMENT (confirmation)')}
+              title={t('DELETING ADVERTISEMENT')}
               message={t(`Are you really sure you want to delete this advert?`)}
               onConfirm={handleDeleteConfirm}
               onCancel={handleCloseModal}
@@ -139,7 +120,7 @@ const AdvertPage = () => {
               <p>{t('Sorry, the requested ad is not available')}</p>
             )}
 
-            {isDisabled && (
+            {isDisabled && isLogged && (
               <section className="buttonSection">
                 <Button id="buyButton" onClick={handleBuy}>
                   {t('Buy button title')}
@@ -149,18 +130,11 @@ const AdvertPage = () => {
 
             {!isDisabled && advert && (
               <section className="buttonSection">
-                <Button id="deleteButton" onClick={() => handleOpenModal(1)}>
+                <Button id="deleteButton" onClick={() => handleOpenModal(2)}>
                   {t('Delete Advert')}?
                 </Button>
                 <Button id="editButton" onClick={handleEdit}>
                   {t('Edit Advert')}
-                </Button>
-              </section>
-            )}
-            {isLogged && advert && (
-              <section className="buttonSection">
-                <Button id="chatButton" onClick={handleChat}>
-                  {t('Chat button title')}
                 </Button>
               </section>
             )}
