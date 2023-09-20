@@ -26,7 +26,7 @@ export const advertsList = createAsyncThunk(
   'ads/list',
   async ({ skip, limit, sort }, { extra: { service }, rejectWithValue }) => {
     try {
-      const adverts = await service.ads.getRecentAds(skip, limit);
+      const adverts = await service.ads.getRecentAds(skip, limit, sort);
 
       return adverts;
     } catch (error) {
