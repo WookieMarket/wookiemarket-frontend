@@ -4,16 +4,10 @@ import Pagination from '../../shared/Pagination/Pagination';
 // import Pagination from '../../shared/pagination/Pagination';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAdsPerPage,
-  getAllCategory,
-  getUi,
-  selectTotalCountAds,
-} from '../../../store/selectors';
-import { getAdsWithFilters, setAdsPerPage } from '../../../store/slices/ads';
+import { getAdsPerPage, getAllCategory, getUi } from '../../../store/selectors';
+import { setAdsPerPage } from '../../../store/slices/ads';
 import { categoriesList } from '../../../store/slices/categories';
 import Layout from '../../layout/Layout';
-import Button from '../../shared/Button';
 import Spinner from '../../shared/spinner/Spinner';
 import AdvertReduced from '../Advert/AdvertReduced';
 import EmptyList from '../EmptyList/EmptyList';
@@ -49,7 +43,6 @@ const AdsList = ({ selector }) => {
   const { isLoading } = useSelector(getUi);
   const categories = useSelector(getAllCategory);
   const uniqueCategories = getUniqueCategories(categories);
-  const totalCountAds = useSelector(selectTotalCountAds);
 
   // const [result, setNoResult] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -113,6 +106,25 @@ const AdsList = ({ selector }) => {
     setQueryMaxPrice(event.target.value);
   };
 
+  /**
+   * Ordenamos  descendente por fechas
+   * @param {*} a
+   * @param {*} b
+   * @returns
+   */
+  const compareDates = (a, b) => {
+    const dateA = a?.createdAt ? new Date(a.createdAt) : new Date('01/01/1980');
+    const dateB = b?.createdAt ? new Date(b.createdAt) : new Date('01/01/1980');
+
+    if (dateA > dateB) {
+      return -1;
+    } else if (dateA < dateB) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
   const filterByMinMaxPrice = ad => {
     if (!queryMinPrice && !queryMaxPrice) return true;
 
@@ -133,29 +145,18 @@ const AdsList = ({ selector }) => {
       .filter(filterByMinMaxPrice);
   }
 
-  const applyFilter = () => {
-    const filters = {
-      name: filterName,
-      category: selectedCategories.join(','),
-      // price: queryPrice,
-      minPrice: queryMinPrice,
-      maxPrice: queryMaxPrice,
-    };
-
-    dispatch(getAdsWithFilters(filters));
-  };
-
   //PAGINATION
   const advertsPerPage = useSelector(getAdsPerPage);
   const totalPages =
     Array.isArray(filteredAds) && filteredAds.length > 0
       ? Math.ceil(filteredAds.length / advertsPerPage)
       : 1;
-  console.log('Número total de páginas:', totalPages);
   const startIndex = (currentPage - 1) * advertsPerPage;
   const endIndex = startIndex + advertsPerPage;
-  const advertsToDisplay = filteredAds.slice(startIndex, endIndex);
-  console.log('Índices de inicio y fin:', startIndex, endIndex);
+  const advertsToDisplay = filteredAds
+    .sort(compareDates)
+    .slice(startIndex, endIndex);
+  console.log('ads', advertsToDisplay);
 
   const handleAdsPerPageChange = event => {
     const selectedValue = parseInt(event.target.value); // Parse the selected value to an integer
@@ -197,14 +198,6 @@ const AdsList = ({ selector }) => {
                 </div>
               </section>
               <section id="filterByPrice">
-                {/* <label className="advert_label">{t('Price')}:</label>
-              <input
-                type="number"
-                id="priceInput"
-                placeholder={t('Enter the exact price')}
-                value={queryPrice}
-                onChange={handleChangePrice}
-              /> */}
                 <div className="element-form">
                   <label className="form-label">{t('Price')}</label>
                   <div className="input-prices">
@@ -226,16 +219,6 @@ const AdsList = ({ selector }) => {
                   </div>
                 </div>
               </section>
-              <div className="button-filter">
-                <Button
-                  className=""
-                  variant="accept"
-                  onClick={applyFilter}
-                  disabled={totalCountAds === 0}
-                >
-                  {t('Filter')}
-                </Button>
-              </div>
             </div>
           </section>
         </section>
@@ -249,7 +232,8 @@ const AdsList = ({ selector }) => {
                   <div className="listContainer">
                     <div className="container-ad">
                       {advertsToDisplay
-                        .sort((a, b) => a.createdAt > b.createdAt)
+                        // .sort((a, b) => b.createdAt - a.createdAt)
+                        // TODO
                         .map(advert => (
                           <div key={advert._id}>
                             <div className="advert-container">

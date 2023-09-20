@@ -16,7 +16,7 @@ const AdvertsListPage = () => {
 
   useEffect(() => {
     const skip = 0;
-    dispatch(advertsList({ skip, limit, sort: 'desc' })).catch(error =>
+    dispatch(advertsList({ skip, limit, sort: 'asc' })).catch(error =>
       console.log(error),
     );
   }, [dispatch]);

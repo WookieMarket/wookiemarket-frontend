@@ -8,10 +8,8 @@ h2 {
 }
 
 .advert-text {
-  /* font-size: 25px; */
   font-weight: normal;
   color: var(--text-color-label);
-  text-decoration: underline;
 }
 
 #advert-name {

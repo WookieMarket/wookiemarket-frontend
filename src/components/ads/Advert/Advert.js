@@ -79,7 +79,6 @@ function Advert(advert) {
         <div className="productInfo">
           <h2>{advert.name}</h2>
           <p className="hologram-text tv-text ">
-            {t('Is&')}
             {advert.onSale === true ? (
               <span id="isSale"> {t('for sale')} </span>
             ) : (
