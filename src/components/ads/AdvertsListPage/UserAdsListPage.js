@@ -6,7 +6,6 @@ import { getAdsByUser } from '../../../store/slices/ads';
 import { useParams } from 'react-router-dom';
 import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
-import { userNotification } from '../../../store/slices/user';
 
 const UserAdsListPage = () => {
   const { error } = useSelector(getUi);
@@ -17,14 +16,6 @@ const UserAdsListPage = () => {
     console.log(username);
     dispatch(getAdsByUser(username)).catch(error => console.log(error));
   }, [username, dispatch]);
-
-  useEffect(() => {
-    const loadNotifications = () => {
-      dispatch(userNotification()).catch(error => console.log(error));
-    };
-
-    loadNotifications();
-  }, [dispatch]);
 
   const handleErrorClick = () => {
     dispatch(resetError());

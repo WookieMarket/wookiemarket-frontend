@@ -29,14 +29,17 @@ export const successRedirects =
       router.navigate('/');
     }
 
-    // TODO modificar cuando este implementado el detalle del anuncio
-    // if (action.type === 'ads/create/fulfilled') {
-    //   router.navigate('/home');
-    // }
-
     // Redirects to "Home" page after successful password change
     if (action.type === 'auth/resetPassword/fulfilled') {
       router.navigate('/login');
+    }
+
+    if (action.type === 'ads/emailBuy/fulfilled') {
+      router.navigate('/');
+    }
+
+    if (action.type === 'user/editUserInfo/fulfilled') {
+      router.navigate('/');
     }
 
     return result;

@@ -5,21 +5,13 @@ import { getFavoriteAds, getUi } from '../../../store/selectors';
 import { getFavorite } from '../../../store/slices/ads';
 import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
-import { userNotification } from '../../../store/slices/user';
 
 const FavoriteAdsList = () => {
   const { error } = useSelector(getUi);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getFavorite()).catch(error => console.log(error));
-  }, [dispatch]);
-
-  useEffect(() => {
-    const loadNotifications = () => {
-      dispatch(userNotification()).catch(error => console.log(error));
-    };
-
-    loadNotifications();
   }, [dispatch]);
 
   const handleErrorClick = () => {

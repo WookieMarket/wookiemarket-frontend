@@ -176,9 +176,9 @@ const ads = createSlice({
     data: [],
     userAds: [],
     favoriteAds: [],
-    adsPerPage:
-      4 ||
-      parseInt(storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE),
+    adsPerPage: parseInt(
+      storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
+    ),
     totalCountAds: 0,
   },
   reducers: {
