@@ -8,11 +8,10 @@ import { getUi } from '../../../store/selectors';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import { resetError } from '../../../store/slices/ui';
 
-const AdBuyPage = ({ handleButtonClick }) => {
+const AdBuyPage = ({ handleButtonClick, handleSubmitEmail }) => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const { name } = useParams();
-  console.log('nombre', name);
+
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [showModalEmail, setShowModalEmail] = useState(false);
@@ -38,7 +37,7 @@ const AdBuyPage = ({ handleButtonClick }) => {
     setShowModalEmail(false);
   };
 
-  const handleSubmitEmail = async event => {
+  handleSubmitEmail = async event => {
     event.preventDefault();
     dispatch(emailBuyAd({ adOwnerId: id, custom_message: formData.email }));
     console.log('Después del dispatch, showModal debería ser true:', showModal);
