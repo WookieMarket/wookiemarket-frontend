@@ -11,6 +11,8 @@ function AdFormBuy(props) {
     buttonDisabled,
     testid,
     nameButton,
+    handleButtonClick,
+    nameButtonCancel,
   } = props;
   const { t } = useTranslation();
 
@@ -34,17 +36,28 @@ function AdFormBuy(props) {
           handleChange={handleChange}
           placeholder={t('Write a message')}
         />
-
-        <Button
-          id="adformbuy"
-          data-testid={testid}
-          type="submit"
-          variant="accept"
-          width="button-form"
-          disabled={buttonDisabled}
-        >
-          {nameButton}
-        </Button>
+        <div className="container-button">
+          <Button
+            id="adformbuycancel"
+            data-testid={testid}
+            type="button"
+            variant="decline"
+            width="button-form"
+            onClick={handleButtonClick}
+          >
+            {nameButtonCancel}
+          </Button>
+          <Button
+            id="adformbuy"
+            data-testid={testid}
+            type="submit"
+            variant="accept"
+            width="button-form"
+            disabled={buttonDisabled}
+          >
+            {nameButton}
+          </Button>
+        </div>
       </form>
     </>
   );

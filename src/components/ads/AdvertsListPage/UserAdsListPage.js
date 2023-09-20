@@ -20,15 +20,15 @@ const UserAdsListPage = () => {
     dispatch(getAdsByUser(username)).catch(error => console.log(error));
   }, [username, dispatch]);
 
-  useEffect(() => {
-    if (accessToken) {
-      const loadNotifications = () => {
-        dispatch(userNotification()).catch(error => console.log(error));
-      };
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     const loadNotifications = () => {
+  //       dispatch(userNotification()).catch(error => console.log(error));
+  //     };
 
-      loadNotifications();
-    }
-  }, [dispatch, accessToken]);
+  //     loadNotifications();
+  //   }
+  // }, [dispatch, accessToken]);
 
   const handleErrorClick = () => {
     dispatch(resetError());

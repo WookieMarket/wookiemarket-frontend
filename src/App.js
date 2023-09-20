@@ -13,19 +13,36 @@ import AdvertPage from './components/ads/AdvertPage/AdvertPage';
 import FavoriteAdsList from './components/ads/AdvertsListPage/FavoriteAdsList';
 //import io from 'socket.io-client';
 import UserProfilePage from './components/user/UserProfilePage';
+import Page404 from './components/shared/page404/Page404';
 
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
+import storage from './utils/storage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { userNotification } from './store/slices/user';
 
 function App() {
+  const accessToken = storage.get('auth');
+  const dispatch = useDispatch();
+
+  // notifications
+  useEffect(() => {
+    if (accessToken) {
+      const loadNotifications = () => {
+        dispatch(userNotification()).catch(error => console.log(error));
+      };
+
+      loadNotifications();
+    }
+  }, [dispatch, accessToken]);
   return (
     <div className="app">
       <div className="background"></div>
       <div className="content">
         <Routes>
           <Route path="/home" element={<AdvertsListPage />} />
-          
 
           <Route
             path="/create-ad"
@@ -87,7 +104,7 @@ function App() {
             }
           />
 
-          <Route path="/adverts/:id/*" element={<AdvertPage />} />
+          <Route path="/adverts/:id/:name" element={<AdvertPage />} />
 
           <Route path="/reset-password" element={<ResetPasswordPage />} />
 
@@ -96,7 +113,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/404" element={<div>404 | Not found</div>} />
+          <Route path="/404" element={<Page404 />} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       </div>
