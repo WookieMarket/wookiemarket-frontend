@@ -38,11 +38,11 @@ function AdFormBuy(props) {
         />
         <div className="container-button">
           <Button
-            id="adformcancel"
+            id="adformbuycancel"
             data-testid={testid}
             type="button"
             variant="decline"
-            // width="button-form"
+            width="button-form"
             onClick={handleButtonClick}
           >
             {nameButtonCancel}

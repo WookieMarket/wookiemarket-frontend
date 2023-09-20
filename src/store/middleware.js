@@ -39,5 +39,9 @@ export const successRedirects =
       router.navigate('/login');
     }
 
+    if (action.type === 'ads/emailBuy/fulfilled') {
+      router.navigate('/');
+    }
+
     return result;
   };

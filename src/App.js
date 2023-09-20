@@ -18,8 +18,25 @@ import Page404 from './components/shared/page404/Page404';
 import './App.css';
 import './css/Variables.css';
 import './css/Reset.css';
+import storage from './utils/storage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { userNotification } from './store/slices/user';
 
 function App() {
+  const accessToken = storage.get('auth');
+  const dispatch = useDispatch();
+
+  // notifications
+  useEffect(() => {
+    if (accessToken) {
+      const loadNotifications = () => {
+        dispatch(userNotification()).catch(error => console.log(error));
+      };
+
+      loadNotifications();
+    }
+  }, [dispatch, accessToken]);
   return (
     <div className="app">
       <div className="background"></div>

@@ -7,7 +7,6 @@ import { emailBuyAd } from '../../../store/slices/ads';
 import { getUi } from '../../../store/selectors';
 import ErrorModal from '../../shared/modal/ErrorModal';
 import { resetError } from '../../../store/slices/ui';
-import { useNavigate } from 'react-router-dom';
 
 const AdBuyPage = ({ handleButtonClick }) => {
   const { t } = useTranslation();
@@ -18,7 +17,6 @@ const AdBuyPage = ({ handleButtonClick }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModalEmail, setShowModalEmail] = useState(false);
   const { error } = useSelector(getUi);
-  const navigate = useNavigate();
 
   const handleErrorClick = () => {
     dispatch(resetError());
@@ -46,7 +44,6 @@ const AdBuyPage = ({ handleButtonClick }) => {
     console.log('Después del dispatch, showModal debería ser true:', showModal);
     setShowModal(true);
     console.log('Después de setShowModal(true), showModal es:', showModal);
-    //navigate('/');
   };
 
   const buttonDisabled = !formData.email;
