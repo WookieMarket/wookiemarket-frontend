@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { areUsersAdsLoaded } from '../selectors';
 
 export const authUserInfo = createAsyncThunk(
   'user/authUserInfo',
@@ -21,21 +20,6 @@ export const editUserInfo = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
-);
-
-export const getUserAds = createAsyncThunk(
-  'ads/getUserAds',
-  async (_, { extra: { service }, rejectWithValue }) => {
-    try {
-      const response = await service.user.getUserAds();
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-  {
-    condition: (_, { getState }) => !areUsersAdsLoaded(getState()),
   },
 );
 
@@ -68,7 +52,6 @@ const user = createSlice({
   initialState: {
     usersAdsAreLoaded: false,
     userInfo: {},
-    ads: [],
     notifications: [],
   },
   extraReducers: builder => {
@@ -78,10 +61,6 @@ const user = createSlice({
       })
       .addCase(editUserInfo.fulfilled, (state, action) => {
         state.userInfo = action.payload.results;
-      })
-      .addCase(getUserAds.fulfilled, (state, action) => {
-        state.usersAdsAreLoaded = true;
-        state.ads = action.payload.results;
       })
       .addCase(readNotifications.fulfilled, (state, action) => {
         const { _id, readAt } = action.payload;
