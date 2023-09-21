@@ -41,3 +41,13 @@ export const getRecentAds = (skip, limit, sort) => {
   const url = `${adUrl}/filter?skip=${skip}&sort=${sort}`;
   return client.get(url);
 };
+
+/**
+ * This fetch ads for the given user
+ * @param {String} username
+ * @returns list of ads
+ */
+export const getAdsByUser = username => {
+  const url = `${adUrl}/user/${username}`;
+  return client.get(url);
+};

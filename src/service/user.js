@@ -27,16 +27,6 @@ export const editUserData = data => {
 };
 
 /**
- * This fetch ads for the given user
- * @param {String} username
- * @returns list of ads
- */
-export const getAdsByUser = username => {
-  const url = `${usersUrl}/${username}/ads`;
-  return client.get(url);
-};
-
-/**
  * This fetch ads of the current user session
  * @returns list of ads
  */
