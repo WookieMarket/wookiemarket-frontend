@@ -22,12 +22,10 @@ import { getIsLogged } from '../../../store/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../shared/modal/Modal';
 import { authLogout } from '../../../store/slices/auth';
-import storage from '../../../utils/storage';
 
 const UserOptions = () => {
   const dispatch = useDispatch();
   const isLogged = useSelector(getIsLogged);
-  const username = storage.get('username');
   const { t } = useTranslation();
   const [showDropdown, setShowDropdown] = useState(false);
   const [toggleModal, setToggleModal] = useState(false);
@@ -40,7 +38,6 @@ const UserOptions = () => {
 
   const handleShowModalconfirm = async event => {
     onLogout();
-    //setToggleModal(false);
   };
 
   const handleShowModalCancel = () => {
@@ -49,7 +46,6 @@ const UserOptions = () => {
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
-    console.log(username);
   };
 
   return (
@@ -74,7 +70,7 @@ const UserOptions = () => {
           )}
 
           {isLogged && (
-            <MenuItem to={`/adverts/${username}`}>
+            <MenuItem to={`/myads`}>
               <FaListAlt />
               {t('My Ads')}
             </MenuItem>

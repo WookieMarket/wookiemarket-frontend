@@ -22,6 +22,7 @@ import storage from './utils/storage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { userNotification } from './store/slices/user';
+import AdsByUserListPage from './components/ads/AdvertsListPage/AdsByUserListPage';
 
 function App() {
   const accessToken = storage.get('auth');
@@ -83,7 +84,7 @@ function App() {
           />
           {/* Display ads for current user - private area */}
           <Route
-            path="/adverts/:username"
+            path="/myads"
             element={
               <RequireAuth>
                 <UserAdsListPage />
@@ -91,7 +92,7 @@ function App() {
             }
           />
           {/* Display ads of a user - public area */}
-          <Route path="/:username/ads" element={<UserAdsListPage />} />
+          <Route path="/:username/ads" element={<AdsByUserListPage />} />
           {/* Redirects to user profile - public area */}
           <Route path="/:username/profile" element={<UserProfilePage />} />
 
