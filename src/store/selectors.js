@@ -16,7 +16,7 @@ export const getNotification = state =>
 export const getFavoriteAds = state =>
   state.ads.favoriteAds ? state.ads.favoriteAds : [];
 
-export const userAds = state => (state.ads.userAds ? state.ads.userAds : []);
+export const userAds = state => (state.user.ads ? state.user.ads : []);
 
 export const adsByUser = state =>
   state.ads.adsByUser ? state.ads.adsByUser : [];
@@ -35,9 +35,7 @@ export const areCategoriesLoaded = state => state.categories.areLoaded;
 
 export const areFavoriteAds = state => state.ads.favoriteAreLoaded;
 
-export const areUsersAdsLoaded = state => state.ads.usersAdsAreLoaded;
-
-export const areAdsByUserLoaded = state => state.ads.adsByUserAreLoaded;
+export const areUsersAdsLoaded = state => state.user.usersAdsAreLoaded;
 
 export const isFavorite = id => state =>
   state.ads.favoriteAds.some(favAd => favAd._id === id);

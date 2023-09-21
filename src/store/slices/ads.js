@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import storage from '../../utils/storage';
-import {
-  areAdvertsLoaded,
-  areFavoriteAds,
-  areUsersAdsLoaded,
-  areAdsByUserLoaded,
-} from '../selectors';
+import { areAdvertsLoaded, areFavoriteAds } from '../selectors';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -85,33 +80,15 @@ export const deleteAdvert = createAsyncThunk(
   },
 );
 
-export const getUserAds = createAsyncThunk(
-  'ads/getUserAds',
-  async (_, { extra: { service }, rejectWithValue }) => {
-    try {
-      const response = await service.user.getUserAds();
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-  {
-    condition: (_, { getState }) => !areUsersAdsLoaded(getState()),
-  },
-);
-
 export const getAdsByUser = createAsyncThunk(
   'ads/getAdsByUser',
   async (username, { extra: { service }, rejectWithValue }) => {
     try {
-      const response = await service.user.getAdsByUser(username);
+      const response = await service.ads.getAdsByUser(username);
       return response;
     } catch (error) {
       return rejectWithValue(error);
     }
-  },
-  {
-    condition: (_, { getState }) => !areAdsByUserLoaded(getState()),
   },
 );
 
@@ -187,10 +164,7 @@ const ads = createSlice({
   initialState: {
     areLoaded: false,
     favoriteAreLoaded: false,
-    usersAdsAreLoaded: false,
-    adsByUserAreLoaded: false,
     data: [],
-    userAds: [],
     adsByUser: [],
     favoriteAds: [],
     adsPerPage: parseInt(
@@ -232,12 +206,7 @@ const ads = createSlice({
         state.areLoaded = false;
         state.data = [action.payload.result];
       })
-      .addCase(getUserAds.fulfilled, (state, action) => {
-        state.usersAdsAreLoaded = true;
-        state.userAds = action.payload.results;
-      })
       .addCase(getAdsByUser.fulfilled, (state, action) => {
-        state.adsByUserAreLoaded = false;
         state.adsByUser = action.payload.results;
       })
       .addCase(getFavorite.fulfilled, (state, action) => {

@@ -2,7 +2,7 @@ import AdsList from '../AdsList/AdsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getUi, userAds } from '../../../store/selectors';
-import { getUserAds } from '../../../store/slices/ads';
+import { getUserAds } from '../../../store/slices/user';
 import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
 
