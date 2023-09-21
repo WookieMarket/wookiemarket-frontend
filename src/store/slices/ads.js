@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import storage from '../../utils/storage';
-import { areAdvertsLoaded, areFavoriteAds } from '../selectors';
+import {
+  areAdvertsLoaded,
+  areUsersAdsLoaded,
+  areFavoriteAds,
+} from '../selectors';
 
 export const adsCreate = createAsyncThunk(
   'ads/create',
@@ -77,6 +81,21 @@ export const deleteAdvert = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
+  },
+);
+
+export const getUserAds = createAsyncThunk(
+  'ads/getUserAds',
+  async (_, { extra: { service }, rejectWithValue }) => {
+    try {
+      const response = await service.user.getUserAds();
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+  {
+    condition: (_, { getState }) => !areUsersAdsLoaded(getState()),
   },
 );
 
@@ -163,8 +182,10 @@ const ads = createSlice({
   name: 'ads',
   initialState: {
     areLoaded: false,
+    usersAdsAreLoaded: false,
     favoriteAreLoaded: false,
     data: [],
+    userAds: [],
     adsByUser: [],
     favoriteAds: [],
     adsPerPage: parseInt(
@@ -201,6 +222,10 @@ const ads = createSlice({
 
         state.data.unshift(modifiedAd);
         state.userAds.unshift(modifiedAd);
+      })
+      .addCase(getUserAds.fulfilled, (state, action) => {
+        state.usersAdsAreLoaded = true;
+        state.userAds = action.payload.results;
       })
       .addCase(getAdById.fulfilled, (state, action) => {
         state.areLoaded = false;
