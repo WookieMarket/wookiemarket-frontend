@@ -4,6 +4,7 @@ import {
   areAdvertsLoaded,
   areFavoriteAds,
   areUsersAdsLoaded,
+  areAdsByUserLoaded,
 } from '../selectors';
 
 export const adsCreate = createAsyncThunk(
@@ -14,7 +15,6 @@ export const adsCreate = createAsyncThunk(
       const createdAdId = createAd.result._id;
 
       const fetchedAd = await service.ads.getAd(createdAdId);
-      //return createdAd;
       return fetchedAd;
     } catch (error) {
       return rejectWithValue(error);
@@ -85,11 +85,11 @@ export const deleteAdvert = createAsyncThunk(
   },
 );
 
-export const getAdsByUser = createAsyncThunk(
-  'ads/getAdsByUser',
-  async (username, { extra: { service }, rejectWithValue }) => {
+export const getUserAds = createAsyncThunk(
+  'ads/getUserAds',
+  async (_, { extra: { service }, rejectWithValue }) => {
     try {
-      const response = await service.user.getUserAds(username);
+      const response = await service.user.getUserAds();
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -97,6 +97,21 @@ export const getAdsByUser = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => !areUsersAdsLoaded(getState()),
+  },
+);
+
+export const getAdsByUser = createAsyncThunk(
+  'ads/getAdsByUser',
+  async (username, { extra: { service }, rejectWithValue }) => {
+    try {
+      const response = await service.user.getAdsByUser(username);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+  {
+    condition: (_, { getState }) => !areAdsByUserLoaded(getState()),
   },
 );
 
@@ -173,8 +188,10 @@ const ads = createSlice({
     areLoaded: false,
     favoriteAreLoaded: false,
     usersAdsAreLoaded: false,
+    adsByUserAreLoaded: false,
     data: [],
     userAds: [],
+    adsByUser: [],
     favoriteAds: [],
     adsPerPage: parseInt(
       storage.get('adsPerPage') || process.env.REACT_APP_ADS_PER_PAGE,
@@ -215,9 +232,13 @@ const ads = createSlice({
         state.areLoaded = false;
         state.data = [action.payload.result];
       })
-      .addCase(getAdsByUser.fulfilled, (state, action) => {
+      .addCase(getUserAds.fulfilled, (state, action) => {
         state.usersAdsAreLoaded = true;
         state.userAds = action.payload.results;
+      })
+      .addCase(getAdsByUser.fulfilled, (state, action) => {
+        state.adsByUserAreLoaded = false;
+        state.adsByUser = action.payload.results;
       })
       .addCase(getFavorite.fulfilled, (state, action) => {
         state.favoriteAreLoaded = true;

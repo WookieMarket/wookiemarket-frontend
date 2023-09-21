@@ -3,7 +3,7 @@ const usersUrl = '/api/users';
 
 /**
  * This call fetch user informatiion
- * @param {*} id
+ * @param {String} id
  * @returns User information
  */
 export const getUserInfo = id => {
@@ -13,7 +13,7 @@ export const getUserInfo = id => {
 
 /**
  * This updates user information
- * @param {*} data
+ * @param {Object} data
  * @returns
  */
 export const editUserData = data => {
@@ -28,11 +28,20 @@ export const editUserData = data => {
 
 /**
  * This fetch ads for the given user
- * @param {*} username
+ * @param {String} username
  * @returns list of ads
  */
-export const getUserAds = username => {
+export const getAdsByUser = username => {
   const url = `${usersUrl}/${username}/ads`;
+  return client.get(url);
+};
+
+/**
+ * This fetch ads of the current user session
+ * @returns list of ads
+ */
+export const getUserAds = () => {
+  const url = `${usersUrl}/myads`;
   return client.get(url);
 };
 
@@ -48,7 +57,7 @@ export const getFavoriteAds = () => {
 
 /**
  * add the ad id to favorites
- * @param {*} id
+ * @param {String} id
  * @returns add the ad id to favorites
  */
 export const includeFavoriteAds = id => {
@@ -58,7 +67,7 @@ export const includeFavoriteAds = id => {
 
 /**
  * delete the id of an ad if it is in favorites
- *
+ * @param {String} id
  * @returns delete the id of an ad if it is in favorites
  */
 export const removeFavorite = id => {

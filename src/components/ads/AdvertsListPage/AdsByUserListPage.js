@@ -1,18 +1,21 @@
 import AdsList from '../AdsList/AdsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUi, userAds } from '../../../store/selectors';
-import { getUserAds } from '../../../store/slices/ads';
+import { getUi, adsByUser } from '../../../store/selectors';
+import { getAdsByUser } from '../../../store/slices/ads';
+import { useParams } from 'react-router-dom';
 import { resetError } from '../../../store/slices/ui';
 import ErrorModal from '../../shared/modal/ErrorModal';
 
-const UserAdsListPage = () => {
+const AdsByUserListPage = () => {
   const { error } = useSelector(getUi);
+  const { username } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserAds()).catch(error => console.log(error));
-  }, [dispatch]);
+    console.log(username);
+    dispatch(getAdsByUser(username)).catch(error => console.log(error));
+  }, [username, dispatch]);
 
   const handleErrorClick = () => {
     dispatch(resetError());
@@ -20,7 +23,7 @@ const UserAdsListPage = () => {
 
   return (
     <div>
-      <AdsList selector={userAds} />
+      <AdsList selector={adsByUser} />
       {error && (
         <ErrorModal
           buttonErrorId="errorUserAds"
@@ -33,4 +36,4 @@ const UserAdsListPage = () => {
   );
 };
 
-export default UserAdsListPage;
+export default AdsByUserListPage;

@@ -6,8 +6,6 @@ export const getUi = state => state.ui;
 
 export const areAdvertsLoaded = state => state.ads.areLoaded;
 
-//export const advertsPerPage = state => state.ads.adsPerPage;
-
 export const getUserInfo = state => state.user.userInfo;
 
 export const getAdverts = state => (state.ads.data ? state.ads.data : []);
@@ -18,7 +16,10 @@ export const getNotification = state =>
 export const getFavoriteAds = state =>
   state.ads.favoriteAds ? state.ads.favoriteAds : [];
 
-export const getUserAds = state => (state.ads.userAds ? state.ads.userAds : []);
+export const userAds = state => (state.ads.userAds ? state.ads.userAds : []);
+
+export const adsByUser = state =>
+  state.ads.adsByUser ? state.ads.adsByUser : [];
 
 export const getAdsPerPage = state => state.ads.adsPerPage;
 
@@ -35,6 +36,8 @@ export const areCategoriesLoaded = state => state.categories.areLoaded;
 export const areFavoriteAds = state => state.ads.favoriteAreLoaded;
 
 export const areUsersAdsLoaded = state => state.ads.usersAdsAreLoaded;
+
+export const areAdsByUserLoaded = state => state.ads.adsByUserAreLoaded;
 
 export const isFavorite = id => state =>
   state.ads.favoriteAds.some(favAd => favAd._id === id);
